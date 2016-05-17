@@ -6,7 +6,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: de
 
 framework:
     #esi:             ~
@@ -66,3 +66,34 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+nelmio_solarium:
+    endpoints:
+        default:
+            scheme: http
+            port: 80
+            path: /gdz2
+            core: collection1
+            timeout: 5
+    clients:
+        default:
+            endpoints: [default]
+
+subugoe_find:
+    facets:
+        - { title: facetcreator, field: facetcreator }
+        - { title: facetpublisher, field: facetpublisher}
+        - { title: dc, field: dc}
+        - { title: facetplacepublish, field: facetplacepublish}
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        my_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }

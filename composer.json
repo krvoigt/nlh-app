@@ -30,11 +30,16 @@
         "symfony/console": "^3.0",
         "symfony/debug": "^3.0",
         "twig/twig": "~1.0",
-        "nelmio/solarium-bundle": "^2.2"
+        "nelmio/solarium-bundle": "^2.2",
+        "symfony/http-foundation": "^3.0",
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "symfony/options-resolver": "^3.0",
+        "liip/imagine-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "liip/functional-test-bundle": "^1.6"
     },
     "scripts": {
         "post-install-cmd": [
