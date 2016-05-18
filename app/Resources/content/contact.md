@@ -36,10 +36,6 @@ D - 37070 Göttingen
 
 [Das GDZ in Google Maps](http://maps.google.de/maps?f=q&hl=de&q=papendiek+14,+37073+G%C3%B6ttingen&sll=51.532674,9.93474&sspn=0.148218,0.43396&layer=&ie=UTF8&z=17&ll=51.534184,9.931608&spn=0.004632,0.013561&t=h&om=1&iwloc=addr)
 
- 
-
- 
-
 ## Anfahrtswege
 
 

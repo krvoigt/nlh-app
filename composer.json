@@ -1,6 +1,6 @@
 {
-    "name": "ingop/gdz",
-    "license": "proprietary",
+    "name": "subugoe/gdz",
+    "license": "GPL-v2.0",
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -16,6 +16,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+           {
+               "type": "vcs",
+               "url": "https://github.com/subugoe/SubugoeFindBundle.git"
+           }
+   ],
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "3.0.*",
@@ -35,7 +41,8 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "symfony/options-resolver": "^3.0",
         "liip/imagine-bundle": "^1.5",
-        "knplabs/knp-markdown-bundle": "^1.5"
+        "knplabs/knp-markdown-bundle": "^1.5",
+        "subugoe/find-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

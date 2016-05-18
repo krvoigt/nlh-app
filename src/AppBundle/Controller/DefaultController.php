@@ -30,7 +30,7 @@ class DefaultController extends Controller
 
         if (file_exists($file)) {
             $text = file_get_contents($file);
-            $content = $this->container->get('markdown.parser')->transformMarkdown($text);
+            $content = $this->get('markdown.parser')->transformMarkdown($text);
         } else {
             return $this->redirect($this->generateUrl('subugoe_find_homepage'));
         }
