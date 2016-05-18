@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Subugoe\FindBundle\SubugoeFindBundle(),
             new Nelmio\SolariumBundle\NelmioSolariumBundle(),
-            new Liip\ImagineBundle\LiipImagineBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         ];
 
