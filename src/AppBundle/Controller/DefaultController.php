@@ -22,30 +22,22 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/contact", name="_contact")
+     * @Route("/{action}", name="_content")
      */
-    public function contactAction()
+    public function contentAction($action)
     {
 
-        $file = __DIR__ . '/../../../app/Resources/content/contact.md';
-        $text = file_get_contents($file);
+        $file = __DIR__ . '/../../../app/Resources/content/' . $action . '.md';
 
-        $content = $this->container->get('markdown.parser')->transformMarkdown($text);
+        if (file_exists($file)) {
+            $text = file_get_contents($file);
+            $content = $this->container->get('markdown.parser')->transformMarkdown($text);
+        } else {
+            return $this->redirect($this->generateUrl('subugoe_find_homepage'));
+        }
 
         return $this->render('partials/site/content.html.twig', ['content' => $content]);
     }
-
-    /**
-     * @Route("/imprint", name="_imprint")
-     */
-    public function imprintAction()
-    {
-        $file = __DIR__ . '/../../../app/Resources/content/imprint.md';
-        $text = file_get_contents($file);
-
-        $content = $this->container->get('markdown.parser')->transformMarkdown($text);
-
-        return $this->render('partials/site/content.html.twig', ['content' => $content]);    }
 
     /**
      * @Route("/mets/{id}.xml", name="_mets")

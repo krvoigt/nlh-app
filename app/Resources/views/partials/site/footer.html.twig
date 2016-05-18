@@ -2,10 +2,13 @@
     <div class="footer_left">
         <ul>
             <li>
-                <a href="{{ path('_contact') }}" title="Kontakt">Kontakt</a>
+                <a href="{{ path('_content', {'action': 'contact'}) }}" title="Kontakt">Kontakt</a>
             </li>
             <li>
-                <a href="{{ path('_imprint') }}" title="Impressum">Impressum</a>
+                <a href="{{ path('_content', {'action': 'imprint'}) }}" title="Impressum">Impressum</a>
+            </li>
+            <li>
+                <a href="{{ path('_content', {'action': 'help'}) }}" title="Hilfe zur Suche">Hilfe zur Suche</a>
             </li>
         </ul>
     </div>
