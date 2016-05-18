@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Göttinger Digitalisierungszentrum{% endblock %}
+
+{% block body %}
+
+
+    <h1>{{ document.bytitle }}</h1>
+
+    {#
+    {% for image in document.thumbs_url %}
+        <img src="{{ image }}" alt="" style="float:left; margin-right:1em;">
+    {% endfor %}
+#}
+    <p style="clear:both">
+
+        Strukturtyp: {{ document.docstrct | trans }}
+
+        <br>
+
+        Titel: {{ document.bytitle }}
+
+        {% if document.creator is defined %}
+            <br>
+            Autor:
+            {% for author in document.creator %}
+              {{ author }}{% if loop.last %}{% else %}, {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+
+        {% if document.yearpublish is defined %}
+            <br>
+            Erscheinungsjahr: {{ document.yearpublish }}
+        {% endif %}
+
+
+        {% if document.placepublish is defined %}
+            <br>
+            Erscheinungsort:
+            {% for place in document.placepublish %}
+              {{ place }}{% if loop.last %}{% else %}, {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if document.publisher is defined %}
+            <br>
+            Verlag:
+            {% for publisher in document.publisher %}
+              {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <br>
+        Kollektionen:
+        {% for dc in document.dc %}
+          {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
+        {% endfor %}
+
+
+        <br>
+        PURL: <a href="{{ document.purl }}">{{ document.purl }}</a>
+
+        <br>
+        gbv-ppn: {{ document['id_gbv-ppn_s'][0] }}
+
+        {% if document.id_PPNanalog_s is defined %}
+
+        <br>
+        PPN (original): <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
+{% endif %}
+
+
+        {% if document.id_ADBID_s is defined %}
+            <br>
+            ADBID: {{ document.id_ADBID_s.0  }}
+        {% endif %}
+
+        <br>
+    {% include "@SubugoeFind/partials/links.html.twig" %}
+    </p>
+
+
+{% endblock %}

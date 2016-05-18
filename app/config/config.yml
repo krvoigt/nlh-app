@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -85,6 +85,7 @@ subugoe_find:
         - { title: facetpublisher, field: facetpublisher}
         - { title: dc, field: dc}
         - { title: facetplacepublish, field: facetplacepublish}
+        - { title: docstrct, field: docstrct}
 
 liip_imagine:
     resolvers:

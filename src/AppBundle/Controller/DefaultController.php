@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,4 +36,17 @@ class DefaultController extends Controller
     {
         return new Response('Imprint');
     }
+
+    /**
+     * @Route("/mets/{id}.xml", name="_mets")
+     * @param string $id
+     * @return RedirectResponse
+     */
+    public function metsAction($id)
+    {
+        $file = 'http://gdz.sub.uni-goettingen.de/mets/' . $id . '.xml';
+        $response = new RedirectResponse($file);
+        return $response;
+    }
+
 }

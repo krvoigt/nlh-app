@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
@@ -10,22 +11,22 @@
 </head>
 <body>
 <div class="wrap">
-    {% include 'partials/header.html.twig' %}
+    {% include 'partials/site/header.html.twig' %}
 
     <div class="content">
-        <div class="results">
-
-            {% block body %}{% endblock %}
-
-            <section class="facets">
-                {% block sidebar %}{% endblock %}
-            </section>
+        <div class="tx_find">
+            <div class="results">
+                <section class="facets">
+                    {% block sidebar %}{% endblock %}
+                </section>
+                {% block body %}{% endblock %}
+            </div>
         </div>
     </div>
 
-    {% include 'partials/footer.html.twig' %}
+    {% include 'partials/site/footer.html.twig' %}
 
-    {% include 'partials/colophon.html.twig' %}
+    {% include 'partials/site/colophon.html.twig' %}
 
 </div>
 </body>
