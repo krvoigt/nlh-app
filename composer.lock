@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3f8f7afcf8d404c8ee928282b5e0f68",
-    "content-hash": "4b45b7917196416e241b4e45a461e542",
+    "hash": "3a72dc452d8c85ee9b268b4d933b98c7",
+    "content-hash": "5ec50b7aad144a9663daa72f18e7915a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1678,6 +1678,45 @@
             "time": "2016-05-03 07:08:49"
         },
         {
+            "name": "subugoe/find-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/subugoe/SubugoeFindBundle.git",
+                "reference": "f05c75227eafa8f6bf223d0c79b3b031803e7139"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/f05c75227eafa8f6bf223d0c79b3b031803e7139",
+                "reference": "f05c75227eafa8f6bf223d0c79b3b031803e7139",
+                "shasum": ""
+            },
+            "require": {
+                "nelmio/solarium-bundle": "^2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Subugoe\\FindBundle\\": ""
+                }
+            },
+            "license": [
+                "GPL-v2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ingo Pfennigstorf",
+                    "email": "i.pfennigstorf@gmail.com"
+                }
+            ],
+            "description": "Solr Index bundle",
+            "support": {
+                "source": "https://github.com/subugoe/SubugoeFindBundle/tree/master",
+                "issues": "https://github.com/subugoe/SubugoeFindBundle/issues"
+            },
+            "time": "2016-05-18 12:08:51"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.2",
             "source": {
@@ -2509,7 +2548,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "subugoe/find-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
