@@ -41,7 +41,8 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "symfony/options-resolver": "^3.0",
         "knplabs/knp-markdown-bundle": "^1.5",
-        "subugoe/find-bundle": "dev-master"
+        "subugoe/find-bundle": "dev-master",
+        "symfony/form": "^3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
