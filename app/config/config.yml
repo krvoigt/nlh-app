@@ -71,6 +71,7 @@ nelmio_solarium:
     endpoints:
         default:
             scheme: http
+            host: "%solr_host%"
             port: 80
             path: /gdz2
             core: collection1
