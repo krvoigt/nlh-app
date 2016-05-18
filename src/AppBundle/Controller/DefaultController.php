@@ -26,7 +26,13 @@ class DefaultController extends Controller
      */
     public function contactAction()
     {
-        return new Response('Contact');
+
+        $file = __DIR__ . '/../../../app/Resources/content/contact.md';
+        $text = file_get_contents($file);
+
+        $content = $this->container->get('markdown.parser')->transformMarkdown($text);
+
+        return $this->render('partials/site/content.html.twig', ['content' => $content]);
     }
 
     /**
@@ -34,8 +40,12 @@ class DefaultController extends Controller
      */
     public function imprintAction()
     {
-        return new Response('Imprint');
-    }
+        $file = __DIR__ . '/../../../app/Resources/content/imprint.md';
+        $text = file_get_contents($file);
+
+        $content = $this->container->get('markdown.parser')->transformMarkdown($text);
+
+        return $this->render('partials/site/content.html.twig', ['content' => $content]);    }
 
     /**
      * @Route("/mets/{id}.xml", name="_mets")
