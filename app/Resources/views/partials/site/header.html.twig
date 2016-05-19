@@ -22,14 +22,7 @@
             </li>
         </ul>
         <div class="search">
-            <div class="search_popup -clip-right -visible">
-                <ul class="search_navigation">
-                    <li class="-active"><a href="#catalog" class="search_tab -catalog">GDZ</a></li>
-                    <li><a href="#website" class="search_tab -website">Website</a></li>
-                </ul>
-            </div>
-
-            <form class="search_form -catalog -visible" method="get" action="/" role="search">
+            <form class="search_form -catalog -visible" method="get" role="search">
                 <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text" name="q" value="{{ query }}">
                 <label for="mytextbox" class="sr-only">Schnellsuche</label>
                 <button type="submit" class="search_submit"><span class="sr-only">Suchen</span></button>
@@ -38,31 +31,14 @@
                         <p>Suche in</p>
                         <ul class="search_catalog-list">
                             <li class="search_item">
-                                <input class="search_radio -new-window" id="radio0" type="checkbox" name="kataloge"
-                                       checked="checked"/>
+                                <input class="search_radio" id="radio0" type="checkbox" name="kataloge" checked="checked"/>
                                 <label class="search_label" for="radio0">Volltexten</label>
                             </li>
                             <li class="search_item">
-                                <input class="search_radio -new-window" id="radio1" type="checkbox" name="kataloge"
-                                       checked="checked"/>
+                                <input class="search_radio" id="radio1" type="checkbox" name="kataloge" checked="checked"/>
                                 <label class="search_label" for="radio1">Metadaten</label>
                             </li>
                         </ul>
-                        <button class="search_close" title="Schließen">
-                            <span class="sr-only">Schließen</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <form class="search_form -website" method="get" action="/suche/" role="search">
-                <input size="40" placeholder="Kataloge, Fächer, Website" class="search_input" id="solrtab"
-                       type="text" name="q">
-                <label for="solrtab" class="sr-only">Schnellsuche</label>
-                <button type="submit" class="search_submit"><span class="sr-only">Suchen</span></button>
-                <div class="search_popup">
-                    <div class="search_content -website" style="min-height: 52px;">
-                        <div class="search_tab-content"></div>
                         <button class="search_close" title="Schließen">
                             <span class="sr-only">Schließen</span>
                         </button>
