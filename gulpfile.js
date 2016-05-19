@@ -13,7 +13,7 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
 
 var paths = {
-    appFiles: 'app/Resources/**/*.{md,php,yml}',
+    appFiles: 'app/Resources/**/*.{md,php,twig,yml}',
     proxy: 'localhost:8000',
     serveDir: '/',
 
