@@ -15,7 +15,7 @@
 !/var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-/web/fonts
+/web/fonts/open-sans
 /web/css/
 /src/Subugoe/*
 .idea/
