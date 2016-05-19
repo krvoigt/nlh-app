@@ -1,12 +1,12 @@
 .short-url {
-	position: relative;
+    position: relative;
 }
 
 .short-url_popup {
-	position: absolute;
+    position: absolute;
 }
 
 .short-url_popup {
-	@include popup(top);
-	display: none;
+    @include popup(top);
+    display: none;
 }

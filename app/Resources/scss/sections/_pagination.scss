@@ -1,59 +1,59 @@
 .pagination {
-	@include pagination;
-	margin-left: 0 !important;
+    @include pagination;
+    margin-left: 0 !important;
 
-	&.-fixed {
-		@include drop-shadow;
-		border-radius: 0 0 $br $br;
-		margin-left: -.25em !important;
-		padding: .25em 0 0 .25em;
-		position: fixed;
-		top: 0;
-		z-index: 1;
+    &.-fixed {
+        @include drop-shadow;
+        border-radius: 0 0 $br $br;
+        margin-left: -.25em !important;
+        padding: .25em 0 0 .25em;
+        position: fixed;
+        top: 0;
+        z-index: 1;
 
-		@include respond-to(large) {
-			left: .25em;
-		}
-	}
+        @include respond-to(large) {
+            left: .25em;
+        }
+    }
 }
 
 .pagination_numbers {
-	margin: 0 1.25em 0 0 !important;
+    margin: 0 1.25em 0 0 !important;
 
-	li {
-		margin-bottom: 0;
-	}
+    li {
+        margin-bottom: 0;
+    }
 }
 
 .pagination_item {
-	&.gap {
-		.-current {
-			background: none;
-			color: $text-color;
-		}
-	}
+    &.gap {
+        .-current {
+            background: none;
+            color: $text-color;
+        }
+    }
 
-	&.-current {
-		display: inline-block;
-		font-weight: bold;
-		width: $grid;
-	}
+    &.-current {
+        display: inline-block;
+        font-weight: bold;
+        width: $grid;
+    }
 }
 
 .pagination_link {
-	&.-last {
-		@include icon('fast-forward', $link-color, false);
-	}
+    &.-last {
+        @include icon('fast-forward', $link-color, false);
+    }
 
-	&.-first {
-		@include icon('fast-backward', $link-color, false);
-	}
+    &.-first {
+        @include icon('fast-backward', $link-color, false);
+    }
 
-	&.-next {
-		@include icon('step-forward', $link-color, false);
-	}
+    &.-next {
+        @include icon('step-forward', $link-color, false);
+    }
 
-	&.-previous {
-		@include icon('step-backward', $link-color, false);
-	}
+    &.-previous {
+        @include icon('step-backward', $link-color, false);
+    }
 }

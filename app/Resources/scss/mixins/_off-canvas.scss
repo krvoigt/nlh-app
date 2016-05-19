@@ -1,27 +1,27 @@
 @mixin off-canvas {
-	min-height: 100%;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 61.8%;
+    min-height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 61.8%;
 
-	> ul {
-		display: block;
-		margin: 0;
-		padding: 0;
-	}
+    > ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
 
-	> ul > li {
-		padding-left: 0;
-	}
+    > ul > li {
+        padding-left: 0;
+    }
 
-	> ul > li,
-	> ul > li > a {
-		float: none;
-		margin-left: 0;
-		text-align: left;
-	}
+    > ul > li,
+    > ul > li > a {
+        float: none;
+        margin-left: 0;
+        text-align: left;
+    }
 }

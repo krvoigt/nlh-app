@@ -1,32 +1,32 @@
 .bold {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 .invisible {
-	@extend .sr-only;
+    @extend .sr-only;
 }
 
 // This is toggled via JavaScript on mobile devices
 .mobile-only {
-	display: none;
+    display: none;
 }
 
 // Used for digit grouping
 .space {
-	margin-left: .2em;
+    margin-left: .2em;
 }
 
 .sr-only {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	margin: -1px;
-	padding: 0;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }

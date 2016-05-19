@@ -1,54 +1,54 @@
 .footer {
-	@extend %clearfix;
-	background: $white;
-	max-width: $site-width;
-	padding: ($grid * 1.5) ($grid / 2) ($grid / 2);
-	position: relative;
+    @extend %clearfix;
+    background: $white;
+    max-width: $site-width;
+    padding: ($grid * 1.5) ($grid / 2) ($grid / 2);
+    position: relative;
 
-	@include respond-to(medium) {
-		padding: $grid 0 0;
-		text-align: center;
-	}
+    @include respond-to(medium) {
+        padding: $grid 0 0;
+        text-align: center;
+    }
 
-	a {
-		@include link(false);
-		white-space: nowrap;
-	}
+    a {
+        @include link(false);
+        white-space: nowrap;
+    }
 
-	li {
-		display: inline-block;
-		margin: 0 ($grid / 2);
-	}
+    li {
+        display: inline-block;
+        margin: 0 ($grid / 2);
+    }
 }
 
 .footer_left {
-	float: left;
+    float: left;
 }
 
 .footer_right {
-	float: right;
+    float: right;
 
-	@include respond-to(large) {
-		margin-top: ($grid / 2);
-	}
+    @include respond-to(large) {
+        margin-top: ($grid / 2);
+    }
 }
 
 .footer_left,
 .footer_right {
-	@include respond-to(large) {
-		float: none;
-		text-align: center;
-	}
+    @include respond-to(large) {
+        float: none;
+        text-align: center;
+    }
 
-	@include respond-to(medium) {
-		display: inline;
+    @include respond-to(medium) {
+        display: inline;
 
-		ul {
-			display: inline;
-		}
+        ul {
+            display: inline;
+        }
 
-		li {
-			margin-bottom: ($grid / 2);
-		}
-	}
+        li {
+            margin-bottom: ($grid / 2);
+        }
+    }
 }

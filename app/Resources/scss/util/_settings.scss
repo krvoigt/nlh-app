@@ -4,10 +4,10 @@ $site-width: 48 * $grid;
 $search-width: 24 * $grid;
 
 $breakpoints: (
-	large: 1023px,
-	medium: 719px,
-	small: 639px,
-	tiny: 479px
+    large: 1023px,
+    medium: 719px,
+    small: 639px,
+    tiny: 479px
 );
 
 $border-width: 1px;
@@ -75,11 +75,11 @@ $outline: 1px dotted $text-color-light;
 
 // Legacy icons for infobox social links
 $social-icons: (
-	phone,
-	comments,
-	pencil,
-	facebook,
-	facebook-square,
-	twitter,
-	rss,
+    phone,
+    comments,
+    pencil,
+    facebook,
+    facebook-square,
+    twitter,
+    rss,
 );

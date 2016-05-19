@@ -1,73 +1,73 @@
 .substaff_list {
-	list-style: none !important;
-	margin-left: 0 !important;
+    list-style: none !important;
+    margin-left: 0 !important;
 }
 
 .substaff_item {
-	border-bottom: $border-width solid $border-color;
-	margin: ($grid / 2) 0;
-	min-height: (3.5 * $grid);
-	padding: 0 0 ($grid / 2 - $border-width);
+    border-bottom: $border-width solid $border-color;
+    margin: ($grid / 2) 0;
+    min-height: (3.5 * $grid);
+    padding: 0 0 ($grid / 2 - $border-width);
 }
 
 .substaff_detail {
-	display: block;
-	margin-left: $grid;
-	text-indent: (-$grid);
+    display: block;
+    margin-left: $grid;
+    text-indent: (-$grid);
 
-	&.-indent {
-		margin-left: (2 * $grid);
-	}
+    &.-indent {
+        margin-left: (2 * $grid);
+    }
 
-	&.-name {
-		font-weight: bold;
-	}
+    &.-name {
+        font-weight: bold;
+    }
 
-	&.-address {
-		margin-left: 0;
-		text-indent: 0;
-	}
+    &.-address {
+        margin-left: 0;
+        text-indent: 0;
+    }
 }
 
 .substaff_image {
-	float: right;
-	margin: 0 0 0 $grid;
+    float: right;
+    margin: 0 0 0 $grid;
 
-	@include respond-to(large) {
-		float: none;
-		margin: 0;
-	}
+    @include respond-to(large) {
+        float: none;
+        margin: 0;
+    }
 
-	&.-small {
-		max-height: (4 * $grid);
-		width: auto;
-	}
+    &.-small {
+        max-height: (4 * $grid);
+        width: auto;
+    }
 }
 
 .substaff_map-link {
-	@include icon('map-marker', $link-color, false);
-	padding: 1px .25em !important;
+    @include icon('map-marker', $link-color, false);
+    padding: 1px .25em !important;
 }
 
 .substaff_more-link {
-	margin: (-$grid / 2) 0 $grid $grid;
+    margin: (-$grid / 2) 0 $grid $grid;
 
-	a {
-		@include button;
-		@include icon('angle-down', $white);
-		box-shadow: none;
-		color: $white;
-		padding: 0 .5em;
-	}
+    a {
+        @include button;
+        @include icon('angle-down', $white);
+        box-shadow: none;
+        color: $white;
+        padding: 0 .5em;
+    }
 }
 
 .substaff_person {
-	& + & {
-		margin-top: $grid;
-	}
+    & + & {
+        margin-top: $grid;
+    }
 }
 
 .substaff_street-address {
-	// Hack allowing "Platz der Göttinger Sieben 1" to fit into a single line
-	word-spacing: -.05em;
+    // Hack allowing "Platz der Göttinger Sieben 1" to fit into a single line
+    word-spacing: -.05em;
 }

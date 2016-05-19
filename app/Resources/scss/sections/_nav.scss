@@ -1,52 +1,52 @@
 .nav {
-	// TODO: Apply class nav_link to all links, then use this for styling
-	a {
-		@include transition(color, background);
-		border-bottom: $border-width solid $border-color;
-		display: block;
-		overflow: hidden;
-		padding: ($grid / 2) ($grid / 2) ($grid / 2 - $border-width);
-		text-overflow: ellipsis;
+    // TODO: Apply class nav_link to all links, then use this for styling
+    a {
+        @include transition(color, background);
+        border-bottom: $border-width solid $border-color;
+        display: block;
+        overflow: hidden;
+        padding: ($grid / 2) ($grid / 2) ($grid / 2 - $border-width);
+        text-overflow: ellipsis;
 
-		@include hover {
-			@include auto-color($brand-color);
-			background: $brand-color;
-		}
+        @include hover {
+            @include auto-color($brand-color);
+            background: $brand-color;
+        }
 
-		&.-current {
-			background: $shadow-light;
-			color: $link-color;
-			font-weight: bold;
-			position: relative;
-		}
+        &.-current {
+            background: $shadow-light;
+            color: $link-color;
+            font-weight: bold;
+            position: relative;
+        }
 
-		&.-toggle {
-			@include icon('chevron-down', $border-color, true, true);
+        &.-toggle {
+            @include icon('chevron-down', $border-color, true, true);
 
-			&::after {
-				@include transition(transform);
-				float: right;
-				margin-top: .25em;
+            &::after {
+                @include transition(transform);
+                float: right;
+                margin-top: .25em;
 
-				@include hover {
-					color: $link-color;
-				}
-			}
+                @include hover {
+                    color: $link-color;
+                }
+            }
 
-			&.-open::after {
-				// Turn chevron upwards
-				transform: rotate(180deg);
-			}
-		}
-	}
+            &.-open::after {
+                // Turn chevron upwards
+                transform: rotate(180deg);
+            }
+        }
+    }
 }
 
 .nav_list {
-	list-style: none;
-	padding: 0;
+    list-style: none;
+    padding: 0;
 
-	& & {
-		border-left: $border-width solid $border-color;
-		margin-left: ($grid - $border-width);
-	}
+    & & {
+        border-left: $border-width solid $border-color;
+        margin-left: ($grid - $border-width);
+    }
 }

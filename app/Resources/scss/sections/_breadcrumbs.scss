@@ -1,16 +1,16 @@
 .breadcrumbs {
-	float: left;
+    float: left;
 
-	a {
-		@include link(false);
-	}
+    a {
+        @include link(false);
+    }
 
-	li {
-		display: inline;
+    li {
+        display: inline;
 
-		+ li {
-			@include icon('angle-right', $text-color-light);
-			padding-left: .25em;
-		}
-	}
+        + li {
+            @include icon('angle-right', $text-color-light);
+            padding-left: .25em;
+        }
+    }
 }

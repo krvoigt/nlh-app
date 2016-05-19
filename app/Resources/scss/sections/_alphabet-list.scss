@@ -1,32 +1,32 @@
 .alphabet-list,
 .alphabet-list_sub-list {
-	list-style: none !important;
-	margin-left: 0 !important;
+    list-style: none !important;
+    margin-left: 0 !important;
 }
 
 .alphabet-list_item {
-	margin-bottom: $grid;
+    margin-bottom: $grid;
 }
 
 .alphabet-list_letter {
-	// h2 without margin
-	@include typo-scale(2);
-	color: $heading-color;
-	font-weight: 300;
+    // h2 without margin
+    @include typo-scale(2);
+    color: $heading-color;
+    font-weight: 300;
 }
 
 .alphabet-list_sub-list.-persons {
-	li {
-		border-bottom: $border-width solid $border-color;
-		padding: ($grid / 2) 0 ($grid / 2 - $border-width);
-	}
+    li {
+        border-bottom: $border-width solid $border-color;
+        padding: ($grid / 2) 0 ($grid / 2 - $border-width);
+    }
 
-	a {
-		@include link(false);
-	}
+    a {
+        @include link(false);
+    }
 
-	img {
-		float: right;
-		margin-left: $grid;
-	}
+    img {
+        float: right;
+        margin-left: $grid;
+    }
 }

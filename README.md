@@ -1,6 +1,5 @@
 # GDZ
 
-
 ## Requirements
 
 You need PHP 7 with cURL and DOMDocument installed (`apt-get install php-curl php-xml`).

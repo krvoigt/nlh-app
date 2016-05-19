@@ -77,12 +77,12 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
 // HTML5 display-role reset for older browsers
@@ -98,54 +98,54 @@ menu,
 nav,
 section,
 main {
-	display: block;
+    display: block;
 }
 
 // 1. Prevent iOS and IE font scaling in landscape
 html {
-	-ms-text-size-adjust: 100%; // 1
-	-webkit-text-size-adjust: 100%; // 1
+    -ms-text-size-adjust: 100%; // 1
+    -webkit-text-size-adjust: 100%; // 1
 }
 
 body {
-	line-height: 1;
+    line-height: 1;
 }
 
 ol,
 ul {
-	list-style: none;
+    list-style: none;
 }
 
 blockquote,
 q {
-	quotes: none;
+    quotes: none;
 }
 
 blockquote {
-	&::before,
-	&::after {
-		content: '';
-		content: none;
-	}
+    &::before,
+    &::after {
+        content: '';
+        content: none;
+    }
 }
 
 q {
-	&::before,
-	&::after {
-		content: '';
-		content: none;
-	}
+    &::before,
+    &::after {
+        content: '';
+        content: none;
+    }
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 button,
 input,
 select,
 textarea {
-	-webkit-appearance: none;
-	-webkit-border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
 }

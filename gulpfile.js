@@ -25,12 +25,12 @@ var paths = {
     styleDest: 'web/css'
 };
 
-gulp.task('fonts', function () {
+gulp.task('fonts', function() {
     gulp.src(paths.fontsSrc)
         .pipe(gulp.dest(paths.fontsDest));
 });
 
-gulp.task('scripts', function () {
+gulp.task('scripts', function() {
     gulp.src(paths.scriptSrc)
         .pipe(newer(paths.scriptDest + '/*.js'))
         .pipe(filter(paths.scriptSrc))
@@ -41,7 +41,7 @@ gulp.task('scripts', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('styles', function () {
+gulp.task('styles', function() {
     gulp.src(paths.styleSrc)
         .pipe(sassLint())
         .pipe(newer(paths.styleDest + '/*.css'))
@@ -57,7 +57,7 @@ gulp.task('styles', function () {
 
 gulp.task('compile', ['fonts', 'scripts', 'styles']);
 
-gulp.task('default', ['scripts', 'styles'], function () {
+gulp.task('default', ['scripts', 'styles'], function() {
     browserSync.init({open: false, proxy: paths.proxy});
     gulp.watch(paths.appFiles).on('change', browserSync.reload);
     gulp.watch(paths.fontsSrc, ['fonts']);
