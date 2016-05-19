@@ -1552,17 +1552,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/subugoe/SubugoeFindBundle.git",
-                "reference": "226d6f716ebeb4341f8f953913e570dd8050b9e9"
+                "reference": "4ca4e60bb5e368627c67ac64196376a13e670531"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/226d6f716ebeb4341f8f953913e570dd8050b9e9",
-                "reference": "226d6f716ebeb4341f8f953913e570dd8050b9e9",
+                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/4ca4e60bb5e368627c67ac64196376a13e670531",
+                "reference": "4ca4e60bb5e368627c67ac64196376a13e670531",
                 "shasum": ""
-            },
-            "require": {
-                "nelmio/solarium-bundle": "^2.2",
-                "symfony/form": "^3.0"
             },
             "type": "library",
             "autoload": {
@@ -1584,7 +1580,7 @@
                 "source": "https://github.com/subugoe/SubugoeFindBundle/tree/master",
                 "issues": "https://github.com/subugoe/SubugoeFindBundle/issues"
             },
-            "time": "2016-05-18 13:14:11"
+            "time": "2016-05-19 11:05:18"
         },
         {
             "name": "swiftmailer/swiftmailer",
