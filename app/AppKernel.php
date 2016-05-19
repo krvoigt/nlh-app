@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Subugoe\FindBundle\SubugoeFindBundle(),
             new Nelmio\SolariumBundle\NelmioSolariumBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
