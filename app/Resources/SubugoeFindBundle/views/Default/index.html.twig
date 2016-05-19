@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Göttinger Digitalisierungszentrum{% endblock %}
+{% block title %}{{ query }} - Göttinger Digitalisierungszentrum{% endblock %}
 
 {% block findnavigation %}
     <div class="resultCount">{{ pagination.getTotalItemCount }} {% trans %}numfound{% endtrans %}</div>

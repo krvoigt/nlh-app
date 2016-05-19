@@ -7,9 +7,13 @@
 
     <h1>{{ document.bytitle }}</h1>
 
-    {% for image in document.thumbs_url %}
-        <img src="{{ image }}" alt="" style="float:left; margin-right:1em;">
-    {% endfor %}
+    {% if document.thumbs_url is defined %}
+
+        {% for image in document.thumbs_url | slice(0, 10) %}
+            <img src="{{ image }}" alt="" style="float:left; margin-right:1em;">
+        {% endfor %}
+
+    {% endif %}
 
     <p style="clear:both">
 
