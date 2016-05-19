@@ -38,12 +38,11 @@
     {% for key, facet in facets %}
         <article class="facet">
             <h1>{{ key | trans }}</h1>
-
             <ol class="facetList">
                 {% for value, count in facet if count > 0 %}
                     {% set facet_name = ['facet', key]|join('-') %}
-                    <li>
-                        <a href="{{ path('subugoe_find_homepage', {
+                    <li class="facetItem">
+                        <a class="facetItemLink" href="{{ path('subugoe_find_homepage', {
                             'filter': queryParams|merge({
                                 (facetCounter):  {
                                     (key) : (value)
@@ -54,6 +53,8 @@
                     </li>
                 {% endfor %}
             </ol>
+            <button class="facetListExpand">{% trans %}expand{% endtrans %}</button>
+            <button class="facetListCollapse">{% trans %}collapse{% endtrans %}</button>
         </article>
     {% endfor %}
 {% endblock %}

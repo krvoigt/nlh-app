@@ -1,0 +1,13 @@
+.facetListCollapse {
+	display: none;
+}
+
+.facetItem {
+	&:nth-child(n+6) {
+		display: none;
+	}
+
+	&:nth-child(6):last-child {
+		display: list-item;
+	}
+}
