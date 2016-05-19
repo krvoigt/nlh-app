@@ -48,8 +48,9 @@
                                 (facetCounter):  {
                                     (key) : (value)
                                 }
-                            }
-                            )})}}">{{ value | trans }} <span class="facetCount">{{ count }}</span></a>
+                            }),
+                        'q': (app.request.get('q'))
+                        }) }}">{{ value | trans }} <span class="facetCount">{{ count }}</span></a>
                     </li>
                 {% endfor %}
             </ol>
