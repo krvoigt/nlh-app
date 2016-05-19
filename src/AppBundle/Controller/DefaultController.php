@@ -21,7 +21,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{action}", name="_content")
+     * @Route("/content/{action}", name="_content")
      */
     public function contentAction($action)
     {

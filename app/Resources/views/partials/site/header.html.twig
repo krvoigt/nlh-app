@@ -1,3 +1,7 @@
+{% if query is not defined %}
+    {% set query = '' %}
+{% endif %}
+
 <header class="header" data-role="header">
     <div class="header_top">
         <button class="header_toggle-nav" title="Navigation">Menü</button>
@@ -26,8 +30,7 @@
             </div>
 
             <form class="search_form -catalog -visible" method="get" action="/" role="search">
-                <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text"
-                       name="searchcat">
+                <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text" name="q" value="{{ query }}">
                 <label for="mytextbox" class="sr-only">Schnellsuche</label>
                 <button type="submit" class="search_submit"><span class="sr-only">Suchen</span></button>
                 <div class="search_popup">
@@ -36,13 +39,11 @@
                         <ul class="search_catalog-list">
                             <li class="search_item">
                                 <input class="search_radio -new-window" id="radio0" type="checkbox" name="kataloge"
-                                       value="https://opac.sub.uni-goettingen.de/DB=1/LNG=DU/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM="
                                        checked="checked"/>
                                 <label class="search_label" for="radio0">Volltexten</label>
                             </li>
                             <li class="search_item">
                                 <input class="search_radio -new-window" id="radio1" type="checkbox" name="kataloge"
-                                       value="https://opac.sub.uni-goettingen.de/DB=1/LNG=DU/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM="
                                        checked="checked"/>
                                 <label class="search_label" for="radio1">Metadaten</label>
                             </li>
