@@ -3,7 +3,7 @@
 {% block title %}{{ query }} - Göttinger Digitalisierungszentrum{% endblock %}
 
 {% block findnavigation %}
-    <div class="resultCount">{{ pagination.getTotalItemCount }} {% trans %}numfound{% endtrans %}</div>
+    <div class="resultCount">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {% trans %}numfound{% endtrans %}</div>
    {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
@@ -50,7 +50,7 @@
                                 }
                             }),
                         'q': (app.request.get('q'))
-                        }) }}">{{ value | trans }} <span class="facetCount">{{ count }}</span></a>
+                        }) }}">{{ value | trans }} <span class="facetCount">{{ count | number_format(0, ',', '.') }}</span></a>
                     </li>
                 {% endfor %}
             </ol>
