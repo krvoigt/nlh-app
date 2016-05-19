@@ -1,0 +1,14 @@
+.sponsorship_book,
+.sponsorship_single {
+	img {
+		float: left;
+		margin: 0 $grid $grid 0;
+		position: relative;
+		top: 7px; // Match top of image with beginning of text. Depends on font's height of capital letters.
+	}
+}
+
+.sponsorship_book {
+	border-bottom: $border-width solid $border-color;
+	margin-bottom: ($grid - $border-width);
+}

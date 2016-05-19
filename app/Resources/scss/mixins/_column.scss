@@ -1,0 +1,12 @@
+@mixin column($unfloat-breakpoint: false) {
+	display: table-cell;
+	padding: 0 $grid;
+	vertical-align: top;
+
+	@if $unfloat-breakpoint {
+		@include respond-to($unfloat-breakpoint) {
+			display: block;
+			min-width: 100%;
+		}
+	}
+}

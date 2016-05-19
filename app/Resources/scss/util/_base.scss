@@ -1,0 +1,116 @@
+html {
+	box-sizing: border-box;
+	color: $text-color;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0 auto;
+	max-width: $site-width;
+	min-height: 100%;
+
+	@include respond-to(large) {
+		box-shadow: 0 0 $grid rgba($black, .5);
+		margin: 0;
+		min-width: 100%;
+		overflow-x: hidden;
+	}
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	border-radius: 0;
+	font: #{$font-size} / #{$grid} $font-family-text;
+
+	.fonts-failed & {
+		font-family: $font-family-text-fallback;
+	}
+}
+
+h1,
+h2,
+h3 {
+	font-family: $font-family-display;
+
+	.fonts-failed & {
+		font-family: $font-family-display-fallback;
+	}
+}
+
+a {
+	color: $link-color;
+	text-decoration: none;
+}
+
+button,
+[type=submit],
+[type=reset] {
+	cursor: pointer;
+	font-size: $font-size;
+
+	// Fix button size in Firefox
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+}
+
+input:focus,
+textarea:focus {
+	outline: 0;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+legend {
+	color: $text-color-light;
+	font-weight: bold;
+}
+
+label {
+	cursor: pointer;
+}
+
+[type=checkbox],
+[type=radio] {
+	opacity: 0;
+	position: absolute;
+
+	+ label {
+		display: inline-block;
+		margin-left: $grid;
+	}
+
+	&:checked + label::before {
+		background: $brand-color;
+		transition-duration: $transition-duration;
+	}
+
+	&:focus + label::before {
+		outline: $outline;
+	}
+}
+
+[type=checkbox] + label::before {
+	@include checkbox;
+}
+
+[type=radio] + label::before {
+	@include radio;
+}

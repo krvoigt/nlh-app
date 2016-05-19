@@ -1,0 +1,7 @@
+// Show a baseline grid for easier typography debugging
+@mixin debug-grid($vertical-offset: 0) {
+	// scss-lint:disable ColorVariable
+	background-image: linear-gradient(transparent 50%, #fee 50%);
+	background-position: 0 $vertical-offset;
+	background-size: $grid $grid;
+}

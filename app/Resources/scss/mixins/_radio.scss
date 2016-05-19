@@ -1,0 +1,4 @@
+@mixin radio {
+	@include checkbox;
+	border-radius: 50%;
+}

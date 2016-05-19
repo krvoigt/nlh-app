@@ -1,0 +1,21 @@
+@mixin button($modifier: null) {
+	@include transition(background, color);
+	background: if($modifier == light, $button-light-bg, $button-bg);
+	border: 0 !important;
+	border-radius: $br;
+	color: if($modifier == light, $link-color, $white);
+	cursor: pointer;
+	display: inline-block;
+	font-size: $font-size;
+	line-height: $line-height;
+	padding: ($grid / 2) $grid;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: if($modifier == light, 0 1px 0 $white, 0 -1px 0 $shadow-dark);
+	vertical-align: top;
+	white-space: nowrap;
+
+	@include hover {
+		background: if($modifier == light, $button-light-bg-hover, $button-bg-hover) !important;
+	}
+}

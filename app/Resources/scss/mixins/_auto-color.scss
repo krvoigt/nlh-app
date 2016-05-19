@@ -1,0 +1,9 @@
+// From Chopstick v0.3.3
+// Calculate text-color based on background-color, see https://vimeo.com/60224584
+@mixin auto-color($bg-color) {
+	@if (.2126 * red($bg-color) + .7152 * green($bg-color) + .0722 * blue($bg-color)) / 255 <= .5 {
+		color: mix($white, $bg-color, 95%);
+	} @else {
+		color: mix($black, $bg-color, 70%);
+	}
+}

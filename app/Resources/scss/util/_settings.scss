@@ -1,0 +1,85 @@
+// Responsive grid and dimensions
+$grid: 26px;
+$site-width: 48 * $grid;
+$search-width: 24 * $grid;
+
+$breakpoints: (
+	large: 1023px,
+	medium: 719px,
+	small: 639px,
+	tiny: 479px
+);
+
+$border-width: 1px;
+$br: 0; // border-radius
+
+// Typography
+$OpenSansPath: '../fonts/open-sans' !default; // scss-lint:disable NameFormat
+$sub-iconfont-path: '../fonts/sub' !default;
+$svg-icon-paths: $font-awesome-svg-paths;
+
+$font-family-display: 'urw_classicoregular', 'Helvetica', 'Arial', sans-serif;
+$font-family-display-fallback: 'Helvetica', 'Arial', sans-serif;
+$font-family-text: 'Open Sans', 'Helvetica', 'Arial', sans-serif;
+$font-family-text-fallback: 'Helvetica', 'Arial', sans-serif;
+
+$img-path: '../images';
+
+$ratio: 1.25; // Factor used for font size increments
+$line-height: $grid;
+$font-size: 16px;
+$font-size-small: 14px;
+$typo-scale-sizing-factor: 1; // Adjust heading font size for different font heights
+
+// Brand colors
+$brand-color: #1a3771;
+$brand-color-light: #93a8cf;
+$brand-color-lighter: lighten($brand-color, 66);
+
+// Other base colors
+$grey: #666;
+$grey-light: #ddd;
+$grey-dark: #333;
+$shadow-light: rgba(black, .08);
+$shadow-dark: rgba(black, .24);
+$white: #fff;
+$black: #000;
+$red: #c33;
+
+// Semantic colors
+$heading-color: $brand-color;
+$text-color: $grey-dark;
+$text-color-light: $grey;
+
+$border-color: $grey-light;
+$highlight-color: $brand-color-lighter;
+
+$link-color: $brand-color;
+$link-hover-bg-color: $brand-color-lighter;
+$link-hover-bg-color-dark: $shadow-dark;
+
+$input-bg-color: $white;
+$input-border-color: $brand-color;
+$input-border-color-focus: $brand-color;
+
+$button-bg: linear-gradient(to bottom, lighten($link-color, 10), $link-color);
+$button-bg-hover: linear-gradient(to bottom, $link-color, darken($link-color, 10));
+$button-light-bg: linear-gradient(to bottom, lighten($grey-light, 10), $grey-light);
+$button-light-bg-hover: linear-gradient(to bottom, lighten($grey-light, 15), lighten($grey-light, 5));
+
+$alert-color: $red;
+
+// Combined values
+$drop-shadow: 0 0 $grid rgba($black, .5);
+$outline: 1px dotted $text-color-light;
+
+// Legacy icons for infobox social links
+$social-icons: (
+	phone,
+	comments,
+	pencil,
+	facebook,
+	facebook-square,
+	twitter,
+	rss,
+);

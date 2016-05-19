@@ -1,0 +1,19 @@
+%full-width-background {
+	position: relative;
+
+	&::before {
+		background: inherit;
+		content: '';
+		height: 100%;
+		left: -9999em;
+		position: absolute;
+		right: -9999em;
+		top: 0;
+		z-index: -99;
+
+		@include respond-to(large) {
+			content: none;
+		}
+	}
+
+}

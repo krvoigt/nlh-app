@@ -1,0 +1,38 @@
+@mixin popup($position: top, $background: $white) {
+	background: $background;
+	box-shadow: $drop-shadow;
+	color: if(lightness($background) > 50%, $text-color, $white);
+	padding: .5em;
+	position: absolute;
+	z-index: 9;
+
+	&::after {
+		background: $background;
+		content: '';
+		display: block;
+		height: .5em;
+		position: absolute;
+		transform: rotate(45deg);
+		width: .5em;
+	}
+
+	@if $position == top {
+		transform: translateY(-100%);
+		top: -.5em;
+		right: 0;
+
+		&::after {
+			bottom: -.25em;
+			right: 1em;
+		}
+	} @elseif $position == bottom {
+		left: 0;
+		margin-top: .5em;
+		top: 100%;
+
+		&::after {
+			top: -.25em;
+			left: 1em;
+		}
+	}
+}

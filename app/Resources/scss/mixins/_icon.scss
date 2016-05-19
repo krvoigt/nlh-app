@@ -1,0 +1,68 @@
+$svg-icon-color: $text-color !default;
+$svg-icon-default-size: 1792px !default; // SVG canvas height and width
+$svg-icon-margin: .25em !default;
+$svg-icon-size: 1em !default;
+$svg-icon-vertical-offset: -.1em !default;
+
+%icon {
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: '';
+	display: inline-block;
+	height: $svg-icon-size;
+	margin: (-$svg-icon-size / 2 + $svg-icon-vertical-offset) 0 (-$svg-icon-size / 2 - $svg-icon-vertical-offset);
+	vertical-align: middle;
+	width: $svg-icon-size;
+}
+
+@mixin icon($name, $color: $svg-icon-color, $with-text: true, $on-right: false) {
+	@if $color == null {
+		$color: $svg-icon-color;
+	}
+	$svg: map-get($svg-icon-paths, $name);
+	@if not $svg {
+		@warn 'Unknown icon: #{$name}';
+	} @else {
+		&::#{if($on-right, after, before)} {
+			@extend %icon;
+			background-image: svg-data-url($svg, $color);
+
+			@if $with-text {
+				margin-#{if($on-right, left, right)}: $svg-icon-margin;
+			}
+		}
+	}
+}
+
+// http://codepen.io/tigt/post/optimizing-svgs-in-data-uris
+// scss-lint:disable ColorVariable
+@function svg-data-url($svg, $color: #000) {
+	// Chunk up string in order to avoid "SystemStackError: stack level too deep"
+	$encoded: '';
+	$slice: 2000;
+	$index: 0;
+	$loops: ceil(str-length($svg) / $slice);
+	$size: $svg-icon-default-size / 1px; // Strip px unit
+	$fill: if($color != #000, 'fill="#{$color}" ', '');
+	$svg: '<svg #{$fill}width="#{$size}" height="#{$size}" viewBox="0 0 #{$size} #{$size}" xmlns="http://www.w3.org/2000/svg">#{$svg}</svg>';
+	@for $i from 1 through $loops {
+		$chunk: str-slice($svg, $index, $index + $slice - 1);
+		$chunk: str-replace($chunk, '"', "'");
+		$chunk: str-replace($chunk, '<', '%3C');
+		$chunk: str-replace($chunk, '>', '%3E');
+		$chunk: str-replace($chunk, '&', '%26');
+		$chunk: str-replace($chunk, '#', '%23');
+		$encoded: #{$encoded}#{$chunk};
+		$index: $index + $slice;
+	}
+	@return url("data:image/svg+xml;charset=utf8,#{$encoded}");
+}
+
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+	@return $string;
+}

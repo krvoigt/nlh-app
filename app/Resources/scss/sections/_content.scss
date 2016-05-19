@@ -1,0 +1,295 @@
+.content {
+	@include column(medium);
+	position: relative;
+	z-index: 0;
+
+	address,
+	blockquote,
+	fieldset,
+	figure,
+	form,
+	dl,
+	h1,
+	h2,
+	h3,
+	iframe,
+	ol,
+	p,
+	pre,
+	table,
+	ul,
+	.vcard {
+		margin-bottom: $grid;
+	}
+
+	a {
+		@include link;
+	}
+
+	caption {
+		font-weight: bold;
+		text-align: left;
+	}
+
+	h1,
+	h2,
+	h3 {
+		color: $heading-color;
+		position: relative;
+		text-rendering: optimizeLegibility;
+		word-wrap: break-word;
+
+		a {
+			@include link(false);
+		}
+	}
+
+	h1 {
+		@include typo-scale(3);
+		font-weight: 300;
+	}
+
+	article + article {
+		margin-top: ($grid * 1.5);
+	}
+
+	h2 {
+		@include typo-scale(2);
+		font-weight: 300;
+		margin-bottom: ($grid / 2);
+	}
+
+	h3 {
+		@include typo-scale(1);
+		margin-bottom: ($grid / 2);
+	}
+
+	h4,
+	h5,
+	h6 {
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+
+
+	ol,
+	ul {
+		margin-left: $grid;
+
+		&.no-style {
+			list-style: none;
+			margin-left: 0;
+		}
+
+		ol,
+		ul {
+			margin-bottom: 0;
+		}
+	}
+
+	ul > li {
+		&::before {
+			border-radius: .125em;
+			content: '';
+			background: $brand-color-light;
+			display: inline-block;
+			height: $border-width;
+			margin: ($line-height / 2) 0 0 -1.1em;
+			position: absolute;
+			width: .5em;
+		}
+	}
+
+	ol {
+		list-style: decimal outside;
+	}
+
+	abbr,
+	acronym,
+	dfn {
+		border-bottom: $border-width dotted $border-color;
+	}
+
+	b,
+	strong {
+		font-weight: bold;
+	}
+
+	big {
+		font-size: 1.25em;
+	}
+
+	cite,
+	em,
+	i,
+	q {
+		font-style: italic;
+	}
+
+	code,
+	kbd,
+	tt,
+	var {
+		font-family: monospace;
+	}
+
+	small {
+		font-size: $font-size-small;
+	}
+
+	sub,
+	sup {
+		font-size: 75%;
+		line-height: 0;
+		position: relative;
+		vertical-align: baseline;
+	}
+
+	sup {
+		top: -.5em;
+	}
+
+	sub {
+		bottom: -.25em;
+	}
+
+	table {
+		border: $border-width solid $border-color;
+		border-width: $border-width 0;
+		margin: floor(-.25 * $grid) 0 ceil(.75 * $grid);
+		width: 100%;
+
+		// Reponsive tables
+		@include respond-to(medium) {
+			&:not(.no-responsive, .dataTable) {
+				&,
+				thead,
+				tbody,
+				th,
+				td,
+				tr {
+					display: block;
+					overflow: hidden;
+				}
+
+				thead tr { // scss-lint:disable SelectorDepth
+					position: absolute;
+					top: -999em;
+					left: -999em;
+				}
+
+				td::before {
+					color: $text-color-light;
+					content: attr(data-label) ': ';
+					display: inline-block;
+					font-weight: bold;
+					width: 9em;
+				}
+			}
+		}
+
+		@include respond-to(small) {
+			// TODO: Rework and rename, as this is responsive, too
+			// Currently only used for opening hours
+			&.no-responsive {
+				border: 0;
+
+				tr {
+					display: block;
+					border: 0;
+
+					+ tr > th {
+						margin-top: $grid;
+					}
+				}
+
+				td,
+				th {
+					min-width: 5em;
+					padding: 0;
+				}
+
+				th {
+					color: $text-color-light;
+					display: block;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	th,
+	td {
+		padding: floor($grid / 4) ($grid / 4) ceil($grid / 4);
+		text-align: left;
+		vertical-align: top;
+	}
+
+	tr {
+		border-bottom: $border-width solid $border-color;
+		border-top: $border-width solid $border-color;
+	}
+
+	[type=date],
+	[type=datetime-local],
+	[type=email],
+	[type=password],
+	[type=search],
+	[type=tel],
+	[type=text],
+	select {
+		@include text-input;
+		height: (2 * $grid);
+	}
+
+	textarea {
+		@include text-input;
+		height: (8 * $grid);
+	}
+
+	button,
+	[type=submit],
+	[type=reset] {
+		@include button;
+	}
+
+	dl {
+		@extend %clearfix;
+
+		width: 100%;
+	}
+
+	dt {
+		clear: left;
+		color: $text-color-light;
+		float: left;
+		font-weight: bold;
+		padding-right: .5em;
+		width: 38.2%;
+
+		@include respond-to(medium) {
+			float: none;
+			padding-right: 0;
+			width: auto;
+		}
+	}
+
+	dd {
+		float: left;
+		margin-bottom: ($grid / 2);
+		width: 61.8%;
+
+		@include respond-to(medium) {
+			float: none;
+			width: auto;
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+
+	:last-child:not(:only-child) {
+		margin-bottom: 0;
+	}
+}

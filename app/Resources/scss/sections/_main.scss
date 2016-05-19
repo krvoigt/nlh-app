@@ -1,0 +1,52 @@
+.main {
+	background: $white;
+	margin: 0 auto;
+	max-width: $site-width;
+	padding: 0 $grid;
+}
+
+.main_left {
+	@include column(large);
+	background: $white;
+	max-width: (11 * $grid); // Prevent width adjustment when text does not fit
+	padding-left: 0;
+	width: (11 * $grid);
+
+	@include respond-to(large) {
+		@include off-canvas;
+		min-width: 0;
+		max-width: none;
+	}
+}
+
+.main_right {
+	@include column(large);
+	@include debug-grid(6px); // TODO: Remove this
+	background: $white;
+	padding-right: 0;
+	position: relative;
+
+	@include respond-to(large) {
+		padding: 0 ($grid / 2); // Prevent off-canvas from popping through
+		margin: 0 (-$grid);
+	}
+}
+
+.main_container {
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.main_logo,
+.main_ads {
+	margin-top: $grid;
+
+	@include respond-to(large) {
+		margin: $grid ($grid / 2) 0;
+	}
+
+	a {
+		display: block;
+	}
+}
