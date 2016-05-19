@@ -9,7 +9,7 @@
 
 {% block body %}
 
-    <ol class="resultList">
+    <ol class="resultList" start="{{ offset + 1 }}">
         {% for result in pagination %}
             <li>
                 <article>
