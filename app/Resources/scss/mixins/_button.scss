@@ -16,6 +16,6 @@
     white-space: nowrap;
 
     @include hover {
-        background: if($modifier == light, $button-light-bg-hover, $button-bg-hover) !important;
+        background: if($modifier == light, $button-light-bg-hover, $button-bg-hover);
     }
 }
