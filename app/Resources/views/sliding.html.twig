@@ -1,40 +1,41 @@
 {# default Sliding pagination control implementation #}
 
 {% if pageCount > 1 %}
-<ol class="pagination">
-    {% if first is defined and current != first %}
-        <li class="pagination_item">
-            <a class="pagination_link -first" href="{{ path(route, query|merge({(pageParameterName): first})) }}"></a>
-        </li>
-    {% endif %}
 
-    {% if previous is defined %}
-        <li class="pagination_item">
-            <a class="pagination_link -previous" href="{{ path(route, query|merge({(pageParameterName): previous})) }}"></a>
-        </li>
-    {% endif %}
-
-    {% for page in pagesInRange %}
-        {% if page != current %}
-            <li class="page pagination_item">
-                <a class="pagination_link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+    <ol class="pagination">
+        {% if first is defined and current != first %}
+            <li class="pagination_item">
+                <a class="pagination_link -first" href="{{ path(route, query|merge({(pageParameterName): first})) }}"></a>
             </li>
-        {% else %}
-            <li class="pagination_item current"><a class="pagination_link -current">{{ page }}</a></li>
         {% endif %}
 
-    {% endfor %}
+        {% if previous is defined %}
+            <li class="pagination_item">
+                <a class="pagination_link -previous" href="{{ path(route, query|merge({(pageParameterName): previous})) }}"></a>
+            </li>
+        {% endif %}
 
-    {% if next is defined %}
-        <li class="pagination_item">
-            <a class="pagination_link -next" href="{{ path(route, query|merge({(pageParameterName): next})) }}"></a>
-        </li>
-    {% endif %}
+        {% for page in pagesInRange %}
+            {% if page != current %}
+                <li class="page pagination_item">
+                    <a class="pagination_link" href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a>
+                </li>
+            {% else %}
+                <li class="pagination_item current"><a class="pagination_link -current">{{ page }}</a></li>
+            {% endif %}
 
-    {% if last is defined and current != last %}
-        <li class="pagination_item">
-            <a class="pagination_link -last" href="{{ path(route, query|merge({(pageParameterName): last})) }}"></a>
-        </li>
-    {% endif %}
-</ol>
+        {% endfor %}
+
+        {% if next is defined %}
+            <li class="pagination_item">
+                <a class="pagination_link -next" href="{{ path(route, query|merge({(pageParameterName): next})) }}"></a>
+            </li>
+        {% endif %}
+
+        {% if last is defined and current != last %}
+            <li class="pagination_item">
+                <a class="pagination_link -last" href="{{ path(route, query|merge({(pageParameterName): last})) }}"></a>
+            </li>
+        {% endif %}
+    </ol>
 {% endif %}
