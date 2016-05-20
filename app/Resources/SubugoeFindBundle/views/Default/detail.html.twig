@@ -5,14 +5,19 @@
 {% block body %}
 
 
+    {% set thumbs = [document.thumbs_url] %}
+    {% set presentation = [document.min_url] %}
+
+    {% set images = thumbs | merge(presentation)  %}
+
     <h1>{{ document.bytitle }}</h1>
 
     {% if document.thumbs_url is defined %}
-
-        {% for image in document.thumbs_url | slice(0, 10) %}
-            <img src="{{ image }}" alt="" style="float:left; margin-right:1em;">
-        {% endfor %}
-
+        <div class="fotorama" data-nav="thumbs">
+            {% for image in images.0 %}
+                 <a data-thumb="{{ image }}" href="{{ presentation[0][loop.index0] }}"></a>
+            {% endfor %}
+        </div>
     {% endif %}
 
     <p style="clear:both">
