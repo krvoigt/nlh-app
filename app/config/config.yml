@@ -87,7 +87,7 @@ subugoe_find:
         - { title: dc, field: dc}
         - { title: facetplacepublish, field: facetplacepublish}
         - { title: docstrct, field: docstrct}
-        - { title: year, field: yearpublish}
+        - { title: yearpublish, field: yearpublish}
 
 knp_paginator:
     page_range: 15                      # default page range used in pagination control
