@@ -18,7 +18,7 @@
 /web/bundles/
 /web/css/
 /web/fonts/open-sans/
-/web/js/
+/web/js/script.js
 /src/Subugoe/*
 .idea/
 .gradle
