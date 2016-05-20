@@ -20,3 +20,5 @@
 /web/js/
 /src/Subugoe/*
 .idea/
+.gradle
+gradlew.bat

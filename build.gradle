@@ -1,0 +1,37 @@
+// Pull the plugin from Maven Central
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'http://dl.bintray.com/robfletcher/gradle-plugins' }
+        jcenter()
+    }
+}
+
+
+plugins {
+    id "com.moowork.gulp" version "0.11"
+}
+loadConfiguration()
+
+def loadConfiguration() {
+    defaultTasks = ['node', 'npmInstall', 'installGulp', 'gulp_compile']
+}
+
+node {
+    // Version of node to use.
+    version = '5.4.1'
+
+    // Enabled the automatic download. False is the default (for now).
+    download = true
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
+
+repositories {
+    mavenCentral()
+}
+
+gulp_build.dependsOn 'installGulp'
+gulp_build.dependsOn 'npmInstall'
