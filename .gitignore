@@ -1,5 +1,6 @@
 /app/config/parameters.yml
-/build/
+/build/*
+!/build/gradle
 /node_modules/
 /phpunit.xml
 /var/*
