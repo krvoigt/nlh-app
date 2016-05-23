@@ -2,7 +2,8 @@ numfound: Treffer
 expand: Mehr …
 collapse: Weniger …
 
-docstrct: Strukturtyp
+#fields
+docstrct: Strukturtyp|Strukturtypen
 facetplacepublish: Erscheinungsort|Erscheinungsorte
 placepublish: Erscheinungsort|Erscheinungsorte
 dc: Sammlung|Sammlungen
@@ -10,7 +11,7 @@ facetpublisher: Verlag|Verlage
 publisher: Verlag|Verlage
 facetcreator: Autor|Autoren
 creator: Autor|Autoren
-yearpublish: Erscheinungsjahr
+yearpublish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
 
 #docstrct
