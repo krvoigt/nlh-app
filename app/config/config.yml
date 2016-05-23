@@ -81,6 +81,7 @@ nelmio_solarium:
             endpoints: [default]
 
 subugoe_find:
+    default_query: "iswork:true"
     facets:
         - { title: facetcreator, field: facetcreator }
         - { title: facetpublisher, field: facetpublisher}
