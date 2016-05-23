@@ -22,73 +22,74 @@
         </div>
     {% endif %}
 
-    <p style="clear:both">
+    <dl class="viewer_metadata">
+        <dt>{% trans %}docstrct{% endtrans %}</dt>
+        <dd>{{ document.docstrct | trans }}</dd>
 
-        {% trans %}docstrct{% endtrans %}: {{ document.docstrct | trans }}
-
-        <br>
-
-        {% trans %}bytitle{% endtrans %}: {{ document.bytitle }}
+        <dt>{% trans %}bytitle{% endtrans %}</dt>
+        <dd>{{ document.bytitle }}</dd>
 
         {% if document.creator is defined %}
-            <br>
-            {{ 'creator' | transchoice(document.publisher | length) }}:
-            {% for author in document.creator %}
-              {{ author }}{% if loop.last %}{% else %}, {% endif %}
-            {% endfor %}
-
+            <dt>{{ 'creator' | transchoice(document.publisher | length) }}:</dt>
+            <dd>
+                {% for author in document.creator %}
+                 {{ author }}{% if loop.last %}{% else %}, {% endif %}
+                {% endfor %}
+            </dd>
         {% endif %}
 
 
         {% if document.yearpublish is defined %}
-            <br>
-            {% trans %}yearpublish{% endtrans %}: {{ document.yearpublish }}
+            <dt>{% trans %}yearpublish{% endtrans %}:</dt>
+            <dd>{{ document.yearpublish }}</dd>
         {% endif %}
 
 
         {% if document.placepublish is defined %}
-            <br>
-            {{ 'placepublish' | transchoice(document.placepublish | length) }}:
-            {% for place in document.placepublish %}
-              {{ place }}{% if loop.last %}{% else %}, {% endif %}
-            {% endfor %}
+            <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
+            <dd>
+                {% for place in document.placepublish %}
+                  {{ place }}{% if loop.last %}{% else %}, {% endif %}
+                {% endfor %}
+            </dd>
         {% endif %}
 
         {% if document.publisher is defined %}
-            <br>
-            {{ 'publisher' | transchoice(document.publisher | length) }}:
-            {% for publisher in document.publisher %}
-              {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
-            {% endfor %}
+            <dt>{{ 'publisher' | transchoice(document.publisher | length) }}</dt>
+            <dd>
+                {% for publisher in document.publisher %}
+                  {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
+                {% endfor %}
+            </dd>
         {% endif %}
 
-        <br>
-        {{ 'dc' | transchoice(document.dc | length) }}:
-        {% for dc in document.dc %}
-          {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
-        {% endfor %}
+        <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
+        <dd>
+            {% for dc in document.dc %}
+              {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
+            {% endfor %}
+        </dd>
 
+        <dt>PURL</dt>
+        <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
 
-        <br>
-        PURL: <a href="{{ document.purl }}">{{ document.purl }}</a>
-
-        <br>
-        gbv-ppn: {{ document['id_gbv-ppn_s'][0] }}
+        <dt>gbv-ppn</dt>
+        <dd>{{ document['id_gbv-ppn_s'][0] }}</dd>
 
         {% if document.id_PPNanalog_s is defined %}
-            <br>
-            PPN (original): <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
+            <dt>PPN (original)</dt>
+            <dd><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a></dd>
         {% endif %}
 
 
         {% if document.id_ADBID_s is defined %}
-            <br>
-            ADBID: {{ document.id_ADBID_s.0  }}
+            <dt>ADBID</dt>
+            <dd>{{ document.id_ADBID_s.0 }}</dd>
         {% endif %}
 
         <br>
+    </dl>
     {% include "@SubugoeFind/partials/links.html.twig" %}
-    </p>
 
 
 {% endblock %}
