@@ -24,15 +24,15 @@
 
     <p style="clear:both">
 
-        Strukturtyp: {{ document.docstrct | trans }}
+        {% trans %}docstrct{% endtrans %}: {{ document.docstrct | trans }}
 
         <br>
 
-        Titel: {{ document.bytitle }}
+        {% trans %}bytitle{% endtrans %}: {{ document.bytitle }}
 
         {% if document.creator is defined %}
             <br>
-            Autor:
+            {{ 'creator' | transchoice(document.publisher | length) }}:
             {% for author in document.creator %}
               {{ author }}{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
@@ -42,13 +42,13 @@
 
         {% if document.yearpublish is defined %}
             <br>
-            Erscheinungsjahr: {{ document.yearpublish }}
+            {% trans %}yearpublish{% endtrans %}: {{ document.yearpublish }}
         {% endif %}
 
 
         {% if document.placepublish is defined %}
             <br>
-            Erscheinungsort:
+            {{ 'placepublish' | transchoice(document.placepublish | length) }}:
             {% for place in document.placepublish %}
               {{ place }}{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
@@ -56,14 +56,14 @@
 
         {% if document.publisher is defined %}
             <br>
-            Verlag:
+            {{ 'publisher' | transchoice(document.publisher | length) }}:
             {% for publisher in document.publisher %}
               {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         {% endif %}
 
         <br>
-        Kollektionen:
+        {{ 'dc' | transchoice(document.dc | length) }}:
         {% for dc in document.dc %}
           {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
         {% endfor %}
@@ -76,10 +76,9 @@
         gbv-ppn: {{ document['id_gbv-ppn_s'][0] }}
 
         {% if document.id_PPNanalog_s is defined %}
-
-        <br>
-        PPN (original): <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
-{% endif %}
+            <br>
+            PPN (original): <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
+        {% endif %}
 
 
         {% if document.id_ADBID_s is defined %}

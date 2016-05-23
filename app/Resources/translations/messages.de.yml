@@ -2,13 +2,16 @@ numfound: Treffer
 expand: Mehr …
 collapse: Weniger …
 
-docstrct: Kategorien
-facetplacepublish: Veröffentlichungsort
-dc: Sammlung
-facetpublisher: Verlag
-facetcreator: Autor
-creator: Autor
-yearpublish: Jahr
+docstrct: Strukturtyp
+facetplacepublish: Erscheinungsort|Erscheinungsorte
+placepublish: Erscheinungsort|Erscheinungsorte
+dc: Sammlung|Sammlungen
+facetpublisher: Verlag|Verlage
+publisher: Verlag|Verlage
+facetcreator: Autor|Autoren
+creator: Autor|Autoren
+yearpublish: Erscheinungsjahr
+bytitle: Titel
 
 monograph: Monograph
 map: Karte
