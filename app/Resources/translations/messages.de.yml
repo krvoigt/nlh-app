@@ -13,16 +13,130 @@ creator: Autor|Autoren
 yearpublish: Erscheinungsjahr
 bytitle: Titel
 
-monograph: Monograph
+#docstrct
+abstract: Abstrakt
+acknowledgment: Danksagung
+addendum: Addendum
+additional: Beilage
+advertising: Werbung
+annotation: Annotation
+announcement: Ankündigung
+appendix: Appendix
+article: Artikel
+attachedwork: Beigefügtes Werk
+beigefuegt: Beigefügt
+bibliography: Bibliographie
+bundle: Nachlass
+chapter: Kapitel
+collectivework: Sammelwerk
+comment: Kommentar
+contents: Inhaltsverzeichnis
+corrigenda: Errata
+courtdecision: Rechtsentscheidung
+cover: Einband
+curriculumvitae: Lebenslauf
+dedication: Widmung
+epilogue: Epilogue
+errata: Errata
+figure: Abbildung
+folder: Mappe
+headword: Stichwort
+illustration: Illustration
+illustrationdescription: Bildbeschreibung
+imprint: Impressum
+indexabbreviations: Abkürzungsverzeichnis
+indexauthor: Index of authors
+indexauthors: Autorenverzeichnis
+indexchronological: Chronologisches verzeichnis
+indexfigures: Abbildungsverzeichnis
+index: Index
+indexlocation: Ortsregister
+indexlocations: Ortsregister
+indexnames: Namensregister
+indexofchronology: Index (chronologisch)
+indexoverall: Gesamtindex
+indexpersons: Personenindex
+indexspecial: Spezialverzeichnis
+indexsubject: Fachbegriffsregister
+indextables: Tabellenverzeichnis
+indexvolume: Bandindex
+introduction: Einleitung
+issue: Heft
+legalcomment: Rechtskommentar
+legalnorm: Rechtsnorm
+letter: Brief
+lettertoeditor: Brief an den Editor
+list: Liste
+listofillustrations: Liste der Abbildungen
+listofmaps: Liste der Karten
+listofpublications: Publikationsverzeichnis
+listoftables: Liste der Tabellen
 map: Karte
+message: Nachricht
+miscella: Miszelle
+miscelle: Miszelle
+monograph: Monograph
+multivolumework: Mehrbändiges Werk
+multivolume_work: Mehrbändiges Werk
+music: Musik
+musical_notation: Noten
+notes: Noten
+obituary: Nachruf
+otherdocstrct: Sonstiges
+other: Sonstiges
+partofwork: Teilwerk
+periodicalissue: Zeitschriftenheft
+periodicalpart: Zeitschriftenteil
+periodicalvolume: Zeitschriftenband
+periodical: Zeitschrift
+poem: Gedicht
+preface: Vorwort
+prepage: Deckblatt
+remarks: Anmerkungen
+review: Rezension
+section: Abschnitt
+sheetmusic: Musik
+singlemap: Einzelne Karte
+supplement: Beilage
+tabledescription: Tabelle der Beschreibungen
+tablelist: Tabelle, Liste
+tableofabbreviations: Abkürzungsverzeichnis
+tableofcontents: Inhaltsverzeichnis
+tableofliteraturerefs: Literaturverzeichnis
+table: Tabelle, Liste
+textsection: Textabschnitt
+theses: DIssertation
+title_page: Titelseite
+titlepage: Titelseite
+unit: Teil
 volume: Band
+werk_beigefuegt: Beigefügtes Werk
+werk: Werk
+contained_work: Enthaltenes Werk
 
-vd18.digital: VD18 Digital
+#dc
+autobiographica: Autobiographica
+digiwunschbuch: DigiWunschbuch
+itineraria: Itineraria
 maps: Karten
 mathematica: Mathematica
-blumenbachiana: Blumenbachiana
-göttingeruniversitätsgeschichte-gedrucktewerke: GöttingerUniversitätsgeschichte-GedruckteWerke
-bucherhaltung: Bucherhaltung
-vd17-mainstream: VD17-Mainstream
-vd17-nova: VD17-nova
+nordamericana: Americana
+rezensionszeitschriften: Rezensionen
+sibirica: Sibirica
 varia: Varia
+wissenschaftsgeschichte: Wissenschaftsgeschichte
+zoologica: Zoologica
+rusdml: RusDML
+vd17-nova: VD17 Nova
+vd17-mainstream: VD17 Mainstream
+vd18.göttingen: VD18 Göttingen
+vd18.digital: VD18 digital
+juridica: Rechtsgeschichte
+göttingeruniversitätsgeschichte.gedrucktewerke: Göttinger Universitätsgeschichte - Gedruckte Werke
+bucherhaltung: Bucherhaltung
+göttinger.universitätsgeschichte.portraits: Göttinger Universitätsgeschichte – Portraits
+antiquitates.und.archaeologia: Antiquitates &amp; Archaeologia
+antiquitates.und.archaeologia.archaeo18: Antiquitates &amp; Archaeologia - ARCHAEO18
+blumenbachiana: Blumenbachiana
+manuscriptae: Manuscripta
+theologie: Theologie
