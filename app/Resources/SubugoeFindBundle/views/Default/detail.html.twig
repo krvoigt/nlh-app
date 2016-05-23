@@ -16,7 +16,7 @@
 
     {% if document.thumbs_url is defined %}
         <div class="fotorama" data-nav="thumbs" data-allowfullscreen="native" data-keyboard="true">
-            {% for image in images.0 %}
+            {% for image in images.0 | slice(0, 30)%}
                  <a data-thumb="{{ image }}" href="{{ presentation[0][loop.index0] }}"></a>
             {% endfor %}
         </div>
