@@ -17,7 +17,7 @@
                 <article>
                     <h1><a href="{{ path('subugoe_find_detail', {'id': result.fields.id}) }}">{{ result.fields.bytitle }}</a></h1>
                     <p>{% if result.fields.creator is defined %}
-                            {% trans %}creator{% endtrans %}:
+                            {{ 'creator' | transchoice(result.fields.creator | length) }}:
                                 {% for author in result.fields.creator %}
                                   {{ author }}{% if loop.last %}{% else %}, {% endif %}
                                 {% endfor %}
@@ -39,7 +39,7 @@
 {% block sidebar %}
     {% for key, facet in facets %}
         <article class="facet">
-            <h1>{{ key | trans }}</h1>
+            <h1>{{ key | transchoice(facet | length) }}</h1>
             <ol class="facetList">
                 {% for value, count in facet if count > 0 %}
                     {% set facet_name = ['facet', key]|join('-') %}
