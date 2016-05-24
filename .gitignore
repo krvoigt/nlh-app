@@ -17,7 +17,8 @@
 /vendor/
 /web/bundles/
 /web/css/
-/web/fonts/open-sans/
+/web/fonts/
+!/web/fonts/classico/
 /web/js/script.js
 /src/Subugoe/*
 .idea/
