@@ -11,12 +11,11 @@ $breakpoints: (
 );
 
 $border-width: 1px;
-$br: 0; // border-radius
+$br: 2px; // border-radius
 
 // Typography
-$OpenSansPath: '../fonts/open-sans' !default; // scss-lint:disable NameFormat
-$sub-iconfont-path: '../fonts/sub' !default;
-$svg-icon-paths: $font-awesome-svg-paths;
+$OpenSansPath: '../fonts/open-sans'; // scss-lint:disable NameFormat
+$fa-font-path: '../fonts/font-awesome';
 
 $font-family-display: 'urw_classicoregular', 'Helvetica', 'Arial', sans-serif;
 $font-family-display-fallback: 'Helvetica', 'Arial', sans-serif;
@@ -39,6 +38,7 @@ $brand-color-lighter: lighten($brand-color, 66);
 // Other base colors
 $grey: #666;
 $grey-light: #ddd;
+$grey-lightest: #eee;
 $grey-dark: #333;
 $shadow-light: rgba(black, .08);
 $shadow-dark: rgba(black, .24);
@@ -62,15 +62,11 @@ $input-bg-color: $white;
 $input-border-color: $brand-color;
 $input-border-color-focus: $brand-color;
 
-$button-bg: linear-gradient(to bottom, lighten($link-color, 10), $link-color);
-$button-bg-hover: linear-gradient(to bottom, $link-color, darken($link-color, 10));
-$button-light-bg: linear-gradient(to bottom, lighten($grey-light, 10), $grey-light);
-$button-light-bg-hover: linear-gradient(to bottom, lighten($grey-light, 15), lighten($grey-light, 5));
-
 $alert-color: $red;
 
 // Combined values
 $drop-shadow: 0 0 $grid rgba($black, .5);
+$drop-shadow-small: 0 0 ($grid / 2) rgba($black, .2);
 $outline: 1px dotted $text-color-light;
 
 // Legacy icons for infobox social links

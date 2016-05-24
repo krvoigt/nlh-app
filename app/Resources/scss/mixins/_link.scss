@@ -2,6 +2,7 @@
     $bg-color: if($on-dark-background, $link-hover-bg-color-dark, $link-hover-bg-color);
 
     @include transition(background);
+    color: $link-color;
     padding: 1px 0;
 
     @if $with-border {

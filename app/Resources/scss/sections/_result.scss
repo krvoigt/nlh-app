@@ -1,0 +1,36 @@
+.resultItem {
+    & + & {
+        margin-top: $grid;
+    }
+}
+
+.resultMetadata {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.resultTitle {
+	font: inherit;
+	font-weight: bold;
+	margin: 0 0 ($grid / 2);
+
+	> a {
+		@include link;
+	}
+}
+
+.resultThumbnail {
+    display: table-cell;
+    padding: 0 ($grid / 2);
+    width: ($grid * 4);
+
+    > img {
+		box-shadow: $drop-shadow-small;
+        display: block;
+    }
+}
+
+.resultWrap {
+    display: inline-block; // block or table would mess up list numbers
+    vertical-align: top;
+}

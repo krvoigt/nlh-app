@@ -40,7 +40,7 @@
 }
 
 .search_close {
-    @include icon('close', $link-color, false);
+    @include icon('close', false);
     @include transition(background);
     background: none;
     bottom: round($grid / 4);
@@ -59,7 +59,7 @@
 
 .search_content {
     background: $white;
-    border-radius: 0 $br $br;
+    border-radius: $br;
     box-shadow: $drop-shadow;
     display: none;
     left: (-$grid / 2);
@@ -134,12 +134,12 @@
     }
 
     &.-hide {
-        @include icon('close', $link-color, false);
+        @include icon('close', false);
         display: none;
     }
 
     &.-show {
-        @include icon('info', $link-color, false);
+        @include icon('info', false);
     }
 }
 
@@ -196,79 +196,6 @@
     }
 }
 
-$search-nav-width: 6.75 * $grid;
-
-.search_navigation {
-    @include drop-shadow;
-    background: $white;
-    clip: rect(-999em $search-nav-width 999em -999em); // Prevent tabs shadow from overlapping search form
-    list-style: none;
-    padding: 0;
-    position: absolute;
-    left: (-$search-nav-width);
-    top: 0;
-    width: $search-nav-width;
-    z-index: 2;
-
-    @include respond-to(medium) {
-        clip: rect(-999em 999em (2 * $grid) -999em);
-        display: table;
-        left: 0;
-        table-layout: fixed;
-        top: (-2 * $grid);
-        width: 100%;
-    }
-
-    li {
-        background: $shadow-light;
-        display: block;
-        border-bottom: $border-width solid $border-color;
-        overflow: hidden; // Prevent links from overflowing border-radius
-        vertical-align: top;
-
-        @include respond-to(medium) {
-            border-bottom: 0;
-            border-right: $border-width solid $border-color;
-            display: table-cell;
-        }
-
-        &:first-child {
-            border-radius: $br 0 0;
-        }
-
-        &:last-child {
-            border-bottom: 0;
-            border-radius: 0 0 0 $br;
-
-            @include respond-to(medium) {
-                border-right: 0;
-                border-radius: 0 $br 0 0;
-            }
-        }
-
-        &.-active {
-            background: $white;
-            color: $link-color;
-            font-weight: bold;
-        }
-    }
-
-    a {
-        @include link(false);
-        @include transition(background);
-        display: block;
-        overflow: hidden;
-        padding: ($grid / 2);
-        position: relative;
-        text-overflow: ellipsis;
-
-        @include hover {
-            @include auto-color($brand-color);
-            background: $brand-color;
-        }
-    }
-}
-
 .search_popup {
     @include transition(opacity);
     opacity: 0;
@@ -285,7 +212,7 @@ $search-nav-width: 6.75 * $grid;
 }
 
 .search_submit {
-    @include icon('search', $link-color, false);
+    @include icon('search', false);
     @include transition(background);
     background: none;
     border: 0;
@@ -303,17 +230,7 @@ $search-nav-width: 6.75 * $grid;
 
     &::before {
         height: $grid;
+        font-size: $grid;
         width: $grid;
     }
-}
-
-.search_subjects,
-.search_tags {
-    margin-left: $grid;
-}
-
-.search_area,
-.search_subject,
-.search_tag {
-    @include icon('caret-right', $brand-color-light);
 }

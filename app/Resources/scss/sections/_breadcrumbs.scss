@@ -9,7 +9,8 @@
         display: inline;
 
         + li {
-            @include icon('angle-right', $text-color-light);
+            @include icon('angle-right');
+            color: $text-color-light;
             padding-left: .25em;
         }
     }

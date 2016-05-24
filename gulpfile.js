@@ -13,12 +13,21 @@ var uglify = require('gulp-uglify');
 var browserSync = require('browser-sync').create();
 
 var paths = {
-    appFiles: 'app/Resources/**/*.{md,php,twig,yml}',
+    appFiles: [
+        'app/config/*.yml',
+        'app/Resources/**/*.{md,php,twig,yml}'
+    ],
     proxy: 'localhost:8000',
     serveDir: '/',
 
-    fontsSrc: 'node_modules/open-sans-fontface/fonts/**',
-    fontsDest: 'web/fonts/open-sans',
+    fontsSrc: [
+        'node_modules/open-sans-fontface/fonts/**',
+        'node_modules/font-awesome/fonts/**'
+    ],
+    fontsDest: [
+        'web/fonts/open-sans',
+        'web/fonts/font-awesome'
+    ],
     scriptSrc: 'app/Resources/js/**/*.js',
     scriptDest: 'web/js',
     styleSrc: 'app/Resources/scss/**/*.scss',
@@ -26,8 +35,10 @@ var paths = {
 };
 
 gulp.task('fonts', function() {
-    gulp.src(paths.fontsSrc)
-        .pipe(gulp.dest(paths.fontsDest));
+    paths.fontsSrc.forEach( function(src, index) {
+        gulp.src(src)
+            .pipe(gulp.dest(paths.fontsDest[index]));
+    });
 });
 
 gulp.task('scripts', function() {

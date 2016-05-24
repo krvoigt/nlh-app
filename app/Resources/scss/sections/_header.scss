@@ -9,10 +9,26 @@
 
 .header {
     background: $white; // Prevent off-canvas nav from popping through
-    padding-bottom: ($grid / 2);
+    padding-bottom: $grid;
     overflow: visible;
     position: relative;
     z-index: 1;
+
+    a {
+        box-shadow: none;
+
+        @include hover {
+            background: none;
+        }
+    }
+
+    ul {
+        margin: 0;
+
+        > li:before {
+            content: none;
+        }
+    }
 }
 
 .header_bar {
@@ -65,12 +81,12 @@
     }
 
     a {
-        @include icon('globe', $link-color);
+        @include icon('globe');
         @include link(false);
 
         @include respond-to(large) {
-            @include icon('globe', $white);
             @include link(false, true);
+            color: $white;
             display: inline-block;
             padding: ($grid / 2);
         }
@@ -166,7 +182,7 @@
 }
 
 .header_toggle-nav {
-    @include icon('bars', $white);
+    @include icon('bars');
     @include link(false, true);
     background: none;
     border: 0;
@@ -185,7 +201,7 @@
     }
 
     .-show-off-canvas & {
-        @include icon('close', $white);
+        @include icon('close');
     }
 }
 

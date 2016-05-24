@@ -3,12 +3,6 @@
     @include auto-color($brand-color);
     background: $brand-color;
     position: relative;
-
-    @each $name in $social-icons {
-        .fa-#{$name} {
-            @include icon($name, $white);
-        }
-    }
 }
 
 .colophon_links {
@@ -42,12 +36,20 @@
         margin-bottom: ($grid / 2);
     }
 
+    ul {
+        margin: 0;
+    }
+
     li {
         margin-left: $grid;
         text-indent: (-$grid);
 
         @include respond-to(small) {
             margin-bottom: round($grid / 4);
+        }
+
+        &::before {
+            content: none;
         }
     }
 }
@@ -77,7 +79,7 @@
     }
 
     a {
-        @include icon('chevron-up', $link-color, false);
+        @include icon('chevron-up', false);
         @include transition(background, color);
         display: block;
         height: ceil(1.618 * $grid);
@@ -86,7 +88,7 @@
         text-align: center;
 
         @include hover {
-            @include icon('chevron-up', $white, false);
+            @include icon('chevron-up', false);
             @include transition(background, color);
             background: $brand-color-light;
             text-shadow: 0 -1px 0 $shadow-dark;

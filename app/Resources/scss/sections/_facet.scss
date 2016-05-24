@@ -1,0 +1,18 @@
+.facetListExpand {
+	@include icon(chevron-down, true);
+}
+
+.facetListCollapse {
+    display: none;
+	@include icon(chevron-up, true);
+}
+
+.facetItem {
+    &:nth-child(n+6) {
+        display: none;
+    }
+
+    &:nth-child(6):last-child {
+        display: list-item;
+    }
+}

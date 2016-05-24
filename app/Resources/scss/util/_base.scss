@@ -51,7 +51,7 @@ h3 {
 }
 
 a {
-    color: $link-color;
+    @include link;
     text-decoration: none;
 }
 
@@ -362,4 +362,36 @@ dd {
     p {
         margin: 0;
     }
+}
+
+ol,
+ul {
+    margin-left: $grid;
+
+    &.no-style {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    ol,
+    ul {
+        margin-bottom: 0;
+    }
+}
+
+ul > li {
+    &::before {
+        border-radius: .125em;
+        content: '';
+        background: $brand-color-light;
+        display: inline-block;
+        height: $border-width;
+        margin: ($line-height / 2) 0 0 -1.1em;
+        position: absolute;
+        width: .5em;
+    }
+}
+
+ol {
+    list-style: decimal outside;
 }

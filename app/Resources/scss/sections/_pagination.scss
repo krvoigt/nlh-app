@@ -1,11 +1,12 @@
 .pagination {
-    @include pagination;
-    margin-left: 0 !important;
+    @extend %clearfix;
+    background: $white;
+    margin: 0;
 
     &.-fixed {
-        @include drop-shadow;
         border-radius: 0 0 $br $br;
-        margin-left: -.25em !important;
+        box-shadow: $drop-shadow;
+        margin-left: -.25em;
         padding: .25em 0 0 .25em;
         position: fixed;
         top: 0;
@@ -17,43 +18,64 @@
     }
 }
 
-.pagination_numbers {
-    margin: 0 1.25em 0 0 !important;
-
-    li {
-        margin-bottom: 0;
-    }
-}
-
 .pagination_item {
-    &.gap {
-        .-current {
-            background: none;
-            color: $text-color;
-        }
-    }
+    display: inline-block;
+    float: left;
+    min-width: $grid;
+    text-align: center;
 
-    &.-current {
-        display: inline-block;
-        font-weight: bold;
-        width: $grid;
+    &::before {
+        content: none;
     }
 }
 
 .pagination_link {
+    @include button(light);
+    border-radius: 0;
+
+    .pagination_item:first-child > & {
+        border-radius: $br 0 0 $br;
+    }
+
+    .pagination_item:last-child > & {
+        border-radius: 0 $br $br 0;
+    }
+
+    .pagination_item:nth-child(n+2) > & {
+        @include separator(0, 0, 0, 1);
+    }
+
+    &.-current {
+        background: $text-color-light;
+        color: $white;
+        font-weight: bold;
+        text-shadow: 0 -1px rgba(#000, .5);
+    }
+
     &.-last {
-        @include icon('fast-forward', $link-color, false);
+        @include icon(fast-forward, false);
     }
 
     &.-first {
-        @include icon('fast-backward', $link-color, false);
+        @include icon(fast-backward, false);
     }
 
     &.-next {
-        @include icon('step-forward', $link-color, false);
+        @include icon(step-forward, false);
     }
 
     &.-previous {
-        @include icon('step-backward', $link-color, false);
+        @include icon(step-backward, false);
     }
+
+    &.-disabled {
+        cursor: not-allowed;
+        opacity: .5;
+    }
+}
+
+.pagination_list {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
 }

@@ -21,7 +21,7 @@
         }
 
         &.-toggle {
-            @include icon('chevron-down', $border-color, true, true);
+            @include icon('chevron-down', true, true);
 
             &::after {
                 @include transition(transform);
