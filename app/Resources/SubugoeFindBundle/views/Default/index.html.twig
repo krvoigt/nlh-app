@@ -13,23 +13,28 @@
 
     <ol class="resultList" start="{{ offset + 1 }}">
         {% for result in pagination %}
-            <li>
-                <article>
-                    <h1><a href="{{ path('subugoe_find_detail', {'id': result.fields.id}) }}">{{ result.fields.bytitle }}</a></h1>
-                    <p>{% if result.fields.creator is defined %}
-                            {{ 'creator' | transchoice(result.fields.creator | length) }}:
-                                {% for author in result.fields.creator %}
-                                  {{ author }}{% if loop.last %}{% else %}, {% endif %}
-                                {% endfor %}
-                            <br>
+            <li class="resultItem">
+                <article class="resultWrap">
+                    <div class="resultThumbnail">
+                        {% if result.fields.thumbs_url is defined %}
+                            <img src="{{ result.fields.thumbs_url.0 }}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="resultMetadata">
+                        <h2 class="resultTitle"><a href="{{ path('subugoe_find_detail', {'id': result.fields.id}) }}">{{ result.fields.bytitle }}</a></h2>
+                        <p>
+                            {% if result.fields.creator is defined %}
+                                {{ 'creator' | transchoice(result.fields.creator | length) }}:
+                                <span class="resultAuthorName">
+                                    {% for author in result.fields.creator %}
+                                        {{ author }}{% if loop.last %}{% else %}, {% endif %}
+                                    {% endfor %}
+                                </span>
+                                <br>
                             {% endif %}
-
-                        {{ result.fields.docstrct | trans }}
-                    </p>
-
-                    {% if result.fields.thumbs_url is defined %}
-                        <img src="{{ result.fields.thumbs_url.0 }}" alt="">
-                    {% endif %}
+                            {{ result.fields.docstrct | trans }}
+                        </p>
+                    </div>
                 </article>
             </li>
         {% endfor %}
@@ -44,7 +49,7 @@
                 {% for value, count in facet if count > 0 %}
                     {% set facet_name = ['facet', key]|join('-') %}
                     <li class="facetItem">
-                        <a class="facetItemLink" href="{{ path('subugoe_find_homepage', {
+                        <a class="facetLink" href="{{ path('subugoe_find_homepage', {
                             'filter': queryParams|merge({
                                 (facetCounter):  {
                                     (key) : (value)
