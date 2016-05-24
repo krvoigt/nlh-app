@@ -23,7 +23,7 @@
     {% endif %}
 
     <dl class="viewer_metadata">
-        <dt>{% trans %}docstrct{% endtrans %}</dt>
+        <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
         <dd>{{ document.docstrct | trans }}</dd>
 
         <dt>{% trans %}bytitle{% endtrans %}</dt>
@@ -40,7 +40,7 @@
 
 
         {% if document.yearpublish is defined %}
-            <dt>{% trans %}yearpublish{% endtrans %}:</dt>
+            <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
             <dd>{{ document.yearpublish }}</dd>
         {% endif %}
 
