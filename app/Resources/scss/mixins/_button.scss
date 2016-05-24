@@ -1,21 +1,34 @@
 @mixin button($modifier: null) {
-    @include transition(background, color);
-    background: if($modifier == light, $button-light-bg, $button-bg);
-    border: 0 !important;
+    border: 0;
     border-radius: $br;
-    color: if($modifier == light, $link-color, $white);
+    box-shadow: none;
     cursor: pointer;
     display: inline-block;
     font-size: $font-size;
     line-height: $line-height;
-    padding: ($grid / 2) $grid;
+    min-width: ($grid * 1.5);
+    padding: ($grid / 4) .5em;
     text-align: center;
     text-decoration: none;
-    text-shadow: if($modifier == light, 0 1px 0 $white, 0 -1px 0 $shadow-dark);
     vertical-align: top;
     white-space: nowrap;
 
-    @include hover {
-        background: if($modifier == light, $button-light-bg-hover, $button-bg-hover);
+    @if $modifier == light {
+        color: $text-color;
+        background: linear-gradient(to bottom, tint(#e7e7e7, 10), shade(#e7e7e7, 10));
+        text-shadow: 0 1px rgba(#fff, .9);
+
+        @include hover {
+            background: linear-gradient(to bottom, tint(#e7e7e7, 30), tint(#e7e7e7, 10));
+            color: shade($text-color, 20);
+        }
+    } @else {
+        background: linear-gradient(to bottom, tint($link-color, 10), shade($link-color, 10));
+        color: #fff;
+        text-shadow: 0 -1px rgba(#000, .6);
+
+        @include hover {
+            background: linear-gradient(to bottom, shade($brand-color, 10), shade($brand-color, 30));
+        }
     }
 }
