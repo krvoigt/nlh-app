@@ -1,7 +1,0 @@
-.infobox_social {
-    @each $name in $social-icons {
-        .fa-#{$name} {
-            @include icon($name, $link-color);
-        }
-    }
-}
