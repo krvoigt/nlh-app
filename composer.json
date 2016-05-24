@@ -43,7 +43,8 @@
         "knplabs/knp-markdown-bundle": "^1.5",
         "subugoe/find-bundle": "dev-master",
         "symfony/form": "^3.0",
-        "symfony/dom-crawler": "^3.0"
+        "symfony/dom-crawler": "^3.0",
+        "eightpoints/guzzle-bundle": "^4.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+{% include "partials/site/head.html.twig" %}
+<body>
+<div class="wrap">
+    {% include 'partials/site/header.html.twig' %}
+
+    <div class="content">
+        <ul>
+        {% for element in structure %}
+            <li><a href="#{{ element.id }}">{{ element.label }}</a>
+
+                {% if element.children is defined %}
+
+                    {{ element.children }}
+
+                {% endif %}
+
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    {% include 'partials/site/footer.html.twig' %}
+
+    {% include 'partials/site/colophon.html.twig' %}
+
+</div>
+</body>
+</html>

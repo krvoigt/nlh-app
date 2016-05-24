@@ -4,8 +4,10 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -39,15 +41,54 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/mets/{id}.xml", name="_mets")
+     * @Route("/{id}/mets.xml", name="_mets")
      * @param string $id
      * @return RedirectResponse
      */
     public function metsAction($id)
     {
-        $file = 'http://gdz.sub.uni-goettingen.de/mets/' . $id . '.xml';
-        $response = new RedirectResponse($file);
+        $client   = $this->get('guzzle.client.mets');
+        $file = $client
+            ->get($id . '.xml')
+            ->getBody();
+
+        $response = new Response(
+            $file,
+            Response::HTTP_OK,
+            [
+                'content-type' => 'application/mets+xml'
+            ]
+        );
+
         return $response;
+    }
+
+    /**
+     * @Route("/id/{id}/toc/", name="_toc")
+     */
+    public function tocAction($id)
+    {
+        $client   = $this->get('guzzle.client.mets');
+        $file = $client
+            ->get($id . '.xml')
+            ->getBody()->__toString();
+
+        $crawler = new Crawler();
+        $crawler->addContent($file);
+        $structure = $crawler
+            ->filterXPath('//mets:mets/mets:structMap/mets:div')
+            ->children()
+            ->each(function (Crawler $node, $i) {
+                $moped = new \stdClass();
+                $moped->id = $node->attr('ID');
+                $moped->type = $node->attr('TYPE');
+                $moped->dmdid = $node->attr('DMDID');
+                $moped->label = $node->attr('LABEL');
+
+                return $moped;
+            });
+
+        return $this->render('toc.html.twig', ['structure' => $structure]);
     }
 
 }
