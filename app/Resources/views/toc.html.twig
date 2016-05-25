@@ -8,7 +8,7 @@
     <div class="content">
         <ul>
         {% for element in structure %}
-            <li><a href="#{{ element.id }}">{{ element.label }}</a>
+            <li><a href="{{ path('subugoe_find_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a>
 
                 {% if element.children is defined %}
 

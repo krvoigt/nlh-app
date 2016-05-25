@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\TableOfContents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DomCrawler\Crawler;
@@ -79,16 +80,19 @@ class DefaultController extends Controller
             ->filterXPath('//mets:mets/mets:structMap/mets:div')
             ->children()
             ->each(function (Crawler $node, $i) {
-                $moped = new \stdClass();
-                $moped->id = $node->attr('ID');
-                $moped->type = $node->attr('TYPE');
-                $moped->dmdid = $node->attr('DMDID');
-                $moped->label = $node->attr('LABEL');
+                $toc = new TableOfContents();
+                $toc->setId($node->attr('ID'));
+                $toc->setType($node->attr('TYPE'));
+                $toc->setDmdid($node->attr('DMDID'));
+                $toc->setLabel($node->attr('LABEL'));
 
-                return $moped;
+                return $toc;
             });
 
-        return $this->render('toc.html.twig', ['structure' => $structure]);
+        return $this->render('toc.html.twig', [
+            'structure' => $structure,
+            'id' => $id
+        ]);
     }
 
 }
