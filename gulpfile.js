@@ -68,7 +68,7 @@ gulp.task('styles', function() {
 
 gulp.task('compile', ['fonts', 'scripts', 'styles']);
 
-gulp.task('default', ['scripts', 'styles'], function() {
+gulp.task('default', ['fonts', 'scripts', 'styles'], function() {
     browserSync.init({open: false, proxy: paths.proxy});
     gulp.watch(paths.appFiles).on('change', browserSync.reload);
     gulp.watch(paths.fontsSrc, ['fonts']);
