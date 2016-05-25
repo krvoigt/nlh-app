@@ -82,6 +82,7 @@ nelmio_solarium:
 
 subugoe_find:
     default_query: "iswork:true"
+    default_sort: "datemodified desc"
     facets:
         - { title: facetcreator, field: facetcreator }
         - { title: facetpublisher, field: facetpublisher}
