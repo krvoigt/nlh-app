@@ -144,6 +144,7 @@
     display: table-cell; // Center text vertically inside element
     height: ($grid * 3);
     left: 142px; // 1
+    margin: $grid 0 0;
     padding: 0 ($grid / 2);
     position: relative;
     top: (-$grid / 2);
