@@ -10,15 +10,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DocumentController extends Controller
 {
-
     /**
      * @Route("/id/{id}/toc/", name="_toc")
      */
     public function tocAction($id)
     {
-        $client   = $this->get('guzzle.client.mets');
+        $client = $this->get('guzzle.client.mets');
         $file = $client
-            ->get($id . '.xml')
+            ->get($id.'.xml')
             ->getBody()->__toString();
 
         $crawler = new Crawler();
@@ -38,18 +37,19 @@ class DocumentController extends Controller
 
         return $this->render('toc.html.twig', [
             'structure' => $structure,
-            'id' => $id
+            'id' => $id,
         ]);
     }
 
     /**
      * @param string $url
+     *
      * @return Response
      */
     public function fullTextAction($url)
     {
-        $client   = $this->get('guzzle.client.fulltext');
-            $file = $client
+        $client = $this->get('guzzle.client.fulltext');
+        $file = $client
                 ->get($url)
                 ->getBody();
 
@@ -58,21 +58,23 @@ class DocumentController extends Controller
 
     /**
      * @Route("/{id}/mets.xml", name="_mets")
+     *
      * @param string $id
+     *
      * @return Response
      */
     public function metsAction($id)
     {
-        $client   = $this->get('guzzle.client.mets');
+        $client = $this->get('guzzle.client.mets');
         $file = $client
-            ->get($id . '.xml')
+            ->get($id.'.xml')
             ->getBody();
 
         $response = new Response(
             $file,
             Response::HTTP_OK,
             [
-                'content-type' => 'application/mets+xml'
+                'content-type' => 'application/mets+xml',
             ]
         );
 

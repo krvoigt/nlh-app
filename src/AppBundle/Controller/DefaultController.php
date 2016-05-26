@@ -36,5 +36,4 @@ class DefaultController extends Controller
 
         return $this->render('partials/site/content.html.twig', ['content' => $content]);
     }
-
 }

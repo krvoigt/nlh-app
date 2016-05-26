@@ -1,12 +1,12 @@
 <?php
+
 namespace AppBundle\Entity;
 
 /**
- * Entity for table of contents
+ * Entity for table of contents.
  */
 class TableOfContents
 {
-
     /**
      * @var string
      */
@@ -90,5 +90,4 @@ class TableOfContents
     {
         $this->label = $label;
     }
-
 }
