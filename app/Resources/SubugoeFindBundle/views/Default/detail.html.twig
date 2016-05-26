@@ -15,7 +15,7 @@
     <h1>{{ document.bytitle }}</h1>
 
     {% if document.thumbs_url is defined %}
-        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="native" data-keyboard="true">
+        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="native" data-keyboard="true" data-hash="true">
             {% for image in images.0 | slice(0, 30)%}
                  <a data-thumb="{{ image }}" href="{{ presentation[0][loop.index0] }}"></a>
             {% endfor %}
