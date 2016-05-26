@@ -22,79 +22,91 @@
         </div>
     {% endif %}
 
-    <dl class="viewer_metadata">
-        <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
-        <dd>{{ document.docstrct | trans }}</dd>
+    <div class="viewer-panel -toc">
+        <h2>{% trans %}Table of contents{% endtrans %}</h2>
+        {{ render(controller(
+               'AppBundle:Default:toc',
+               { 'id': document.id }
+           )) }}
+    </div>
 
-        <dt>{% trans %}bytitle{% endtrans %}</dt>
-        <dd>{{ document.bytitle }}</dd>
+    <div class="viewer-panel -metadata">
 
-        {% if document.creator is defined %}
-            <dt>{{ 'creator' | transchoice(document.publisher | length) }}:</dt>
-            <dd>
-                {% for author in document.creator %}
-                 {{ author }}{% if loop.last %}{% else %}, {% endif %}
-                {% endfor %}
-            </dd>
-        {% endif %}
+        <h2>{% trans %}Metadata{% endtrans %}</h2>
 
+        <section class="viewer_metadata">
 
-        {% if document.yearpublish is defined %}
-            <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
-            <dd>{{ document.yearpublish }}</dd>
-        {% endif %}
+            <dl>
+                <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
+                <dd>{{ document.docstrct | trans }}</dd>
 
+                <dt>{% trans %}bytitle{% endtrans %}</dt>
+                <dd>{{ document.bytitle }}</dd>
 
-        {% if document.placepublish is defined %}
-            <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
-            <dd>
-                {% for place in document.placepublish %}
-                  {{ place }}{% if loop.last %}{% else %}, {% endif %}
-                {% endfor %}
-            </dd>
-        {% endif %}
-
-        {% if document.publisher is defined %}
-            <dt>{{ 'publisher' | transchoice(document.publisher | length) }}</dt>
-            <dd>
-                {% for publisher in document.publisher %}
-                  {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
-                {% endfor %}
-            </dd>
-        {% endif %}
-
-        <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
-        <dd>
-            {% for dc in document.dc %}
-              {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
-            {% endfor %}
-        </dd>
-
-        <dt>PURL</dt>
-        <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
-
-        {% if document['id_gbv-ppn_s'] is defined %}
-            <dt>gbv-ppn</dt>
-            <dd>{{ document['id_gbv-ppn_s'][0] }}</dd>
-        {% endif %}
-
-        {% if document.id_PPNanalog_s is defined %}
-            <dt>PPN (original)</dt>
-            <dd><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a></dd>
-        {% endif %}
+                {% if document.creator is defined %}
+                    <dt>{{ 'creator' | transchoice(document.publisher | length) }}:</dt>
+                    <dd>
+                        {% for author in document.creator %}
+                         {{ author }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endfor %}
+                    </dd>
+                {% endif %}
 
 
-        {% if document.id_ADBID_s is defined %}
-            <dt>ADBID</dt>
-            <dd>{{ document.id_ADBID_s.0 }}</dd>
-        {% endif %}
+                {% if document.yearpublish is defined %}
+                    <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
+                    <dd>{{ document.yearpublish }}</dd>
+                {% endif %}
 
-        <br>
-    </dl>
 
-    <p><a href="{{ path('_toc', {id : document.id}) }}">{% trans %}Table of contents{% endtrans %}</a></p>
+                {% if document.placepublish is defined %}
+                    <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
+                    <dd>
+                        {% for place in document.placepublish %}
+                          {{ place }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endfor %}
+                    </dd>
+                {% endif %}
+
+                {% if document.publisher is defined %}
+                    <dt>{{ 'publisher' | transchoice(document.publisher | length) }}</dt>
+                    <dd>
+                        {% for publisher in document.publisher %}
+                          {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
+                        {% endfor %}
+                    </dd>
+                {% endif %}
+
+                <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
+                <dd>
+                    {% for dc in document.dc %}
+                      {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
+                    {% endfor %}
+                </dd>
+
+                <dt>PURL</dt>
+                <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
+
+                {% if document['id_gbv-ppn_s'] is defined %}
+                    <dt>gbv-ppn</dt>
+                    <dd>{{ document['id_gbv-ppn_s'][0] }}</dd>
+                {% endif %}
+
+                {% if document.id_PPNanalog_s is defined %}
+                    <dt>PPN (original)</dt>
+                    <dd><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a></dd>
+                {% endif %}
+
+
+                {% if document.id_ADBID_s is defined %}
+                    <dt>ADBID</dt>
+                    <dd>{{ document.id_ADBID_s.0 }}</dd>
+                {% endif %}
+    
+            </dl>
+        </section>
+    </div>
 
     {% include "@SubugoeFind/partials/links.html.twig" %}
-
 
 {% endblock %}

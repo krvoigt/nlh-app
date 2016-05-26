@@ -1,32 +1,15 @@
-<!DOCTYPE html>
-<html>
-{% include "partials/site/head.html.twig" %}
-<body>
-    <div class="wrap">
-        {% include 'partials/site/header.html.twig' %}
+<ul>
+{% for element in structure %}
+    <li><a href="{{ path('subugoe_find_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a>
 
-        <div class="content">
+        {% if element.children is defined %}
             <ul>
-            {% for element in structure %}
-                <li><a href="{{ path('subugoe_find_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a>
-
-                    {% if element.children is defined %}
-                        <ul>
-                            {% for children in element.children %}
-                                <li>{{ element.children }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-
-                </li>
-            {% endfor %}
+                {% for children in element.children %}
+                    <li>{{ element.children }}</li>
+                {% endfor %}
             </ul>
-        </div>
+        {% endif %}
 
-        {% include 'partials/site/footer.html.twig' %}
-
-        {% include 'partials/site/colophon.html.twig' %}
-
-    </div>
-</body>
-</html>
+    </li>
+{% endfor %}
+</ul>
