@@ -95,4 +95,14 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function fullTextAction($url)
+    {
+        $client   = $this->get('guzzle.client.fulltext');
+            $file = $client
+                ->get($url)
+                ->getBody();
+
+        return new Response($file);
+    }
+
 }

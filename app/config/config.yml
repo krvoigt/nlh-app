@@ -109,3 +109,5 @@ guzzle:
     clients:
       mets:
         base_url: "http://gdz.sub.uni-goettingen.de/mets/"
+      fulltext:
+        base_url: "http://gdz.sub.uni-goettingen.de/gdzocr/"

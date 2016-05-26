@@ -22,6 +22,19 @@
         </div>
     {% endif %}
 
+    {# TODO get fulltext dynamically #}
+    {% if document['gdzocr_url'] is defined %}
+        <div class="viewer-panel -transcript">
+            <h2>{% trans %}Transcription{% endtrans %}</h2>
+            <section class="viewer_transcript">
+                {{ render(controller(
+                       'AppBundle:Default:fullText',
+                       { 'url': document['gdzocr_url'][0] }
+                   )) | striptags('<p>') | raw }}
+            </section>
+        </div>
+    {% endif %}
+
     {% if document.iswork == true %}
         <div class="viewer-panel -toc">
             <h2>{% trans %}Table of contents{% endtrans %}</h2>
