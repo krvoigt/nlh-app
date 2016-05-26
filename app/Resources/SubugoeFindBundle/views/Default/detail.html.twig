@@ -28,7 +28,7 @@
             <h2>{% trans %}Transcription{% endtrans %}</h2>
             <section class="viewer_transcript">
                 {{ render(controller(
-                       'AppBundle:Default:fullText',
+                       'AppBundle:Document:fullText',
                        { 'url': document['gdzocr_url'][0] }
                    )) | striptags('<p>') | raw }}
             </section>
@@ -39,7 +39,7 @@
         <div class="viewer-panel -toc">
             <h2>{% trans %}Table of contents{% endtrans %}</h2>
             {{ render(controller(
-                   'AppBundle:Default:toc',
+                   'AppBundle:Document:toc',
                    { 'id': document.id }
                )) }}
         </div>
