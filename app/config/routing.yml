@@ -1,6 +1,6 @@
 subugoe_find:
-    resource: "@SubugoeFindBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@SubugoeFindBundle/Controller"
+    type: annotation
 
 app:
     resource: "@AppBundle/Controller/"

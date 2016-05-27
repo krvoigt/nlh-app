@@ -21,7 +21,7 @@
                         {% endif %}
                     </div>
                     <div class="resultMetadata">
-                        <h2 class="resultTitle"><a href="{{ path('subugoe_find_detail', {'id': result.fields.id}) }}">{{ result.fields.bytitle }}</a></h2>
+                        <h2 class="resultTitle"><a href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.bytitle }}</a></h2>
                         <p>
                             {% if result.fields.creator is defined %}
                                 {{ 'creator' | transchoice(result.fields.creator | length) }}:
@@ -49,7 +49,7 @@
                 {% for value, count in facet if count > 0 %}
                     {% set facet_name = ['facet', key]|join('-') %}
                     <li class="facetItem">
-                        <a class="facetLink" href="{{ path('subugoe_find_homepage', {
+                        <a class="facetLink" href="{{ path('_homepage', {
                             'filter': queryParams|merge({
                                 (facetCounter):  {
                                     (key) : (value)
