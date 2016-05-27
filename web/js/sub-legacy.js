@@ -48,95 +48,6 @@ var initMenus,mobilecheck;$.fx.speeds._default=250,$(function(){var t,i,e,n,a,o,
     });
   });
 
-  $.fn.loadSubjects = function(url) {
-    return this.each(function() {
-      var $this;
-      $this = $(this);
-      return $.getJSON(url, function(areas) {
-        var $area, $areaLink, $subject, $subjectLink, $subjectList, $tag, $tagList, area, i, j, k, len, len1, len2, ref, ref1, subject, tag;
-        for (i = 0, len = areas.length; i < len; i++) {
-          area = areas[i];
-          $area = $("<li class='search_area'/>");
-          $areaLink = $("<a><span class='search_title'>" + area.titel + "</span></a>");
-          $areaLink.attr('href', area.seite);
-          $area.append($areaLink);
-          $subjectList = $('<ul class="search_subjects"/>').hide();
-          ref = area.faecher;
-          for (j = 0, len1 = ref.length; j < len1; j++) {
-            subject = ref[j];
-            $subject = $("<li class='search_subject'/>");
-            $subjectLink = $("<a><span class='search_title'>" + subject.titel + "</span></a>");
-            $subjectLink.attr('href', subject.seite);
-            $subject.append($subjectLink);
-            $tagList = $('<ul class="search_tags"/>');
-            ref1 = subject.tags;
-            for (k = 0, len2 = ref1.length; k < len2; k++) {
-              tag = ref1[k];
-              $tag = $("<li class='search_tag'><span class='search_title'>" + tag + "</span></li>");
-              $tagList.append($tag);
-            }
-            $subject.append($tagList);
-            $subjectList.append($subject);
-          }
-          $area.append($subjectList);
-          $this.append($area);
-        }
-        return $('#q').keyup();
-      });
-    });
-  };
-
-  $.fn.filterSubjects = function(val) {
-    return this.each(function() {
-      var $items, $this, tokens;
-      $this = $(this);
-      if (val === filterVal) {
-        return;
-      }
-      tokens = val.toLowerCase().replace(/[\^$]/g, '').split(' ');
-      filterVal = val;
-      $items = $this.find('li');
-      if (val.length > 2 && tokens !== ['']) {
-        $this.clearHighlight();
-        $items.each(function(index, item) {
-          var show;
-          show = true;
-          $.each(tokens, function(index, token) {
-            var $html, $link, $newHtml, regex;
-            if ($(item).text().toLowerCase().indexOf(token) === -1) {
-              show = false;
-              return false;
-            }
-            if (token > '') {
-              $link = $(item).find('.search_title:first');
-              $html = $link.html();
-              regex = new RegExp("(" + token + ")", "gi");
-              $newHtml = $html.replace(regex, '\^$1\$');
-              if ($html !== $newHtml) {
-                return $link.html($newHtml);
-              } else {
-                show = false;
-                return false;
-              }
-            }
-          });
-          if (show) {
-            $(item).show().parents().show();
-          } else {
-            $(item).hide();
-          }
-        });
-        $noResults.toggle($items.filter(':visible').length === 0);
-        $this.html($this.html().replace(/\^/g, '<span class="search_highlight">').replace(/\$/g, '</span>'));
-      } else {
-        $this.clearHighlight();
-        $items.filter('.search_area').show();
-        $items.not('.search_area').hide();
-        $noResults.hide();
-      }
-    });
-  };
-
   $.fn.clearHighlight = function() {
     return this.each(function() {
       return $(this).find('.search_highlight').contents().unwrap();
@@ -182,17 +93,6 @@ var initMenus,mobilecheck;$.fx.speeds._default=250,$(function(){var t,i,e,n,a,o,
         }
         return false;
       }
-    });
-    $('.search_navigation a').click(function() {
-      var $parent, target;
-      target = $(this).attr('href').split('#')[1];
-      $parent = $(this).parent('li');
-      $('.search_navigation li').not($parent).removeClass('-active');
-      $parent.addClass('-active');
-      $('.search_content, .search_form').not('.-' + target).removeClass('-visible');
-      $('.search_content, .search_form').filter('.-' + target).addClass('-visible');
-      $('.search_form.-' + target + ' .search_input').focus();
-      return false;
     });
     $('.search_form.-catalog').submit(function() {
       var get, link, open, str, url;
