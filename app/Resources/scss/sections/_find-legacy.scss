@@ -118,7 +118,6 @@ $tab-selected: #263476;
 
     .results {
         clear: left;
-        padding-top: $grid;
         position: relative;
 
         .navigation {
@@ -281,14 +280,6 @@ $tab-selected: #263476;
         .resultCount {
             margin-bottom: $grid;
         }
-    }
-
-    /* result count */
-
-    .resultCount {
-        float: right;
-        width: 200px;
-        text-align: right;
     }
 
     /* page browser single item view */

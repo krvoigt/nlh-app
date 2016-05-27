@@ -10,13 +10,13 @@
 }
 
 .resultTitle {
-	font: inherit;
-	font-weight: bold;
-	margin: 0 0 ($grid / 2);
+    font: inherit;
+    font-weight: bold;
+    margin: 0 0 ($grid / 2);
 
-	> a {
-		@include link;
-	}
+    > a {
+        @include link;
+    }
 }
 
 .resultThumbnail {
@@ -25,7 +25,7 @@
     width: ($grid * 4);
 
     > img {
-		box-shadow: $drop-shadow-small;
+        box-shadow: $drop-shadow-small;
         display: block;
     }
 }

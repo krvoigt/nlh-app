@@ -3,6 +3,10 @@
     margin: 0 auto;
     max-width: $site-width;
     padding: 0 $grid;
+
+    .site.-fixed & {
+        max-width: none;
+    }
 }
 
 .main_left {

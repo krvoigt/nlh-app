@@ -7,6 +7,7 @@
         @include respond-to($unfloat-breakpoint) {
             display: block;
             min-width: 100%;
+            padding: 0 ($grid / 2);
         }
     }
 }

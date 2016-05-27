@@ -1,0 +1,15 @@
+{# TODO: Get fulltext dynamically #}
+
+{% if document['gdzocr_url'] is defined %}
+    <section class="viewer_transcript">
+        <h2 class="viewer_heading">{% trans %}Transcript{% endtrans %}</h2>
+        {% if secondPage %}
+            <div class="viewer_transcript-page">
+                {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 2] })) | striptags('<p>') | raw }}
+            </div>
+        {% endif %}
+        <div class="viewer_transcript-page">
+            {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 1] })) | striptags('<p>') | raw }}
+        </div>
+    </section>
+{% endif %}

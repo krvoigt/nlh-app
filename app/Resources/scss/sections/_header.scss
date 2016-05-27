@@ -9,7 +9,6 @@
 
 .header {
     background: $white; // Prevent off-canvas nav from popping through
-    padding-bottom: $grid;
     overflow: visible;
     position: relative;
     z-index: 1;
@@ -142,6 +141,7 @@
     background: $brand-color;
     color: $white;
     display: table-cell; // Center text vertically inside element
+    font-family: $font-family-display;
     height: ($grid * 3);
     left: 142px; // 1
     margin: $grid 0 0;

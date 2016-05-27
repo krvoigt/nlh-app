@@ -5,12 +5,11 @@
 {% endif %}
 
 {% block findnavigation %}
-    <div class="resultCount">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {% trans %}numfound{% endtrans %}</div>
+    <div class="findCount">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {% trans %}numfound{% endtrans %}</div>
    {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
-{% block body %}
-
+{% block content %}
     <ol class="resultList" start="{{ offset + 1 }}">
         {% for result in pagination %}
             <li class="resultItem">

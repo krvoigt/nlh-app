@@ -144,11 +144,12 @@
 }
 
 .search_input {
-    @include text-input;
+    @include input;
     @include transition(width);
     border: $border-width solid $input-border-color;
     box-shadow: .1em .1em .5em rgba($black, .2) inset;
     float: right;
+    height: ($grid * 2);
     padding-right: round(1.75 * $grid);
     position: relative;
     width: 12 * $grid;

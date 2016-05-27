@@ -1,121 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'fixed.html.twig' %}
 
 {% set title = document.bytitle %}
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block body %}
-
+{% block content %}
 
     {% set thumbs = [document.thumbs_url] %}
     {% set presentation = [document.min_url] %}
 
     {% set images = thumbs | merge(presentation)  %}
 
-    <h1>{{ document.bytitle }}</h1>
-
-    {% if document.thumbs_url is defined %}
-        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="native" data-keyboard="true" data-hash="true">
-            {% for image in images.0 | slice(0, 30)%}
-                 <a data-thumb="{{ image }}" href="{{ presentation[0][loop.index0] }}"></a>
-            {% endfor %}
-        </div>
+    {# Viewer settings #}
+    {% set pageCount = images.0|length %}
+    {% set page = app.request.get('page')|number_format %}
+    {% if page < 1 or page > pageCount %}
+        {% set page = 1 %}
     {% endif %}
+    {% set showDoublePage = app.request.get('showDoublePage') == 'true' %}
+    {% set oddPageCountOrNotLastPage = pageCount % 2 > 0 or page != pageCount %}
+    {% set secondPage = showDoublePage and (page > 1 and oddPageCountOrNotLastPage) ? page - 1 : false %}
 
-    {# TODO get fulltext dynamically #}
-    {% if document['gdzocr_url'] is defined %}
-        <div class="viewer-panel -transcript">
-            <h2>{% trans %}Transcription{% endtrans %}</h2>
-            <section class="viewer_transcript">
-                {{ render(controller(
-                       'AppBundle:Document:fullText',
-                       { 'url': document['gdzocr_url'][0] }
-                   )) | striptags('<p>') | raw }}
-            </section>
-        </div>
-    {% endif %}
-
-    {% if document.iswork == true %}
-        <div class="viewer-panel -toc">
-            <h2>{% trans %}Table of contents{% endtrans %}</h2>
-            {{ render(controller(
-                   'AppBundle:Document:toc',
-                   { 'id': document.id }
-               )) }}
-        </div>
-    {% endif %}
-
-    <div class="viewer-panel -metadata">
-
-        <h2>{% trans %}Metadata{% endtrans %}</h2>
-
-        <section class="viewer_metadata">
-
-            <dl>
-                <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
-                <dd>{{ document.docstrct | trans }}</dd>
-
-                <dt>{% trans %}bytitle{% endtrans %}</dt>
-                <dd>{{ document.bytitle }}</dd>
-
-                {% if document.creator is defined %}
-                    <dt>{{ 'creator' | transchoice(document.publisher | length) }}:</dt>
-                    <dd>
-                        {% for author in document.creator %}
-                         {{ author }}{% if loop.last %}{% else %}, {% endif %}
-                        {% endfor %}
-                    </dd>
-                {% endif %}
-
-
-                {% if document.yearpublish is defined %}
-                    <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
-                    <dd>{{ document.yearpublish }}</dd>
-                {% endif %}
-
-
-                {% if document.placepublish is defined %}
-                    <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
-                    <dd>
-                        {% for place in document.placepublish %}
-                          {{ place }}{% if loop.last %}{% else %}, {% endif %}
-                        {% endfor %}
-                    </dd>
-                {% endif %}
-
-                {% if document.publisher is defined %}
-                    <dt>{{ 'publisher' | transchoice(document.publisher | length) }}</dt>
-                    <dd>
-                        {% for publisher in document.publisher %}
-                          {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
-                        {% endfor %}
-                    </dd>
-                {% endif %}
-
-                <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
-                <dd>
-                    {% for dc in document.dc %}
-                      {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
-                    {% endfor %}
-                </dd>
-
-                <dt>PURL</dt>
-                <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
-
-                {% if document['id_gbv-ppn_s'] is defined %}
-                    <dt>gbv-ppn</dt>
-                    <dd>{{ document['id_gbv-ppn_s'][0] }}</dd>
-                {% endif %}
-
-                {% if document.id_PPNanalog_s is defined %}
-                    <dt>PPN (original)</dt>
-                    <dd><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a></dd>
-                {% endif %}
-
-            </dl>
+    <main class="main" id="main">
+        <section class="viewer">
+            {% include "@SubugoeFind/Default/partials/header.html.twig" %}
+            <div class="viewer_main">
+                <div class="viewer_panel -scan">
+                    {% include "@SubugoeFind/Default/partials/scan.html.twig" %}
+                </div>
+                <div class="viewer_panel -transcript -hidden">
+                    {% include "@SubugoeFind/Default/partials/transcript.html.twig" %}
+                </div>
+                <div class="viewer_panel -toc -hidden">
+                    {% include "@SubugoeFind/Default/partials/toc.html.twig" %}
+                </div>
+                <div class="viewer_panel -metadata">
+                    {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
+                </div>
+            </div>
+            {% include "@SubugoeFind/Default/partials/footer.html.twig" %}
         </section>
-    </div>
-
-    {% include "@SubugoeFind/partials/links.html.twig" %}
+    </main>
 
 {% endblock %}

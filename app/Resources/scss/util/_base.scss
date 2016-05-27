@@ -319,12 +319,11 @@ tr {
 [type=tel],
 [type=text],
 select {
-    @include text-input;
-    height: (2 * $grid);
+    @include input;
 }
 
 textarea {
-    @include text-input;
+    @include input;
     height: (8 * $grid);
 }
 

@@ -24,7 +24,6 @@ class DefaultController extends Controller
      */
     public function contentAction($action)
     {
-
         $file = __DIR__ . '/../../../app/Resources/content/' . $action . '.md';
 
         if (file_exists($file)) {

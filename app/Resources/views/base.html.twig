@@ -14,20 +14,21 @@
                     <section class="facets">
                         {% block sidebar %}{% endblock %}
                     </section>
-                    {% block body %}{% endblock %}
+                    {% block content %}{% endblock %}
                 </div>
             </div>
         </div>
 
         {% include 'partials/site/footer.html.twig' %}
-
         {% include 'partials/site/colophon.html.twig' %}
-
     </div>
+
     <script src="{{ asset('js/vendor/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/sub-1.js') }}"></script>
-    <script src="{{ asset('js/sub-2.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.lazyload.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.mousewheel.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.panzoom.min.js') }}"></script>
+
+    <script src="{{ asset('js/sub-legacy.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 </body>
 </html>

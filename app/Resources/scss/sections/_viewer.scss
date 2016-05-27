@@ -1,0 +1,255 @@
+// TODO: Split in separate files (one for every viewer section)
+
+.viewer {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.viewer_header {
+    @include separator(1, 0);
+    background: $header-bg;
+    flex: 0 0 ($grid * 2);
+    display: flex;
+    flex-wrap: wrap;
+    padding: ($grid / 4 - $border-width)  0 0 ($grid / 4);
+}
+
+.viewer_image {
+    font-size: 0;
+    position: absolute;
+    white-space: nowrap;
+
+    img + img {
+        margin-left: ($grid / 2);
+    }
+
+    &.-double img {
+        display: inline-block !important;
+        vertical-align: top;
+    }
+}
+
+.viewer_main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.viewer_controls {
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
+
+    p + p {
+        margin-left: 1em;
+    }
+
+    &.-overlay {
+        left: 0;
+        margin: ($grid / 2);
+        position: absolute;
+        right: 0;
+    }
+
+    [type=range] {
+        @include range-slider;
+    }
+}
+
+.viewer_control {
+    @include button(light);
+	border-radius: 0;
+
+    &.-active {
+		@include button;
+    }
+
+    & + &,
+    label + & {
+        @include separator(0, 0, 0, 1);
+    }
+
+    &[type=text] {
+        color: $text-color !important;
+    }
+
+    &:first-child {
+        border-top-left-radius: $br;
+        border-bottom-left-radius: $br;
+    }
+
+    &:last-child {
+        border-top-right-radius: $br;
+        border-bottom-right-radius: $br;
+    }
+
+    &.-first-page {
+        @include icon(fast-backward, false);
+    }
+
+    &.-previous-section {
+        @include icon(step-backward, false);
+    }
+
+    &.-previous-page {
+        @include icon(caret-left, false);
+    }
+
+    &.-next-page {
+        @include icon(caret-right, false);
+    }
+
+    &.-next-section {
+        @include icon(step-forward, false);
+    }
+
+    &.-last-page {
+        @include icon(fast-forward, false);
+    }
+
+    &.-zoom-out {
+        @include icon(search-minus, false);
+    }
+
+    &.-zoom-out {
+        @include icon(search-minus, false);
+    }
+
+    &.-zoom-in {
+        @include icon(search-plus, false);
+    }
+
+	&.-zoom-reset {
+		@include icon(circle-o-notch, false);
+	}
+
+    &.-search {
+        @include icon(search, false);
+    }
+
+	&.-fullscreen {
+		@include icon(arrows-alt, false);
+	}
+}
+
+.viewer_dl {
+    dt, dd {
+        float: none;
+        padding: 0;
+        width: auto;
+    }
+
+    dd + dt {
+        margin-top: ($grid / 2);
+    }
+}
+
+.viewer_group {
+	border-radius: $br;
+    box-shadow: $drop-shadow;
+	display: flex;
+    margin: 0 ($grid / 4) ($grid / 4) 0;
+}
+
+.viewer_metadata {
+    overflow-y: auto;
+    padding: ($grid / 2);
+
+    dt {
+        float: none;
+        width: auto;
+    }
+
+    dd {
+        margin-bottom: 1em;
+        width: auto;
+    }
+}
+
+.viewer_overlay {
+    position: absolute;
+    top: 0;
+}
+
+.viewer_panel {
+    border-left: $border-width solid $border-color;
+    display: flex;
+    position: relative;
+    transition: width .2s;
+    width: 20em;
+
+    &:first-child {
+        border: 0;
+    }
+
+    &.-hidden {
+        border: 0;
+        overflow: hidden;
+        width: 0 !important;
+    }
+
+    &.-scan {
+        flex: 3;
+    }
+
+    &.-transcript {
+        white-space: nowrap; // TODO
+        width: 40em;
+    }
+}
+
+.viewer_scan {
+    background: $text-color;
+    flex: 1;
+}
+
+.viewer_switcher {
+    p {
+        display: inline-block;
+        margin: ($grid / 4) .5em 0;
+    }
+}
+
+.viewer_title {
+    flex: 1;
+    margin: ($grid / 4) !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.viewer_toc {
+    flex: 1;
+    overflow-y: auto;
+    padding: ($grid / 2);
+
+    li:before {
+        content: none !important;
+    }
+
+    ul {
+        margin-left: 0;
+
+        ul {
+            margin-left: $grid;
+        }
+    }
+}
+
+.viewer_transcript {
+    overflow-y: auto;
+    padding: ($grid / 2);
+}
+
+.viewer_transcript-page {
+    & + & {
+        border-top: $border-width solid $border-color;
+        margin-top: $grid;
+        padding-top: $grid;
+    }
+}

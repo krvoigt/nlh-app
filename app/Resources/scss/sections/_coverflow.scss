@@ -1,0 +1,54 @@
+.coverflow {
+    background: $black;
+    display: flex;
+    padding: ($grid / 4);
+    overflow-x: scroll;
+}
+
+.coverflow_link {
+    box-shadow: none;
+    flex: 0 0 auto;
+    height: ($grid * 3);
+    margin-right: ($grid / 4);
+    overflow: hidden;
+    position: relative;
+    width: ($grid * 2.25);
+
+    @include hover {
+        background: none;
+        opacity: .8;
+    }
+
+	&.-current {
+		background: $link-color;
+
+		img {
+			opacity: .5;
+		}
+	}
+
+    img {
+        min-width: 100%;
+        height: auto;
+    }
+}
+
+.coverflow_page-number {
+    background: rgba(#000, .4);
+    bottom: 0;
+    border-radius: .5em 0 0;
+    color: #fff;
+    display: block;
+    font-size: $font-size-small;
+    font-weight: bold;
+    line-height: 1;
+    min-width: ($grid);
+    padding: ($grid / 4);
+    position: absolute;
+    right: 0;
+    text-align: center;
+
+	.coverflow_link.-current & {
+		background: $link-color;
+	}
+}

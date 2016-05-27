@@ -1,0 +1,16 @@
+<footer class="viewer_footer">
+    {% if document.thumbs_url is defined %}
+        <div id="coverflow" class="coverflow">
+            {% for image in images.0 %}
+                {% set link = document.id ~ '?page=' ~ loop.index ~ (showDoublePage ? '&showDoublePage=true') %}
+                <a class="coverflow_link {{ page == loop.index ? '-current' }}" href="{{ link }}">
+                    <img data-original="{{ image }}" alt="">
+                    <span class="coverflow_page-number">
+                        <span class="sr-only">{% trans %}Go to page{% endtrans %}</span>
+                        {{ loop.index }}
+                    </span>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</footer>

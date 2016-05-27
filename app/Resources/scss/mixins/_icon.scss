@@ -12,7 +12,7 @@
         }
     } @else {
         &::before {
-			@include fa-icon;
+            @include fa-icon;
             content: map-get($font-awesome-icons, $name);
 
             @if $with-text {

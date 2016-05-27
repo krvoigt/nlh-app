@@ -1,0 +1,14 @@
+@mixin input {
+	@include transition(border);
+	background: $white;
+	border: 1px solid $grey;
+	font: inherit;
+	margin: round(-$grid / 8) 0;
+	padding: round($grid / 8) .5em;
+	vertical-align: middle;
+
+	&:focus {
+		border-color: $brand-color;
+		outline: 0;
+	}
+}

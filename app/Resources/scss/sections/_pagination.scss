@@ -1,7 +1,6 @@
 .pagination {
-    @extend %clearfix;
     background: $white;
-    margin: 0;
+    margin: 0 0 ($grid / 2);
 
     &.-fixed {
         border-radius: 0 0 $br $br;
@@ -21,6 +20,7 @@
 .pagination_item {
     display: inline-block;
     float: left;
+    margin-bottom: ($grid / 2);
     min-width: $grid;
     text-align: center;
 

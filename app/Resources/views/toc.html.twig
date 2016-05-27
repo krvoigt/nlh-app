@@ -1,15 +1,13 @@
 <ul>
-{% for element in structure %}
-    <li><a href="{{ path('_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a>
-
-        {% if element.children is defined %}
-            <ul>
-                {% for children in element.children %}
-                    <li>{{ element.children }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-    </li>
-{% endfor %}
+    {% for element in structure %}
+        <li><a href="{{ path('_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a>
+            {% if element.children is defined %}
+                <ul>
+                    {% for children in element.children %}
+                        <li>{{ element.children }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
 </ul>

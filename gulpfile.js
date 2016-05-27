@@ -20,13 +20,19 @@ var paths = {
     proxy: 'localhost:8000',
     serveDir: '/',
 
-    fontsSrc: [
+    assetsSrc: [
+        'node_modules/jquery-lazyload/jquery.lazyload.js',
+        'node_modules/jquery-mousewheel/jquery.mousewheel.js',
+        'node_modules/jquery.panzoom/dist/jquery.panzoom.min.js',
         'node_modules/open-sans-fontface/fonts/**',
-        'node_modules/font-awesome/fonts/**'
+        'node_modules/font-awesome/fonts/**',
     ],
-    fontsDest: [
+    assetsDest: [
+        'web/js/vendor',
+        'web/js/vendor',
+        'web/js/vendor',
         'web/fonts/open-sans',
-        'web/fonts/font-awesome'
+        'web/fonts/font-awesome',
     ],
     scriptSrc: 'app/Resources/js/**/*.js',
     scriptDest: 'web/js',
@@ -34,14 +40,14 @@ var paths = {
     styleDest: 'web/css'
 };
 
-gulp.task('fonts', function() {
-    paths.fontsSrc.forEach( function(src, index) {
+gulp.task('assets', function () {
+    paths.assetsSrc.forEach( function(src, index) {
         gulp.src(src)
-            .pipe(gulp.dest(paths.fontsDest[index]));
+            .pipe(gulp.dest(paths.assetsDest[index]));
     });
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', function () {
     gulp.src(paths.scriptSrc)
         .pipe(newer(paths.scriptDest + '/*.js'))
         .pipe(filter(paths.scriptSrc))
@@ -52,7 +58,7 @@ gulp.task('scripts', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('styles', function() {
+gulp.task('styles', function () {
     gulp.src(paths.styleSrc)
         .pipe(sassLint())
         .pipe(newer(paths.styleDest + '/*.css'))
@@ -66,12 +72,12 @@ gulp.task('styles', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('compile', ['fonts', 'scripts', 'styles']);
+gulp.task('compile', ['assets', 'scripts', 'styles']);
 
-gulp.task('default', ['fonts', 'scripts', 'styles'], function() {
+gulp.task('default', ['assets', 'scripts', 'styles'], function () {
     browserSync.init({open: false, proxy: paths.proxy});
     gulp.watch(paths.appFiles).on('change', browserSync.reload);
-    gulp.watch(paths.fontsSrc, ['fonts']);
+    gulp.watch(paths.assetsSrc, ['assets']);
     gulp.watch(paths.scriptSrc, ['scripts']);
     gulp.watch(paths.styleSrc, ['styles']);
 });

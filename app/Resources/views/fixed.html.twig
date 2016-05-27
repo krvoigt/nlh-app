@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="-fixed" lang="de">
+    {% include "partials/site/head.html.twig" %}
+    <body class="site -fixed">
+        {% include 'partials/site/header.html.twig' %}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <!-- {% include 'partials/site/footer.html.twig' %} -->
+        <!-- {% include 'partials/site/colophon.html.twig' %} -->
+
+        <script src="{{ asset('js/vendor/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery.lazyload.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery.mousewheel.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery.panzoom.min.js') }}"></script>
+
+        <script src="{{ asset('js/sub-legacy.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+    </body>
+</html>
