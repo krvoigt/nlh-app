@@ -20,6 +20,8 @@
 /web/fonts/
 !/web/fonts/classico/
 /web/js/script.js
+/web/js/vendor
+!/web/js/vendor/jquery.min.js
 /src/Subugoe/*
 .idea/
 .gradle
