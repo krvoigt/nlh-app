@@ -23,6 +23,10 @@
                    class="external-link-new-window">Gutenberg Digital</a></h6>
             <p class="colophon-copy">Besuchen Sie das Faksimile der Göttinger Gutenberg Bibel.</p>
         </div>
+        <div class="colophon_column">
+            <h6>{% trans %}Just scanned{% endtrans %}</h6>
+            {{ render(controller('AppBundle:Document:justScanned')) }}
+        </div>
     </div>
     <div class="colophon_top-link">
         <a title="Zurück zum Seitenanfang" href="#top">

@@ -8,7 +8,7 @@
         <dd>{{ document.bytitle }}</dd>
 
         {% if document.creator is defined %}
-            <dt>{{ 'creator' | transchoice(document.publisher | length) }}:</dt>
+            <dt>{{ 'creator' | transchoice(document.creator | length) }}:</dt>
             <dd>
                 {% for author in document.creator %}
                  {{ author }}{% if loop.last %}{% else %}, {% endif %}
