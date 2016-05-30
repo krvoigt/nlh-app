@@ -7,7 +7,7 @@
         <button class="header_toggle-nav" title="Navigation">Menü</button>
         <div class="header_logo" role="banner">
             <a href="/">
-                <span class="sr-only">Niedersächsische Staats-und Universitätsbibliothek Göttingen &ndash;</span>
+                <span class="sr-only">{% trans %}Göttingen State and University Library{% endtrans %} &ndash;</span>
                 <span class="header_title">Göttinger Digitalisierungszentrum</span>
             </a>
         </div>
@@ -22,23 +22,23 @@
         <div class="search">
             <form class="search_form -catalog -visible" method="get" role="search" action="/">
                 <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text" name="q" value="{{ query }}">
-                <label for="mytextbox" class="sr-only">Schnellsuche</label>
-                <button type="submit" class="search_submit"><span class="sr-only">Suchen</span></button>
+                <label for="mytextbox" class="sr-only">{% trans %}Quick search{% endtrans %}</label>
+                <button type="submit" class="search_submit"><span class="sr-only">{% trans %}Search{% endtrans %}</span></button>
                 <div class="search_popup">
                     <div class="search_content -catalog -visible">
-                        <p>Suche in</p>
+                        <p>{% trans %}Seach in{% endtrans %}</p>
                         <ul class="search_catalog-list">
                             <li class="search_item">
                                 <input class="search_radio" id="radio0" type="checkbox" name="kataloge" />
-                                <label class="search_label" for="radio0">Volltexten</label>
+                                <label class="search_label" for="radio0">{% trans %}in-fulltexts{% endtrans %}</label>
                             </li>
                             <li class="search_item">
                                 <input class="search_radio" id="radio1" type="checkbox" name="kataloge"/>
-                                <label class="search_label" for="radio1">Metadaten</label>
+                                <label class="search_label" for="radio1">{% trans %}in-metadata{% endtrans %}</label>
                             </li>
                         </ul>
                         <button class="search_close" title="Schließen">
-                            <span class="sr-only">Schließen</span>
+                            <span class="sr-only">{% trans %}close{% endtrans %}</span>
                         </button>
                     </div>
                 </div>
