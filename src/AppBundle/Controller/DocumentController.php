@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\TableOfContents;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,24 +22,52 @@ class DocumentController extends Controller
 
         $crawler = new Crawler();
         $crawler->addContent($file);
-        $structure = $crawler
+
+        $storage = [];
+
+        $storage[] = $crawler
             ->filterXPath('//mets:mets/mets:structMap/mets:div')
             ->children()
             ->each(function (Crawler $node, $i) {
-                $toc = new TableOfContents();
 
-                $toc->setId($node->attr('ID'));
-                $toc->setType($node->attr('TYPE'));
-                $toc->setDmdid($node->attr('DMDID'));
-                $toc->setLabel($node->attr('LABEL'));
+                $toc = $this->getTocElement($node);
+
+                if ($node->children()->count() > 0) {
+                    $children = new \SplObjectStorage();
+
+                    $node->children()
+                        ->each(function (Crawler $childNode) use (&$children) {
+
+                            $childToc = $this->getTocElement($childNode);
+                            $children->attach($childToc);
+                        });
+                    $toc->setChildren($children);
+                }
 
                 return $toc;
             });
 
         return $this->render('toc.html.twig', [
-            'structure' => $structure,
+            'structure' => $storage,
             'id' => $id,
         ]);
+    }
+
+    /**
+     * @param Crawler $node
+     *
+     * @return TableOfContents
+     */
+    protected function getTocElement($node)
+    {
+        $toc = new TableOfContents();
+
+        $toc->setId($node->attr('ID'));
+        $toc->setType($node->attr('TYPE'));
+        $toc->setDmdid($node->attr('DMDID'));
+        $toc->setLabel($node->attr('LABEL'));
+
+        return $toc;
     }
 
     /**
@@ -51,8 +79,8 @@ class DocumentController extends Controller
     {
         $client = $this->get('guzzle.client.fulltext');
         $file = $client
-                ->get($url)
-                ->getBody();
+            ->get($url)
+            ->getBody();
 
         return new Response($file);
     }

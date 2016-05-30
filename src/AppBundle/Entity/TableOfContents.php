@@ -28,6 +28,11 @@ class TableOfContents
     protected $label;
 
     /**
+     * @var \SplObjectStorage<TableOfContents>
+     */
+    protected $children;
+
+    /**
      * @return string
      */
     public function getId()
@@ -89,5 +94,21 @@ class TableOfContents
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return \SplObjectStorage
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param \SplObjectStorage $children
+     */
+    public function setChildren($children)
+    {
+        $this->children = $children;
     }
 }
