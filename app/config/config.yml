@@ -13,6 +13,7 @@ parameters:
       - { id: "mathematica", image: "mathematica.jpg" }
       - { id: "vd17-mainstream", image: "vd17-mainstream.jpg" }
       - { id: "bucherhaltung", image: "bucherhaltung.jpg" }
+      - { id: "varia", image: "varia.jpg" }
 
 framework:
     #esi:             ~
