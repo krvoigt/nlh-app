@@ -1,5 +1,6 @@
 <section class="viewer_metadata">
     <h2 class="viewer_heading">{% trans %}Metadata{% endtrans %}</h2>
+
     <dl>
         <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
         <dd>{{ document.docstrct | trans }}</dd>
@@ -11,7 +12,7 @@
             <dt>{{ 'creator' | transchoice(document.creator | length) }}:</dt>
             <dd>
                 {% for author in document.creator %}
-                 {{ author }}{% if loop.last %}{% else %}, {% endif %}
+                    {{ author }}{% if loop.last %}{% else %}, {% endif %}
                 {% endfor %}
             </dd>
         {% endif %}
@@ -27,7 +28,7 @@
             <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
             <dd>
                 {% for place in document.placepublish %}
-                  {{ place }}{% if loop.last %}{% else %}, {% endif %}
+                    {{ place }}{% if loop.last %}{% else %}, {% endif %}
                 {% endfor %}
             </dd>
         {% endif %}
@@ -36,7 +37,7 @@
             <dt>{{ 'publisher' | transchoice(document.publisher | length) }}</dt>
             <dd>
                 {% for publisher in document.publisher %}
-                  {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
+                    {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
                 {% endfor %}
             </dd>
         {% endif %}
@@ -44,7 +45,7 @@
         <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
         <dd>
             {% for dc in document.dc %}
-              {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
+                {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
 
@@ -58,7 +59,9 @@
 
         {% if document.id_PPNanalog_s is defined %}
             <dt>PPN (original)</dt>
-            <dd><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a></dd>
+            <dd>
+                <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
+            </dd>
         {% endif %}
 
 

@@ -1,5 +1,4 @@
 {# TODO: Show current page via page variable #}
-
 <section class="viewer_scan">
     <div class="viewer_controls -overlay">
         <div class="viewer_group">
@@ -10,7 +9,12 @@
         </div>
         <div class="viewer_group">
             <button class="viewer_control -first-page" title="{% trans %}First page{% endtrans %}"><span class="sr-only">{% trans %}First page{% endtrans %}</span></button>
-            <button class="viewer_control -previous-section" title="{% trans %}Previous section{% endtrans %}"><span class="sr-only">{% trans %}Previous section{% endtrans %}</span></button>
+            {% if document.idparentdoc is defined %}
+                {% set parentDoc = document.idparentdoc | first %}
+                <a href="{{ path("_detail", {id: parentDoc}) }}">
+                    <button class="viewer_control -previous-section" title="{% trans %}Previous section{% endtrans %}"><span class="sr-only">{% trans %}Previous section{% endtrans %}</span></button>
+                </a>
+            {% endif %}
             <button class="viewer_control -previous-page js-previous-page" title="{% trans %}Previous page{% endtrans %}" {{ page == 1 ? 'disabled' }}><span class="sr-only">{% trans %}Previous page{% endtrans %}</span></button>
 
             {% if showDoublePage %}
