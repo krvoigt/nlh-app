@@ -7,6 +7,12 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: de
+    collections:
+      - { id: "vd18.digital", image: "vd18.digital.jpg" }
+      - { id: "vd17-nova", image: "vd17-nova.jpg" }
+      - { id: "mathematica", image: "mathematica.jpg" }
+      - { id: "vd17-mainstream", image: "vd17-mainstream.jpg" }
+      - { id: "bucherhaltung", image: "bucherhaltung.jpg" }
 
 framework:
     #esi:             ~

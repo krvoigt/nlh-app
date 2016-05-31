@@ -46,10 +46,12 @@
             <button class="viewer_control -zoom-in js-zoom-in" title="{% trans %}Zoom in{% endtrans %}"></i><span class="sr-only">{% trans %}Zoom in{% endtrans %}</span></button>
             <button class="viewer_control -zoom-reset js-zoom-reset" title="{% trans %}Reset zoom{% endtrans %}"><span class="sr-only">{% trans %}Reset zoom{% endtrans %}</span></button>
         </div>
-        <div class="viewer_group">
-            <input class="viewer_control" type="text" placeholder="{% trans %}Search in document{% endtrans %}" title="{% trans %}Search in document{% endtrans %}">
-            <button class="viewer_control -search"><span class="sr-only">{% trans %}Search{% endtrans %}</span></button>
-        </div>
+        {% if document.gdzocr_url is defined %}
+            <div class="viewer_group">
+                <input class="viewer_control" type="text" placeholder="{% trans %}Search in document{% endtrans %}" title="{% trans %}Search in document{% endtrans %}">
+                <button class="viewer_control -search"><span class="sr-only">{% trans %}Search{% endtrans %}</span></button>
+            </div>
+        {% endif %}
     </div>
     <div class="viewer_image {{ showDoublePage ? '-double' }}" id="viewer_scan">
         {% if secondPage %}

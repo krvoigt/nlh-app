@@ -1,0 +1,19 @@
+{% extends "content.html.twig" %}
+
+{% block body %}
+    <ul class="collections">
+
+        {% for collection in collections %}
+
+            {% set image =  '/images/collections/' ~collection.image %}
+
+            <li class="collections_item">
+                <a href="{{ path('_collection', {id: collection.id}) }}" class="collections_link">
+                    <img src="{{ asset(image) }}" alt="" class="collections_image">
+                    <span class="collections_name"> {{ collection.id | trans }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
