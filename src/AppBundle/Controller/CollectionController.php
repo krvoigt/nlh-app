@@ -21,12 +21,15 @@ class CollectionController extends Controller
 
     /**
      * @Route("/collection/{id}", name="_collection")
+     *
+     * @todo avoid code duplication!
      */
     public function collectionAction(Request $request, $id)
     {
         $client = $this->get('solarium.client');
         $select = $client->createSelect();
-        $query = $request->get('q') ?: '*:*';
+        $query = $request->get('q') ?: '';
+        $facetConfiguration = $this->getParameter('facets');
 
         $filterQuery = new FilterQuery();
         $filterQuery->setKey('dc');
@@ -41,8 +44,30 @@ class CollectionController extends Controller
         $paginator = $this->get('knp_paginator');
         $rows = (int) $this->getParameter('results_per_page');
         $currentPage = (int) $request->get('page') ?: 1;
-
         $offset = ($currentPage - 1) * $rows;
+
+        $facetSet = $select->getFacetSet();
+
+        foreach ($facetConfiguration as $facet) {
+            $facetSet->createFacetField($facet['title'])->setField($facet['field']);
+        }
+
+        $activeFacets = $request->get('filter');
+        $facetCounter = count($activeFacets) ?: 0;
+
+        if (count($activeFacets) > 0) {
+            foreach ($activeFacets as $activeFacet) {
+                $filterQuery = new FilterQuery();
+                foreach ($activeFacet as $itemKey => $item) {
+                    $filterQuery->setKey($itemKey.$facetCounter);
+                    $filterQuery->setQuery($itemKey.':"'.$item.'"');
+                }
+                $select->addFilterQuery($filterQuery);
+                ++$facetCounter;
+            }
+        }
+
+        $results = $client->select($select);
 
         $pagination = $paginator->paginate(
             [
@@ -56,7 +81,9 @@ class CollectionController extends Controller
         return $this->render('@SubugoeFind/Default/index.html.twig', [
             'pagination' => $pagination,
             'query' => $query,
-            'facets' => [],
+            'facets' => $results->getFacetSet()->getFacets(),
+            'facetCounter' => $facetCounter,
+            'queryParams' => $request->get('filter') ?: [],
             'offset' => $offset,
         ]);
     }
