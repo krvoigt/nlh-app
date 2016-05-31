@@ -12,6 +12,9 @@
             </a>
         </div>
         <ul class="header_nav">
+            <li class="header_nav-item">
+                <a href="{{ path('_collections') }}">{% trans %}Collections{% endtrans %}</a>
+            </li>
             <li class="header_nav-item -fixed">
                 <button class="header_search-toggle js-search-toggle">
                     <i class="fa fa-search"></i>
@@ -29,7 +32,7 @@
                         <p>{% trans %}Search in{% endtrans %}</p>
                         <ul class="search_catalog-list">
                             <li class="search_item">
-                                <input class="search_radio" id="radio0" type="checkbox" name="kataloge" />
+                                <input class="search_radio" id="radio0" type="checkbox" name="kataloge"/>
                                 <label class="search_label" for="radio0">{% trans %}in-fulltexts{% endtrans %}</label>
                             </li>
                             <li class="search_item">

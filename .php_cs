@@ -9,7 +9,6 @@ $config
     ->exclude('build')
     ->exclude('cache')
     ->exclude('vendor')
-    ->exclude('tests')
-    ->name('*.php');
+    ->exclude('tests');
 
 return $config;
