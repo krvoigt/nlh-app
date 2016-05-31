@@ -2,9 +2,10 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% if title is defined %}{{ title }} - {% endif %}Göttinger Digitalisierungszentrum{% endblock %}</title>
-
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}"/>
+    <link rel="alternate" type="application/atom+xml" title="GDZ Atom-Feed" href="{{ url('_feed', {'_format': 'atom'}) }}" />
+    <link rel="alternate" type="application/rss+xml" title="GDZ RSS-Feed" href="{{ url('_feed', {'_format': 'rss'}) }}" />
 </head>
