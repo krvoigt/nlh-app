@@ -23,12 +23,14 @@
         {% include 'partials/site/colophon.html.twig' %}
     </div>
 
-    <script src="{{ asset('js/vendor/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/vendor/jquery.lazyload.js') }}"></script>
-    <script src="{{ asset('js/vendor/jquery.mousewheel.js') }}"></script>
-    <script src="{{ asset('js/vendor/jquery.panzoom.min.js') }}"></script>
+    {% block javascripts %}
+        <script src="{{ asset('js/vendor/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery.lazyload.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery.mousewheel.js') }}"></script>
+        <script src="{{ asset('js/vendor/jquery.panzoom.min.js') }}"></script>
 
-    <script src="{{ asset('js/sub-legacy.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+        <script src="{{ asset('js/sub-legacy.js') }}"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+    {% endblock %}
 </body>
 </html>
