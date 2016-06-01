@@ -14,6 +14,17 @@ parameters:
       - { id: "vd17-mainstream", image: "vd17-mainstream.jpg" }
       - { id: "bucherhaltung", image: "bucherhaltung.jpg" }
       - { id: "varia", image: "varia.jpg" }
+      - { id: "nordamericana", image: "nordamericana.jpg" }
+      - { id: "blumenbachiana", image: "blumenbachiana.jpg" }
+      - { id: "zoologica", image: "zoologica.jpg" }
+      - { id: "wissenschaftsgeschichte", image: "wissenschaftsgeschichte.jpg" }
+      - { id: "sibirica", image: "sibirica.jpg" }
+      - { id: "rusdml", image: "rusdml.jpg" }
+      - { id: "rezensionszeitschriften", image: "rezensionszeitschriften.jpg" }
+      - { id: "juridica", image: "juridica.jpg" }
+      - { id: "göttingeruniversitätsgeschichte-gedrucktewerke", image: "göttingeruniversitätsgeschichte-gedrucktewerke.jpg" }
+      - { id: "digiwunschbuch", image: "digiwunschbuch.jpg" }
+      - { id: "antiquitates.und.archaeologia.archaeo18", image: "antiquitates.und.archaeologia.archaeo18.jpg" }
 
 framework:
     #esi:             ~
