@@ -4,8 +4,12 @@
     "type": "git",
     "url": "git+https://github.com/subugoe/gdz-app.git"
   },
+  "scripts": {
+    "test": "node_modules/casperjs/bin/casperjs test --includes=tests/config.js ./tests/**/*.js"
+  },
   "devDependencies": {
     "browser-sync": "^2.12.8",
+    "casperjs": "^1.1.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
