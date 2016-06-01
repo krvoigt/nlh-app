@@ -1,0 +1,3 @@
+Die Kollektion „Blumenbachiana“ enthält Digitalisate von Druckwerken, die überwiegend mit dem Wirken Johann Friedrich Blumenbachs verbunden sind. In einem Kooperationsprojekt der Akademie der Wissenschaften zu Göttingen, der Georg-August-Universität sowie der SUB Göttingen werden Schriften Blumenbachs digitalisiert, editorisch bearbeitet und zusammen mit Objekten, die dieser für seine Forschungen gesammelt hat, im Akademie-Vorhaben „Blumenbach-Online“ verknüpft und präsentiert. Die Digitalisierung der Blumenbach’schen Werke erfolgte in den Jahren 2012-2013. Das Gesamtprojekt ist unter [www.blumenbach-online.de](http://www.blumenbach-online.de) zugänglich.
+
+**Status**: Förderung durch die Akademie der Wissenschaften zu Göttingen, Digitalisierung abgeschlossen 2013

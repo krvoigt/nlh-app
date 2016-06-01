@@ -1,0 +1,3 @@
+In einer deutsch-russischen Kooperation wurden bedeutende mathematische Zeitschriften aus Russland, die zum einen bislang nur gedruckt, zum andern nur an wenigen Bibliotheken außerhalb Russlands verfügbar waren, digitalisiert und mit verschiedenen Zugangsmöglichkeiten weltweit verfügbar gemacht. Als externe Zugangsmöglichkeiten wurden insbesondere die Datenbanken wichtiger internationaler mathematischer Referateorgane ([Zentralblatt MATH](http://zbmath.org/)) und Jahrbuch über die Fortschritte der Mathematik ([JFM](http://www.emis.de/projects/JFM/)) mit den hier digitalisierten Artikeln verknüpft.
+
+**Status:** DFG-gefördert, abgeschlossen 2007

@@ -1,0 +1,3 @@
+Im Mittelpunkt dieses DFG-Projektes steht die Archäologie-Vorlesung, die Christian Gottlob Heyne seit 1767 an der Universität Göttingen hielt. Zentrales Element der Heyne'schen Konzeption war die umfassende Verarbeitung der zu seiner Zeit vorliegenden und durch ihn in der Göttinger Universitätsbibliothek außerordentlich vollständig gesammelten altertumswissenschaftlichen Literatur. Viele der in der Vorlesung Heynes zitierten Werke und Abbildungen werden in dieser Kollektion gezeigt. Das Editionsprojekt ist unter [www.heyne-digital.de](http://www.heyne-digital.de) erreichbar.
+
+**Status**: DFG-gefördert, abgeschlossen 2013
