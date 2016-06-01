@@ -13,11 +13,15 @@
 
     {# Viewer settings #}
     {% set pageCount = images.0|length %}
+
+    {% set showDoublePage = app.request.get('showDoublePage') == 'true' %}
     {% set page = app.request.get('page')|number_format %}
     {% if page < 1 or page > pageCount %}
         {% set page = 1 %}
+    {% elseif showDoublePage and page % 2 == 0 %}
+        {% set page = page + 1 %}
     {% endif %}
-    {% set showDoublePage = app.request.get('showDoublePage') == 'true' %}
+
     {% set oddPageCountOrNotLastPage = pageCount % 2 > 0 or page != pageCount %}
     {% set secondPage = showDoublePage and (page > 1 and oddPageCountOrNotLastPage) ? page - 1 : false %}
 

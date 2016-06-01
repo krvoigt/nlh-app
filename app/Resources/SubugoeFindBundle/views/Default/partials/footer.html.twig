@@ -3,7 +3,8 @@
         <div id="coverflow" class="coverflow">
             {% for image in images.0 %}
                 {% set link = document.id ~ '?page=' ~ loop.index ~ (showDoublePage ? '&showDoublePage=true') %}
-                <a class="coverflow_link {{ page == loop.index ? '-current' }}" href="{{ link }}">
+                {% set isCurrent = page == loop.index or secondPage == loop.index %}
+                <a class="coverflow_link {{ isCurrent ? '-current' }}" {{ not isCurrent ? 'href=' ~ link }}>
                     <img data-original="{{ image }}" alt="">
                     <span class="coverflow_page-number">
                         <span class="sr-only">{% trans %}Go to page{% endtrans %}</span>
