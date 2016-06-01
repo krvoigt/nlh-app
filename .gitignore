@@ -26,3 +26,4 @@
 .idea/
 .gradle
 gradlew.bat
+web/media/cache

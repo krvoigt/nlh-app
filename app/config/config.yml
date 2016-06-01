@@ -121,3 +121,16 @@ guzzle:
         base_url: "http://gdz.sub.uni-goettingen.de/mets/"
       fulltext:
         base_url: "http://gdz.sub.uni-goettingen.de/gdzocr/"
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        collections:
+            quality: 75
+            filters:
+                upscale: { min: [640, 640] }
+                crop: { start: [0, 0], size: [640, 640] }
