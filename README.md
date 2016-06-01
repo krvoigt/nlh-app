@@ -2,7 +2,7 @@
 
 ## Requirements
 
-You need PHP 7 with cURL and DOMDocument installed (`apt-get install php-curl php-xml`).
+You need PHP 7 with cURL, DOMDocument and gd installed (`apt-get install php-curl php-xml php-gd`).
 
 Also see http://symfony.com/doc/current/reference/requirements.html.
 
