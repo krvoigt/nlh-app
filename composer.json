@@ -1,6 +1,6 @@
 {
     "name": "subugoe/gdz",
-    "license": "GPL-v2.0",
+    "license": "AGPL-3.0	",
     "type": "project",
     "description": "GDZ Website",
     "autoload": {
