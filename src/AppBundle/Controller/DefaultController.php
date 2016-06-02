@@ -4,14 +4,13 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
@@ -24,13 +23,13 @@ class DefaultController extends Controller
      */
     public function contentAction($action)
     {
-        $file = __DIR__.'/../../../app/Resources/content/'.$action.'.md';
+        $file = $this->get('kernel')->getRootDir().'/Resources/content/'.$action.'.md';
 
         if (file_exists($file)) {
             $text = file_get_contents($file);
             $content = $this->get('markdown.parser')->transformMarkdown($text);
         } else {
-            return $this->redirect($this->generateUrl('subugoe_find_homepage'));
+            return $this->redirect($this->generateUrl('_homepage'));
         }
 
         return $this->render('partials/site/content.html.twig', ['content' => $content]);

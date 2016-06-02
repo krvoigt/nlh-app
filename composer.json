@@ -2,6 +2,7 @@
     "name": "subugoe/gdz",
     "license": "GPL-v2.0",
     "type": "project",
+    "description": "GDZ Website",
     "autoload": {
         "psr-4": {
             "": "src/"
