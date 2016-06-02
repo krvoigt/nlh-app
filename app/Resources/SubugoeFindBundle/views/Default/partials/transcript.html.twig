@@ -6,13 +6,13 @@
         {% if secondPage %}
             <div class="viewer_transcript-page">
                 {% autoescape %}
-                    {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 2] })) | striptags('<p>') | raw }}
+                    {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 2] })) | nl2br }}
                 {% endautoescape %}
             </div>
         {% endif %}
         <div class="viewer_transcript-page">
             {% autoescape %}
-                {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 1] })) | striptags('<p>') | raw }}
+                {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 1] })) | nl2br }}
             {% endautoescape %}
         </div>
     </section>

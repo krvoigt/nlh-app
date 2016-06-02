@@ -78,11 +78,15 @@ class DocumentController extends Controller
     public function fullTextAction($url)
     {
         $client = $this->get('guzzle.client.fulltext');
+        $teiProcessor = $this->get('tei_processor');
+
         $file = $client
             ->get($url)
             ->getBody();
 
-        return new Response($file);
+        $text = $teiProcessor->process($file);
+
+        return new Response($text);
     }
 
     /**
