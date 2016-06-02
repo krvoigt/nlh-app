@@ -31,6 +31,9 @@ class CollectionController extends Controller
         $query = $request->get('q') ?: '';
         $facetConfiguration = $this->getParameter('facets');
 
+        $paginator = $this->get('knp_paginator');
+        $rows = (int) $this->getParameter('results_per_page');
+
         $filterQuery = new FilterQuery();
         $filterQuery->setKey('dc');
         $filterQuery->setQuery('dc:'.$id);
@@ -41,8 +44,6 @@ class CollectionController extends Controller
 
         $select->addFilterQueries([$filterQuery, $workQuery]);
 
-        $paginator = $this->get('knp_paginator');
-        $rows = (int) $this->getParameter('results_per_page');
         $currentPage = (int) $request->get('page') ?: 1;
         $offset = ($currentPage - 1) * $rows;
 
