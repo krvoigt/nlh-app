@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\AppBundle\Controller;
+namespace tests\AppBundle\Service;
 
 use AppBundle\Service\TeiProcessor;
 
