@@ -26,8 +26,7 @@ class DefaultController extends Controller
         $file = $this->get('kernel')->getRootDir().'/Resources/content/'.$action.'.md';
 
         if (file_exists($file)) {
-            $text = file_get_contents($file);
-            $content = $this->get('markdown.parser')->transformMarkdown($text);
+            $content = file_get_contents($file);
         } else {
             return $this->redirect($this->generateUrl('_homepage'));
         }
