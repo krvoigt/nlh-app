@@ -32,6 +32,11 @@ class TableOfContents
      */
     protected $children;
 
+    public function __construct()
+    {
+        $this->children = new \SplObjectStorage();
+    }
+
     /**
      * @return string
      */
@@ -105,10 +110,10 @@ class TableOfContents
     }
 
     /**
-     * @param \SplObjectStorage $children
+     * @param TableOfContents $children
      */
-    public function setChildren($children)
+    public function addChildren($children)
     {
-        $this->children = $children;
+        $this->children->attach($children);
     }
 }

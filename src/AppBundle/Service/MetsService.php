@@ -33,12 +33,11 @@ class MetsService
                     $children = new \SplObjectStorage();
 
                     $node->children()
-                        ->each(function (Crawler $childNode) use (&$children) {
+                        ->each(function (Crawler $childNode) use (&$children, &$toc) {
 
                             $childToc = $this->getTocElement($childNode);
-                            $children->attach($childToc);
+                            $toc->addChildren($childToc);
                         });
-                    $toc->setChildren($children);
                 }
 
                 return $toc;
