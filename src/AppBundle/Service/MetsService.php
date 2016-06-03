@@ -52,7 +52,7 @@ class MetsService
      *
      * @return TableOfContents
      */
-    protected function getTocElement($node)
+    protected function getTocElement(Crawler $node)
     {
         $toc = new TableOfContents();
 
