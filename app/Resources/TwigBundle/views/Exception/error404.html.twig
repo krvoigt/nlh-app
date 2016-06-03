@@ -2,6 +2,6 @@
 
 {% block content %}
 
-    {% trans %}The requested page was not found{% endtrans %}
+    <p>{% trans %}The requested page was not found{% endtrans %}: {{ status_text | trans }}</p>
 
 {% endblock %}

@@ -8,6 +8,7 @@ use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CollectionController extends Controller
 {
@@ -48,6 +49,10 @@ class CollectionController extends Controller
         }
 
         $results = $client->select($select);
+
+        if ($results->count() === 0) {
+            throw new NotFoundHttpException(sprintf('Collection »%s« does not exist', $id));
+        }
 
         $pagination = $paginator->paginate(
             [

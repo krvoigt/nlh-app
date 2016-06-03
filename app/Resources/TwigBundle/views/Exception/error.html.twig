@@ -2,6 +2,6 @@
 
 {% block content %}
 
-    {% trans %}An error occured{% endtrans %}
+    <p>{% trans %}An error occured{% endtrans %}: {{ status_text | trans }}</p>
 
 {% endblock %}

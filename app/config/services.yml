@@ -6,5 +6,6 @@ parameters:
 services:
   tei_processor:
     class: AppBundle\Service\TeiProcessor
+
   mets_service:
     class: AppBundle\Service\MetsService
