@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CollectionController extends Controller
 {
     /**
-     * @Route("/collections", name="_collections")
+     * @Route("/collections", name="_collections", methods={"GET"})
      */
     public function indexAction()
     {
@@ -20,7 +20,7 @@ class CollectionController extends Controller
     }
 
     /**
-     * @Route("/collection/{id}", name="_collection")
+     * @Route("/collection/{id}", name="_collection", methods={"GET"})
      *
      * @todo avoid code duplication!
      */

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DocumentController extends Controller
 {
     /**
-     * @Route("/id/{id}/toc/", name="_toc")
+     * @Route("/id/{id}/toc/", name="_toc", methods={"GET"})
      */
     public function tocAction($id)
     {
@@ -48,7 +48,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/{id}/mets.xml", name="_mets")
+     * @Route("/{id}/mets.xml", name="_mets", methods={"GET"})
      *
      * @param string $id
      *
@@ -73,7 +73,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/just-scanned/", name="just-scanned")
+     * @Route("/just-scanned/", name="just-scanned", methods={"GET"})
      */
     public function justScannedAction()
     {
