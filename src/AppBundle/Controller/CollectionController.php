@@ -117,7 +117,7 @@ class CollectionController extends Controller
                 $filterQuery = new FilterQuery();
                 foreach ($activeFacet as $itemKey => $item) {
                     $filterQuery->setKey($itemKey.$this->getFacetCounter($activeFacets));
-                    $filterQuery->setQuery(vsprintf('%s:%s', [$itemKey, $item]));
+                    $filterQuery->setQuery(vsprintf('%s:"%s"', [$itemKey, $item]));
                 }
                 $filterQueries[] = $filterQuery;
                 ++$facetCounter;
