@@ -1,5 +1,7 @@
 # GDZ
 
+[![Build Status](https://travis-ci.org/subugoe/gdz-app.svg?branch=develop)](https://travis-ci.org/subugoe/gdz-app)
+
 ## Requirements
 
 You need PHP 7 with cURL, DOMDocument and gd installed (`apt-get install php-curl php-xml php-gd`).
