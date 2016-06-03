@@ -6,10 +6,7 @@
 
 {% block content %}
 
-    {% set thumbs = [document.thumbs_url] %}
-    {% set presentation = [document.min_url] %}
-
-    {% set images = thumbs | merge(presentation)  %}
+    {% set images = [document.thumbs_url] | merge([document.min_url])  %}
 
     {# Viewer settings #}
     {% set pageCount = images.0|length %}

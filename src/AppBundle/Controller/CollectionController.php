@@ -7,13 +7,14 @@ use Solarium\QueryType\Select\Query\Component\FacetSet;
 use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CollectionController extends Controller
 {
     /**
      * @Route("/collections", name="_collections", methods={"GET"})
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         $collections = $this->getParameter('collections');
 
@@ -116,7 +117,7 @@ class CollectionController extends Controller
                 $filterQuery = new FilterQuery();
                 foreach ($activeFacet as $itemKey => $item) {
                     $filterQuery->setKey($itemKey.$this->getFacetCounter($activeFacets));
-                    $filterQuery->setQuery($itemKey.':"'.$item.'"');
+                    $filterQuery->setQuery(vsprintf('%s:%s', [$itemKey, $item]));
                 }
                 $filterQueries[] = $filterQuery;
                 ++$facetCounter;
