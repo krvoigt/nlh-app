@@ -2,6 +2,8 @@
 
 {% block content %}
 
-    <p>{% trans %}The requested page was not found{% endtrans %}: {{ exception.message | trans }}</p>
+    <p>{% trans %}The requested page was not found{% endtrans %}</p>
+
+    {#  add feedback form to inform someone #}
 
 {% endblock %}
