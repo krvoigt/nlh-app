@@ -1,0 +1,25 @@
+{% extends "content.html.twig" %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Feedback</h1>
+
+    {% for flash_message in app.session.flashBag.get('notice') %}
+        <div class="flash-notice">
+            {{ flash_message | trans }}
+        </div>
+    {% endfor %}
+
+
+    {{ form_start(form) }}
+
+    {% block form_row %}
+        <div class="form_row">
+            {{ form_label(form) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    {% endblock form_row %}
+    {{ form_end(form) }}
+{% endblock %}

@@ -15,6 +15,10 @@ parameters:
     mailer_user:       ~
     mailer_password:   ~
 
+    # values for feedback form
+    feedback_form_recipient: info@example.com
+    feedback_form_sender:    info@example.com
+
     # A secret key that's used to generate certain security-related tokens
     secret:            ChangeThisGdzSecret
     solr_host:         solr:password@host
