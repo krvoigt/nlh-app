@@ -104,6 +104,7 @@ subugoe_find:
     default_sort: "datemodified desc"
     feed_sort: "dateindexed DESC"
     feed_rows: 15
+    feed_category: dc
     feed_fields: ["bytitle", "purl", "dateindexed"]
     facets:
         - { title: facetcreator, field: facetcreator }

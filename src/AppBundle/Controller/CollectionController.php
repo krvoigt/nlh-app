@@ -95,6 +95,7 @@ class CollectionController extends Controller
 
     /**
      * @param $activeFacets
+     *
      * @return int
      */
     protected function getFacetCounter($activeFacets)

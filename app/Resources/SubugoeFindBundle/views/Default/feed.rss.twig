@@ -2,7 +2,7 @@
 {% set firstElement = feeds|first %}
 <rss version="2.0">
     <channel>
-        <title>GDZ RSS-Feed</title>
+        <title>GDZ RSS-Feed{% if category is not empty %} - {{ category | trans }}{% endif %}</title>
         <pubDate>{{ firstElement.dateindexed }}</pubDate>
         <lastBuildDate>{{ firstElement.dateindexed }}</lastBuildDate>
         <description>The stream informs about newly added works to the  GDZ document server hosted at the SUB Göttingen.</description>
