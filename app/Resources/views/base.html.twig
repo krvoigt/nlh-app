@@ -6,6 +6,9 @@
         {% include 'partials/site/header.html.twig' %}
 
         <div class="content">
+
+            {% include "partials/site/flashmessage.html.twig" %}
+
             <div class="tx_find">
                 <div class="navigation top">
                     {% block findnavigation %}{% endblock %}

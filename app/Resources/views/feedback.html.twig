@@ -5,13 +5,6 @@
 
     <h1>Feedback</h1>
 
-    {% for flash_message in app.session.flashBag.get('notice') %}
-        <div class="flash-notice">
-            {{ flash_message | trans }}
-        </div>
-    {% endfor %}
-
-
     {{ form_start(form) }}
 
     {% block form_row %}
