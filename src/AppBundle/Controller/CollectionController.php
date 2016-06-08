@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Solarium\QueryType\Select\Query\Component\FacetSet;
 use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +41,7 @@ class CollectionController extends Controller
 
         $facetSet = $select->getFacetSet();
 
-        $filters = array_merge($this->addFacets($facetSet, $activeFacets), $this->getDefaultFilters($id));
+        $filters = array_merge($this->get('subugoe_find.query_service')->addFacets($facetSet, $activeFacets), $this->getDefaultFilters($id));
 
         foreach ($filters as $filter) {
             $select->addFilterQuery($filter);
@@ -67,7 +66,7 @@ class CollectionController extends Controller
             'pagination' => $pagination,
             'query' => $query,
             'facets' => $results->getFacetSet()->getFacets(),
-            'facetCounter' => $this->getFacetCounter($request),
+            'facetCounter' => $this->getFacetCounter($activeFacets),
             'queryParams' => $request->get('filter') ?: [],
             'offset' => $offset,
         ]);
@@ -94,41 +93,14 @@ class CollectionController extends Controller
         return $filterQueries;
     }
 
+    /**
+     * @param $activeFacets
+     * @return int
+     */
     protected function getFacetCounter($activeFacets)
     {
         $facetCounter = count($activeFacets) ?: 0;
 
         return $facetCounter;
-    }
-
-    /**
-     * @param FacetSet $facetSet
-     * @param array    $activeFacets
-     *
-     * @return array
-     */
-    protected function addFacets(FacetSet $facetSet, $activeFacets)
-    {
-        $facetConfiguration = $this->getParameter('facets');
-
-        $filterQueries = [];
-        $facetCounter = $this->getFacetCounter($activeFacets);
-        foreach ($facetConfiguration as $facet) {
-            $facetSet->createFacetField($facet['title'])->setField($facet['field']);
-        }
-
-        if (count($activeFacets) > 0) {
-            foreach ($activeFacets as $activeFacet) {
-                $filterQuery = new FilterQuery();
-                foreach ($activeFacet as $itemKey => $item) {
-                    $filterQuery->setKey($itemKey.$this->getFacetCounter($activeFacets));
-                    $filterQuery->setQuery(vsprintf('%s:"%s"', [$itemKey, $item]));
-                }
-                $filterQueries[] = $filterQuery;
-                ++$facetCounter;
-            }
-        }
-
-        return $filterQueries;
     }
 }
