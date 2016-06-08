@@ -129,6 +129,14 @@
     }
 }
 
+.header_search-toggle {
+    @include icon(search, false);
+
+    @include hover {
+        background: none;
+    }
+}
+
 // 1. Position department name at the same position as brand name.
 // 2. Approximate width of brand name in logo that has to be overlayed is 440px.
 //    Has to be slightly larger to accomodate some very long deparment names,
