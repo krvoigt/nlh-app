@@ -34,11 +34,9 @@ class CollectionController extends Controller
         $currentPage = (int) $request->get('page') ?: 1;
 
         $rows = (int) $this->getParameter('results_per_page');
-
         $offset = ($currentPage - 1) * $rows;
 
         $select = $client->createSelect();
-
         $facetSet = $select->getFacetSet();
 
         $filters = array_merge($this->get('subugoe_find.query_service')->addFacets($facetSet, $activeFacets), $this->getDefaultFilters($id));
@@ -53,12 +51,6 @@ class CollectionController extends Controller
             throw new NotFoundHttpException(sprintf('Collection »%s« does not exist', $id));
         }
 
-        $file = $this->get('kernel')->getRootDir().'/Resources/content/dc/'.$id.'.md';
-        $content = '';
-        if (file_exists($file)) {
-            $content = file_get_contents($file);
-        }
-
         $pagination = $paginator->paginate(
             [
                 $client,
@@ -69,14 +61,30 @@ class CollectionController extends Controller
         );
 
         return $this->render('@SubugoeFind/Default/collections.html.twig', [
-            'content' => $content,
+            'content' => $this->getCollectionContent($id),
             'pagination' => $pagination,
             'query' => $query,
             'facets' => $results->getFacetSet()->getFacets(),
-            'facetCounter' => $this->getFacetCounter($activeFacets),
+            'facetCounter' => $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets),
             'queryParams' => $request->get('filter') ?: [],
             'offset' => $offset,
         ]);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return string
+     */
+    protected function getCollectionContent($id)
+    {
+        $file = $this->get('kernel')->getRootDir().'/Resources/content/dc/'.$id.'.md';
+        $content = '';
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+        }
+
+        return $content;
     }
 
     /**
@@ -98,17 +106,5 @@ class CollectionController extends Controller
         $filterQueries[] = $workQuery;
 
         return $filterQueries;
-    }
-
-    /**
-     * @param $activeFacets
-     *
-     * @return int
-     */
-    protected function getFacetCounter($activeFacets)
-    {
-        $facetCounter = count($activeFacets) ?: 0;
-
-        return $facetCounter;
     }
 }
