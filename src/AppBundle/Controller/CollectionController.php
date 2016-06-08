@@ -53,6 +53,12 @@ class CollectionController extends Controller
             throw new NotFoundHttpException(sprintf('Collection »%s« does not exist', $id));
         }
 
+        $file = $this->get('kernel')->getRootDir().'/Resources/content/dc/'.$id.'.md';
+        $content = '';
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+        }
+
         $pagination = $paginator->paginate(
             [
                 $client,
@@ -63,6 +69,7 @@ class CollectionController extends Controller
         );
 
         return $this->render('@SubugoeFind/Default/collections.html.twig', [
+            'content' => $content,
             'pagination' => $pagination,
             'query' => $query,
             'facets' => $results->getFacetSet()->getFacets(),
