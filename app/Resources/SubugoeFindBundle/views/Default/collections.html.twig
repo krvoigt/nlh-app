@@ -1,3 +1,5 @@
+{% set title = app.request.get('id') | trans %}
+
 {% extends "@SubugoeFind/Default/index.html.twig" %}
 
 {% block content %}
