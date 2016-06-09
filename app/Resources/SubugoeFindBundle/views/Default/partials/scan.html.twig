@@ -8,14 +8,23 @@
             </select>
         </div>
         <div class="viewer_group">
-            <button class="viewer_control -first-page" title="{% trans %}First page{% endtrans %}"><span class="sr-only">{% trans %}First page{% endtrans %}</span></button>
-            {% if document.idparentdoc is defined %}
-                {% set parentDoc = document.idparentdoc | first %}
-                <a href="{{ path("_detail", {id: parentDoc}) }}">
-                    <button class="viewer_control -previous-section" title="{% trans %}Previous section{% endtrans %}"><span class="sr-only">{% trans %}Previous section{% endtrans %}</span></button>
-                </a>
-            {% endif %}
-            <button class="viewer_control -previous-page js-previous-page" title="{% trans %}Previous page{% endtrans %}" {{ page == 1 ? 'disabled' }}><span class="sr-only">{% trans %}Previous page{% endtrans %}</span></button>
+            <button
+                class="viewer_control -first-page"
+                title="{% trans %}First page{% endtrans %}"
+                disabled
+            >
+                <span class="sr-only">{% trans %}First page{% endtrans %}</span>
+            </button>
+            <a
+                class="viewer_control -previous-section {{ not document.idparentdoc is defined ? '-disabled' }}"
+                title="{% trans %}Previous section{% endtrans %}"
+                {{ document.idparentdoc is defined ? 'href=' ~ path('_detail', {id: document.idparentdoc | first}) }}
+            >
+                <span class="sr-only">{% trans %}Previous section{% endtrans %}</span>
+            </a>
+            <button
+                class="viewer_control -previous-page js-previous-page"
+                title="{% trans %}Previous page{% endtrans %}" {{ page == 1 ? 'disabled' }}><span class="sr-only">{% trans %}Previous page{% endtrans %}</span></button>
 
             {% if showDoublePage %}
                 <label class="sr-only double-page" for="viewer-page-select-2">{% trans %}Current pages{% endtrans %}</label>
@@ -39,9 +48,26 @@
                 </select>
             {% endif %}
 
-            <button class="viewer_control -next-page js-next-page" title="{% trans %}Next page{% endtrans %}" {{ page == pageCount ? 'disabled' }}><span class="sr-only">{% trans %}Next page{% endtrans %}</span></button>
-            <button class="viewer_control -next-section" title="{% trans %}Next section{% endtrans %}"><span class="sr-only">{% trans %}Next section{% endtrans %}</span></button>
-            <button class="viewer_control -last-page" title="{% trans %}Last page{% endtrans %}"><span class="sr-only">{% trans %}Last page{% endtrans %}</span></button>
+            <button
+                class="viewer_control -next-page js-next-page"
+                title="{% trans %}Next page{% endtrans %}" {{ page == pageCount ? 'disabled' }}
+            >
+                <span class="sr-only">{% trans %}Next page{% endtrans %}</span>
+            </button>
+            <button
+                class="viewer_control -next-section"
+                title="{% trans %}Next section{% endtrans %}"
+                disabled
+            >
+                <span class="sr-only">{% trans %}Next section{% endtrans %}</span>
+            </button>
+            <button
+                class="viewer_control -last-page"
+                title="{% trans %}Last page{% endtrans %}"
+                disabled
+            >
+                <span class="sr-only">{% trans %}Last page{% endtrans %}</span>
+            </button>
         </div>
         <div class="viewer_group">
             <button class="viewer_control -zoom-out js-zoom-out" title="{% trans %}Zoom out{% endtrans %}"><span class="sr-only">{% trans %}Zoom out{% endtrans %}</span></button>

@@ -8,6 +8,7 @@
     margin: 0;
     min-width: ($grid * 1.5);
     padding: ($grid / 4) .5em;
+    text-align: center;
     text-decoration: none;
     vertical-align: middle;
     white-space: nowrap;
@@ -21,10 +22,6 @@
             background: linear-gradient(to bottom, tint(#e7e7e7, 30), tint(#e7e7e7, 10));
             color: shade($text-color, 20);
         }
-
-        &[disabled] {
-            color: tint($text-color, 50);
-        }
     } @else {
         background: linear-gradient(to bottom, tint($link-color, 10), shade($link-color, 10));
         color: #fff;
@@ -32,10 +29,6 @@
 
         @include hover {
             background: linear-gradient(to bottom, shade($brand-color, 10), shade($brand-color, 30));
-        }
-
-        &[disabled] {
-            color: shade($text-color, 50);
         }
     }
 }

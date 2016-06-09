@@ -69,6 +69,11 @@
 		@include button;
     }
 
+    &[disabled],
+    &.-disabled {
+        color: tint($text-color, 50);
+    }
+
     & + &,
     label + & {
         @include separator(0, 0, 0, 1);
