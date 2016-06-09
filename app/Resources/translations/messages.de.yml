@@ -1,8 +1,10 @@
-Page: Seite
-First page: Erste Seite
-Last page: Letzte Seite
-Previous page: Vorige Seite
-Next page: Nächste Seite
+# Pagination
+Current page:: Aktuelle Seite:
+Go to first page: Zur ersten Seite
+Go to last page: Zur letzten Seite
+Go to previous page: Zur vorigen Seite
+Go to next page: Zur nächsten Seite
+
 Contact: Kontakt
 Imprint: Impressum
 Help for search: Hilfe zur Suche
