@@ -1,0 +1,49 @@
+.facets {
+    clear: right;
+    float: right;
+    width: 200px;
+
+    @include respond-to(medium) {
+        float: none;
+        width: auto;
+    }
+}
+
+.facetsBody {
+    @include respond-to(medium) {
+        border-bottom: $border-width solid $border-color;
+        display: none;
+        margin: 0 0 $grid;
+    }
+
+    &.-visible {
+        display: block;
+    }
+}
+
+.facetsHeader {
+    display: none;
+    padding: 0 0 $grid;
+    text-align: center;
+
+    @include respond-to(medium) {
+        display: block;
+    }
+
+    &::after {
+        background: $link-color;
+        content: '';
+        display: block;
+        height: $border-width;
+        margin-top: (-$grid / 2);
+        position: absolute;
+        width: 100%;
+    }
+}
+
+.facetsToggle {
+    background: $white;
+    padding: 0 .5em;
+    position: relative;
+    z-index: 1;
+}

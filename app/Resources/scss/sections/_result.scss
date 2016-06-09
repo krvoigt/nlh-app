@@ -4,6 +4,27 @@
     }
 }
 
+.resultList {
+    margin: 0 220px 0 0; // TODO
+    padding-left: 3em;
+
+    @include respond-to(medium) {
+        margin: 0;
+    }
+
+    h1 {
+        font: inherit;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    li:target {
+        background: $background-active;
+        border-radius: 7px;
+        transition: background .5s ease-in-out;
+    }
+}
+
 .resultMetadata {
     display: table-cell;
     vertical-align: top;

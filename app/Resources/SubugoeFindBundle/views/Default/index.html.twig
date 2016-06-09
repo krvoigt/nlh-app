@@ -41,26 +41,32 @@
 {% endblock %}
 
 {% block sidebar %}
-    {% for key, facet in facets %}
-        <article class="facet">
-            <h1>{{ key | transchoice(facet | length) }}</h1>
-            <ol class="facetList">
-                {% for value, count in facet if count > 0 %}
-                    {% set facet_name = ['facet', key]|join('-') %}
-                    <li class="facetItem">
-                        <a class="facetLink" href="{{ path('_homepage', {
-                            'filter': queryParams|merge({
-                                (facetCounter):  {
-                                    (key) : (value)
-                                }
-                            }),
-                        'q': (app.request.get('q'))
-                        }) }}">{{ value | trans }} <span class="facetCount">{{ count | number_format(0, ',', '.') }}</span></a>
-                    </li>
-                {% endfor %}
-            </ol>
-            <button class="facetListExpand">{% trans %}expand{% endtrans %}</button>
-            <button class="facetListCollapse">{% trans %}collapse{% endtrans %}</button>
-        </article>
-    {% endfor %}
+    <div class="facetsHeader">
+        <button class="facetsToggle -show">{% trans %}Show filters{% endtrans %}</button>
+        <button class="facetsToggle -hide hidden">{% trans %}Hide filters{% endtrans %}</button>
+    </div>
+    <div class="facetsBody">
+        {% for key, facet in facets %}
+            <article class="facet">
+                <h1>{{ key | transchoice(facet | length) }}</h1>
+                <ol class="facetList">
+                    {% for value, count in facet if count > 0 %}
+                        {% set facet_name = ['facet', key]|join('-') %}
+                        <li class="facetItem">
+                            <a class="facetLink" href="{{ path('_homepage', {
+                                'filter': queryParams|merge({
+                                    (facetCounter):  {
+                                        (key) : (value)
+                                    }
+                                }),
+                            'q': (app.request.get('q'))
+                            }) }}">{{ value | trans }} <span class="facetCount">{{ count | number_format(0, ',', '.') }}</span></a>
+                        </li>
+                    {% endfor %}
+                </ol>
+                <button class="facetListExpand">{% trans %}expand{% endtrans %}</button>
+                <button class="facetListCollapse">{% trans %}collapse{% endtrans %}</button>
+            </article>
+        {% endfor %}
+    </div>
 {% endblock %}

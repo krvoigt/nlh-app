@@ -124,36 +124,11 @@ $tab-selected: #263476;
             clear: both;
             margin-bottom: $grid;
         }
-
-        ol.resultList {
-            margin: 0 220px 0 0;
-            padding-left: 3em;
-
-            h1 {
-                font: inherit;
-                font-weight: bold;
-                margin: 0;
-            }
-
-            li:target {
-                background: $background-active;
-                border-radius: 7px;
-                transition: background .5s ease-in-out;
-            }
-        }
     }
 
     /* facets */
 
-    .facets {
-        float: right;
-        clear: right;
-        width: 200px;
-    }
-
     article.facet {
-        margin-bottom: 2em;
-
         h1 {
             @include typo-scale(1);
             margin-bottom: ($grid / 2);

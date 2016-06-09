@@ -17,12 +17,10 @@
             </dd>
         {% endif %}
 
-
         {% if document.yearpublish is defined %}
             <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
             <dd>{{ document.yearpublish }}</dd>
         {% endif %}
-
 
         {% if document.placepublish is defined %}
             <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
@@ -69,6 +67,5 @@
             <dt>ADBID</dt>
             <dd>{{ document.id_ADBID_s.0 }}</dd>
         {% endif %}
-
     </dl>
 </section>

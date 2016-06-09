@@ -1,3 +1,7 @@
+.facet {
+    margin: 0 0 $grid;
+}
+
 .facetListExpand {
     @include icon(chevron-down, true);
 }
