@@ -9,6 +9,9 @@
    {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
+{% block contentabove %}
+{% endblock %}
+
 {% block content %}
     <ol class="resultList" start="{{ offset + 1 }}">
         {% for result in pagination %}
@@ -48,7 +51,7 @@
     <div class="facetsBody">
         {% for key, facet in facets %}
             <article class="facet">
-                <h1>{{ key | transchoice(facet | length) }}</h1>
+                <h2>{{ key | transchoice(facet | length) }}</h2>
                 <ol class="facetList">
                     {% for value, count in facet if count > 0 %}
                         {% set facet_name = ['facet', key]|join('-') %}

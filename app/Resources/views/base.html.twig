@@ -8,16 +8,17 @@
         <div class="content">
             {% include "partials/site/flashmessage.html.twig" %}
 
-            <div class="tx_find">
-                <div class="navigation top">
-                    {% block findnavigation %}{% endblock %}
-                </div>
-                <div class="results">
-                    <section class="facets">
-                        {% block sidebar %}{% endblock %}
-                    </section>
-                    {% block content %}{% endblock %}
-                </div>
+            {% block contentabove %}{% endblock %}
+
+            <div class="navigation top">
+                {% block findnavigation %}{% endblock %}
+            </div>
+
+            <div class="results">
+                <section class="facets">
+                    {% block sidebar %}{% endblock %}
+                </section>
+                {% block content %}{% endblock %}
             </div>
         </div>
 

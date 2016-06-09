@@ -2,6 +2,12 @@
     margin: 0 0 $grid;
 }
 
+.facetCount {
+    color: $text-color-lightest;
+    font-size: $font-size-small;
+    font-weight: bold;
+}
+
 .facetListExpand {
     @include icon(chevron-down, true);
 }
@@ -19,4 +25,18 @@
     &:nth-child(6):last-child {
         display: list-item;
     }
+}
+
+.facetLink {
+    border-radius: $br;
+    box-shadow: none;
+    display: inline-block;
+    margin: -1px 0;
+    padding-left: 1em;
+    text-indent: -1em;
+}
+
+.facetList {
+    list-style: none;
+    margin: 0;
 }
