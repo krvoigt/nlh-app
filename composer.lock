@@ -2023,12 +2023,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/subugoe/SubugoeFindBundle.git",
-                "reference": "e35058687c145d30b468f8c15193e67f4c1bf8aa"
+                "reference": "e915e720700eaa589299e6a0f56d6fc4499a5976"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/e35058687c145d30b468f8c15193e67f4c1bf8aa",
-                "reference": "e35058687c145d30b468f8c15193e67f4c1bf8aa",
+                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/e915e720700eaa589299e6a0f56d6fc4499a5976",
+                "reference": "e915e720700eaa589299e6a0f56d6fc4499a5976",
                 "shasum": ""
             },
             "type": "library",
@@ -2051,7 +2051,7 @@
                 "source": "https://github.com/subugoe/SubugoeFindBundle/tree/master",
                 "issues": "https://github.com/subugoe/SubugoeFindBundle/issues"
             },
-            "time": "2016-06-08 09:18:42"
+            "time": "2016-06-09 07:02:59"
         },
         {
             "name": "swiftmailer/swiftmailer",
