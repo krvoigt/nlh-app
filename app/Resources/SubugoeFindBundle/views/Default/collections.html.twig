@@ -3,9 +3,9 @@
 {% extends "@SubugoeFind/Default/index.html.twig" %}
 
 {% block content %}
-    <h2>{{ app.request.get('id') | trans }}</h2>
+    <h2>{{ title | trans }}</h2>
     {{ content | markdown }}
-    <p><a href="{{ path('_feed', {'_format': 'rss', 'category': app.request.get('id')}) }}"><span class="collection-rss-link">RSS Feed</span></a></p>
+    <p><a href="{{ path('_feed', {'_format': 'rss', 'category': app.request.get('id')}) }}"><span class="collection-rss-link">{{ title | trans }} RSS Feed</span></a></p>
     {{ parent() }}
 {% endblock %}
 
