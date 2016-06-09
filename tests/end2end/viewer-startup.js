@@ -1,4 +1,4 @@
-casper.test.begin('Viewer: Start', function suite(test) {
+casper.test.begin('Viewer: Startup', function suite(test) {
     casper.start(config.base + '/id/' + config.docId, function () {
         var title = casper.fetchText('h1');
         test.assertEquals(title, config.docTitle, 'The correct document title is shown');

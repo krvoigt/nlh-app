@@ -1,17 +1,22 @@
-// TODO: Would be nice to actually check the label, but it's a pain in the ass
-// because the text contains lots of whitespace and line breaks. Maybe extend
-// casper with a decent assertSelectorHasText method?
+// TODO: Move this to another file.
+// Not as easy as it sounds since casper executes each test file in its own context
+casper.test.assertSelectorHasLabel = function(selector, label, message) {
+    var actualCleanedLabel = casper.fetchText(selector).trim().replace(/(\s+)/gm, ' ');
+    this.assertEquals(actualCleanedLabel, label, message);
+};
 
 casper.test.begin('Search: Pagination', function suite(test) {
+    var current = '.pagination_item.-current';
+
     casper.start(config.base, function () {
-        test.assertExists('.pagination_item.-current:nth-child(3)', 'Page 1 should be highlighted');
+        test.assertSelectorHasLabel(current, 'Aktuelle Seite: 1', 'Page 1 should be highlighted');
     });
 
     casper.then(function () {
         this.clickLabel('Zur nächsten Seite');
         this.waitForSelector('.pagination_item.-current:nth-child(4)');
     }).then(function () {
-        test.assert(true, 'Page 2 should be highlighted');
+        test.assertSelectorHasLabel(current, 'Aktuelle Seite: 2', 'Page 2 should be highlighted');
     });
 
     casper.then(function () {
@@ -32,7 +37,7 @@ casper.test.begin('Search: Pagination', function suite(test) {
         this.clickLabel('Zur ersten Seite');
         this.waitForSelector('.pagination_item.-current:nth-child(3)');
     }).then(function () {
-        test.assert(true, 'Page 1 should be highlighted again');
+        test.assertSelectorHasLabel(current, 'Aktuelle Seite: 1', 'Page 1 should be highlighted again');
     });
 
     casper.run(function () {
