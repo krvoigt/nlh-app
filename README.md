@@ -4,7 +4,7 @@
 
 ## Requirements
 
-You need PHP 7 with cURL, DOMDocument and gd installed (`apt-get install php-curl php-xml php-gd`).
+You need PHP 7 with cURL, DOMDocument, gd and ImageMagick installed (`apt-get install php-curl php-xml php-gd php-imagick`).
 
 Also see http://symfony.com/doc/current/reference/requirements.html.
 
