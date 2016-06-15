@@ -9,7 +9,6 @@ use Symfony\Component\Form\Test\TypeTestCase;
  */
 class FeedbackTypeTest extends TypeTestCase
 {
-
     public function testSubmitValidData()
     {
         $data = array(
@@ -34,6 +33,4 @@ class FeedbackTypeTest extends TypeTestCase
         }
 
     }
-
-
 }
