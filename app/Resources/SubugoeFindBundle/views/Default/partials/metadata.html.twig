@@ -2,8 +2,6 @@
     <h2 class="viewer_heading">{% trans %}Metadata{% endtrans %}</h2>
 
     <dl>
-        <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
-        <dd>{{ document.docstrct | trans }}</dd>
 
         <dt>{% trans %}bytitle{% endtrans %}</dt>
         <dd>{{ document.bytitle }}</dd>
@@ -61,5 +59,8 @@
                 <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
             </dd>
         {% endif %}
+
+        <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
+        <dd>{{ document.docstrct | trans }}</dd>
     </dl>
 </section>
