@@ -61,11 +61,5 @@
                 <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
             </dd>
         {% endif %}
-
-
-        {% if document.id_ADBID_s is defined %}
-            <dt>ADBID</dt>
-            <dd>{{ document.id_ADBID_s.0 }}</dd>
-        {% endif %}
     </dl>
 </section>
