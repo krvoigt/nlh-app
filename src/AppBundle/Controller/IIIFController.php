@@ -12,6 +12,10 @@ use Imagine\Image\Point;
 class IIIFController extends Controller
 {
     /**
+     * {scheme}://{server}{/prefix}/{identifier}/{region}/{size}/{rotation}/{quality}.{format}.
+     *
+     * @see http://iiif.io/api/image/2.0/#uri-syntax
+     *
      * @Route("/iiif/{identifier}/{region}/{size}/{rotation}/{quality}.{format}")
      */
     public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
