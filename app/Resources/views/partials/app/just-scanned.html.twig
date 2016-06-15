@@ -1,7 +1,7 @@
 <div class="just-scanned">
     <figure>
         <img src="{{ document.thumbs_url[0] }}" alt="" class="just-scanned_thumb">
-        <figcaption class="just-scanned_title"><a href="{{ path('_detail', {id: document.id}) }}">{{ document.bytitle }}</a></figcaption>
+        <figcaption class="just-scanned_title"><a href="{{ path('_detail', {id: document.id}) }}">{{ document.title | first }}</a></figcaption>
         {% if document.creator is defined %}
             <span class="just-scanned_creator">{{ 'creator' | transchoice(document.creator | length) }}:
                 {% for author in document.creator %}

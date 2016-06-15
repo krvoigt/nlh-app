@@ -1,5 +1,5 @@
 <header class="viewer_header">
-    <h1 class="viewer_title">{{ document.bytitle }}</h1>
+    <h1 class="viewer_title">{{ document.title | first }}</h1>
     <div class="viewer_group">
         {% if document.gdzocr_url is defined %}
             <button class="viewer_control js-toggle-panel" data-target="transcript">{% trans %}Transcript{% endtrans %}</button>

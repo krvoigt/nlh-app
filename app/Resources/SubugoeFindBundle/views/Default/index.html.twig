@@ -23,7 +23,7 @@
                         {% endif %}
                     </div>
                     <div class="resultMetadata">
-                        <h2 class="resultTitle"><a href="{{ path('_detail', {'id': result.fields.id}) }}">{% if result.fields.bytitle is defined %}{{ result.fields.bytitle }}{% else %}{{ result.fields.title.0 }}{% endif %}</a></h2>
+                        <h2 class="resultTitle"><a href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a></h2>
                         <p class="resultParagraph">
                             {% if result.fields.creator is defined %}
                                 {{ 'creator' | transchoice(result.fields.creator | length) }}:

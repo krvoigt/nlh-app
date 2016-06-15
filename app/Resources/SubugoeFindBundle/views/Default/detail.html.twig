@@ -1,6 +1,6 @@
 {% extends 'fixed.html.twig' %}
 
-{% set title = document.bytitle %}
+{% set title = document.title | first %}
 
 {% block title %}{{ title }}{% endblock %}
 
