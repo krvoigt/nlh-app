@@ -47,16 +47,16 @@
             {% endfor %}
         </dd>
 
-        <dt>PURL</dt>
+        <dt>{% trans %}PURL{% endtrans %}</dt>
         <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
 
         {% if document['id_gbv-ppn_s'] is defined %}
-            <dt>gbv-ppn</dt>
+            <dt>{% trans %}gbv-ppn{% endtrans %}</dt>
             <dd>{{ document['id_gbv-ppn_s'][0] }}</dd>
         {% endif %}
 
         {% if document.id_PPNanalog_s is defined %}
-            <dt>PPN (original)</dt>
+            <dt>{% trans %}PPN (original){% endtrans %}</dt>
             <dd>
                 <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
             </dd>
