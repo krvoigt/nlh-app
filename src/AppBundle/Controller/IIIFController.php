@@ -16,7 +16,7 @@ class IIIFController extends Controller
      *
      * @see http://iiif.io/api/image/2.0/#uri-syntax
      *
-     * @Route("/iiif/{identifier}/{region}/{size}/{rotation}/{quality}.{format}")
+     * @Route("/iiif/{identifier}/{region}/{size}/{rotation}/{quality}.{format}", methods={"GET"})
      */
     public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
     {
