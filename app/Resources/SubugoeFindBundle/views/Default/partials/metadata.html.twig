@@ -43,7 +43,7 @@
         <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
         <dd>
             {% for dc in document.dc %}
-                {{ dc | trans }}{% if loop.last %}{% else %}, {% endif %}
+                <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
 
