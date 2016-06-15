@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class IIIFController extends Controller
 {
@@ -20,13 +21,23 @@ class IIIFController extends Controller
      */
     public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
     {
-        $sourceFileBaseUri = 'http://gdz.sub.uni-goettingen.de/tiff/';
-        $sourceFileIdentifier = str_replace(':', '/', $identifier);
-        $sourceFileFormat = 'tif';
-        $sourceFile = $sourceFileBaseUri.$sourceFileIdentifier.'.'.$sourceFileFormat;
-
+        $client = $this->get('guzzle.client.tiff');
         $imagine = $this->get('liip_imagine');
-        $image = $imagine->open($sourceFile);
+
+        if (strpos($identifier, ':')) {
+            $sourceFileIdentifier = str_replace(':', '/', $identifier);
+        } else {
+            throw new NotFoundHttpException(sprintf('Invalid identifier: %s', $identifier));
+        }
+
+        $originalImage = $client->get($sourceFileIdentifier.'.tif');
+
+        try {
+            $image = $imagine->load($originalImage->getBody());
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $identifier));
+        }
+
         $imageOriginalSize = $image->getSize();
         $imageWidth = $imageOriginalSize->getWidth();
         $imageHeight = $imageOriginalSize->getHeight();

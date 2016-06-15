@@ -134,6 +134,8 @@ guzzle:
         base_url: "http://gdz.sub.uni-goettingen.de/mets/"
       fulltext:
         base_url: "http://gdz.sub.uni-goettingen.de/gdzocr/"
+      tiff:
+        base_url: "http://gdz.sub.uni-goettingen.de/tiff/"
 
 liip_imagine:
     resolvers:
