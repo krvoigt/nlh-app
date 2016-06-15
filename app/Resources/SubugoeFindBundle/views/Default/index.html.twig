@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% if search.query is not empty %}
-    {% set title = query %}
+    {% set title = search.query %}
 {% endif %}
 
 {% block findnavigation %}
