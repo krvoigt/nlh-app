@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Solarium\QueryType\Select\Query\FilterQuery;
+use Subugoe\FindBundle\Entity\Search;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,11 +31,11 @@ class CollectionController extends Controller
         $paginator = $this->get('knp_paginator');
         $activeFacets = $request->get('filter');
 
-        $query = $request->get('q') ?: '';
-        $currentPage = (int) $request->get('page') ?: 1;
-
-        $rows = (int) $this->getParameter('results_per_page');
-        $offset = ($currentPage - 1) * $rows;
+        $search = new Search();
+        $search
+            ->setQuery($request->get('q') ?: '')
+            ->setRows((int) $this->getParameter('results_per_page'))
+            ->setCurrentPage((int) $request->get('page') ?: 1);
 
         $select = $client->createSelect();
         $facetSet = $select->getFacetSet();
@@ -56,18 +57,17 @@ class CollectionController extends Controller
                 $client,
                 $select,
             ],
-            $currentPage,
-            $rows
+            $search->getCurrentPage(),
+            $search->getRows()
         );
 
         return $this->render('@SubugoeFind/Default/collections.html.twig', [
             'content' => $this->getCollectionContent($id),
             'pagination' => $pagination,
-            'query' => $query,
+            'search' => $search,
             'facets' => $results->getFacetSet()->getFacets(),
             'facetCounter' => $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets),
             'queryParams' => $request->get('filter') ?: [],
-            'offset' => $offset,
         ]);
     }
 

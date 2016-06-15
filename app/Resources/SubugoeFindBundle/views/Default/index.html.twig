@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% if query is not empty %}
+{% if search.query is not empty %}
     {% set title = query %}
 {% endif %}
 
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    <ol class="resultList" start="{{ offset + 1 }}">
+    <ol class="resultList" start="{{ search.offset + 1 }}">
         {% for result in pagination %}
             <li class="resultItem">
                 <article class="resultWrap">
