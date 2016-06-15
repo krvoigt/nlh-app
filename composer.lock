@@ -2069,12 +2069,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/subugoe/SubugoeFindBundle.git",
-                "reference": "cfa9184998ff1b3c55fb90a597ff09f32046bce8"
+                "reference": "acf0e4528f7d9c25b33db3c760be04194d2bc3c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/cfa9184998ff1b3c55fb90a597ff09f32046bce8",
-                "reference": "cfa9184998ff1b3c55fb90a597ff09f32046bce8",
+                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/acf0e4528f7d9c25b33db3c760be04194d2bc3c1",
+                "reference": "acf0e4528f7d9c25b33db3c760be04194d2bc3c1",
                 "shasum": ""
             },
             "type": "library",
@@ -2097,7 +2097,7 @@
                 "source": "https://github.com/subugoe/SubugoeFindBundle/tree/master",
                 "issues": "https://github.com/subugoe/SubugoeFindBundle/issues"
             },
-            "time": "2016-06-13 13:17:53"
+            "time": "2016-06-15 07:02:49"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2555,16 +2555,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "e71d4713c506686e6cf027af44c97ee5d94c7db4"
+                "reference": "6e1b1497276f8477e9d89b1b6398cf7c7dcebd7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/e71d4713c506686e6cf027af44c97ee5d94c7db4",
-                "reference": "e71d4713c506686e6cf027af44c97ee5d94c7db4",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/6e1b1497276f8477e9d89b1b6398cf7c7dcebd7d",
+                "reference": "6e1b1497276f8477e9d89b1b6398cf7c7dcebd7d",
                 "shasum": ""
             },
             "require": {
@@ -2686,7 +2686,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-05-30 07:24:54"
+            "time": "2016-06-15 05:59:11"
         },
         {
             "name": "twig/twig",
@@ -4023,7 +4023,7 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
