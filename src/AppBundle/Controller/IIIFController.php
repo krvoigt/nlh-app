@@ -48,11 +48,22 @@ class IIIFController extends Controller
             $this->getRegion(trim($region), $sourceImageWidth, $sourceImageHeight, $image);
         }
 
+        // Apply IIIF size function
+        if ((trim($size) !== 'full') && (trim($size) !== 'max')) {
+            $this->getSize($size, $image);
+        }
+
         return new BinaryFileResponse($image->show($format));
     }
 
     /*
      * Apply the requested image region as per IIIF-Image API.
+     * Parameters may be
+     *      - full
+     *      - x,y,w,h
+     *      - pct:x,y,w,h
+     *
+     * @see http://iiif.io/api/image/2.0/#region
      *
      * @param string $region  The requested image region
      * @param int $sourceImageWidth The source image width
@@ -113,5 +124,65 @@ class IIIFController extends Controller
         }
 
         $image->crop(new Point($x, $y), new Box($w, $h));
+    }
+
+    /*
+     * Apply the requested image size as per IIIF-Image API
+     * Size parameter may be:
+     *      - full
+     *      - w,
+     *      - ,h
+     *      - pct:n
+     *      - w,h
+     *      - !w,h
+     *
+     * @see http://iiif.io/api/image/2.0/#size
+     *
+     * @param string $size The requested image size
+     * @param ImageInterface $image The image object
+     *
+     * @throws BadRequestHttpException if wrong size syntax given
+     */
+    protected function getSize($size, ImageInterface $image)
+    {
+        $rawSize = $size;
+        if (strstr($size, '!')) {
+            $size = str_replace('!', '', $size);
+        }
+        $regionWidth = $image->getSize()->getWidth();
+        $regionHeight = $image->getSize()->getHeight();
+        if (!strstr($size, 'pct')) {
+            $requestedSize = explode(',', $size);
+            if (count($requestedSize) != 2) {
+                throw new BadRequestHttpException(sprintf('Bad Request: Size syntax %s is not valid.', $size));
+            }
+            $width = $requestedSize[0];
+            $height = $requestedSize[1];
+            if (strstr($rawSize, '!')) {
+                $w = (($regionWidth / $regionHeight) * $height);
+                $h = (($regionHeight / $regionWidth) * $width);
+            } else {
+                if (!empty($width)) {
+                    $w = $width;
+                } else {
+                    $w = (($regionWidth / $regionHeight) * $height);
+                }
+                if (!empty($height)) {
+                    $h = $height;
+                } else {
+                    $h = (($regionHeight / $regionWidth) * $width);
+                }
+            }
+            $image->resize(new Box($w, $h));
+        } elseif (strstr($size, 'pct')) {
+            $requestedPercentage = explode(':', $size)[1];
+            if (is_numeric($requestedPercentage)) {
+                $w = (($regionWidth * $requestedPercentage) / 100);
+                $h = (($regionHeight * $requestedPercentage) / 100);
+                $image->resize(new Box($w, $h));
+            } else {
+                throw new BadRequestHttpException(sprintf('Bad Request: Size syntax %s is not valid.', $size));
+            }
+        }
     }
 }
