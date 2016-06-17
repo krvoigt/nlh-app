@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Imagine\Image\ImageInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -39,36 +40,28 @@ class IIIFController extends Controller
         }
 
         $imageOriginalSize = $image->getSize();
-        $imageWidth = $imageOriginalSize->getWidth();
-        $imageHeight = $imageOriginalSize->getHeight();
+        $sourceImageWidth = $imageOriginalSize->getWidth();
+        $sourceImageHeight = $imageOriginalSize->getHeight();
 
+        // Apply IIIF region function
         if (isset($region) && $region !== 'full') {
-            list($x, $y, $w, $h) = $this->getImageCoordinates($region, $imageWidth, $imageHeight);
-            $image->crop(new Point($x, $y), new Box($w, $h));
-        }
-
-        if (isset($rotation) && !empty($rotation)) {
-            $image->rotate(str_replace('!', '', $rotation));
-            if (strstr($rotation, '!')) {
-                $image->flipHorizontally();
-            }
+            $this->getRegion(trim($region), $sourceImageWidth, $sourceImageHeight, $image);
         }
 
         return new BinaryFileResponse($image->show($format));
     }
 
     /*
-     * Returns the coordinates of the requested image region.
+     * Apply the requested image region as per IIIF-Image API.
      *
-     * @param string $region  The required image region to be returned
-     * @param int $imageWidth The image width
-     * @param int $imageHeight The image height
-     *
-     * @return Array An array consisting of coordinates of the requeseted image region
+     * @param string $region  The requested image region
+     * @param int $sourceImageWidth The source image width
+     * @param int $sourceImageHeight The source image height
+     * @param ImageInterface $image The image object
      *
      * @throws BadRequestHttpException if a region parameter missing or parameter out of image bound
      */
-    protected function getImageCoordinates($region, $imageWidth, $imageHeight)
+    protected function getRegion($region, $sourceImageWidth, $sourceImageHeight, ImageInterface $image)
     {
         if ($region === 'square') {
             $regionSort = 'squareBased';
@@ -80,8 +73,8 @@ class IIIFController extends Controller
 
         switch ($regionSort) {
             case 'squareBased':
-                $calculateShorterDimension = $imageWidth < $imageHeight ? $imageWidth : $imageHeight;
-                $calculateLongerDimension = $imageWidth < $imageHeight ? $imageHeight : $imageWidth;
+                $calculateShorterDimension = $sourceImageWidth < $sourceImageHeight ? $sourceImageWidth : $sourceImageHeight;
+                $calculateLongerDimension = $sourceImageWidth < $sourceImageHeight ? $sourceImageHeight : $sourceImageWidth;
                 $imageLeftRightMargin = (($calculateLongerDimension - $calculateShorterDimension) / 2);
                 $x = 0;
                 $y = $imageLeftRightMargin;
@@ -107,13 +100,18 @@ class IIIFController extends Controller
                         (isset($imageCoordinates[1]) && $imageCoordinates[1] >= 100)) {
                     throw new BadRequestHttpException('Bad Request: Crop coordinates are out of bound.');
                 }
-                $x = ceil(($imageCoordinates[0] / 100) * $imageWidth);
-                $y = ceil(($imageCoordinates[1] / 100) * $imageHeight);
-                $w = ceil(($imageCoordinates[2] / 100) * $imageWidth);
-                $h = ceil(($imageCoordinates[3] / 100) * $imageHeight);
+                $x = ceil(($imageCoordinates[0] / 100) * $sourceImageWidth);
+                $y = ceil(($imageCoordinates[1] / 100) * $sourceImageHeight);
+                $w = ceil(($imageCoordinates[2] / 100) * $sourceImageWidth);
+                $h = ceil(($imageCoordinates[3] / 100) * $sourceImageHeight);
                 break;
+            default:
+                $x = 0;
+                $y = 0;
+                $w = $sourceImageWidth;
+                $h = $sourceImageHeight;
         }
 
-        return [$x, $y, $w, $h];
+        $image->crop(new Point($x, $y), new Box($w, $h));
     }
 }
