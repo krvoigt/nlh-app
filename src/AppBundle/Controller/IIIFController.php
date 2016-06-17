@@ -53,12 +53,17 @@ class IIIFController extends Controller
             $this->getSize($size, $image);
         }
 
+        // Apply IIIF rotation function
+        if (isset($rotation) && !empty($rotation)) {
+            $this->getRotation($rotation, $image);
+        }
+
         return new BinaryFileResponse($image->show($format));
     }
 
     /*
      * Apply the requested image region as per IIIF-Image API.
-     * Parameters may be
+     * Region parameters may be:
      *      - full
      *      - x,y,w,h
      *      - pct:x,y,w,h
@@ -128,7 +133,7 @@ class IIIFController extends Controller
 
     /*
      * Apply the requested image size as per IIIF-Image API
-     * Size parameter may be:
+     * Size parameters may be:
      *      - full
      *      - w,
      *      - ,h
@@ -182,6 +187,34 @@ class IIIFController extends Controller
                 $image->resize(new Box($w, $h));
             } else {
                 throw new BadRequestHttpException(sprintf('Bad Request: Size syntax %s is not valid.', $size));
+            }
+        }
+    }
+
+    /*
+     * Apply the requested image rotation as per IIIF-Image API
+     * Rotation parameters may be:
+     *      - n
+     *      - !n
+     *
+     * @see http://iiif.io/api/image/2.0/##rotation
+     *
+     * @param string $rotation The requested image rotation
+     * @param ImageInterface $image The image object
+     *
+     * @throws BadRequestHttpException if wrong rotation parameters provided
+     */
+    protected function getRotation($rotation, ImageInterface $image)
+    {
+        if (isset($rotation) && !empty($rotation)) {
+            $rotationDegree = str_replace('!', '', $rotation);
+            if (intval($rotationDegree) <= 360) {
+                if (strstr($rotation, '!')) {
+                    $image->flipVertically();
+                }
+                $image->rotate(str_replace('!', '', $rotation));
+            } else {
+                throw new BadRequestHttpException(sprintf('Bad Request: Rotation argument %s is not between 0 and 360.', $rotationDegree));
             }
         }
     }
