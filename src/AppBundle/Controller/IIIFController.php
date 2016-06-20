@@ -37,8 +37,6 @@ class IIIFController extends Controller
             return new BinaryFileResponse($cachedFile);
         }
 
-        $this->get('logger')->log(Logger::INFO, $cachedFile);
-
         $client = $this->get('guzzle.client.tiff');
         $imagine = $this->get('liip_imagine');
 
