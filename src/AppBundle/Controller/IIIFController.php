@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use Monolog\Logger;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -18,10 +20,25 @@ class IIIFController extends Controller
      *
      * @see http://iiif.io/api/image/2.0/#uri-syntax
      *
-     * @Route("/image/{identifier}/{region}/{size}/{rotation}/{quality}.{format}", methods={"GET"})
+     * @Route("/image/{identifier}/{region}/{size}/{rotation}/{quality}.{format}", name="_image", methods={"GET"})
      */
-    public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
+    public function indexAction($identifier, $region = 'full', $size, $rotation = 0, $quality = 'default', $format = 'jpg')
     {
+        $hash = sha1(serialize(func_get_args()));
+        $cachedFile = $this->getParameter('kernel.cache_dir').'/images/'.$hash.'.'.$format;
+
+        $fs = new Filesystem();
+
+        if (!$fs->exists(dirname($cachedFile))) {
+            $fs->mkdir(dirname($cachedFile));
+        }
+
+        if ($fs->exists($cachedFile)) {
+            return new BinaryFileResponse($cachedFile);
+        }
+
+        $this->get('logger')->log(Logger::INFO, $cachedFile);
+
         $client = $this->get('guzzle.client.tiff');
         $imagine = $this->get('liip_imagine');
 
@@ -62,6 +79,7 @@ class IIIFController extends Controller
         if ((trim($quality) !== 'default') && (trim($quality) !== 'color')) {
             $this->getQuality($quality, $image);
         }
+        $image->save($cachedFile, ['format' => $format]);
 
         return new BinaryFileResponse($image->show($format));
     }
