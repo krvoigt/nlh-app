@@ -76,6 +76,8 @@ class IIIFController extends Controller
         if ((trim($quality) !== 'default') && (trim($quality) !== 'color')) {
             $this->getQuality($quality, $image);
         }
+        $image->strip();
+
         $image->save($cachedFile, ['format' => $format]);
 
         return new BinaryFileResponse($image->show($format));
