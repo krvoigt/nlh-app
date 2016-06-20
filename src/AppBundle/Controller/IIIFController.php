@@ -2,14 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use Imagine\Image\ImageInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Imagine\Image\Box;
 use Imagine\Image\Point;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Imagine\Imagick\Image;
 
 class IIIFController extends Controller
 {
@@ -58,6 +58,11 @@ class IIIFController extends Controller
             $this->getRotation($rotation, $image);
         }
 
+        // Apply IIIF quality function
+        if ((trim($quality) !== 'default') && (trim($quality) !== 'color')) {
+            $this->getQuality($quality, $image);
+        }
+
         return new BinaryFileResponse($image->show($format));
     }
 
@@ -73,11 +78,11 @@ class IIIFController extends Controller
      * @param string $region  The requested image region
      * @param int $sourceImageWidth The source image width
      * @param int $sourceImageHeight The source image height
-     * @param ImageInterface $image The image object
+     * @param Image $image The image object
      *
      * @throws BadRequestHttpException if a region parameter missing or parameter out of image bound
      */
-    protected function getRegion($region, $sourceImageWidth, $sourceImageHeight, ImageInterface $image)
+    protected function getRegion($region, $sourceImageWidth, $sourceImageHeight, Image $image)
     {
         if ($region === 'square') {
             $regionSort = 'squareBased';
@@ -144,11 +149,11 @@ class IIIFController extends Controller
      * @see http://iiif.io/api/image/2.0/#size
      *
      * @param string $size The requested image size
-     * @param ImageInterface $image The image object
+     * @param Image $image The image object
      *
      * @throws BadRequestHttpException if wrong size syntax given
      */
-    protected function getSize($size, ImageInterface $image)
+    protected function getSize($size, Image $image)
     {
         $rawSize = $size;
         if (strstr($size, '!')) {
@@ -200,11 +205,11 @@ class IIIFController extends Controller
      * @see http://iiif.io/api/image/2.0/##rotation
      *
      * @param string $rotation The requested image rotation
-     * @param ImageInterface $image The image object
+     * @param Image $image The image object
      *
      * @throws BadRequestHttpException if wrong rotation parameters provided
      */
-    protected function getRotation($rotation, ImageInterface $image)
+    protected function getRotation($rotation, Image $image)
     {
         if (isset($rotation) && !empty($rotation)) {
             $rotationDegree = str_replace('!', '', $rotation);
@@ -216,6 +221,39 @@ class IIIFController extends Controller
             } else {
                 throw new BadRequestHttpException(sprintf('Bad Request: Rotation argument %s is not between 0 and 360.', $rotationDegree));
             }
+        }
+    }
+
+    /*
+     * Apply the requested image quality as per IIIF-Image API
+     *
+     * Quality parameters may be:
+     *      - color
+     *      - gray
+     *      - bitonal
+     *      - default
+     *
+     * @see http://iiif.io/api/image/2.0/##quality
+     *
+     * @param string $quality The requested image quality
+     * @param Image $image The image object
+     *
+     * @throws BadRequestHttpException if wrong quality parameters provided
+     */
+    protected function getQuality($quality, Image $image)
+    {
+        switch ($quality) {
+            case 'gray':
+                $image->effects()->grayscale();
+                break;
+            case 'bitonal':
+                $max = $image->getImagick()->getQuantumRange();
+                $max = $max['quantumRangeLong'];
+                $imageClearnessFactor = 0.20;
+                $image->getImagick()->thresholdImage($max * $imageClearnessFactor);
+                break;
+            default:
+                throw new BadRequestHttpException(sprintf('Bad Request: %s is not a supported quality.', $quality));
         }
     }
 }
