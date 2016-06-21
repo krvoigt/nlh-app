@@ -80,7 +80,7 @@ class IIIFController extends Controller
 
         $image->save($cachedFile, ['format' => $format]);
 
-        return new BinaryFileResponse($image->show($format));
+        return new BinaryFileResponse($cachedFile);
     }
 
     /*
