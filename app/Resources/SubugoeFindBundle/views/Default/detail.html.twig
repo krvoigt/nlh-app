@@ -6,10 +6,8 @@
 
 {% block content %}
 
-    {% set images = [document.thumbs_url] | merge([document.min_url])  %}
-
     {# Viewer settings #}
-    {% set pageCount = images.0|length %}
+    {% set pageCount = document.presentation_url.0|length %}
 
     {% set showDoublePage = app.request.get('showDoublePage') == 'true' %}
     {% set page = app.request.get('page')|number_format %}

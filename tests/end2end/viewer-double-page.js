@@ -27,8 +27,8 @@ casper.test.begin('Viewer: Double page', function suite(test) {
             casper.getElementAttribute('.viewer_image > img:nth-child(2)', 'src'),
         ];
         var expectedImageSrcs = [
-            config.imageBase + '/' + config.docId + '/500/0/00000002.jpg',
-            config.imageBase + '/' + config.docId + '/500/0/00000003.jpg',
+            '/image/' + config.docId + ':00000002/full/1024,',
+            '/image/' + config.docId + ':00000003/full/1024,',
         ];
         test.assertEquals(actualImageSrcs, expectedImageSrcs, 'The scans of pages 2 and 3 are being displayed');
     });

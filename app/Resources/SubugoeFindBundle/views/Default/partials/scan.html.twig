@@ -30,7 +30,7 @@
                 <label class="sr-only double-page" for="viewer-page-select-2">{% trans %}Current pages{% endtrans %}</label>
                 <select class="viewer_control double-page js-select-page" name="page" id="viewer-page-select-2">
                     <option {{ page == 1 ? 'selected' }}>1</option>
-                    {% for image in images.0 %}
+                    {% for image in document.presentation_url %}
                         {% if loop.index > 1 and loop.index % 2 == 1 %}
                             <option {{ page == loop.index - 1 or page == loop.index ? 'selected' }} value="{{ loop.index }}">{{ loop.index - 1 }} | {{ loop.index }}</option>
                         {% endif %}
@@ -42,7 +42,7 @@
             {% else %}
                 <label class="sr-only single-page" for="viewer-page-select">{% trans %}Current page{% endtrans %}</label>
                 <select class="viewer_control single-page js-select-page" name="page" id="viewer-page-select">
-                    {% for image in images.0 %}
+                    {% for image in document.presentation_url %}
                         <option {{ loop.index == page ? 'selected' }}>{{ loop.index }}</option>
                     {% endfor %}
                 </select>
@@ -85,8 +85,8 @@
     </div>
     <div class="viewer_image {{ showDoublePage ? '-double' }}" id="viewer_scan">
         {% if secondPage %}
-            <img src="{{ images.1[page - 2] }}" alt="">
+            <img src="{{ path('_image', {'format': 'jpg', 'identifier': (document.presentation_url[page - 2] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '1024,', 'rotation': 0, 'quality': 'default'}) }}" alt="">
         {% endif %}
-        <img src="{{ images.1[page - 1] }}" alt="">
+        <img src="{{ path('_image', {'format': 'jpg', 'identifier': (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '1024,', 'rotation': 0, 'quality': 'default'}) }}" alt="">
     </div>
 </section>
