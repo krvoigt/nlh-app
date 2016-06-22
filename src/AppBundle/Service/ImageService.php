@@ -88,7 +88,7 @@ class ImageService
 
         $image->crop(new Point($x, $y), new Box($w, $h));
 
-        return $this;
+        return $image;
     }
 
     /*
@@ -154,7 +154,7 @@ class ImageService
             }
         }
 
-        return $this;
+        return $image;
     }
 
     /*
@@ -184,7 +184,7 @@ class ImageService
             }
         }
 
-        return $this;
+        return $image;
     }
 
     /*
@@ -223,6 +223,6 @@ class ImageService
                 throw new BadRequestHttpException(sprintf('Bad Request: %s is not a supported quality.', $quality));
         }
 
-        return $this;
+        return $image;
     }
 }

@@ -71,11 +71,10 @@ class IIIFController extends Controller
             throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
         }
 
-        $imageService
-            ->getRegion($imageEntity->getRegion(), $image)
-            ->getSize($imageEntity->getSize(), $image)
-            ->getRotation($imageEntity->getRotation(), $image)
-            ->getQuality($imageEntity->getQuality(), $image);
+        $imageService->getRegion($imageEntity->getRegion(), $image);
+        $imageService->getSize($imageEntity->getSize(), $image);
+        $imageService->getRotation($imageEntity->getRotation(), $image);
+        $imageService->getQuality($imageEntity->getQuality(), $image);
 
         $image
             ->strip()
