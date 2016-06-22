@@ -9,3 +9,6 @@ services:
 
   mets_service:
     class: AppBundle\Service\MetsService
+
+  image_service:
+    class: AppBundle\Service\ImageService
