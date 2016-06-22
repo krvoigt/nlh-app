@@ -6,7 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class IIIFController extends Controller
@@ -32,13 +32,24 @@ class IIIFController extends Controller
         $errors = $this->get('validator')->validate($imageEntity);
 
         if (count($errors) > 0) {
-            $response = $errors->get(0)->getMessage();
+            $errorMessages = [];
 
-            return new Response($response);
+            for ($i = 0; $i < count($errorMessages); ++$i) {
+                $errorMessages[] = $errors->get($i)->getMessage();
+            }
+
+            throw new BadRequestHttpException(implode('. ', $errorMessages));
         }
 
         $hash = sha1(serialize(func_get_args()));
-        $cachedFile = vsprintf('%s/images/%s.%s', [$this->getParameter('kernel.cache_dir'), $hash, $imageEntity->getFormat()]);
+        $cachedFile = vsprintf(
+            '%s/images/%s.%s',
+            [
+                $this->getParameter('kernel.cache_dir'),
+                $hash,
+                $imageEntity->getFormat(),
+            ]
+        );
 
         $this->createCacheDirectory($cachedFile);
 
@@ -60,15 +71,16 @@ class IIIFController extends Controller
             throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
         }
 
-        $imageService->getRegion($imageEntity->getRegion(), $image->getSize()->getWidth(), $image->getSize()->getHeight(), $image);
-        $imageService->getSize($size, $image);
-        $imageService->getRotation($imageEntity->getRotation(), $image);
-        $imageService->getQuality($quality, $image);
+        $imageService
+            ->getRegion($imageEntity->getRegion(), $image)
+            ->getSize($imageEntity->getSize(), $image)
+            ->getRotation($imageEntity->getRotation(), $image)
+            ->getQuality($imageEntity->getQuality(), $image);
 
         $image
             ->strip()
             ->save($cachedFile,
-                ['format' => $format]
+                ['format' => $imageEntity->getFormat()]
             );
 
         return new BinaryFileResponse($cachedFile);

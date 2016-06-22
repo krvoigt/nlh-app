@@ -12,7 +12,7 @@ class Image
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Regex("/^\w+:\w+/", message="Invalid identifier format.")
+     * @Assert\Regex(pattern="/^\w+:\w+/", message="Invalid identifier format.")
      */
     protected $identifier;
 
@@ -28,6 +28,7 @@ class Image
 
     /**
      * @var string|int
+     * @Assert\Regex(pattern="/^(!)?(-)?[0-9]{1,3}$/", message="Invalid rotation format")
      */
     protected $rotation = 0;
 

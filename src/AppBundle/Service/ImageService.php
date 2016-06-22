@@ -22,19 +22,20 @@ class ImageService
      * @see http://iiif.io/api/image/2.0/#region
      *
      * @param string $region  The requested image region
-     * @param int $sourceImageWidth The source image width
-     * @param int $sourceImageHeight The source image height
      * @param Image $image The image object
      *
      * @throws BadRequestHttpException if a region parameter missing or parameter out of image bound
      */
-    public function getRegion($region, $sourceImageWidth, $sourceImageHeight, Image $image)
+    public function getRegion($region, Image $image)
     {
         $region = trim($region);
 
         if ($region === 'full') {
             return $image;
         }
+
+        $sourceImageWidth = $image->getSize()->getWidth();
+        $sourceImageHeight = $image->getSize()->getHeight();
 
         if ($region === 'square') {
             $regionSort = 'squareBased';
@@ -86,6 +87,8 @@ class ImageService
         }
 
         $image->crop(new Point($x, $y), new Box($w, $h));
+
+        return $this;
     }
 
     /*
@@ -150,6 +153,8 @@ class ImageService
                 throw new BadRequestHttpException(sprintf('Bad Request: Size syntax %s is not valid.', $size));
             }
         }
+
+        return $this;
     }
 
     /*
@@ -178,6 +183,8 @@ class ImageService
                 throw new BadRequestHttpException(sprintf('Bad Request: Rotation argument %s is not between 0 and 360.', $rotationDegree));
             }
         }
+
+        return $this;
     }
 
     /*
@@ -215,5 +222,7 @@ class ImageService
             default:
                 throw new BadRequestHttpException(sprintf('Bad Request: %s is not a supported quality.', $quality));
         }
+
+        return $this;
     }
 }
