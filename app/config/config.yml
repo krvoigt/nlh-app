@@ -100,7 +100,7 @@ nelmio_solarium:
             endpoints: [default]
 
 subugoe_find:
-    default_query: "ismets:true"
+    default_query: "ismets:true AND iswork:true"
     default_sort: "datemodified desc"
     feed_sort: "dateindexed DESC"
     feed_rows: 15
