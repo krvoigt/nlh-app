@@ -6,7 +6,8 @@
     font-size: $font-size;
     line-height: $line-height;
     margin: 0;
-    min-width: ($grid * 1.5);
+    min-height: $grid * 1.5;
+    min-width: $grid * 1.5;
     padding: ($grid / 4) .5em;
     text-align: center;
     text-decoration: none;
