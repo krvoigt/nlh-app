@@ -5,6 +5,10 @@
     @include respond-to(large) {
         margin: 0 auto;
     }
+
+    .site.-fixed & {
+        max-width: none;
+    }
 }
 
 .header {
