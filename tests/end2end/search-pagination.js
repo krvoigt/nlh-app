@@ -14,28 +14,28 @@ casper.test.begin('Search: Pagination', function suite(test) {
 
     casper.then(function () {
         this.clickLabel('Zur nächsten Seite');
-        this.waitForSelector('.pagination_item.-current:nth-child(4)');
+        this.waitForSelector(current + ':nth-child(4)');
     }).then(function () {
         test.assertSelectorHasLabel(current, 'Aktuelle Seite: 2', 'Page 2 should be highlighted');
     });
 
     casper.then(function () {
         this.clickLabel('Zur letzten Seite');
-        this.waitForSelector('.pagination_item.-current:nth-last-child(3)');
+        this.waitForSelector(current + ':nth-last-child(3)');
     }).then(function () {
         test.assert(true, 'The last page should be highlighted');
     });
 
     casper.then(function () {
         this.clickLabel('Zur vorigen Seite');
-        this.waitForSelector('.pagination_item.-current:nth-last-child(4)');
+        this.waitForSelector(current + ':nth-last-child(4)');
     }).then(function () {
         test.assert(true, 'The second-to-last page should be highlighted');
     });
 
     casper.then(function () {
         this.clickLabel('Zur ersten Seite');
-        this.waitForSelector('.pagination_item.-current:nth-child(3)');
+        this.waitForSelector(current + ':nth-child(3)');
     }).then(function () {
         test.assertSelectorHasLabel(current, 'Aktuelle Seite: 1', 'Page 1 should be highlighted again');
     });
