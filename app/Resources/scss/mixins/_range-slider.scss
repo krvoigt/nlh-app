@@ -5,6 +5,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
     &::-moz-range-track {
         background: #aaa;
         border-radius: $br;
@@ -12,6 +13,7 @@
         cursor: pointer;
         height: ($grid / 4);
     }
+
     &::-webkit-slider-runnable-track {
         background: #aaa;
         border-radius: $br;
@@ -19,15 +21,17 @@
         cursor: pointer;
         height: ($grid / 4);
     }
+
     &::-moz-range-thumb {
-        background: linear-gradient(to bottom, tint($text-color, 10), shade($text-color, 10));;
+        background: linear-gradient(to bottom, tint($text-color, 10), shade($text-color, 10));
         border-radius: $br;
         cursor: pointer;
         height: $grid;
         width: ($grid / 2);
     }
+
     &::-webkit-slider-thumb {
-        background: linear-gradient(to bottom, tint($text-color, 10), shade($text-color, 10));;
+        background: linear-gradient(to bottom, tint($text-color, 10), shade($text-color, 10));
         border-radius: $br;
         cursor: pointer;
         height: $grid;
