@@ -12,7 +12,7 @@ class Image
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Regex(pattern="/^\w+:\w+/", message="Invalid identifier format.")
+     * @Assert\Regex(pattern="/^[(\w+:\w+)|(\w)]/", message="Invalid identifier format.")
      */
     protected $identifier;
 
@@ -50,7 +50,11 @@ class Image
      */
     public function getIdentifier()
     {
-        $identifier = str_replace(':', '/', $this->identifier);
+        if (preg_match('/\w:\w/', $this->identifier)) {
+            $identifier = str_replace(':', '/', $this->identifier);
+        } else {
+            $identifier = $this->identifier.'/'.str_pad('1', 8, 0, STR_PAD_LEFT);
+        }
 
         return $identifier;
     }
