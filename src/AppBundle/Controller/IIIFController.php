@@ -8,6 +8,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class IIIFController extends Controller
 {
@@ -31,15 +32,7 @@ class IIIFController extends Controller
 
         $errors = $this->get('validator')->validate($imageEntity);
 
-        if (count($errors) > 0) {
-            $errorMessages = [];
-
-            for ($i = 0; $i < count($errorMessages); ++$i) {
-                $errorMessages[] = $errors->get($i)->getMessage();
-            }
-
-            throw new BadRequestHttpException(implode('. ', $errorMessages));
-        }
+        $this->processErrors($errors);
 
         $hash = sha1(serialize(func_get_args()));
         $cachedFile = vsprintf(
@@ -94,6 +87,24 @@ class IIIFController extends Controller
 
         if (!$fs->exists(dirname($file))) {
             $fs->mkdir(dirname($file));
+        }
+    }
+
+    /**
+     * @param ConstraintViolationListInterface $errors
+     */
+    protected function processErrors($errors)
+    {
+        $errorCounter = count($errors);
+
+        if ($errorCounter > 0) {
+            $errorMessages = [];
+
+            for ($i = 0; $i < $errorCounter; ++$i) {
+                $errorMessages[] = $errors->get($i)->getMessage();
+            }
+
+            throw new BadRequestHttpException(implode('. ', $errorMessages));
         }
     }
 }

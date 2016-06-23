@@ -163,7 +163,7 @@ class ImageService
      *      - n
      *      - !n
      *
-     * @see http://iiif.io/api/image/2.0/##rotation
+     * @see http://iiif.io/api/image/2.0/#rotation
      *
      * @param string $rotation The requested image rotation
      * @param Image $image The image object
@@ -196,7 +196,7 @@ class ImageService
      *      - bitonal
      *      - default
      *
-     * @see http://iiif.io/api/image/2.0/##quality
+     * @see http://iiif.io/api/image/2.0/#quality
      *
      * @param string $quality The requested image quality
      * @param Image $image The image object
