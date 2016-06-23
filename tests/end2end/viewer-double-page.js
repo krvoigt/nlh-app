@@ -13,7 +13,7 @@ casper.test.begin('Viewer: Double page', function suite(test) {
     });
 
     casper.then(function () {
-        this.click('.coverflow_link:nth-child(2)');
+        this.click('.coverflow_item:nth-child(2) > .coverflow_link');
         this.waitFor(function check() {
             return (this.getCurrentUrl() === config.base + '/id/' + config.docId + '?page=2&showDoublePage=true');
         });
@@ -27,8 +27,8 @@ casper.test.begin('Viewer: Double page', function suite(test) {
             casper.getElementAttribute('.viewer_image > img:nth-child(2)', 'src'),
         ];
         var expectedImageSrcs = [
-            '/image/' + config.docId + ':00000002/full/1024,',
-            '/image/' + config.docId + ':00000003/full/1024,',
+            '/image/' + config.docId + ':00000002/full/1024,/0/default.jpg',
+            '/image/' + config.docId + ':00000003/full/1024,/0/default.jpg',
         ];
         test.assertEquals(actualImageSrcs, expectedImageSrcs, 'The scans of pages 2 and 3 are being displayed');
     });
