@@ -17,7 +17,7 @@
     @if $modifier == light {
         color: $text-color;
         background: linear-gradient(to bottom, tint(#e7e7e7, 10), shade(#e7e7e7, 10));
-        text-shadow: 0 1px rgba(#fff, .9);
+        text-shadow: 0 1px $light;
 
         @include hover {
             background: linear-gradient(to bottom, tint(#e7e7e7, 30), tint(#e7e7e7, 10));

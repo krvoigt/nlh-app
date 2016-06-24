@@ -10,6 +10,11 @@
     top: 0;
 }
 
+.viewer_footer {
+    background: $black;
+    min-height: $grid;
+}
+
 .viewer_header {
     @include separator(1, 0);
     background: $header-bg;
