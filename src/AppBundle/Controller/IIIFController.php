@@ -36,9 +36,9 @@ class IIIFController extends Controller
 
         $hash = sha1(serialize(func_get_args()));
         $cachedFile = vsprintf(
-            '%s/images/%s.%s',
+            '%s/%s.%s',
             [
-                $this->getParameter('kernel.cache_dir'),
+                $this->getParameter('image_cache'),
                 $hash,
                 $imageEntity->getFormat(),
             ]

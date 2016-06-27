@@ -7,6 +7,9 @@
 !/var/cache
 /var/cache/*
 !/var/cache/.gitkeep
+!/var/images/
+/var/images/*
+!/var/images/.gitkeep
 !/var/logs
 /var/logs/*
 !var/logs/.gitkeep
