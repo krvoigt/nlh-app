@@ -29,10 +29,6 @@
     position: absolute;
     white-space: nowrap;
 
-    img + img {
-        margin-left: ($grid / 2);
-    }
-
     &.-double img {
         display: inline-block !important;
         vertical-align: top;
@@ -167,6 +163,7 @@
 }
 
 .viewer_metadata {
+    min-width: 20em;
     overflow-y: auto;
     padding: ($grid / 2);
 
@@ -187,10 +184,11 @@
 }
 
 .viewer_panel {
+    background: $white;
     border-left: $border-width solid $border-color;
     display: flex;
     position: relative;
-    transition: width .2s;
+    transition: visibility .2s, width .2s;
     width: 20em;
 
     &:first-child {
@@ -200,6 +198,7 @@
     &.-hidden {
         border: 0;
         overflow: hidden;
+        visibility: hidden; // Prevent element from being tab-selectable
         width: 0 !important;
     }
 
@@ -234,7 +233,7 @@
 }
 
 .viewer_toc {
-    flex: 1;
+    min-width: 20em;
     overflow-y: auto;
     padding: ($grid / 2);
 
@@ -252,6 +251,7 @@
 }
 
 .viewer_transcript {
+    min-width: 20em;
     overflow-y: auto;
     padding: ($grid / 2);
 }
