@@ -10,5 +10,7 @@
 @import 'util/mod';
 @import 'util/base';
 
+@import '../../../node_modules/select2/src/scss/core';
+
 @import 'extends/*';
 @import 'sections/*';

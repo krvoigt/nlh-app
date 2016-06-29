@@ -24,11 +24,14 @@
             </a>
             <button
                 class="viewer_control -previous-page js-previous-page"
-                title="{% trans %}Previous page{% endtrans %}" {{ page == 1 ? 'disabled' }}><span class="sr-only">{% trans %}Previous page{% endtrans %}</span></button>
+                title="{% trans %}Previous page{% endtrans %}" {{ page == 1 ? 'disabled' }}
+            >
+                <span class="sr-only">{% trans %}Previous page{% endtrans %}</span>
+            </button>
 
             {% if showDoublePage %}
                 <label class="sr-only double-page" for="viewer-page-select-2">{% trans %}Current pages{% endtrans %}</label>
-                <select class="viewer_control double-page js-select-page" name="page" id="viewer-page-select-2">
+                <select class="viewer_control -page-select double-page js-select-page" name="page" id="viewer-page-select-2">
                     <option {{ page == 1 ? 'selected' }}>1</option>
                     {% for image in document.presentation_url %}
                         {% if loop.index > 1 and loop.index % 2 == 1 %}
@@ -41,7 +44,7 @@
                 </select>
             {% else %}
                 <label class="sr-only single-page" for="viewer-page-select">{% trans %}Current page{% endtrans %}</label>
-                <select class="viewer_control single-page js-select-page" name="page" id="viewer-page-select">
+                <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
                     {% for image in document.presentation_url %}
                         <option {{ loop.index == page ? 'selected' }}>{{ loop.index }}</option>
                     {% endfor %}

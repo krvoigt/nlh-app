@@ -27,6 +27,7 @@ $(function () {
         saveState(settings);
     });
 
+
     // NOTE: No point in saving fullscreen since this can only be triggered by the user as a security measure
     $('.js-fullscreen').click(function () {
         $(this).toggleClass('-active');
@@ -43,12 +44,25 @@ $(function () {
 
     var page = parseInt($('.js-select-page').val());
     var showDoublePage = $('.js-page-view').val() === 'double';
-    $('.js-select-page').change(function () {
+    $('.js-select-page')
+    .select2()
+    .change(function () {
         setGetParameter('page', $(this).val());
     });
+    $('.select2-container').addClass('viewer_control');
+
+    // Close page select dropdown when clicking scan
+    $('.viewer_scan').click(function (e) {
+        $('.js-select-page').select2('close');
+    })
+    $('.viewer_control').click(function () {
+        return false;
+    })
+
     $('.js-previous-page').click(function () {
         setGetParameter('page', showDoublePage ? page - 2 : page - 1);
     });
+
     $('.js-next-page').click(function () {
         setGetParameter('page', showDoublePage ? page + 2 : page + 1);
     });

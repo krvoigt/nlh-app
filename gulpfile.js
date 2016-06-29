@@ -21,18 +21,20 @@ var paths = {
     serveDir: '/',
 
     assetsSrc: [
+        'node_modules/font-awesome/fonts/**',
         'node_modules/jquery-lazyload/jquery.lazyload.js',
         'node_modules/jquery-mousewheel/jquery.mousewheel.js',
         'node_modules/jquery.panzoom/dist/jquery.panzoom.min.js',
         'node_modules/open-sans-fontface/fonts/**',
-        'node_modules/font-awesome/fonts/**',
+        'node_modules/select2/dist/js/select2.min.js',
     ],
     assetsDest: [
+        'web/fonts/font-awesome',
         'web/js/vendor',
         'web/js/vendor',
         'web/js/vendor',
         'web/fonts/open-sans',
-        'web/fonts/font-awesome',
+        'web/js/vendor',
     ],
     scriptSrc: 'app/Resources/js/**/*.js',
     scriptDest: 'web/js',
