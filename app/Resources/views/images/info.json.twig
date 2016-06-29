@@ -1,0 +1,45 @@
+{
+  "@context": "http://iiif.io/api/image/2/context.json",
+  "@id": "{{ url('_iiifjson', {'identifier': identifier}) }}",
+  "width": {{ size.width }},
+  "height": {{ size.height }},
+  "protocol": "http://iiif.io/api/image",
+  "sizes": [
+    {
+      "height": {{ size.height / 16 }},
+      "width": {{ size.width / 16 }}
+    },
+    {
+      "height": {{ size.height / 8 }},
+      "width": {{ size.width / 8 }}
+    },
+    {
+      "height": {{ size.height / 4 }},
+      "width": {{ size.width / 4 }}
+    },
+    {
+      "height": {{ size.height / 2 }},
+      "width": {{ size.width / 2 }}
+    },
+    {
+      "height": {{ size.height / 1 }},
+      "width": {{ size.width / 1 }}
+    }
+  ],
+  "tiles": [
+    {
+      "width": 256,
+      "height": 256,
+      "scaleFactors": [
+        1,
+        2,
+        4,
+        8,
+        16
+      ]
+    }
+  ],
+  "profile": [
+    "http://iiif.io/api/image/2/level0.json"
+  ]
+}

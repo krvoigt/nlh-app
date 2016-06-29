@@ -25,7 +25,7 @@ class MetsService
         $storage[] = $crawler
             ->filterXPath('//mets:mets/mets:structMap/mets:div')
             ->children()
-            ->each(function (Crawler $node, $i) {
+            ->each(function (Crawler $node) {
 
                 $toc = $this->getTocElement($node);
 

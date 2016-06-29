@@ -23,8 +23,10 @@
 /web/fonts/
 !/web/fonts/classico/
 /web/js/script.js
-/web/js/vendor
+/web/js/vendor/*
 !/web/js/vendor/jquery.min.js
+!/web/js/vendor/leaflet.js
+!/web/js/vendor/leaflet-iiif.js
 /src/Subugoe/*
 .idea/
 .gradle
