@@ -1,49 +1,39 @@
 $(function () {
-    var $panzoom = $('.viewer_image');
-    var $panzoomButtons = $('.viewer_controls');
-    $panzoom.panzoom({
-        $zoomIn: $panzoomButtons.find(".js-zoom-in"),
-        $zoomOut: $panzoomButtons.find(".js-zoom-out"),
-        $zoomRange: $panzoomButtons.find(".js-zoom-range"),
-        $reset: $panzoomButtons.find(".js-zoom-reset")
+    var $image = $('.viewer_image');
+    var $controls = $('.viewer_controls');
+    var settings = {};
+
+    $image.panzoom({
+        $zoomIn: $controls.find(".js-zoom-in"),
+        $zoomOut: $controls.find(".js-zoom-out"),
+        $zoomRange: $controls.find(".js-zoom-range"),
+        $reset: $controls.find(".js-zoom-reset")
     });
-    $panzoom.parent().on('mousewheel.focal', function (e) {
+
+    $image.parent().on('mousewheel.focal', function (e) {
         e.preventDefault();
         var delta = e.delta || e.originalEvent.wheelDelta;
         var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-        $panzoom.panzoom('zoom', zoomOut, {
-            increment: 0.1,
+        $image.panzoom('zoom', zoomOut, {
+            increment: .2,
             focal: e
         });
     });
 
-    function requestFullscreen(element) {
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.webkitRequestFullScreen) {
-            element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        }
-    }
+    $image.on('panzoomchange', function (e, panzoom, matrix) {
+        settings.zoom = Math.round(matrix[0] * 100) / 100;
+        settings.panX = Math.round(matrix[4]);
+        settings.panY = Math.round(matrix[5]);
+        saveState(settings);
+    });
 
-    function exitFullscreen() {
-        if(document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if(document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if(document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        }
-    }
-
+    // NOTE: No point in saving fullscreen since this can only be triggered by the user as a security measure
     $('.js-fullscreen').click(function () {
         $(this).toggleClass('-active');
-        var viewer = document.getElementById('main');
         if ( document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement ) {
             exitFullscreen();
         } else {
-            requestFullscreen(viewer);
+            requestFullscreen($('#main')[0]);
         }
     });
 
@@ -77,7 +67,49 @@ $(function () {
 
     $('.js-toggle-panel').click(function () {
         $(this).toggleClass('-active');
-        var $panel = $('.viewer_panel.-' + $(this).data('target'));
+        var panelName = $(this).data('target');
+        var $panel = $('.viewer_panel.-' + panelName);
         $panel.toggleClass('-hidden');
+        settings.panels = settings.panels || {};
+        settings.panels[panelName] = $(this).hasClass('-active');
+        saveState(settings);
     });
+
+    loadState(settings);
+
+    function loadState(settings) {
+        if ( location.hash ) {
+            settings = JSON.parse(location.hash.substr(1));
+            $image.panzoom('zoom', settings.zoom, {silent: true});
+            $image.panzoom('pan', settings.panX, settings.panY);
+            $.each(settings.panels, function (name, show) {
+                var buttonName = '.js-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
+                $(buttonName).click();
+            });
+        }
+    }
+
+    function saveState(settings) {
+        location.hash = JSON.stringify(settings);
+    }
+
+    function requestFullscreen(element) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    }
+
+    function exitFullscreen() {
+        if(document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if(document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if(document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+    }
 });

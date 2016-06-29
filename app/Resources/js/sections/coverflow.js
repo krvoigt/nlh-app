@@ -36,6 +36,11 @@ $(function () {
         });
         // TODO: This doesn't seem to work.
         $('body').trigger('mousemove');
+
+        $('.coverflow_link').click(function () {
+            window.location = $(this).attr('href') + location.hash;
+            return false;
+        })
     }
 
     function getMouseDistance(el, e) {
