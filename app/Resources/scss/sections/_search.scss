@@ -83,6 +83,10 @@
     a {
         @include link(false);
     }
+
+    p {
+        margin: 0;
+    }
 }
 
 .search_description {

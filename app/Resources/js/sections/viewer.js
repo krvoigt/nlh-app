@@ -44,20 +44,23 @@ $(function () {
 
     var page = parseInt($('.js-select-page').val());
     var showDoublePage = $('.js-page-view').val() === 'double';
+
     $('.js-select-page')
     .select2()
     .change(function () {
         setGetParameter('page', $(this).val());
     });
+
     $('.select2-container').addClass('viewer_control');
 
     // Close page select dropdown when clicking scan
     $('.viewer_scan').click(function (e) {
         $('.js-select-page').select2('close');
-    })
+    });
+
     $('.viewer_control').click(function () {
         return false;
-    })
+    });
 
     $('.js-previous-page').click(function () {
         setGetParameter('page', showDoublePage ? page - 2 : page - 1);
@@ -68,15 +71,24 @@ $(function () {
     });
 
     $('.js-search-toggle').click(function () {
-        $('.search').fadeIn();
+        $('.search').addClass('-show-popup').fadeIn();
         setTimeout(function () {
             $('.search_input:visible').focus();
         }, 10);
         return false;
     });
 
-    $('.site.-fixed .search_close').click( function () {
+    $('.site.-fixed .search_close').click(function () {
         $('.search').fadeOut();
+        return false;
+    });
+
+    $('.site.-fixed').click(function () {
+        $('.site.-fixed .search_close').click();
+    });
+
+    $('.search').click(function (e) {
+        e.stopPropagation();
     });
 
     $('.js-toggle-panel').click(function () {
