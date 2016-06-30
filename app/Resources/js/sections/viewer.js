@@ -116,7 +116,8 @@ $(function () {
     }
 
     function saveState(settings) {
-        location.hash = JSON.stringify(settings);
+        // Using replaceState instead of location.hash to prevent a new history step begin added for every change in view settings
+        history.replaceState(undefined, undefined, '#' + JSON.stringify(settings));
     }
 
     function requestFullscreen(element) {
