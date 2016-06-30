@@ -14,8 +14,8 @@ $border-width: 1px;
 $br: 2px; // border-radius
 
 // Typography
-$OpenSansPath: '../fonts/open-sans'; // scss-lint:disable NameFormat
-$fa-font-path: '../fonts/font-awesome';
+$OpenSansPath: '../fonts'; // scss-lint:disable NameFormat
+$fa-font-path: '../fonts';
 
 $font-family-display: 'urw_classicoregular', 'Helvetica', 'Arial', sans-serif;
 $font-family-display-fallback: 'Helvetica', 'Arial', sans-serif;

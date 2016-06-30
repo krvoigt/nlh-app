@@ -1,6 +1,9 @@
-@include font-face('urw_classicoregular', '../fonts/classico/urwclassico-regular-webfont');
+@include font-face('urw_classicoregular', '../fonts/urwclassico-regular-webfont');
 
-@import '../../../../node_modules/open-sans-fontface/sass/open-sans';
+@include font-face('Open Sans', '../fonts/OpenSans-Regular');
+@include font-face('Open Sans', '../fonts/OpenSans-Italic', italic);
+@include font-face('Open Sans', '../fonts/OpenSans-Bold', normal, bold);
+@include font-face('Open Sans', '../fonts/OpenSans-BoldItalic', italic, bold);
 
 @import '../../../../node_modules/font-awesome/scss/variables';
 @import '../../../../node_modules/font-awesome/scss/path';
