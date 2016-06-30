@@ -21,6 +21,15 @@
         crs: L.CRS.Simple,
         zoom: 0
     }).addLayer(L.tileLayer.iiif('{{ path('_iiifjson', {"identifier": identifier}) }}'));
+
+    map.on('move', function (ev) {
+        var parameters = {
+            "latlon": map.getBounds().getCenter(),
+            "zoom": map.getZoom()
+        };
+
+        location.hash = JSON.stringify(parameters);
+    });
 </script>
 </body>
 </html>
