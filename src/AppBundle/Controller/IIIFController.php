@@ -79,6 +79,42 @@ class IIIFController extends Controller
     }
 
     /**
+     * @Route("/image/{identifier}/info.json", name="_iiifjson")
+     */
+    public function infoJsonAction($identifier)
+    {
+        $imageEntity = new \AppBundle\Entity\Image();
+        $imageEntity->setIdentifier($identifier);
+
+        $client = $this->get('guzzle.client.tiff');
+        $imagine = $this->get('liip_imagine');
+        $originalImage = $client->get($imageEntity->getIdentifier().'.tif');
+
+        try {
+            $image = $imagine->load($originalImage->getBody());
+        } catch (\Exception $e) {
+            throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
+        }
+
+        $image->strip();
+
+        return $this->render('images/info.json.twig', [
+            'size' => $image->getSize(),
+            'identifier' => $identifier,
+        ]);
+    }
+
+    /**
+     * @Route("/image/view/{identifier}")
+     */
+    public function viewAction($identifier)
+    {
+        return $this->render('images/view.html.twig', [
+              'identifier' => $identifier,
+          ]);
+    }
+
+    /**
      * @param string $file
      */
     protected function createCacheDirectory($file)
