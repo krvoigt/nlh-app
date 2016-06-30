@@ -20,27 +20,60 @@ $(function () {
         var initialHeight = $items.first().height();
         var height = $coverflow.height() - 4;
         var maxDistance = 200;
+        var scrollAreaWidth = 30;
+        var scrollFactor = 15;
+        var scrollInterval;
+        var scrollStep;
+
         $coverflow.css({bottom: -height});
+
         $('body').mousemove(function (e) {
             verticalDistance = Math.max(0, $(window).height() - e.pageY - height * 3);
             $coverflow.css({
                 bottom: verticalDistance < height ? -height + height * (height - verticalDistance) / height : -height
             });
 
-            $items.each(function (i) {
-                distance = getMouseDistance($(this), e);
-                $(this).css({
-                    width: distance < maxDistance ? Math.round(initialWidth * (1 + (maxDistance - distance) / maxDistance)) : ''
-                });
-            });
+            fishEye($items, e);
+
+            // Scroll coverflow when pointer is near the left or right edge
+            if ( e.pageY > $(window).height() - $coverflow.height() && e.pageX < scrollAreaWidth ) {
+                scrollStep = (scrollAreaWidth - e.pageX) / scrollAreaWidth * scrollFactor;
+                clearInterval(scrollInterval);
+                scrollInterval = setInterval(function () {
+                    $coverflow.scrollLeft( $coverflow.scrollLeft() - scrollStep);
+                    fishEye($items, e);
+                }, 25);
+            } else if ( e.pageY > $(window).height() - $coverflow.height() && e.pageX > $(window).width() - scrollAreaWidth ) {
+                scrollStep = (scrollAreaWidth - ($(window).width() - e.pageX)) / scrollAreaWidth * scrollFactor;
+                clearInterval(scrollInterval);
+                scrollInterval = setInterval(function () {
+                    $coverflow.scrollLeft( $coverflow.scrollLeft() + scrollStep);
+                    fishEye($items, e);
+                }, 25);
+            } else {
+                if ( scrollInterval ) {
+                    clearInterval(scrollInterval);
+                    scrollInterval = null;
+                }
+            }
         });
+
         // TODO: This doesn't seem to work.
         $('body').trigger('mousemove');
 
         $('.coverflow_link').click(function () {
             window.location = $(this).attr('href') + location.hash;
             return false;
-        })
+        });
+    }
+
+    function fishEye($items, mouse) {
+        $items.each(function () {
+            var distance = getMouseDistance($(this), mouse);
+            $(this).css({
+                width: distance < maxDistance ? Math.round(initialWidth * (1 + (maxDistance - distance) / maxDistance)) : ''
+            });
+        });
     }
 
     function getMouseDistance(el, e) {
