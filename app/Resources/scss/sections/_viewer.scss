@@ -143,32 +143,6 @@
 	}
 }
 
-// select2
-.select2 {
-    padding: 0;
-    min-width: 6em !important;
-}
-
-.select2-search {
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.select2-results__option--highlighted {
-    background: $link-color !important;
-}
-
-.select2-selection.select2-selection--single {
-    background: none;
-    border: 0;
-    height: auto;
-    padding: ($grid / 4);
-}
-
-.select2-selection__arrow {
-    top: ($grid / 4) !important;
-}
-
 .viewer_dl {
     dt, dd {
         float: none;
