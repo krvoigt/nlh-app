@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
@@ -53,14 +54,11 @@ class IIIFController extends Controller
             return new BinaryFileResponse($cachedFile);
         }
 
-        $client = $this->get('guzzle.client.tiff');
         $imagine = $this->get('liip_imagine');
         $imageService = $this->get('image_service');
 
-        $originalImage = $client->get($imageEntity->getIdentifier().'.tif');
-
         try {
-            $image = $imagine->load($originalImage->getBody());
+            $image = $imagine->load($this->getOriginalFileContents($imageEntity, $identifier));
         } catch (\Exception $e) {
             throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
         }
@@ -87,12 +85,11 @@ class IIIFController extends Controller
         $imageEntity = new \AppBundle\Entity\Image();
         $imageEntity->setIdentifier($identifier);
 
-        $client = $this->get('guzzle.client.tiff');
         $imagine = $this->get('liip_imagine');
-        $originalImage = $client->get($imageEntity->getIdentifier().'.tif');
+        $originalImage = $this->getOriginalFileContents($imageEntity, $identifier);
 
         try {
-            $image = $imagine->load($originalImage->getBody());
+            $image = $imagine->load($originalImage);
         } catch (\Exception $e) {
             throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
         }
@@ -114,13 +111,36 @@ class IIIFController extends Controller
     }
 
     /**
+     * @param Image $image
+     *
+     * @return \Psr\Http\Message\StreamInterface|string
+     */
+    protected function getOriginalFileContents(Image $image, $originalIdentifier)
+    {
+        $client = $this->get('guzzle.client.tiff');
+        $fs = new Filesystem();
+
+        $originalImageCacheFile = $this->getParameter('kernel.cache_dir').'/originals/'.$originalIdentifier.'.tif';
+
+        $this->createCacheDirectory($originalImageCacheFile);
+
+        if ($fs->exists($originalImageCacheFile)) {
+            $originalImage = file_get_contents($originalImageCacheFile);
+        } else {
+            $originalImage = $client->get($image->getIdentifier().'.tif', ['sink' => $originalImageCacheFile])->getBody();
+        }
+
+        return $originalImage;
+    }
+
+    /**
      * @Route("/image/view/{identifier}", name="_iiifview", methods={"GET"})
      */
     public function viewAction($identifier)
     {
         return $this->render('images/view.html.twig', [
-              'identifier' => $identifier,
-          ]);
+            'identifier' => $identifier,
+        ]);
     }
 
     /**
