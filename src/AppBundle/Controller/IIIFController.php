@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -79,7 +80,7 @@ class IIIFController extends Controller
     }
 
     /**
-     * @Route("/image/{identifier}/info.json", name="_iiifjson")
+     * @Route("/image/{identifier}/info.json", name="_iiifjson", methods={"GET"})
      */
     public function infoJsonAction($identifier)
     {
@@ -98,14 +99,22 @@ class IIIFController extends Controller
 
         $image->strip();
 
-        return $this->render('images/info.json.twig', [
-            'size' => $image->getSize(),
-            'identifier' => $identifier,
-        ]);
+        $response = new Response(
+            $this->renderView(
+                'images/info.json.twig', [
+                    'size' => $image->getSize(),
+                    'identifier' => $identifier,
+                ]
+            )
+        );
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
     /**
-     * @Route("/image/view/{identifier}")
+     * @Route("/image/view/{identifier}", name="_iiifview", methods={"GET"})
      */
     public function viewAction($identifier)
     {
