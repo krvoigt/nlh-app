@@ -1,32 +1,60 @@
 $(function () {
-    var $image = $('.viewer_image');
-    var $controls = $('.viewer_controls');
+    var defaultZoom = 1;
+    var maxZoom = 3;
     var settings = {};
+    var $controls = $('.viewer_controls');
+    var $image = $('.viewer_image');
+    var $zoomInControl = $controls.find('.js-zoom-in');
+    var $zoomOutControl = $controls.find('.js-zoom-out');
+    var $zoomRangeControl = $controls.find('.js-zoom-range');
+    var $zoomResetControl = $controls.find('.js-zoom-reset');
 
-    $image.panzoom({
-        $zoomIn: $controls.find(".js-zoom-in"),
-        $zoomOut: $controls.find(".js-zoom-out"),
-        $zoomRange: $controls.find(".js-zoom-range"),
-        $reset: $controls.find(".js-zoom-reset")
-    });
+    var image = L.map('viewer_image', {
+        attributionControl: false,
+        center: [0, 0],
+        crs: L.CRS.Simple,
+        zoom: defaultZoom,
+        zoomControl: false,
+        maxZoom: maxZoom,
+    }).addLayer(L.tileLayer.iiif( $('#viewer_image').data('iiif') ));
 
-    $image.parent().on('mousewheel.focal', function (e) {
-        e.preventDefault();
-        var delta = e.delta || e.originalEvent.wheelDelta;
-        var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-        $image.panzoom('zoom', zoomOut, {
-            increment: .2,
-            focal: e
-        });
-    });
+    // TODO: 'load' event does not fire for unknown reasons, so we're using 'viewreset' as a workaround.
+    // Because this can fire multiple times, event binding is disabled in loadState function.
+    image.on('viewreset', loadState);
 
-    $image.on('panzoomchange', function (e, panzoom, matrix) {
-        settings.zoom = Math.round(matrix[0] * 100) / 100;
-        settings.panX = Math.round(matrix[4]);
-        settings.panY = Math.round(matrix[5]);
+    image.on('zoomend', function () {
+        settings.zoom = image.getZoom();
+        $zoomRangeControl.val(settings.zoom  / maxZoom * 100);
         saveState(settings);
     });
 
+    image.on('moveend', function () {
+        var latLng = image.getCenter();
+        settings.lat = latLng.lat;
+        settings.lng = latLng.lng;
+        saveState(settings);
+    });
+
+    $zoomInControl.click(function () {
+        image.zoomIn();
+    });
+
+    $zoomOutControl.click(function () {
+        image.zoomOut();
+    });
+
+    $zoomRangeControl.val(image.getZoom() / maxZoom * 100).change(function () {
+        // TODO: Forcing integer values for zoom until we figure out why decimals make the image disappear
+        image.setZoom( Math.round($(this).val() / 100 * maxZoom) );
+    });
+
+    $zoomResetControl.click(function () {
+        image.setZoom(defaultZoom);
+    });
+
+    $(window).resize(function () {
+        image.invalidateSize();
+    });
 
     // NOTE: No point in saving fullscreen since this can only be triggered by the user as a security measure
     $('.js-fullscreen').click(function () {
@@ -99,15 +127,17 @@ $(function () {
         settings.panels = settings.panels || {};
         settings.panels[panelName] = $(this).hasClass('-active');
         saveState(settings);
+        // Wait until after panel transition has finished before resetting image size
+        setTimeout(function () {
+            image.invalidateSize();
+        }, 300);
     });
 
-    loadState(settings);
-
-    function loadState(settings) {
+    function loadState() {
+        image.off('viewreset', loadState);
         if ( location.hash ) {
             settings = JSON.parse(location.hash.substr(1));
-            $image.panzoom('zoom', settings.zoom, {silent: true});
-            $image.panzoom('pan', settings.panX, settings.panY);
+            image.setView([settings.lat, settings.lng], settings.zoom);
             $.each(settings.panels, function (name, show) {
                 var buttonName = '.js-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
                 $(buttonName).click();

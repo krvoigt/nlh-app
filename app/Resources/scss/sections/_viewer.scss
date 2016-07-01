@@ -25,9 +25,10 @@
 }
 
 .viewer_image {
-    font-size: 0;
+    height: 100%;
     position: absolute;
     white-space: nowrap;
+    width: 100%;
 
     &.-double img {
         display: inline-block !important;

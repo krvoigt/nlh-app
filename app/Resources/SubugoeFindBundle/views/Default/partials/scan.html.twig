@@ -74,8 +74,8 @@
         </div>
         <div class="viewer_group">
             <button class="viewer_control -zoom-out js-zoom-out" title="{% trans %}Zoom out{% endtrans %}"><span class="sr-only">{% trans %}Zoom out{% endtrans %}</span></button>
-            <label class="sr-only" for="viewer-zoom-reset">{% trans %}Set zoom{% endtrans %}</label>
-            <input type="range" class="viewer_control js-zoom-range" id="viewer-zoom-reset">
+            <label class="sr-only" for="viewer-zoom-range">{% trans %}Set zoom{% endtrans %}</label>
+            <input type="range" class="viewer_control js-zoom-range" id="viewer-zoom-range">
             <button class="viewer_control -zoom-in js-zoom-in" title="{% trans %}Zoom in{% endtrans %}"></i><span class="sr-only">{% trans %}Zoom in{% endtrans %}</span></button>
             <button class="viewer_control -zoom-reset js-zoom-reset" title="{% trans %}Reset zoom{% endtrans %}"><span class="sr-only">{% trans %}Reset zoom{% endtrans %}</span></button>
         </div>
@@ -86,10 +86,12 @@
             </div>
         {% endif %}
     </div>
-    <div class="viewer_image {{ showDoublePage ? '-double' }}" id="viewer_scan">
+    <div
+        class="viewer_image {{ showDoublePage ? '-double' }}"
+        id="viewer_image"
+        data-iiif="{{ path('_iiifjson', {'identifier': (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'}))}) }}"
         {% if secondPage %}
-            <img src="{{ path('_image', {'format': 'jpg', 'identifier': (document.presentation_url[page - 2] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '1024,', 'rotation': 0, 'quality': 'default'}) }}" alt="">
+            data-iiif-second-page="{{ path('_iiifjson', {'identifier': (document.presentation_url[page - 2] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'}))}) }}"
         {% endif %}
-        <img src="{{ path('_image', {'format': 'jpg', 'identifier': (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '1024,', 'rotation': 0, 'quality': 'default'}) }}" alt="">
-    </div>
+    ></div>
 </section>
