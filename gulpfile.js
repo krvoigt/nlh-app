@@ -42,7 +42,6 @@ var paths = {
         'node_modules/leaflet/dist/leaflet.js',
         'node_modules/leaflet-iiif/leaflet-iiif.js',
         'node_modules/select2/dist/js/select2.min.js',
-        'node_modules/jquery.panzoom/dist/jquery.panzoom.js',
     ],
     vendorScriptDest: 'web/js',
 };
