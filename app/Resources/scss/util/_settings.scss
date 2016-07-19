@@ -68,8 +68,7 @@ $input-border-color-focus: $brand-color;
 $alert-color: $red;
 
 // Combined values
-$drop-shadow: 0 0 $grid rgba($black, .5);
-$drop-shadow-small: 0 0 ($grid / 2) rgba($black, .2);
+$drop-shadow: 0 0 ($grid / 4) rgba($black, .5);
 $outline: 1px dotted $text-color-light;
 
 // Legacy icons for infobox social links

@@ -2,12 +2,6 @@
 <section class="viewer_scan">
     <div class="viewer_controls -overlay">
         <div class="viewer_group">
-            <select class="viewer_control js-page-view">
-                <option value="single" {{ not showDoublePage ? 'selected' }}>{% trans %}Single page{% endtrans %}</option>
-                <option value="double" {{ showDoublePage ? 'selected' }}>{% trans %}Double page{% endtrans %}</option>
-            </select>
-        </div>
-        <div class="viewer_group">
             <button
                 class="viewer_control -first-page"
                 title="{% trans %}First page{% endtrans %}"
@@ -29,27 +23,12 @@
                 <span class="sr-only">{% trans %}Previous page{% endtrans %}</span>
             </button>
 
-            {% if showDoublePage %}
-                <label class="sr-only double-page" for="viewer-page-select-2">{% trans %}Current pages{% endtrans %}</label>
-                <select class="viewer_control -page-select double-page js-select-page" name="page" id="viewer-page-select-2">
-                    <option {{ page == 1 ? 'selected' }}>1</option>
-                    {% for image in document.presentation_url %}
-                        {% if loop.index > 1 and loop.index % 2 == 1 %}
-                            <option {{ page == loop.index - 1 or page == loop.index ? 'selected' }} value="{{ loop.index }}">{{ loop.index - 1 }} | {{ loop.index }}</option>
-                        {% endif %}
-                    {% endfor %}
-                    {% if pageCount % 2 == 0 %}
-                        <option {{ page == pageCount ? 'selected' }}>{{ pageCount }}</option>
-                    {% endif %}
-                </select>
-            {% else %}
-                <label class="sr-only single-page" for="viewer-page-select">{% trans %}Current page{% endtrans %}</label>
-                <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
-                    {% for image in document.presentation_url %}
-                        <option {{ loop.index == page ? 'selected' }}>{{ loop.index }}</option>
-                    {% endfor %}
-                </select>
-            {% endif %}
+            <label class="sr-only single-page" for="viewer-page-select">{% trans %}Current page{% endtrans %}</label>
+            <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
+                {% for image in document.presentation_url %}
+                    <option {{ loop.index == page ? 'selected' }}>{{ loop.index }}</option>
+                {% endfor %}
+            </select>
 
             <button
                 class="viewer_control -next-page js-next-page"
@@ -75,7 +54,6 @@
         <div class="viewer_group">
             <button class="viewer_control -zoom-out js-zoom-out" title="{% trans %}Zoom out{% endtrans %}"><span class="sr-only">{% trans %}Zoom out{% endtrans %}</span></button>
             <label class="sr-only" for="viewer-zoom-range">{% trans %}Set zoom{% endtrans %}</label>
-            <input type="range" class="viewer_control js-zoom-range" id="viewer-zoom-range">
             <button class="viewer_control -zoom-in js-zoom-in" title="{% trans %}Zoom in{% endtrans %}"></i><span class="sr-only">{% trans %}Zoom in{% endtrans %}</span></button>
             <button class="viewer_control -zoom-reset js-zoom-reset" title="{% trans %}Reset zoom{% endtrans %}"><span class="sr-only">{% trans %}Reset zoom{% endtrans %}</span></button>
         </div>
@@ -87,11 +65,8 @@
         {% endif %}
     </div>
     <div
-        class="viewer_image {{ showDoublePage ? '-double' }}"
+        class="viewer_image"
         id="viewer_image"
         data-iiif="{{ path('_iiifjson', {'identifier': (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'}))}) }}"
-        {% if secondPage %}
-            data-iiif-second-page="{{ path('_iiifjson', {'identifier': (document.presentation_url[page - 2] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'}))}) }}"
-        {% endif %}
     ></div>
 </section>

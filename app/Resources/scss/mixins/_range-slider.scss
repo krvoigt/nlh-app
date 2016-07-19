@@ -1,10 +1,8 @@
 // NOTE: For range slider styling to work, each browser has to be addressed
 //       with a separate rule. Combined rules won't work.
 @mixin range-slider {
-    & {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+    -webkit-appearance: none;
+    margin: 0;
 
     &::-moz-range-track {
         background: #aaa;

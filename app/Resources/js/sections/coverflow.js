@@ -61,7 +61,7 @@ $(function () {
         // TODO: This doesn't seem to work.
         $('body').trigger('mousemove');
 
-        $('.coverflow_link').click(function () {
+        $('.coverflow_link:not(.-current)').click(function () {
             window.location = $(this).attr('href') + location.hash;
             return false;
         });

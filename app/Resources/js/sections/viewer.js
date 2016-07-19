@@ -1,12 +1,11 @@
 $(function () {
     var defaultZoom = 1;
-    var maxZoom = 3;
+    var maxZoom = 2;
     var settings = {};
     var $controls = $('.viewer_controls');
     var $image = $('.viewer_image');
     var $zoomInControl = $controls.find('.js-zoom-in');
     var $zoomOutControl = $controls.find('.js-zoom-out');
-    var $zoomRangeControl = $controls.find('.js-zoom-range');
     var $zoomResetControl = $controls.find('.js-zoom-reset');
 
     var image = L.map('viewer_image', {
@@ -24,7 +23,6 @@ $(function () {
 
     image.on('zoomend', function () {
         settings.zoom = image.getZoom();
-        $zoomRangeControl.val(settings.zoom  / maxZoom * 100);
         saveState(settings);
     });
 
@@ -41,11 +39,6 @@ $(function () {
 
     $zoomOutControl.click(function () {
         image.zoomOut();
-    });
-
-    $zoomRangeControl.val(image.getZoom() / maxZoom * 100).change(function () {
-        // TODO: Forcing integer values for zoom until we figure out why decimals make the image disappear
-        image.setZoom( Math.round($(this).val() / 100 * maxZoom) );
     });
 
     $zoomResetControl.click(function () {
@@ -66,12 +59,7 @@ $(function () {
         }
     });
 
-    $('.js-page-view').change(function () {
-        setGetParameter('showDoublePage', $(this).val() === 'double');
-    });
-
     var page = parseInt($('.js-select-page').val());
-    var showDoublePage = $('.js-page-view').val() === 'double';
 
     $('.js-select-page')
     .select2()
@@ -91,11 +79,11 @@ $(function () {
     });
 
     $('.js-previous-page').click(function () {
-        setGetParameter('page', showDoublePage ? page - 2 : page - 1);
+        setGetParameter('page', page - 1);
     });
 
     $('.js-next-page').click(function () {
-        setGetParameter('page', showDoublePage ? page + 2 : page + 1);
+        setGetParameter('page', page + 1);
     });
 
     $('.js-search-toggle').click(function () {
