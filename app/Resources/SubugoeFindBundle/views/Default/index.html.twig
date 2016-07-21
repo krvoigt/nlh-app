@@ -5,7 +5,7 @@
 {% endif %}
 
 {% block findnavigation %}
-    <div class="findCount">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {% trans %}numfound{% endtrans %}</div>
+    <div class="find_count">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {% trans %}numfound{% endtrans %}</div>
    {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
@@ -13,21 +13,29 @@
 {% endblock %}
 
 {% block content %}
-    <ol class="resultList" start="{{ search.offset + 1 }}">
+    <ol class="result_list" start="{{ search.offset + 1 }}">
         {% for result in pagination %}
-            <li class="resultItem">
-                <article class="resultWrap">
-                    <div class="resultThumbnail">
+            <li class="result_item">
+                <article class="result_wrap">
+                    <div class="result_thumbnail">
                         {% if result.fields.presentation_url is defined %}
                             <img src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
                         {% endif %}
                     </div>
-                    <div class="resultMetadata">
-                        <h2 class="resultTitle"><a href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a></h2>
-                        <p class="resultParagraph">
+                    <div class="result_metadata">
+                        <h2 class="result_title">
+                            <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                            <button class="result_title-toggle -expand">
+                                {% trans %}Show full title{% endtrans %}
+                            </button>
+                            <button class="result_title-toggle -collapse">
+                                {% trans %}Collapse title{% endtrans %}
+                            </button>
+                        </h2>
+                        <p class="result_paragraph">
                             {% if result.fields.creator is defined %}
                                 {{ 'creator' | transchoice(result.fields.creator | length) }}:
-                                <span class="resultAuthorName">
+                                <span class="result_author-name">
                                     {% for author in result.fields.creator %}
                                         {{ author }}{% if loop.last %}{% else %}, {% endif %}
                                     {% endfor %}
@@ -44,19 +52,19 @@
 {% endblock %}
 
 {% block sidebar %}
-    <div class="facetsHeader">
-        <button class="facetsToggle -show">{% trans %}Show filters{% endtrans %}</button>
-        <button class="facetsToggle -hide hidden">{% trans %}Hide filters{% endtrans %}</button>
+    <div class="facets_header">
+        <button class="facets_toggle -show">{% trans %}Show filters{% endtrans %}</button>
+        <button class="facets_toggle -hide hidden">{% trans %}Hide filters{% endtrans %}</button>
     </div>
-    <div class="facetsBody">
+    <div class="facets_body">
         {% for key, facet in facets %}
             <article class="facet">
                 <h2>{{ key | transchoice(facet | length) }}</h2>
-                <ol class="facetList">
+                <ol class="facet_list">
                     {% for value, count in facet if count > 0 %}
                         {% set facet_name = ['facet', key]|join('-') %}
-                        <li class="facetItem">
-                            <a class="facetLink" href="{{ path(app.request.attributes.get('_route'), {
+                        <li class="facet_item">
+                            <a class="facet_link" href="{{ path(app.request.attributes.get('_route'), {
                                 'filter': queryParams|merge({
                                     (facetCounter):  {
                                         (key) : (value)
@@ -68,8 +76,8 @@
                         </li>
                     {% endfor %}
                 </ol>
-                <button class="facetListExpand">{% trans %}expand{% endtrans %}</button>
-                <button class="facetListCollapse">{% trans %}collapse{% endtrans %}</button>
+                <button class="facet_list-toggle -expand">{% trans %}expand{% endtrans %}</button>
+                <button class="facet_list-toggle -collapse">{% trans %}collapse{% endtrans %}</button>
             </article>
         {% endfor %}
     </div>

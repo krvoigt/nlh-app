@@ -1,5 +1,6 @@
 @mixin button($modifier: null) {
     border: 0;
+    border-radius: $br;
     box-shadow: none;
     cursor: pointer;
     display: inline-block;

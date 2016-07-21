@@ -9,7 +9,7 @@
     }
 }
 
-.facetsBody {
+.facets_body {
     @include respond-to(medium) {
         border-bottom: $border-width solid $border-color;
         display: none;
@@ -21,7 +21,7 @@
     }
 }
 
-.facetsHeader {
+.facets_header {
     display: none;
     padding: 0 0 $grid;
     text-align: center;
@@ -41,7 +41,7 @@
     }
 }
 
-.facetsToggle {
+.facets_toggle {
     background: $white;
     padding: 0 .5em;
     position: relative;
