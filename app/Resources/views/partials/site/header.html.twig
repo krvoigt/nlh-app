@@ -31,12 +31,12 @@
                         <p>{% trans %}Search in{% endtrans %}</p>
                         <ul class="search_catalog-list">
                             <li class="search_item">
-                                <input class="search_radio" id="radio0" type="checkbox" name="kataloge"/>
-                                <label class="search_label" for="radio0">{% trans %}in-fulltexts{% endtrans %}</label>
+                                <input class="search_radio" id="search-meta" type="checkbox" name="kataloge" checked>
+                                <label class="search_label" for="search-meta">{% trans %}in-metadata{% endtrans %}</label>
                             </li>
                             <li class="search_item">
-                                <input class="search_radio" id="radio1" type="checkbox" name="kataloge"/>
-                                <label class="search_label" for="radio1">{% trans %}in-metadata{% endtrans %}</label>
+                                <input class="search_radio" id="search-full" type="checkbox" name="kataloge">
+                                <label class="search_label" for="search-full">{% trans %}in-fulltexts{% endtrans %}</label>
                             </li>
                         </ul>
                         <button class="search_close" title="Schließen">
