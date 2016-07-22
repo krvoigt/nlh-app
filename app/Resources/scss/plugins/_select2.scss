@@ -14,6 +14,14 @@
     padding-bottom: 8px;
 }
 
+.select2-results__option {
+    white-space: nowrap;
+
+    &::before {
+        content: none;
+    }
+}
+
 .select2-results__option--highlighted {
     background: $link-color !important;
 }
@@ -22,7 +30,7 @@
     background: none;
     border: 0;
     height: auto;
-    padding: ($grid / 4);
+    padding: ($grid / 4) 0;
 }
 
 .select2-selection__arrow {
