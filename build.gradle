@@ -19,7 +19,7 @@ def loadConfiguration() {
 
 node {
     // Version of node to use.
-    version = '5.4.1'
+    version = '6.3.1'
 
     // Enabled the automatic download. False is the default (for now).
     download = true
