@@ -10,6 +10,13 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class MetsService
 {
+    protected $solrService;
+
+    public function __construct(\Solarium\Client $solrService)
+    {
+        $this->solrService = $solrService;
+    }
+
     /**
      * @param string $mets
      *
@@ -61,5 +68,19 @@ class MetsService
         $toc->setLabel($node->attr('LABEL'));
 
         return $toc;
+    }
+
+    public function getParentDocument($id)
+    {
+        $select = $this->solrService->createSelect();
+        $select->setQuery('id:'.$id);
+        $documents = $this->solrService->select($select)->getDocuments();
+        $document = $documents[0]->getFields();
+
+        if (isset($document['idparentdoc'])) {
+            $id = array_pop($document['idparentdoc']);
+        }
+
+        return $id;
     }
 }
