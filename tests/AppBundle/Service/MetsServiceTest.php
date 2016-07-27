@@ -14,8 +14,10 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $solariumMock = $this->getMockBuilder(\Solarium\Client::class)->getMock();
+
         parent::setUp();
-        $this->fixture = new MetsService();
+        $this->fixture = new MetsService($solariumMock);
     }
 
     /**
