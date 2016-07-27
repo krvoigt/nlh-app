@@ -42,14 +42,20 @@ class DocumentController extends Controller
      */
     public function fullTextAction($url)
     {
-        $client = $this->get('guzzle.client.fulltext');
         $teiProcessor = $this->get('tei_processor');
+        $teiFile = $this->get('cache.app')->getItem('tei.'.sha1($url));
 
-        $file = $client
+        if (!$teiFile->isHit()) {
+            $client = $this->get('guzzle.client.fulltext');
+            $file = $client
             ->get($url)
-            ->getBody();
+            ->getBody()->__toString();
 
-        $text = $teiProcessor->process($file);
+            $teiFile->set($file);
+            $this->get('cache.app')->save($teiFile);
+        }
+
+        $text = $teiProcessor->process($teiFile->get());
 
         return new Response($text);
     }
