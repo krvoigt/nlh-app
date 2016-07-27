@@ -14,9 +14,10 @@ class DocumentController extends Controller
     public function tocAction($id)
     {
         $metsService = $this->get('mets_service');
+
         $id = $metsService->getParentDocument($id);
 
-        $metsFile = $this->get('cache.app')->getItem('mets.'.$id);
+        $metsFile = $this->get('cache.app')->getItem('mets.'.sha1($id));
 
         if (!$metsFile->isHit()) {
             $client = $this->get('guzzle.client.mets');

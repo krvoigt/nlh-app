@@ -110,8 +110,16 @@ $(function () {
     $('.js-toggle-panel').click(function () {
         $(this).toggleClass('-active');
         var panelName = $(this).data('target');
+
         var $panel = $('.viewer_panel.-' + panelName);
         $panel.toggleClass('-hidden');
+
+        if (panelName === 'toc') {
+           $.get(window.location.origin + window.location.pathname + '/toc/', function(data) {
+                $('.viewer_panel.-toc').html(data);
+            });
+        }
+
         settings.panels = settings.panels || {};
         settings.panels[panelName] = $(this).hasClass('-active');
         saveState(settings);
