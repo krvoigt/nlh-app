@@ -51,6 +51,8 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+    cache:
+        app: cache.adapter.filesystem
 
 # Twig Configuration
 twig:

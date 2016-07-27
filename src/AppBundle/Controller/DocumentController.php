@@ -13,14 +13,21 @@ class DocumentController extends Controller
      */
     public function tocAction($id)
     {
-        $client = $this->get('guzzle.client.mets');
         $metsService = $this->get('mets_service');
+        $metsFile = $this->get('cache.app')->getItem('mets.'.$id);
 
-        $file = $client
-            ->get($id.'.xml')
-            ->getBody()->__toString();
+        if (!$metsFile->isHit()) {
+            $client = $this->get('guzzle.client.mets');
 
-        $structure = $metsService->getTableOfContents($file);
+            $file = $client
+                ->get($id.'.xml')
+                ->getBody()->__toString();
+
+            $metsFile->set($file);
+            $this->get('cache.app')->save($metsFile);
+        }
+
+        $structure = $metsService->getTableOfContents($metsFile->get());
 
         return $this->render('toc.html.twig', [
             'structure' => $structure,
