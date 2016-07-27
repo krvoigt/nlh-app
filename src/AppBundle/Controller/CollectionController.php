@@ -100,7 +100,7 @@ class CollectionController extends Controller
         $dcFilter->setKey('dc')->setQuery('dc:'.$id);
 
         $workQuery = new FilterQuery();
-        $workQuery->setKey('work')->setQuery('iswork:true');
+        $workQuery->setKey('mets')->setQuery('ismets:true');
 
         $filterQueries[] = $dcFilter;
         $filterQueries[] = $workQuery;

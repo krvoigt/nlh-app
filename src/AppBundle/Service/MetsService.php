@@ -70,10 +70,15 @@ class MetsService
         return $toc;
     }
 
+    /**
+     * @param string $id
+     *
+     * @return string
+     */
     public function getParentDocument($id)
     {
         $select = $this->solrService->createSelect();
-        $select->setQuery('id:'.$id);
+        $select->setQuery(sprintf('id:%s', $id));
         $documents = $this->solrService->select($select)->getDocuments();
         $document = $documents[0]->getFields();
 
