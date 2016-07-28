@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f01cff31ffd9d1fd5d8a85f8d34193a4",
+    "hash": "80c583a7eb6e96a592c51dfd4e695f40",
     "content-hash": "f0dfcc4f10dbb9994ac321bcf539890c",
     "packages": [
         {
@@ -2560,12 +2560,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "194dcf3b5d49cf14486b198a179e05c9e1b4ea15"
+                "reference": "c7fa99e41f51e74e40cec36717902935c4720e70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/194dcf3b5d49cf14486b198a179e05c9e1b4ea15",
-                "reference": "194dcf3b5d49cf14486b198a179e05c9e1b4ea15",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c7fa99e41f51e74e40cec36717902935c4720e70",
+                "reference": "c7fa99e41f51e74e40cec36717902935c4720e70",
                 "shasum": ""
             },
             "require": {
@@ -2689,7 +2689,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-07-26 08:08:27"
+            "time": "2016-07-28 07:26:33"
         },
         {
             "name": "twig/twig",
