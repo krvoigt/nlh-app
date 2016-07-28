@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80c583a7eb6e96a592c51dfd4e695f40",
-    "content-hash": "f0dfcc4f10dbb9994ac321bcf539890c",
+    "hash": "3c26a9cffa164146f694969b95345225",
+    "content-hash": "e9dca003873269644a596f67d247172d",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -776,23 +776,23 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v4.5.1",
+            "version": "v5.0.1",
             "target-dir": "EightPoints/Bundle/GuzzleBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/GuzzleBundle.git",
-                "reference": "ae14e6ea001133b80db65de3fb41c29d8db6b180"
+                "reference": "eda854f74e0751dbc535604a0b36809f6150d04e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/GuzzleBundle/zipball/ae14e6ea001133b80db65de3fb41c29d8db6b180",
-                "reference": "ae14e6ea001133b80db65de3fb41c29d8db6b180",
+                "url": "https://api.github.com/repos/8p/GuzzleBundle/zipball/eda854f74e0751dbc535604a0b36809f6150d04e",
+                "reference": "eda854f74e0751dbc535604a0b36809f6150d04e",
                 "shasum": ""
             },
             "require": {
                 "eightpoints/guzzle-wsse-middleware": "~4.0",
                 "guzzlehttp/guzzle": "~6.0",
-                "php": ">=5.5.0",
+                "php": ">=5.6",
                 "psr/log": "~1.0",
                 "symfony/dependency-injection": "~2.3|~3.0",
                 "symfony/event-dispatcher": "~2.3|~3.0",
@@ -800,8 +800,8 @@
                 "symfony/http-kernel": "~2.3|~3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "*",
-                "symfony/config": "~2.3|~3.0"
+                "phpunit/phpunit": "~5.4",
+                "symfony/config": "2.3|~3.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -836,7 +836,7 @@
                 "symfony",
                 "web service"
             ],
-            "time": "2016-04-28 15:51:32"
+            "time": "2016-07-27 14:15:54"
         },
         {
             "name": "eightpoints/guzzle-wsse-middleware",
