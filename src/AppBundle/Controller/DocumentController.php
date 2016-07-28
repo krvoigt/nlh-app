@@ -17,10 +17,6 @@ class DocumentController extends Controller
 
         $structure = $metsService->getTableOfContents($id);
 
-        if (count($structure) === 0) {
-            $id = $metsService->getParentDocument($id);
-        };
-
         return $this->render('toc.html.twig', [
             'structure' => $structure,
             'id' => $id,

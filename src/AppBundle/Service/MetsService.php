@@ -4,6 +4,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\TableOfContents;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -45,7 +46,7 @@ class MetsService
     /**
      * @param $id
      *
-     * @return mixed
+     * @return string
      */
     protected function getMetFile($id)
     {
@@ -55,8 +56,8 @@ class MetsService
 
         if (!$metsFile->isHit()) {
             $file = $this->metsClient
-                  ->get($id.'.xml')
-                  ->getBody()->__toString();
+                ->get($id.'.xml')
+                ->getBody()->__toString();
 
             $metsFile->set($file);
             $this->cache->save($metsFile);
@@ -72,33 +73,50 @@ class MetsService
      */
     public function getTableOfContents($id)
     {
-        $metsFile = $this->getMetFile($id);
+        try {
+            $metsFile = $this->getMetFile($id);
+        } catch (ClientException $e) {
+            $id = $this->getParentDocument($id);
+
+            try {
+                $metsFile = $this->getMetFile($id);
+            } catch (ClientException $e) {
+                $id = $this->getParentDocument($id);
+                $metsFile = $this->getMetFile($id);
+            }
+        }
 
         $crawler = new Crawler();
         $crawler->addContent($metsFile);
 
         $storage = [];
 
+        $documentId = $crawler->filterXPath('//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:recordInfo/mods:recordIdentifier')->text();
+
         $storage[] = $crawler
             ->filterXPath('//mets:mets/mets:structMap/mets:div')
             ->children()
-            ->each(function (Crawler $node) {
+            ->each(function (Crawler $node) use ($documentId) {
 
-                $toc = $this->getTocElement($node);
+                $toc = $this->getTocElement($node, $documentId);
 
                 if ($node->children()->count() > 0) {
                     $children = new \SplObjectStorage();
 
                     $node->children()
-                        ->each(function (Crawler $childNode) use (&$children, &$toc) {
+                        ->each(function (Crawler $childNode) use (&$children, &$toc, $documentId) {
 
-                            $childToc = $this->getTocElement($childNode);
+                            $childToc = $this->getTocElement($childNode, $documentId);
                             $toc->addChildren($childToc);
                         });
                 }
 
                 return $toc;
             });
+
+        if (count($storage) === 0) {
+            self::getTableOfContents($this->getParentDocument($id));
+        };
 
         return $storage;
     }
@@ -108,7 +126,7 @@ class MetsService
      *
      * @return TableOfContents
      */
-    protected function getTocElement(Crawler $node)
+    protected function getTocElement(Crawler $node, $parent)
     {
         $toc = new TableOfContents();
 
@@ -116,6 +134,7 @@ class MetsService
         $toc->setType($node->attr('TYPE'));
         $toc->setDmdid($node->attr('DMDID'));
         $toc->setLabel($node->attr('LABEL'));
+        $toc->setParentDocument($parent);
 
         return $toc;
     }
@@ -133,7 +152,7 @@ class MetsService
         $document = $documents[0]->getFields();
 
         if (isset($document['idparentdoc'])) {
-            $id = array_pop($document['idparentdoc']);
+            $id = $document['idparentdoc'][0];
         }
 
         return $id;

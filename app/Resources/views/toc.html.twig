@@ -4,7 +4,7 @@
             {% if element.children is defined %}
                 <ul>
                     {% for children in element.children %}
-                        <li><a href="{{ path('_detail', {'id': id ~ '|' ~ children.id}) }}">{{ children.label }}</a>
+                        <li><a href="{{ path('_detail', {'id': children.parentDocument ~ '|' ~ children.id}) }}">{{ children.label }}</a>
                     {% endfor %}
                 </ul>
             {% endif %}

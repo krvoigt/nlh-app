@@ -28,6 +28,11 @@ class TableOfContents
     protected $label;
 
     /**
+     * @var string
+     */
+    protected $parentDocument;
+
+    /**
      * @var \SplObjectStorage<TableOfContents>
      */
     protected $children;
@@ -115,5 +120,21 @@ class TableOfContents
     public function addChildren($children)
     {
         $this->children->attach($children);
+    }
+
+    /**
+     * @return string
+     */
+    public function getParentDocument(): string
+    {
+        return $this->parentDocument;
+    }
+
+    /**
+     * @param string $parentDocument
+     */
+    public function setParentDocument(string $parentDocument)
+    {
+        $this->parentDocument = $parentDocument;
     }
 }
