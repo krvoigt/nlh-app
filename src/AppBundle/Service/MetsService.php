@@ -3,6 +3,9 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\TableOfContents;
+use GuzzleHttp\Client;
+use Symfony\Component\Cache\Adapter\AbstractAdapter;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -10,22 +13,50 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class MetsService
 {
+    /**
+     * @var \Solarium\Client
+     */
     protected $solrService;
 
-    public function __construct(\Solarium\Client $solrService)
+    /**
+     * @var AbstractAdapter
+     */
+    protected $cache;
+
+    /**
+     * @var Client
+     */
+    protected $metsClient;
+
+    public function __construct(\Solarium\Client $solrService, AdapterInterface $cache, Client $metsClient)
     {
         $this->solrService = $solrService;
+        $this->cache = $cache;
+        $this->metsClient = $metsClient;
     }
 
     /**
-     * @param string $mets
+     * @param string $id
      *
      * @return array
      */
-    public function getTableOfContents($mets)
+    public function getTableOfContents($id)
     {
+        $identifier = 'mets.'.sha1($id);
+
+        $metsFile = $this->cache->getItem($identifier);
+
+        if (!$metsFile->isHit()) {
+            $file = $this->metsClient
+                ->get($id.'.xml')
+                ->getBody()->__toString();
+
+            $metsFile->set($file);
+            $this->cache->save($metsFile);
+        }
+
         $crawler = new Crawler();
-        $crawler->addContent($mets);
+        $crawler->addContent($metsFile->get());
 
         $storage = [];
 

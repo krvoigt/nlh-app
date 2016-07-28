@@ -4,6 +4,10 @@ namespace tests\AppBundle\Service;
 
 use AppBundle\Entity\TableOfContents;
 use AppBundle\Service\MetsService;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\BufferStream;
+use GuzzleHttp\Psr7\Response;
+use Symfony\Component\Cache\Adapter\NullAdapter;
 
 class MetsServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -16,8 +20,53 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
     {
         $solariumMock = $this->getMockBuilder(\Solarium\Client::class)->getMock();
 
+        $streamInterfaceMock = $this->getMockBuilder(BufferStream::class)
+            ->setMethods(['__toString'])
+            ->getMock();
+
+        $responseInterfaceMock = $this
+            ->getMockBuilder(Response::class)
+            ->setMethods(['getBody'])
+            ->getMock();
+
+        $cacheMock = $this
+            ->getMockBuilder(NullAdapter::class)
+            ->setMethods(['isHit'])
+            ->getMock();
+
+        $cacheMock
+            ->expects($this->any())
+            ->method('isHit')
+            ->willReturn('false');
+
+        $metsClientMock = $this
+            ->getMockBuilder(Client::class)
+            ->setMethods(['get'])
+            ->getMock();
+
+        $metsClientMock
+             ->expects($this->any())
+             ->method('get')
+             ->willReturn(
+                 $responseInterfaceMock
+             );
+
+        $responseInterfaceMock
+            ->expects($this->any())
+            ->method('getBody')
+            ->willReturn(
+                $streamInterfaceMock
+            );
+
+        $streamInterfaceMock
+              ->expects($this->any())
+              ->method('__toString')
+              ->willReturn(
+                  $this->metsDataProvider()[0][0]
+              );
+
         parent::setUp();
-        $this->fixture = new MetsService($solariumMock);
+        $this->fixture = new MetsService($solariumMock, $cacheMock, $metsClientMock);
     }
 
     /**

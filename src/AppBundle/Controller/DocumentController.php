@@ -15,22 +15,11 @@ class DocumentController extends Controller
     {
         $metsService = $this->get('mets_service');
 
-        $id = $metsService->getParentDocument($id);
+        $structure = $metsService->getTableOfContents($id);
 
-        $metsFile = $this->get('cache.app')->getItem('mets.'.sha1($id));
-
-        if (!$metsFile->isHit()) {
-            $client = $this->get('guzzle.client.mets');
-
-            $file = $client
-                ->get($id.'.xml')
-                ->getBody()->__toString();
-
-            $metsFile->set($file);
-            $this->get('cache.app')->save($metsFile);
-        }
-
-        $structure = $metsService->getTableOfContents($metsFile->get());
+        if (count($structure) === 0) {
+            $id = $metsService->getParentDocument($id);
+        };
 
         return $this->render('toc.html.twig', [
             'structure' => $structure,
