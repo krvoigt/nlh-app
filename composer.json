@@ -3,6 +3,8 @@
     "license": "AGPL-3.0",
     "type": "project",
     "description": "GDZ Website",
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
     "autoload": {
         "psr-4": {
             "": "src/"
@@ -25,7 +27,7 @@
    ],
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "3.1.*",
+        "symfony/symfony": "3.2.*",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
@@ -34,23 +36,23 @@
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
-        "symfony/console": "^3.1",
-        "symfony/debug": "^3.1",
+        "symfony/console": "^3.2",
+        "symfony/debug": "^3.2",
         "twig/twig": "~1.24",
         "nelmio/solarium-bundle": "^2.2",
-        "symfony/http-foundation": "^3.1",
+        "symfony/http-foundation": "^3.2",
         "knplabs/knp-paginator-bundle": "^2.5",
-        "symfony/options-resolver": "^3.1",
+        "symfony/options-resolver": "^3.2",
         "knplabs/knp-markdown-bundle": "^1.5",
         "subugoe/find-bundle": "dev-master",
-        "symfony/form": "^3.1",
-        "symfony/dom-crawler": "^3.1",
+        "symfony/form": "^3.2",
+        "symfony/dom-crawler": "^3.2",
         "eightpoints/guzzle-bundle": "^4.5",
         "liip/imagine-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.1",
+        "symfony/phpunit-bridge": "^3.2",
         "liip/functional-test-bundle": "^1.6",
         "phpunit/phpunit": "^5.4"
     },
