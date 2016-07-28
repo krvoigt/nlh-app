@@ -28,11 +28,41 @@ class MetsService
      */
     protected $metsClient;
 
+    /**
+     * MetsService constructor.
+     *
+     * @param \Solarium\Client $solrService
+     * @param AdapterInterface $cache
+     * @param Client           $metsClient
+     */
     public function __construct(\Solarium\Client $solrService, AdapterInterface $cache, Client $metsClient)
     {
         $this->solrService = $solrService;
         $this->cache = $cache;
         $this->metsClient = $metsClient;
+    }
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    protected function getMetFile($id)
+    {
+        $identifier = 'mets.'.sha1($id);
+
+        $metsFile = $this->cache->getItem($identifier);
+
+        if (!$metsFile->isHit()) {
+            $file = $this->metsClient
+                  ->get($id.'.xml')
+                  ->getBody()->__toString();
+
+            $metsFile->set($file);
+            $this->cache->save($metsFile);
+        }
+
+        return $metsFile->get();
     }
 
     /**
@@ -42,21 +72,10 @@ class MetsService
      */
     public function getTableOfContents($id)
     {
-        $identifier = 'mets.'.sha1($id);
-
-        $metsFile = $this->cache->getItem($identifier);
-
-        if (!$metsFile->isHit()) {
-            $file = $this->metsClient
-                ->get($id.'.xml')
-                ->getBody()->__toString();
-
-            $metsFile->set($file);
-            $this->cache->save($metsFile);
-        }
+        $metsFile = $this->getMetFile($id);
 
         $crawler = new Crawler();
-        $crawler->addContent($metsFile->get());
+        $crawler->addContent($metsFile);
 
         $storage = [];
 
