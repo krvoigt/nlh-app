@@ -93,20 +93,21 @@ class MetsService
 
         $documentId = $crawler->filterXPath('//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:recordInfo/mods:recordIdentifier')->text();
 
+        $pageMapping = $this->getPageMapping($crawler);
+
         $storage[] = $crawler
             ->filterXPath('//mets:mets/mets:structMap/mets:div')
             ->children()
-            ->each(function (Crawler $node) use ($documentId) {
+            ->each(function (Crawler $node) use ($documentId, $pageMapping) {
 
-                $toc = $this->getTocElement($node, $documentId);
+                $toc = $this->getTocElement($node, $documentId, $pageMapping);
 
                 if ($node->children()->count() > 0) {
                     $children = new \SplObjectStorage();
 
                     $node->children()
-                        ->each(function (Crawler $childNode) use (&$children, &$toc, $documentId) {
-
-                            $childToc = $this->getTocElement($childNode, $documentId);
+                        ->each(function (Crawler $childNode) use (&$children, &$toc, $documentId, $pageMapping) {
+                            $childToc = $this->getTocElement($childNode, $documentId, $pageMapping);
                             $toc->addChildren($childToc);
                         });
                 }
@@ -122,11 +123,33 @@ class MetsService
     }
 
     /**
+     * Get the links and pages from logical to physical pages.
+     *
+     * @param Crawler $crawler
+     *
+     * @return array
+     */
+    protected function getPageMapping(Crawler $crawler)
+    {
+        $links = [];
+        $crawler->filterXPath('//mets:mets/mets:structLink')->children()->each(function (Crawler $node) use (&$links) {
+             $key = $node->attr('xlink:from');
+             if (!array_key_exists($key, $links)) {
+                 $links[$key] = [];
+             }
+             array_push($links[$key], $node->attr('xlink:to'));
+         });
+
+        return $links;
+    }
+    /**
      * @param Crawler $node
+     * @param string  $parent
+     * @param Crawler $linkSegment
      *
      * @return TableOfContents
      */
-    protected function getTocElement(Crawler $node, $parent)
+    protected function getTocElement(Crawler $node, $parent, $linkSegment)
     {
         $toc = new TableOfContents();
 
@@ -135,6 +158,7 @@ class MetsService
         $toc->setDmdid($node->attr('DMDID'));
         $toc->setLabel($node->attr('LABEL'));
         $toc->setParentDocument($parent);
+        $toc->setPhysicalPages($linkSegment[$node->attr('ID')]);
 
         return $toc;
     }

@@ -37,6 +37,11 @@ class TableOfContents
      */
     protected $children;
 
+    /**
+     * @var array
+     */
+    protected $physicalPages;
+
     public function __construct()
     {
         $this->children = new \SplObjectStorage();
@@ -136,5 +141,21 @@ class TableOfContents
     public function setParentDocument(string $parentDocument)
     {
         $this->parentDocument = $parentDocument;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPhysicalPages(): array
+    {
+        return $this->physicalPages;
+    }
+
+    /**
+     * @param array $physicalPages
+     */
+    public function setPhysicalPages(array $physicalPages)
+    {
+        $this->physicalPages = $physicalPages;
     }
 }

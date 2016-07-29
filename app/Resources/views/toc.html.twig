@@ -1,6 +1,6 @@
 <ul>
     {% for element in structure[0] %}
-        <li><a href="{{ path('_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a>
+        <li><a href="{{ path('_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a> {% trans %}pages{% endtrans %} {% for physicalPages in element.physicalPages %}{{ physicalPages}} {% endfor %}
             {% if element.children is defined %}
                 <ul>
                     {% for children in element.children %}

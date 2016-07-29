@@ -93,6 +93,17 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(TableOfContents::class, $result[0][10]);
     }
 
+    /**
+     * @dataProvider metsDataProvider
+     */
+    public function testPhysicalPageLinksExist($mets)
+    {
+        $result = $this->fixture->getTableOfContents($mets);
+        $this->assertAttributeNotEmpty('physicalPages', $result[0][0]);
+        $this->assertAttributeCount(14, 'physicalPages', $result[0][13]);
+        $this->assertAttributeCount(2, 'physicalPages', $result[0][14]);
+    }
+
     public function metsDataProvider()
     {
         $mets = [
