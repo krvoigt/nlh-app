@@ -6,7 +6,7 @@ use AppBundle\Service\TeiProcessor;
 
 class TeiProcessorTest extends \PHPUnit_Framework_TestCase
 {
-     public function teiDataProvider()
+    public function teiDataProvider()
     {
         return [
             [
@@ -144,8 +144,8 @@ class TeiProcessorTest extends \PHPUnit_Framework_TestCase
         . 8.   ^reiê 9 ШЬ   3n §alWeberbanb Ш«. 10.60. 
       
         ^tof
-        . %. ©iegfrieb: „Sir empfeitlen baè Serf einem ЗеЬеп, ber fic^ eine lebenWae SCnfc|auuna t)on ber ©ntwidflung ber ^еЬгш|феп Literatur %\x oerfфaffen Юип|ф1"                                                                    К%%г^\. Ш.=3*9. 1895 Ш. 12.)'
-        ]
+        . %. ©iegfrieb: „Sir empfeitlen baè Serf einem ЗеЬеп, ber fic^ eine lebenWae SCnfc|auuna t)on ber ©ntwidflung ber ^еЬгш|феп Literatur %\x oerfфaffen Юип|ф1"                                                                    К%%г^\. Ш.=3*9. 1895 Ш. 12.)',
+        ],
         ];
     }
 
@@ -167,6 +167,6 @@ class TeiProcessorTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->fixture->process($teiContent);
 
-       $this->assertSame($expected, $result);
+        $this->assertSame($expected, $result);
     }
 }

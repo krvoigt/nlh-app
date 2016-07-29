@@ -1,5 +1,6 @@
 <?php
-declare(strict_types=1);
+
+declare (strict_types = 1);
 
 namespace tests\AppBundle\Service;
 
@@ -23,16 +24,16 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 'PPN341721271',
-                'PPN341721271/00000001'
+                'PPN341721271/00000001',
             ],
             [
                 'PPN341721271:00000001',
-                'PPN341721271/00000001'
+                'PPN341721271/00000001',
             ],
             [
                 '1:1',
-                '1/1'
-            ]
+                '1/1',
+            ],
         ];
     }
 
@@ -41,16 +42,16 @@ class ImageTest extends \PHPUnit_Framework_TestCase
         return [
             [
                 90,
-                90
+                90,
             ],
             [
                 '!90',
-                '!90'
+                '!90',
             ],
             [
                 0,
-                0
-            ]
+                0,
+            ],
         ];
     }
 

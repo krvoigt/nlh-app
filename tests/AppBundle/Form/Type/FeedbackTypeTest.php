@@ -1,11 +1,12 @@
 <?php
+
 namespace tests\AppBundle\Form\Type;
 
 use AppBundle\Form\Type\FeedbackType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
 /**
- * Unit Tests for forms
+ * Unit Tests for forms.
  */
 class FeedbackTypeTest extends TypeTestCase
 {
@@ -31,6 +32,5 @@ class FeedbackTypeTest extends TypeTestCase
         foreach (array_keys($formData) as $key) {
             $this->assertArrayHasKey($key, $children);
         }
-
     }
 }
