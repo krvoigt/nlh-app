@@ -35,9 +35,10 @@
         content: '';
         display: block;
         height: $border-width;
+        left: ($grid / 2);
         margin-top: (-$grid / 2);
         position: absolute;
-        width: 100%;
+        right: ($grid / 2);
     }
 }
 

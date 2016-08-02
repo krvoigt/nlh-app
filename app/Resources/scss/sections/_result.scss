@@ -47,7 +47,7 @@
 }
 
 .result_title-toggle {
-    @include button(light);
+    @include button(link);
     display: none;
     float: right;
     font-weight: normal;

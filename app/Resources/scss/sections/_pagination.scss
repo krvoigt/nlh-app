@@ -30,20 +30,8 @@
 }
 
 .pagination_link {
-    @include button(light);
-    border-radius: 0;
-
-    .pagination_item:first-child > & {
-        border-radius: $br 0 0 $br;
-    }
-
-    .pagination_item:last-child > & {
-        border-radius: 0 $br $br 0;
-    }
-
-    .pagination_item:nth-child(n+2) > & {
-        @include separator(0, 0, 0, 1);
-    }
+    @include button(link);
+    margin-right: $border-width * 2;
 
     &.-current {
         background: $text-color-light;
