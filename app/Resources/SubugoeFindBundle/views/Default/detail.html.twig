@@ -5,15 +5,11 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-
     {# Viewer settings #}
     {% set pageMappings = pageMappings.getScannedPagesMapping(app.request.get('id')) %}
     {% set pageCount = pageMappings|length %}
-
-    {% set page = app.request.get('page')|number_format %}
+    {% set page = app.request.get('page') ? app.request.get('page') : 1 %}
     {% set isValidPage = (page >= 1 and page <= pageCount) %}
-
-    {% set oddPageCountOrNotLastPage = pageCount % 2 > 0 or page != pageCount %}
 
     <main class="main" id="main">
         <section class="viewer">
@@ -37,5 +33,4 @@
             {% include "@SubugoeFind/Default/partials/coverflow.html.twig" %}
         </section>
     </main>
-
 {% endblock %}
