@@ -25,8 +25,10 @@
 
             <label class="sr-only single-page" for="viewer-page-select">{{ 'Current page'|trans }}</label>
             <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
-                {% for image in document.presentation_url %}
-                    <option {{ loop.index == page ? 'selected' }}>{{ loop.index }}</option>
+                {% for physPage, logPage in pageMappings %}
+                    <option value={{ physPage }} {{ physPage == page ? 'selected' }}>
+                        {{ physPage }} : {{ logPage }}
+                    </option>
                 {% endfor %}
             </select>
 
@@ -64,9 +66,16 @@
             </div>
         {% endif %}
     </div>
-    <div
-        class="viewer_image"
-        id="viewer_image"
-        data-iiif="{{ path('_iiifjson', {'identifier': (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'}))}) }}"
-    ></div>
+    {% if isValidPage %}
+        {% set identifier = (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
+        <div
+            class="viewer_image"
+            id="viewer_image"
+            data-iiif="{{ path('_iiifjson', {'identifier': identifier}) }}"
+        ></div>
+    {% else %}
+        <div class="viewer_error">
+            {{ 'Invalid page'|trans }}
+        </div>
+    {% endif %}
 </section>

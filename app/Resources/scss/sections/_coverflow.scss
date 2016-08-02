@@ -1,4 +1,9 @@
 .coverflow {
+    background: $black;
+    min-height: $grid;
+}
+
+.coverflow_list {
     margin: 0;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -10,7 +15,9 @@
 }
 
 .coverflow_item {
+    box-shadow: $drop-shadow;
     display: inline-block;
+    box-shadow: $drop-shadow;
     position: relative;
     vertical-align: bottom;
     width: round($grid * 2.25);
@@ -56,7 +63,7 @@
     font-weight: bold;
     line-height: 1;
     min-width: ($grid);
-    padding: round($grid / 6) round($grid / 4) ($grid * 2) ($grid * 2);
+    padding: round($grid / 6) round($grid / 6) ($grid * 2) ($grid * 2);
     position: absolute;
     right: 0;
     text-align: center;

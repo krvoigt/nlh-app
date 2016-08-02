@@ -7,7 +7,7 @@ $(function () {
     });
 
     $('article.facet').each(function () {
-        if ($(this).find('.facet_list').children().length < 7) {
+        if ($(this).find('.facet_list.-toggle').children().length < 7) {
             $(this).find('.facet_list-toggle.-expand').hide();
         }
     });

@@ -7,11 +7,14 @@ $(function () {
             effect: 'fadeIn',
         });
 
-        var currentPos = $coverflow.find('.coverflow_link.-current').offset().left - $coverflow.width() / 2.5;
-        $coverflow.scrollLeft(currentPos).mousewheel(function (event, delta) {
-            this.scrollLeft -= (delta * 100);
-            event.preventDefault();
-        });
+        var $current = $coverflow.find('.coverflow_link.-current');
+        if ( $current.length > 0 ) {
+            var currentPos = $current.offset().left - $coverflow.width() / 2.5;
+            $coverflow.scrollLeft(currentPos).mousewheel(function (event, delta) {
+                this.scrollLeft -= (delta * 100);
+                event.preventDefault();
+            });
+        }
 
         var $container = $('.coverflow');
         var $items = $('.coverflow_item');
@@ -28,7 +31,8 @@ $(function () {
         $coverflow.css({bottom: -height});
 
         $('body').mousemove(function (e) {
-            verticalDistance = Math.max(0, $(window).height() - e.pageY - height * 3);
+            // Move up covers when pointer is close
+            var verticalDistance = Math.max(0, $(window).height() - e.pageY - height * 2);
             $coverflow.css({
                 bottom: verticalDistance < height ? -height + height * (height - verticalDistance) / height : -height
             });

@@ -10,9 +10,13 @@
     top: 0;
 }
 
-.viewer_footer {
-    background: $black;
-    min-height: $grid;
+.viewer_error {
+    align-items: center;
+    color: $highlight-color;
+    font-weight: bold;
+    display: flex;
+    height: 100%;
+    justify-content: center;
 }
 
 .viewer_header {
@@ -52,14 +56,11 @@
         position: absolute;
         right: 0;
     }
-
-    [type=range] {
-        @include range-slider;
-    }
 }
 
 .viewer_control {
     @include button(light);
+    border-radius: 0;
 
     &.-active {
 		@include button;
@@ -78,6 +79,7 @@
 
     &[type=text] {
         color: $text-color !important;
+        text-align: left;
     }
 
     &:first-child {

@@ -7,12 +7,11 @@
 {% block content %}
 
     {# Viewer settings #}
-    {% set pageCount = document.presentation_url.0|length %}
+    {% set pageMappings = pageMappings.getScannedPagesMapping(app.request.get('id')) %}
+    {% set pageCount = pageMappings|length %}
 
     {% set page = app.request.get('page')|number_format %}
-    {% if page < 1 or page > pageCount %}
-        {% set page = 1 %}
-    {% endif %}
+    {% set isValidPage = (page >= 1 and page <= pageCount) %}
 
     {% set oddPageCountOrNotLastPage = pageCount % 2 > 0 or page != pageCount %}
 
@@ -35,7 +34,7 @@
                     {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
                 </div>
             </div>
-            {% include "@SubugoeFind/Default/partials/footer.html.twig" %}
+            {% include "@SubugoeFind/Default/partials/coverflow.html.twig" %}
         </section>
     </main>
 
