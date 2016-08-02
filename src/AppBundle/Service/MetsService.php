@@ -93,21 +93,21 @@ class MetsService
 
         $documentId = $crawler->filterXPath('//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:recordInfo/mods:recordIdentifier')->text();
 
-        $pageMapping = $this->getPageMapping($crawler);
+        $pageMappings = $this->getPageMapping($crawler);
 
         $storage[] = $crawler
             ->filterXPath('//mets:mets/mets:structMap/mets:div')
             ->children()
-            ->each(function (Crawler $node) use ($documentId, $pageMapping) {
+            ->each(function (Crawler $node) use ($documentId, $pageMappings) {
 
-                $toc = $this->getTocElement($node, $documentId, $pageMapping);
+                $toc = $this->getTocElement($node, $documentId, $pageMappings);
 
                 if ($node->children()->count() > 0) {
                     $children = new \SplObjectStorage();
 
                     $node->children()
-                        ->each(function (Crawler $childNode) use (&$children, &$toc, $documentId, $pageMapping) {
-                            $childToc = $this->getTocElement($childNode, $documentId, $pageMapping);
+                        ->each(function (Crawler $childNode) use (&$children, &$toc, $documentId, $pageMappings) {
+                            $childToc = $this->getTocElement($childNode, $documentId, $pageMappings);
                             $toc->addChildren($childToc);
                         });
                 }
@@ -120,6 +120,45 @@ class MetsService
         };
 
         return $storage;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return array
+     */
+    public function getScannedPagesMapping($id)
+    {
+        try {
+            $metsFile = $this->getMetFile($id);
+        } catch (ClientException $e) {
+            $id = $this->getParentDocument($id);
+
+            try {
+                $metsFile = $this->getMetFile($id);
+            } catch (ClientException $e) {
+                $id = $this->getParentDocument($id);
+                $metsFile = $this->getMetFile($id);
+            }
+        }
+
+        $links = [];
+
+        $crawler = new Crawler();
+        $crawler->addContent($metsFile);
+
+        $crawler->filterXPath('//mets:mets/mets:structMap[@TYPE="PHYSICAL"]/mets:div')->children()->each(function (Crawler $node) use (&$links) {
+            $key = $node->attr('ORDER');
+
+            $links[$key] = '';
+
+            if ($node->attr('ORDERLABEL')) {
+                $links[$key] = $node->attr('ORDERLABEL');
+            }
+
+         });
+
+        return $links;
     }
 
     /**

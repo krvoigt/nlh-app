@@ -19,6 +19,7 @@ class DocumentController extends Controller
 
         return $this->render('toc.html.twig', [
             'structure' => $structure,
+            'pageMappings' => $metsService->getScannedPagesMapping($id),
             'id' => $id,
         ]);
     }
