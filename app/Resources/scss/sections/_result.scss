@@ -32,17 +32,21 @@
     display: block;
     font: inherit;
     font-weight: bold;
-    height: $grid;
     margin: 0 0 ($grid / 2);
-    overflow: hidden;
     position: relative;
 
     > a {
         @include link;
     }
 
+    &.-cut {
+        height: $grid;
+        overflow: hidden;
+    }
+
     &.-full {
-        height: auto;
+        height: auto !important;
+        overflow: visible;
     }
 }
 
@@ -57,7 +61,7 @@
     &.-expand {
         @include icon(chevron-down, false);
         position: absolute;
-        top: 0;
+        bottom: 0;
         right: 0;
 
         &::after {
@@ -65,11 +69,11 @@
             content: '';
             display: block;
             height: $grid;
-            margin-left: (-$grid * 2.75); // width + button padding
+            margin-left: (-$grid * 3.25); // width + button padding
             pointer-events: none;
             position: absolute;
             top: 0;
-            width: ($grid * 2.5);
+            width: ($grid * 3);
         }
     }
 
