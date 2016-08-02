@@ -2,14 +2,14 @@
     <h1 class="viewer_title">{{ document.title | first }}</h1>
     <div class="viewer_group">
         {% if document.gdzocr_url is defined %}
-            <button class="viewer_control js-toggle-panel" data-target="transcript">{% trans %}Transcript{% endtrans %}</button>
+            <button class="viewer_control js-toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
         {% endif %}
-        <button class="viewer_control js-toggle-panel" data-target="toc">{% trans %}Contents{% endtrans %}</button>
-        <button class="viewer_control -active js-toggle-panel" data-target="metadata">{% trans %}Metadata{% endtrans %}</button>
+        <button class="viewer_control js-toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
+        <button class="viewer_control -active js-toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
     </div>
     <div class="viewer_group">
         <button class="viewer_control -fullscreen js-fullscreen" title="Vollbildansicht">
-            <span class="sr-only">{% trans %}Fullscreen{% endtrans %}</span>
+            <span class="sr-only">{{ 'Fullscreen'|trans }}</span>
         </button>
     </div>
 </header>

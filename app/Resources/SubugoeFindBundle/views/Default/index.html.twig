@@ -5,7 +5,7 @@
 {% endif %}
 
 {% block findnavigation %}
-    <div class="find_count">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {% trans %}numfound{% endtrans %}</div>
+    <div class="find_count">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {{ 'numfound'|trans }}</div>
    {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
@@ -26,10 +26,10 @@
                         <h2 class="result_title">
                             <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
                             <button class="result_title-toggle -expand">
-                                {% trans %}Show full title{% endtrans %}
+                                {{ 'Show full title'|trans }}
                             </button>
                             <button class="result_title-toggle -collapse">
-                                {% trans %}Collapse title{% endtrans %}
+                                {{ 'Collapse title'|trans }}
                             </button>
                         </h2>
                         <p class="result_paragraph">
@@ -53,8 +53,8 @@
 
 {% block sidebar %}
     <div class="facets_header">
-        <button class="facets_toggle -show">{% trans %}Show filters{% endtrans %}</button>
-        <button class="facets_toggle -hide hidden">{% trans %}Hide filters{% endtrans %}</button>
+        <button class="facets_toggle -show">{{ 'Show filters'|trans }}</button>
+        <button class="facets_toggle -hide hidden">{{ 'Hide filters'|trans }}</button>
     </div>
     <div class="facets_body">
         {% for key, facet in facets %}
@@ -76,8 +76,8 @@
                         </li>
                     {% endfor %}
                 </ol>
-                <button class="facet_list-toggle -expand">{% trans %}expand{% endtrans %}</button>
-                <button class="facet_list-toggle -collapse">{% trans %}collapse{% endtrans %}</button>
+                <button class="facet_list-toggle -expand">{{ 'expand'|trans }}</button>
+                <button class="facet_list-toggle -collapse">{{ 'collapse'|trans }}</button>
             </article>
         {% endfor %}
     </div>

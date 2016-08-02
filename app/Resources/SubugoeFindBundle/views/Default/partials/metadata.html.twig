@@ -1,9 +1,7 @@
 <section class="viewer_metadata">
-    <h2 class="viewer_heading">{% trans %}Metadata{% endtrans %}</h2>
-
+    <h2 class="viewer_heading">{{ 'Metadata'|trans }}</h2>
     <dl>
-
-        <dt>{% trans %}bytitle{% endtrans %}</dt>
+        <dt>{{ 'bytitle'|trans }}</dt>
         <dd>{{ document.title | first }}</dd>
 
         {% if document.creator is defined %}
@@ -45,16 +43,16 @@
             {% endfor %}
         </dd>
 
-        <dt>{% trans %}PURL{% endtrans %}</dt>
+        <dt>{{ 'PURL'|trans }}</dt>
         <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
 
         {% if document['id_gbv-ppn_s'] is defined %}
-            <dt>{% trans %}gbv-ppn{% endtrans %}</dt>
+            <dt>{{ 'gbv-ppn'|trans }}</dt>
             <dd>{{ document['id_gbv-ppn_s'][0] }}</dd>
         {% endif %}
 
         {% if document.id_PPNanalog_s is defined %}
-            <dt>{% trans %}PPN (original){% endtrans %}</dt>
+            <dt>{{ 'PPN (original)'|trans }}</dt>
             <dd>
                 <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
             </dd>

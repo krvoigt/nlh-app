@@ -4,26 +4,26 @@
         <div class="viewer_group">
             <button
                 class="viewer_control -first-page"
-                title="{% trans %}First page{% endtrans %}"
+                title="{{ 'First page'|trans }}"
                 disabled
             >
-                <span class="sr-only">{% trans %}First page{% endtrans %}</span>
+                <span class="sr-only">{{ 'First page'|trans }}</span>
             </button>
             <a
                 class="viewer_control -previous-section {{ not document.idparentdoc is defined ? '-disabled' }}"
-                title="{% trans %}Previous section{% endtrans %}"
+                title="{{ 'Previous section'|trans }}"
                 {{ document.idparentdoc is defined ? 'href=' ~ path('_detail', {id: document.idparentdoc | first}) }}
             >
-                <span class="sr-only">{% trans %}Previous section{% endtrans %}</span>
+                <span class="sr-only">{{ 'Previous section'|trans }}</span>
             </a>
             <button
                 class="viewer_control -previous-page js-previous-page"
-                title="{% trans %}Previous page{% endtrans %}" {{ page == 1 ? 'disabled' }}
+                title="{{ 'Previous page'|trans }}" {{ page == 1 ? 'disabled' }}
             >
-                <span class="sr-only">{% trans %}Previous page{% endtrans %}</span>
+                <span class="sr-only">{{ 'Previous page'|trans }}</span>
             </button>
 
-            <label class="sr-only single-page" for="viewer-page-select">{% trans %}Current page{% endtrans %}</label>
+            <label class="sr-only single-page" for="viewer-page-select">{{ 'Current page'|trans }}</label>
             <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
                 {% for image in document.presentation_url %}
                     <option {{ loop.index == page ? 'selected' }}>{{ loop.index }}</option>
@@ -32,35 +32,35 @@
 
             <button
                 class="viewer_control -next-page js-next-page"
-                title="{% trans %}Next page{% endtrans %}" {{ page == pageCount ? 'disabled' }}
+                title="{{ 'Next page'|trans }}" {{ page == pageCount ? 'disabled' }}
             >
-                <span class="sr-only">{% trans %}Next page{% endtrans %}</span>
+                <span class="sr-only">{{ 'Next page'|trans }}</span>
             </button>
             <button
                 class="viewer_control -next-section"
-                title="{% trans %}Next section{% endtrans %}"
+                title="{{ 'Next section'|trans }}"
                 disabled
             >
-                <span class="sr-only">{% trans %}Next section{% endtrans %}</span>
+                <span class="sr-only">{{ 'Next section'|trans }}</span>
             </button>
             <button
                 class="viewer_control -last-page"
-                title="{% trans %}Last page{% endtrans %}"
+                title="{{ 'Last page'|trans }}"
                 disabled
             >
-                <span class="sr-only">{% trans %}Last page{% endtrans %}</span>
+                <span class="sr-only">{{ 'Last page'|trans }}</span>
             </button>
         </div>
         <div class="viewer_group">
-            <button class="viewer_control -zoom-out js-zoom-out" title="{% trans %}Zoom out{% endtrans %}"><span class="sr-only">{% trans %}Zoom out{% endtrans %}</span></button>
-            <label class="sr-only" for="viewer-zoom-range">{% trans %}Set zoom{% endtrans %}</label>
-            <button class="viewer_control -zoom-in js-zoom-in" title="{% trans %}Zoom in{% endtrans %}"></i><span class="sr-only">{% trans %}Zoom in{% endtrans %}</span></button>
-            <button class="viewer_control -zoom-reset js-zoom-reset" title="{% trans %}Reset zoom{% endtrans %}"><span class="sr-only">{% trans %}Reset zoom{% endtrans %}</span></button>
+            <button class="viewer_control -zoom-out js-zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
+            <label class="sr-only" for="viewer-zoom-range">{{ 'Set zoom'|trans }}</label>
+            <button class="viewer_control -zoom-in js-zoom-in" title="{{ 'Zoom in'|trans }}"></i><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
+            <button class="viewer_control -zoom-reset js-zoom-reset" title="{{ 'Reset zoom'|trans }}"><span class="sr-only">{{ 'Reset zoom'|trans }}</span></button>
         </div>
         {% if document.gdzocr_url is defined %}
             <div class="viewer_group">
-                <input class="viewer_control" type="text" placeholder="{% trans %}Search in document{% endtrans %}" title="{% trans %}Search in document{% endtrans %}">
-                <button class="viewer_control -search"><span class="sr-only">{% trans %}Search{% endtrans %}</span></button>
+                <input class="viewer_control" type="text" placeholder="{{ "Search in document"|trans }}" title="{{ 'Search in document'|trans }}">
+                <button class="viewer_control -search"><span class="sr-only">{{ 'Search'|trans }}</span></button>
             </div>
         {% endif %}
     </div>

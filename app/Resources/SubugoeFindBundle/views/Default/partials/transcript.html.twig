@@ -2,7 +2,7 @@
 
 {% if document['gdzocr_url'] is defined %}
     <section class="viewer_transcript">
-        <h2 class="viewer_heading">{% trans %}Transcript{% endtrans %}</h2>
+        <h2 class="viewer_heading">{{ 'Transcript'|trans }}</h2>
         <div class="viewer_transcript-page">
             {% autoescape %}
                 {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][page - 1] })) | nl2br }}
