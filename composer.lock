@@ -1544,16 +1544,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.20.0",
+            "version": "1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037"
+                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/55841909e2bcde01b5318c35f2b74f8ecc86e037",
-                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/f42fbdfd53e306bda545845e4dbfd3e72edb4952",
+                "reference": "f42fbdfd53e306bda545845e4dbfd3e72edb4952",
                 "shasum": ""
             },
             "require": {
@@ -1618,7 +1618,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-07-02 14:02:10"
+            "time": "2016-07-29 03:23:52"
         },
         {
             "name": "nelmio/solarium-bundle",
@@ -2560,12 +2560,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b6bbe43b4b525be1caa00a5bcbc6ad53be969b84"
+                "reference": "983b560e157c9a814e8a092d11d281a9b53fb3bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b6bbe43b4b525be1caa00a5bcbc6ad53be969b84",
-                "reference": "b6bbe43b4b525be1caa00a5bcbc6ad53be969b84",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/983b560e157c9a814e8a092d11d281a9b53fb3bd",
+                "reference": "983b560e157c9a814e8a092d11d281a9b53fb3bd",
                 "shasum": ""
             },
             "require": {
@@ -2689,7 +2689,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-07-28 11:15:50"
+            "time": "2016-07-30 07:40:44"
         },
         {
             "name": "twig/twig",
