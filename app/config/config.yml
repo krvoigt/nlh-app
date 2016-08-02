@@ -58,6 +58,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        pageMappings: "@mets_service"
 
 # Doctrine Configuration
 doctrine:
@@ -103,7 +105,7 @@ nelmio_solarium:
             endpoints: [default]
 
 subugoe_find:
-    default_query: "ismets:true"
+    default_query: "ismets:true isanchor:false"
     default_sort: "datemodified desc"
     feed_sort: "dateindexed DESC"
     feed_rows: 15
