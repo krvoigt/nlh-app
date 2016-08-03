@@ -16,8 +16,6 @@
     white-space: nowrap;
 
     @if $modifier == link {
-        background: $white;
-
         @include hover {
             background: linear-gradient(to bottom, tint($link-hover-bg-color, 30), tint($link-hover-bg-color, 10));
             color: shade($link-color, 20);

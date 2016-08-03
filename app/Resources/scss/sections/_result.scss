@@ -1,12 +1,38 @@
 .result_item {
+    background: $white;
+    border-radius: $br;
+    box-shadow: $card-shadow;
+    padding: ($grid / 2);
+    // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
     & + & {
-        margin-top: $grid;
+        margin-top: ($grid / 2);
+    }
+}
+
+.result_left {
+    display: table-cell;
+    padding: 0 ($grid / 2) 0 0;
+    width: ($grid * 4);
+}
+
+.result_link {
+    &.-image {
+        box-shadow: none;
+
+        > img {
+            @include transition(opacity);
+
+            @include hover {
+                opacity: .7;
+            }
+        }
     }
 }
 
 .result_list {
-    margin: 0 220px 0 0; // TODO
-    padding-left: 3em;
+    list-style: none;
+    margin: 0 (9 * $grid) 0 0; // TODO
 
     @include respond-to(medium) {
         margin: 0;
@@ -52,6 +78,7 @@
 
 .result_title-toggle {
     @include button(link);
+    background: $white;
     display: none;
     float: right;
     font-weight: normal;
@@ -83,14 +110,7 @@
 }
 
 .result_thumbnail {
-    display: table-cell;
-    padding: 0 ($grid / 2);
-    width: ($grid * 4);
-
-    > img {
-        box-shadow: $drop-shadow;
-        display: block;
-    }
+    display: block;
 }
 
 .result_wrap {

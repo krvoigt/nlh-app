@@ -10,7 +10,7 @@
 
             {% block contentabove %}{% endblock %}
 
-            <div class="navigation top">
+            <div class="navigation -top">
                 {% block findnavigation %}{% endblock %}
             </div>
 
@@ -19,6 +19,10 @@
                     {% block sidebar %}{% endblock %}
                 </section>
                 {% block content %}{% endblock %}
+            </div>
+
+            <div class="navigation -bottom">
+                {% block footer %}{% endblock %}
             </div>
         </div>
 

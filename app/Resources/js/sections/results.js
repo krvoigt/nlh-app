@@ -1,7 +1,7 @@
 $(function () {
     var titleLineHeight = parseInt($('.result_title').css('line-height'));
 
-    $('.result_thumbnail > img').each( function() {
+    $('.result_thumbnail').each( function() {
         var $parent = $(this).closest('.result_item');
         if ($(this).height() > 0) {
             $parent.adjustHeight(titleLineHeight);
@@ -30,7 +30,7 @@ $.fn.extend({
             var $title = $this.find('.result_title');
             $title.height( '' ).removeClass('-cut');
             var metadataHeight = $this.find('.result_metadata').height();
-            var thumbnailHeight = $this.find('.result_thumbnail > img').height();
+            var thumbnailHeight = $this.find('.result_thumbnail').height();
             var excessHeight = Math.floor(metadataHeight - thumbnailHeight);
             if ( excessHeight > 0 ) {
                 $title.height( Math.max($title.height() - Math.ceil(excessHeight / minHeight) * minHeight, minHeight) ).addClass('-cut');

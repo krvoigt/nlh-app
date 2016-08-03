@@ -23,7 +23,7 @@
 
 .facets_header {
     display: none;
-    padding: 0 0 $grid;
+    padding: 0 0 ($grid / 2);
     text-align: center;
 
     @include respond-to(medium) {
@@ -43,7 +43,7 @@
 }
 
 .facets_toggle {
-    background: $white;
+    background: $grey-lightest;
     padding: 0 .5em;
     position: relative;
     z-index: 1;

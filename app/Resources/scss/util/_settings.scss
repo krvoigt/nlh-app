@@ -38,7 +38,7 @@ $brand-color-lighter: lighten($brand-color, 66);
 // Other base colors
 $grey: #666;
 $grey-light: #ddd;
-$grey-lightest: #eee;
+$grey-lightest: #f7f7f7;
 $grey-dark: #333;
 $shadow-light: rgba(black, .08);
 $shadow-dark: rgba(black, .24);
@@ -68,6 +68,7 @@ $input-border-color-focus: $brand-color;
 $alert-color: $red;
 
 // Combined values
+$card-shadow: 0 0 1px $shadow-light, 0 1px 2px $shadow-dark;
 $drop-shadow: 0 0 ($grid / 4) rgba($black, .5);
 $outline: 1px dotted $text-color-light;
 
