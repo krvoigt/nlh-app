@@ -38,7 +38,7 @@ class FeedbackController extends Controller
                             'text/html'
                         );
             $this->get('mailer')->send($message);
-            $this->addFlash('notice', 'Your feedback has been sent!');
+            $this->addFlash('notice', 'Your feedback has been sent.');
 
             $response = $this->redirectToRoute('_homepage');
 
