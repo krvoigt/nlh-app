@@ -72,10 +72,6 @@
         border-radius: 0 0 $br $br;
     }
 
-    &.-catalog a {
-        @include link;
-    }
-
     &.-visible {
         display: block;
     }
