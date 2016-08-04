@@ -64,6 +64,7 @@
 
     &.-active {
 		@include button;
+        border-radius: 0;
     }
 
     &[disabled],
