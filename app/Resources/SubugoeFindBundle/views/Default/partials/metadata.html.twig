@@ -44,8 +44,8 @@
         </dd>
 
         <dt>DFG-Viewer</dt>
-        <dd>
-            <a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">Link</a>
+        <dd class="dfgviewer">
+            <a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}"><img class="dfgviewer-image" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ document.title | first }}"></a>
         </dd>
 
         <dt>{{ 'PURL'|trans }}</dt>

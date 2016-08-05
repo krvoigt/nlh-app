@@ -25,7 +25,7 @@
     flex: 0 0 ($grid * 2);
     display: flex;
     flex-wrap: wrap;
-    padding: ($grid / 4 - $border-width)  0 0 ($grid / 4);
+    padding: ($grid / 4 - $border-width) 0 0 ($grid / 4);
 }
 
 .viewer_image {
@@ -63,7 +63,7 @@
     border-radius: 0;
 
     &.-active {
-		@include button;
+        @include button;
         border-radius: 0;
     }
 
@@ -129,17 +129,17 @@
         @include icon(search-plus, false);
     }
 
-	&.-zoom-reset {
-		@include icon(circle-o-notch, false);
-	}
+    &.-zoom-reset {
+        @include icon(circle-o-notch, false);
+    }
 
     &.-search {
         @include icon(search, false);
     }
 
-	&.-fullscreen {
-		@include icon(arrows-alt, false);
-	}
+    &.-fullscreen {
+        @include icon(arrows-alt, false);
+    }
 }
 
 .viewer_dl {
@@ -155,9 +155,9 @@
 }
 
 .viewer_group {
-	border-radius: $br;
+    border-radius: $br;
     box-shadow: $drop-shadow;
-	display: flex;
+    display: flex;
     margin: 0 ($grid / 4) ($grid / 4) 0;
 }
 
@@ -174,6 +174,10 @@
     dd {
         margin-bottom: 1em;
         width: auto;
+    }
+
+    .dfgviewer-image {
+        height: $grid;
     }
 }
 
