@@ -43,6 +43,11 @@
             {% endfor %}
         </dd>
 
+        <dt>DFG-Viewer</dt>
+        <dd>
+            <a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">Link</a>
+        </dd>
+
         <dt>{{ 'PURL'|trans }}</dt>
         <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
 
