@@ -2070,12 +2070,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/subugoe/SubugoeFindBundle.git",
-                "reference": "3e00aa71fd3b7939483f7531405cebfdbcea0d45"
+                "reference": "71f0087d321071107cd07bf501224af93c566eb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/3e00aa71fd3b7939483f7531405cebfdbcea0d45",
-                "reference": "3e00aa71fd3b7939483f7531405cebfdbcea0d45",
+                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/71f0087d321071107cd07bf501224af93c566eb1",
+                "reference": "71f0087d321071107cd07bf501224af93c566eb1",
                 "shasum": ""
             },
             "type": "library",
@@ -2098,7 +2098,7 @@
                 "source": "https://github.com/subugoe/SubugoeFindBundle/tree/master",
                 "issues": "https://github.com/subugoe/SubugoeFindBundle/issues"
             },
-            "time": "2016-06-15 07:12:56"
+            "time": "2016-08-05 12:33:39"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2560,12 +2560,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "e408b50c5ad44fe3af402ee8ccc839d62adeebbe"
+                "reference": "64ace101fb6a58c97f7d3ea4e39f15985f1e6b2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/e408b50c5ad44fe3af402ee8ccc839d62adeebbe",
-                "reference": "e408b50c5ad44fe3af402ee8ccc839d62adeebbe",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/64ace101fb6a58c97f7d3ea4e39f15985f1e6b2e",
+                "reference": "64ace101fb6a58c97f7d3ea4e39f15985f1e6b2e",
                 "shasum": ""
             },
             "require": {
@@ -2689,7 +2689,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-08-02 10:17:38"
+            "time": "2016-08-05 10:06:06"
         },
         {
             "name": "twig/twig",
