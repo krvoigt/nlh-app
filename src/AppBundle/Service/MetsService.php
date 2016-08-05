@@ -197,7 +197,12 @@ class MetsService
         $toc->setDmdid($node->attr('DMDID'));
         $toc->setLabel($node->attr('LABEL'));
         $toc->setParentDocument($parent);
-        $toc->setPhysicalPages($linkSegment[$node->attr('ID')]);
+
+        if (isset($linkSegment[$node->attr('ID')])) {
+            $toc->setPhysicalPages($linkSegment[$node->attr('ID')]);
+        } else {
+            $toc->setPhysicalPages([]);
+        }
 
         return $toc;
     }
