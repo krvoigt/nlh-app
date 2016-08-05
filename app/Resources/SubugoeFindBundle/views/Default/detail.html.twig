@@ -5,32 +5,36 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    {# Viewer settings #}
-    {% set pageMappings = pageMappings.getScannedPagesMapping(app.request.get('id')) %}
-    {% set pageCount = pageMappings|length %}
-    {% set page = app.request.get('page') ? app.request.get('page') : 1 %}
-    {% set isValidPage = (page >= 1 and page <= pageCount) %}
+    {% if document.isanchor %}
+        {{ render(controller('AppBundle:Document:anchorDocument', { 'id': document.id })) }}
+    {% else %}
+        {# Viewer settings #}
+        {% set pageMappings = pageMappings.getScannedPagesMapping(app.request.get('id')) %}
+        {% set pageCount = pageMappings|length %}
+        {% set page = app.request.get('page') ? app.request.get('page') : 1 %}
+        {% set isValidPage = (page >= 1 and page <= pageCount) %}
 
-    <main class="main" id="main">
-        <section class="viewer">
-            {% include "@SubugoeFind/Default/partials/header.html.twig" %}
-            <div class="viewer_main">
-                <div class="viewer_panel -scan">
-                    {% include "@SubugoeFind/Default/partials/scan.html.twig" %}
-                </div>
-                {% if document.gdzocr_url is defined %}
-                    <div class="viewer_panel -transcript -hidden">
-                        {% include "@SubugoeFind/Default/partials/transcript.html.twig" %}
+        <main class="main" id="main">
+            <section class="viewer">
+                {% include "@SubugoeFind/Default/partials/header.html.twig" %}
+                <div class="viewer_main">
+                    <div class="viewer_panel -scan">
+                        {% include "@SubugoeFind/Default/partials/scan.html.twig" %}
                     </div>
-                {% endif %}
-                <div class="viewer_panel -toc -hidden">
-                    {% include "@SubugoeFind/Default/partials/toc.html.twig" %}
+                    {% if document.gdzocr_url is defined %}
+                        <div class="viewer_panel -transcript -hidden">
+                            {% include "@SubugoeFind/Default/partials/transcript.html.twig" %}
+                        </div>
+                    {% endif %}
+                    <div class="viewer_panel -toc -hidden">
+                        {% include "@SubugoeFind/Default/partials/toc.html.twig" %}
+                    </div>
+                    <div class="viewer_panel -metadata">
+                        {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
+                    </div>
                 </div>
-                <div class="viewer_panel -metadata">
-                    {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
-                </div>
-            </div>
-            {% include "@SubugoeFind/Default/partials/coverflow.html.twig" %}
-        </section>
-    </main>
+                {% include "@SubugoeFind/Default/partials/coverflow.html.twig" %}
+            </section>
+        </main>
+    {% endif %}
 {% endblock %}

@@ -3,11 +3,40 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Solarium\QueryType\Select\Result\DocumentInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class DocumentController extends Controller
 {
+    /**
+     * @Route("/anchor/{id}", name="_anchor", methods={"GET"})
+     */
+    public function anchorDocumentAction($id)
+    {
+        $client = $this->get('solarium.client');
+        $select = $client->createSelect()->setQuery(sprintf('idparentdoc:%s', $id));
+        $documents = array_filter($client->select($select)->getDocuments(), [$this, 'onlyOneParent']);
+
+        return $this->render('partials/app/anchor.html.twig', [
+            'documents' => $documents,
+        ]);
+    }
+
+    /**
+     * @param DocumentInterface $document
+     *
+     * @return bool
+     */
+    protected function onlyOneParent($document)
+    {
+        if (count($document->getFields()['idparentdoc']) === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @Route("/id/{id}/toc/", name="_toc", methods={"GET"})
      */
