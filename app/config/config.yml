@@ -117,7 +117,7 @@ subugoe_find:
         - { title: dc, field: dc}
         - { title: facetplacepublish, field: facetplacepublish}
         - { title: docstrct, field: docstrct}
-        - { title: yearpublish, field: yearpublish}
+        - { title: yearpublish, field: yearpublish, sort: "index"}
     hidden:
         - { field: dc, value: archaeo18 }
         - { field: dc, value: aschiana }
