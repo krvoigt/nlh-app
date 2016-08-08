@@ -1721,16 +1721,16 @@
         },
         {
             "name": "psr/cache",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3"
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
                 "shasum": ""
             },
             "require": {
@@ -1763,20 +1763,20 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2015-12-11 02:52:07"
+            "time": "2016-08-06 20:24:11"
         },
         {
             "name": "psr/http-message",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "shasum": ""
             },
             "require": {
@@ -1804,6 +1804,7 @@
                 }
             ],
             "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -1812,7 +1813,7 @@
                 "request",
                 "response"
             ],
-            "time": "2015-05-04 20:22:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -2560,12 +2561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "64ace101fb6a58c97f7d3ea4e39f15985f1e6b2e"
+                "reference": "02f59fe20b52dc95e022bd010b747a2be36a27f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/64ace101fb6a58c97f7d3ea4e39f15985f1e6b2e",
-                "reference": "64ace101fb6a58c97f7d3ea4e39f15985f1e6b2e",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/02f59fe20b52dc95e022bd010b747a2be36a27f9",
+                "reference": "02f59fe20b52dc95e022bd010b747a2be36a27f9",
                 "shasum": ""
             },
             "require": {
@@ -2689,7 +2690,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-08-05 10:06:06"
+            "time": "2016-08-07 16:24:25"
         },
         {
             "name": "twig/twig",
