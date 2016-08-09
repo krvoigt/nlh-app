@@ -1,7 +1,3 @@
-{% if query is not defined %}
-    {% set query = '' %}
-{% endif %}
-
 {% set scope = app.request.query.get('scope') | default('metadata') %}
 
 <header class="header" data-role="header">
@@ -25,7 +21,7 @@
         </ul>
         <div class="search">
             <form class="search_form -visible" method="get" role="search" action="/">
-                <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text" name="q" value="{{ query }}">
+                <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text" name="q" value="{{ app.request.query.get('q') }}">
                 <label for="mytextbox" class="sr-only">{{ 'Quick search'|trans }}</label>
                 <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>
                 <div class="search_popup">
