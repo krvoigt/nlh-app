@@ -42,6 +42,11 @@
     }
 }
 
+.facets_remove {
+    @include button(light);
+    margin-bottom: $grid;
+}
+
 .facets_toggle {
     background: $grey-lightest;
     padding: 0 .5em;

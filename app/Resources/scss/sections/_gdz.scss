@@ -27,7 +27,7 @@ hr {
     transition: opacity 0.3s ease-in-out;
     border-radius: 3px;
     height: auto;
-    opacity: .75;
+    opacity: .7;
     width: 100%;
 }
 
@@ -199,7 +199,7 @@ hr {
     height: 100%;
     margin: 0 0 0 -32.5px;
     text-align: center;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: $shadow-inset;
     width: 26px;
 }
 

@@ -13,12 +13,10 @@
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
-    white-space: nowrap;
 
     @if $modifier == link {
         @include hover {
-            background: linear-gradient(to bottom, tint($link-hover-bg-color, 30), tint($link-hover-bg-color, 10));
-            color: shade($link-color, 20);
+            background: $link-hover-bg-color;
         }
     } @else if $modifier == light {
         color: $text-color;
@@ -32,7 +30,7 @@
     } @else {
         background: linear-gradient(to bottom, tint($link-color, 10), shade($link-color, 10));
         color: #fff;
-        text-shadow: 0 -1px rgba(#000, .6);
+        text-shadow: $shadow-inset;
 
         @include hover {
             background: linear-gradient(to bottom, shade($brand-color, 10), shade($brand-color, 30));

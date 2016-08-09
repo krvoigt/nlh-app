@@ -1,10 +1,4 @@
-# Pagination
-Current page:: Aktuelle Seite:
-Go to first page: Zur ersten Seite
-Go to last page: Zur letzten Seite
-Go to previous page: Zur vorigen Seite
-Go to next page: Zur nächsten Seite
-
+# Common
 An error occured: Ein Fehler trat auf
 Close: Schließen
 Collections: Sammlungen
@@ -12,25 +6,38 @@ Contact: Kontakt
 Fulltexts: Volltexte
 Göttingen State and University Library: Niedersächsische Staats- und Universitätsbibliothek Göttingen
 Help for search: Hilfe zur Suche
-Hide filters: Filter ausblenden
+
 Imprint: Impressum
 Just scanned: Just scanned
 Metadata: Metadaten
 Metadata and fulltexts: Metadaten und Volltexte
 Quick search: Schnellsuche
 Search in: Durchsuche
-Show filters: Filter anzeigen
 The requested page was not found: Die gewünschte Seite wurde nicht gefunden
 Your feedback has been sent.: Ihre Nachricht wurde übermittelt.
+
+# Pagination
+Current page:: Aktuelle Seite:
+Go to first page: Zur ersten Seite
+Go to last page: Zur letzten Seite
+Go to previous page: Zur vorigen Seite
+Go to next page: Zur nächsten Seite
+
+# Results
+Add filter &ldquo;%name% is %value%&rdquo;: 'Filter hinzufügen: &bdquo;%name% ist %value%&ldquo;'
+Hide filters: Filter ausblenden
+Remove all filters: Alle Filter entfernen
+Remove filter &ldquo;%name% is %value%&rdquo;: 'Filter entfernen: &bdquo;%name% ist %value%&ldquo;'
+Show filters: Filter anzeigen
 
 # Search results
 Show full title: Voller Titel
 Collapse title: Titel verkleinern
 
-#command
+# Command
 Cleared IIIF image cache: IIIF cache geleert
 
-#form
+# Form
 Comment: Kommentar
 E-mail: E-Mail
 Submit: Absenden
@@ -64,7 +71,7 @@ Transcript: Transkript
 Zoom in: Vergrößern
 Zoom out: Verkleinern
 
-#fields
+# Fields
 docstrct: Strukturtyp|Strukturtypen
 facetplacepublish: Erscheinungsort|Erscheinungsorte
 placepublish: Erscheinungsort|Erscheinungsorte
@@ -76,7 +83,7 @@ creator: Autor|Autoren
 yearpublish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
 
-#docstrct
+# Docstrct
 abstract: Abstrakt
 acknowledgment: Danksagung
 addendum: Addendum
@@ -177,7 +184,7 @@ werk_beigefuegt: Beigefügtes Werk
 werk: Werk
 contained_work: Enthaltenes Werk
 
-#dc
+# DC
 autobiographica: Autobiographica
 digiwunschbuch: DigiWunschbuch
 itineraria: Itineraria

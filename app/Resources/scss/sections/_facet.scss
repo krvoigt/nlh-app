@@ -33,9 +33,33 @@
     border-radius: $br;
     box-shadow: none;
     display: inline-block;
-    margin: -1px 0;
+    margin: -1px 0 0;
     padding-left: 1em;
+    position: relative;
     text-indent: -1em;
+    width: 100%;
+
+    &.-remove {
+        @include button(light);
+        @include icon(close);
+        min-height: 0;
+        padding: 0 0 0 1.75em;
+        text-indent: 0;
+        text-shadow: $light-inset;
+        text-align: left;
+
+        // icon
+        &::before {
+            @include separator(0, 1, 0, 0);
+            @include transition(opacity);
+            border-radius: $br 0 0 $br;
+            left: 0;
+            height: 100%;
+            text-shadow: $shadow-inset;
+            padding: .3em;
+            position: absolute;
+        }
+    }
 }
 
 .facet_list {
