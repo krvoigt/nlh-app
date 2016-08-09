@@ -25,14 +25,15 @@ Go to next page: Zur nächsten Seite
 
 # Results
 Add filter &ldquo;%name% is %value%&rdquo;: 'Filter hinzufügen: &bdquo;%name% ist %value%&ldquo;'
+Collapse title: Titel verkleinern
 Hide filters: Filter ausblenden
 Remove all filters: Alle Filter entfernen
 Remove filter &ldquo;%name% is %value%&rdquo;: 'Filter entfernen: &bdquo;%name% ist %value%&ldquo;'
+results: Treffer
 Show filters: Filter anzeigen
-
-# Search results
 Show full title: Voller Titel
-Collapse title: Titel verkleinern
+Show less: Weniger anzeigen
+Show all: Alle anzeigen
 
 # Command
 Cleared IIIF image cache: IIIF cache geleert
@@ -41,10 +42,6 @@ Cleared IIIF image cache: IIIF cache geleert
 Comment: Kommentar
 E-mail: E-Mail
 Submit: Absenden
-
-collapse: weniger
-expand: mehr
-numfound: Treffer
 
 # Viewer
 Contents: Inhalt

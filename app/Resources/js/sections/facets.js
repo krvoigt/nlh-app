@@ -14,15 +14,7 @@ $(function () {
 
     $('.facet_list-toggle').click(function () {
         var $facetList = $(this).siblings('.facet_list');
-
-        // Scroll viewport so toggle button's vertical position doesn't change
-        if ($(this).hasClass('-collapse')) {
-            expandedListHeight = $facetList.offset().top + $facetList.height() - $facetList.find('li:nth-child(6)').offset().top;
-            scrollPos = $('body').scrollTop() - expandedListHeight;
-            $('html, body').animate({scrollTop: scrollPos});
-        }
-
-        $facetList.find('li:nth-child(n+6)').slideToggle();
+        $facetList.find('li:nth-child(n+6)').toggle();
         $(this).siblings('.facet_list-toggle').addBack().toggle();
     });
 });

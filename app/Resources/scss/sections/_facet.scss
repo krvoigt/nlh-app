@@ -9,13 +9,15 @@
 }
 
 .facet_list-toggle {
+    margin-bottom: round($grid / 4);
+
     &.-expand {
-        @include icon(chevron-down, true);
+        @include icon(plus, true);
     }
 
     &.-collapse {
         display: none;
-        @include icon(chevron-up, true);
+        @include icon(minus, true);
     }
 }
 

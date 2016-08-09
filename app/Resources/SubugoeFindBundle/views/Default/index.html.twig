@@ -5,7 +5,7 @@
 {% endif %}
 
 {% block findnavigation %}
-    <div class="find_count">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {{ 'numfound'|trans }}</div>
+    <div class="find_count">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {{ 'results'|trans }}</div>
     {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
@@ -78,6 +78,8 @@
 
             <article class="facet">
                 <h2>{{ key|transchoice(facet|length) }}</h2>
+                <button class="facet_list-toggle -expand">{{ 'Show all'|trans }}</button>
+                <button class="facet_list-toggle -collapse">{{ 'Show less'|trans }}</button>
                 <ol class="facet_list">
                     {% for value, count in facet if count > 0 %}
                         <li class="facet_item">
@@ -122,8 +124,6 @@
                         </li>
                     {% endfor %}
                 </ol>
-                <button class="facet_list-toggle -expand">{{ 'expand'|trans }}</button>
-                <button class="facet_list-toggle -collapse">{{ 'collapse'|trans }}</button>
             </article>
         {% endfor %}
     </div>
