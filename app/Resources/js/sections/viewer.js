@@ -115,8 +115,8 @@ $(function () {
         $panel.toggleClass('-hidden');
 
         if (panelName === 'toc') {
-           $.get(window.location.origin + window.location.pathname + '/toc/', function(data) {
-                $('.viewer_panel.-toc').html(data);
+            $.get(window.location.origin + window.location.pathname + '/toc/', function(data) {
+                $('.viewer_toc').append(data);
             });
         }
 
