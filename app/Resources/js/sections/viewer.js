@@ -136,7 +136,12 @@ $(function () {
             image.setView([settings.lat, settings.lng], settings.zoom);
             $.each(settings.panels, function (name, show) {
                 var buttonName = '.js-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
+                var $panel = $('.viewer_panel.-' + name)
+                $panel.css('transitionDuration', '0s');
                 $(buttonName).click();
+                setTimeout(function () {
+                    $panel.css('transitionDuration', '');
+                }, 10);
             });
         }
     }
