@@ -225,4 +225,16 @@ class MetsService
 
         return $id;
     }
+
+    /**
+     * @param string $id
+     *
+     * @return int
+     */
+    public function checkIfTableOfContentsExists($id)
+    {
+        $structure = $this->getTableOfContents($id);
+
+        return count($structure[0]) > 0 ? true : false;
+    }
 }
