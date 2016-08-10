@@ -59,7 +59,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-        pageMappings: "@mets_service"
+        metsService: "@mets_service"
 
 # Doctrine Configuration
 doctrine:

@@ -4,7 +4,9 @@
         {% if document.gdzocr_url is defined %}
             <button class="viewer_control js-toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
         {% endif %}
-        <button class="viewer_control js-toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
+        {% if tableOfContents %}
+            <button class="viewer_control js-toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
+        {% endif %}
         <button class="viewer_control -active js-toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
     </div>
     <div class="viewer_group">
