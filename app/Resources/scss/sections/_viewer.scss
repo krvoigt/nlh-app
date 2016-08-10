@@ -10,51 +10,15 @@
     top: 0;
 }
 
-.viewer_error {
-    align-items: center;
-    color: $highlight-color;
-    font-weight: bold;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-}
-
-.viewer_header {
-    @include separator(1, 0);
-    background: $header-bg;
-    flex: 0 0 ($grid * 2);
-    display: flex;
-    flex-wrap: wrap;
-    padding: ($grid / 4 - $border-width) 0 0 ($grid / 4);
-}
-
-.viewer_image {
-    height: 100%;
-    position: absolute;
-    white-space: nowrap;
-    width: 100%;
-}
-
-.viewer_main {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-}
-
 .viewer_controls {
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-left: 1em;
     z-index: 1;
 
     p + p {
         margin-left: 1em;
-    }
-
-    &.-overlay {
-        left: 0;
-        margin: ($grid / 2);
-        position: absolute;
-        right: 0;
     }
 }
 
@@ -154,11 +118,42 @@
     }
 }
 
+.viewer_error {
+    align-items: center;
+    color: $highlight-color;
+    font-weight: bold;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+}
+
 .viewer_group {
     border-radius: $br;
     box-shadow: $drop-shadow;
     display: flex;
     margin: 0 ($grid / 4) ($grid / 4) 0;
+}
+
+.viewer_header {
+    @include separator(1, 0);
+    background: $header-bg;
+    display: table;
+    padding: ($grid / 4 - $border-width) 0 0 ($grid / 4);
+    vertical-align: top;
+    width: 100%;
+}
+
+.viewer_image {
+    height: 100%;
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.viewer_main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
 }
 
 .viewer_metadata {
@@ -228,10 +223,12 @@
 }
 
 .viewer_title {
-    flex: 1;
-    margin: ($grid / 4) !important;
+    display: table-cell;
+    max-width: 20em;
     overflow: hidden;
+    padding: floor($grid / 4) 0 0 floor($grid / 4);
     text-overflow: ellipsis;
+    vertical-align: top;
     white-space: nowrap;
 }
 
