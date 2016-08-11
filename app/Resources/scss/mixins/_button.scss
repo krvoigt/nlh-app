@@ -20,11 +20,11 @@
         }
     } @else if $modifier == light {
         color: $text-color;
-        background: linear-gradient(to bottom, tint(#e7e7e7, 10), shade(#e7e7e7, 10));
+        background: linear-gradient(to bottom, #fff, shade(#fff, 5));
         text-shadow: 0 1px $light;
 
         @include hover {
-            background: linear-gradient(to bottom, tint(#e7e7e7, 30), tint(#e7e7e7, 10));
+            background: linear-gradient(to bottom, shade(#fff, 5), shade(#fff, 10));
             color: shade($text-color, 20);
         }
     } @else {
