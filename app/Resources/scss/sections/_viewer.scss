@@ -14,12 +14,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    margin-left: 1em;
     z-index: 1;
-
-    p + p {
-        margin-left: 1em;
-    }
 }
 
 .viewer_control {
@@ -139,8 +134,15 @@
     background: $header-bg;
     display: table;
     padding: ($grid / 4 - $border-width) 0 0 ($grid / 4);
+    table-layout: fixed;
     vertical-align: top;
     width: 100%;
+}
+
+.viewer_header-column {
+    display: table-cell;
+    max-width: 50%;
+    vertical-align: top;
 }
 
 .viewer_image {
@@ -223,10 +225,9 @@
 }
 
 .viewer_title {
-    display: table-cell;
-    max-width: 20em;
+    margin: 0;
     overflow: hidden;
-    padding: floor($grid / 4) 0 0 floor($grid / 4);
+    padding: floor($grid / 4);
     text-overflow: ellipsis;
     vertical-align: top;
     white-space: nowrap;

@@ -1,88 +1,92 @@
 <header class="viewer_header">
-    <h1 class="viewer_title" title="{{ document.title | first }}">{{ document.title | first }}</h1>
+    <div class="viewer_header-column">
+        <h1 class="viewer_title" title="{{ document.title | first }}">{{ document.title | first }}</h1>
+    </div>
 
-    <div class="viewer_controls">
-        <div class="viewer_group">
-            <button
-                class="viewer_control -first-page"
-                title="{{ 'First page'|trans }}"
-                disabled
-            >
-                <span class="sr-only">{{ 'First page'|trans }}</span>
-            </button>
-            <a
-                class="viewer_control -previous-section {{ not document.idparentdoc is defined ? '-disabled' }}"
-                title="{{ 'Previous section'|trans }}"
-                {{ document.idparentdoc is defined ? 'href=' ~ path('_detail', {id: document.idparentdoc | first}) }}
-            >
-                <span class="sr-only">{{ 'Previous section'|trans }}</span>
-            </a>
-            <button
-                class="viewer_control -previous-page js-previous-page"
-                title="{{ 'Previous page'|trans }}" {{ page == 1 ? 'disabled' }}
-            >
-                <span class="sr-only">{{ 'Previous page'|trans }}</span>
-            </button>
-
-            <label class="sr-only single-page" for="viewer-page-select">{{ 'Current page'|trans }}</label>
-            <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
-                {% for physPage, logPage in pageMappings %}
-                    <option value={{ physPage }} {{ physPage == page ? 'selected' }}>
-                        {{ physPage }} : {{ logPage }}
-                    </option>
-                {% endfor %}
-            </select>
-
-            <button
-                class="viewer_control -next-page js-next-page"
-                title="{{ 'Next page'|trans }}" {{ page == pageCount ? 'disabled' }}
-            >
-                <span class="sr-only">{{ 'Next page'|trans }}</span>
-            </button>
-            <button
-                class="viewer_control -next-section"
-                title="{{ 'Next section'|trans }}"
-                disabled
-            >
-                <span class="sr-only">{{ 'Next section'|trans }}</span>
-            </button>
-            <button
-                class="viewer_control -last-page"
-                title="{{ 'Last page'|trans }}"
-                disabled
-            >
-                <span class="sr-only">{{ 'Last page'|trans }}</span>
-            </button>
-        </div>
-
-        <div class="viewer_group">
-            <button class="viewer_control -zoom-out js-zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
-            <label class="sr-only" for="viewer-zoom-range">{{ 'Set zoom'|trans }}</label>
-            <button class="viewer_control -zoom-in js-zoom-in" title="{{ 'Zoom in'|trans }}"></i><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
-            <button class="viewer_control -zoom-reset js-zoom-reset" title="{{ 'Reset zoom'|trans }}"><span class="sr-only">{{ 'Reset zoom'|trans }}</span></button>
-        </div>
-
-        {% if document.gdzocr_url is defined %}
+    <div class="viewer_header-column">
+        <div class="viewer_controls">
             <div class="viewer_group">
-                <input class="viewer_control" type="text" placeholder="{{ "Search in document"|trans }}" title="{{ 'Search in document'|trans }}">
-                <button class="viewer_control -search"><span class="sr-only">{{ 'Search'|trans }}</span></button>
+                <button
+                    class="viewer_control -first-page"
+                    title="{{ 'First page'|trans }}"
+                    disabled
+                >
+                    <span class="sr-only">{{ 'First page'|trans }}</span>
+                </button>
+                <a
+                    class="viewer_control -previous-section {{ not document.idparentdoc is defined ? '-disabled' }}"
+                    title="{{ 'Previous section'|trans }}"
+                    {{ document.idparentdoc is defined ? 'href=' ~ path('_detail', {id: document.idparentdoc | first}) }}
+                >
+                    <span class="sr-only">{{ 'Previous section'|trans }}</span>
+                </a>
+                <button
+                    class="viewer_control -previous-page js-previous-page"
+                    title="{{ 'Previous page'|trans }}" {{ page == 1 ? 'disabled' }}
+                >
+                    <span class="sr-only">{{ 'Previous page'|trans }}</span>
+                </button>
+
+                <label class="sr-only single-page" for="viewer-page-select">{{ 'Current page'|trans }}</label>
+                <select class="viewer_control page-select single-page js-select-page" name="page" id="viewer-page-select">
+                    {% for physPage, logPage in pageMappings %}
+                        <option value={{ physPage }} {{ physPage == page ? 'selected' }}>
+                            {{ physPage }} : {{ logPage }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button
+                    class="viewer_control -next-page js-next-page"
+                    title="{{ 'Next page'|trans }}" {{ page == pageCount ? 'disabled' }}
+                >
+                    <span class="sr-only">{{ 'Next page'|trans }}</span>
+                </button>
+                <button
+                    class="viewer_control -next-section"
+                    title="{{ 'Next section'|trans }}"
+                    disabled
+                >
+                    <span class="sr-only">{{ 'Next section'|trans }}</span>
+                </button>
+                <button
+                    class="viewer_control -last-page"
+                    title="{{ 'Last page'|trans }}"
+                    disabled
+                >
+                    <span class="sr-only">{{ 'Last page'|trans }}</span>
+                </button>
             </div>
-        {% endif %}
 
-        <div class="viewer_group">
+            <div class="viewer_group">
+                <button class="viewer_control -zoom-out js-zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
+                <label class="sr-only" for="viewer-zoom-range">{{ 'Set zoom'|trans }}</label>
+                <button class="viewer_control -zoom-in js-zoom-in" title="{{ 'Zoom in'|trans }}"></i><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
+                <button class="viewer_control -zoom-reset js-zoom-reset" title="{{ 'Reset zoom'|trans }}"><span class="sr-only">{{ 'Reset zoom'|trans }}</span></button>
+            </div>
+
             {% if document.gdzocr_url is defined %}
-                <button class="viewer_control js-toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
+                <div class="viewer_group">
+                    <input class="viewer_control" type="text" placeholder="{{ "Search in document"|trans }}" title="{{ 'Search in document'|trans }}">
+                    <button class="viewer_control -search"><span class="sr-only">{{ 'Search'|trans }}</span></button>
+                </div>
             {% endif %}
-            {% if tableOfContents %}
-                <button class="viewer_control js-toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
-            {% endif %}
-            <button class="viewer_control -active js-toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
-        </div>
 
-        <div class="viewer_group">
-            <button class="viewer_control -fullscreen js-fullscreen" title="Vollbildansicht">
-                <span class="sr-only">{{ 'Fullscreen'|trans }}</span>
-            </button>
+            <div class="viewer_group">
+                {% if document.gdzocr_url is defined %}
+                    <button class="viewer_control js-toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
+                {% endif %}
+                {% if tableOfContents %}
+                    <button class="viewer_control js-toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
+                {% endif %}
+                <button class="viewer_control -active js-toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
+            </div>
+
+            <div class="viewer_group">
+                <button class="viewer_control -fullscreen js-fullscreen" title="Vollbildansicht">
+                    <span class="sr-only">{{ 'Fullscreen'|trans }}</span>
+                </button>
+            </div>
         </div>
     </div>
 </header>
