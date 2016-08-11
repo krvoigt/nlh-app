@@ -1,19 +1,5 @@
 .pagination {
     margin-bottom: (-$grid / 2);
-
-    &.-fixed {
-        border-radius: 0 0 $br $br;
-        box-shadow: $drop-shadow;
-        margin-left: -.25em;
-        padding: .25em 0 0 .25em;
-        position: fixed;
-        top: 0;
-        z-index: 1;
-
-        @include respond-to(large) {
-            left: .25em;
-        }
-    }
 }
 
 .pagination_item {
