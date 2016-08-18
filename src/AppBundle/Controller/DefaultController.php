@@ -3,18 +3,44 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Subugoe\FindBundle\Controller\DefaultController as BaseController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Solarium\QueryType\Select\Query\FilterQuery;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     /**
-     * @Route("/", name="homepage", methods={"GET"})
+     * @Route("/", name="_homepage")
+     *
+     * @param Request $request A request instance
+     *
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
+        $search = $this->getSearchEntity($request);
+        $select = $this->getQuerySelect($request);
+        $this->addQuerySort($select);
+        $activeFacets = $request->get('filter');
+        $this->addQueryFilters($select, $activeFacets);
+        $collection = $request->get('collection');
+        if (!empty($collection) && $collection !== 'all') {
+            $dcFilter = new FilterQuery();
+            $collectionFilter = $dcFilter->setKey('dc')->setQuery('dc:'.$collection);
+            $select->addFilterQuery($collectionFilter);
+        }
+        $pagination = $this->getPagination($request, $select);
+        $facets = $this->getSolrClient()->select($select)->getFacetSet()->getFacets();
+        $facetCounter = $this->getQueryService()->getFacetCounter($activeFacets);
+
+        return $this->render('SubugoeFindBundle:Default:index.html.twig', [
+                'facets' => $facets,
+                'facetCounter' => $facetCounter,
+                'queryParams' => $request->get('filter') ?: [],
+                'search' => $search,
+                'pagination' => $pagination,
+                'activeCollection' => $request->get('activeCollection'),
         ]);
     }
 
