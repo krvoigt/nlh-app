@@ -1,13 +1,11 @@
 @mixin button($modifier: null) {
     border: 0;
     border-radius: $br;
-    box-shadow: none;
     cursor: pointer;
     display: inline-block;
     font-size: $font-size;
     line-height: $line-height;
     margin: 0;
-    min-height: $grid * 1.5;
     min-width: $grid * 1.5;
     padding: ($grid / 4) .5em;
     text-align: center;
@@ -15,10 +13,16 @@
     vertical-align: middle;
 
     @if $modifier == link {
+        @include transition(background);
+        box-shadow: none;
+        color: $link-color;
+
         @include hover {
             background: $link-hover-bg-color;
+            transition: none;
         }
     } @else if $modifier == light {
+        box-shadow: $card-shadow;
         color: $text-color;
         background: linear-gradient(to bottom, #fff, shade(#fff, 5));
         text-shadow: 0 1px $light;
@@ -33,7 +37,7 @@
         text-shadow: $shadow-inset;
 
         @include hover {
-            background: linear-gradient(to bottom, shade($brand-color, 10), shade($brand-color, 30));
+            background: linear-gradient(to bottom, shade($link-color, 10), shade($link-color, 30));
         }
     }
 }

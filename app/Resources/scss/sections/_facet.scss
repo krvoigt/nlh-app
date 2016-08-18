@@ -6,10 +6,13 @@
     color: $text-color-lightest;
     font-size: $font-size-small;
     font-weight: bold;
+    line-height: 1;
 }
 
 .facet_list-toggle {
-    margin-bottom: round($grid / 4);
+    @include button(link);
+    margin: 0 -.25em round($grid / 4);
+    padding: 0 .25em;
 
     &.-expand {
         @include icon(plus, true);
@@ -32,20 +35,21 @@
 }
 
 .facet_link {
-    border-radius: $br;
-    box-shadow: none;
-    display: inline-block;
-    margin: -1px 0 0;
-    padding-left: 1em;
+    @include button(link);
+    display: block;
+    margin: 0 -.2em;
+    padding: 0 .2em 0 1.2em;
     position: relative;
+    text-align: left;
     text-indent: -1em;
-    width: 100%;
 
     &.-remove {
         @include button(light);
         @include icon(close);
+        display: block;
+        margin-bottom: $border-width;
         min-height: 0;
-        padding: 0 0 0 1.75em;
+        padding: 0 .2em 0 1.7em;
         text-indent: 0;
         text-shadow: $light-inset;
         text-align: left;
