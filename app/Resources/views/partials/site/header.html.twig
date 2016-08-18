@@ -1,3 +1,4 @@
+{% set subset = app.request.query.get('document') | default('this') %}
 {% set scope = app.request.query.get('scope') | default('metadata') %}
 
 <header class="header" data-role="header">
@@ -21,13 +22,26 @@
         </ul>
         <div class="search">
             <form class="search_form -visible" method="get" role="search" action="/">
-                <input size="40" placeholder="Schnellsuche" class="search_input" id="mytextbox" type="text" name="q" value="{{ app.request.query.get('q') }}">
-                <label for="mytextbox" class="sr-only">{{ 'Quick search'|trans }}</label>
+                <input size="40" placeholder="{{ 'Search'|trans }}" class="search_input" id="q" type="text" name="q" value="{{ app.request.query.get('q') }}">
+                <label for="q" class="sr-only">{{ 'Search'|trans }}</label>
                 <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>
                 <div class="search_popup">
                     <div class="search_content -visible">
+                        {% if document is defined %}
+                            <ul class="search_list">
+                                <li class="search_item">
+                                    <input class="search_radio" id="search-this" name="document" type="radio" value="this" {{ subset == 'this' ? 'checked' }}>
+                                    <label class="search_label" for="search-this">{{ 'Only in this document'|trans }}</label>
+                                </li>
+                                <li class="search_item">
+                                    <input class="search_radio" id="search-all" name="document" type="radio" value="all" {{ subset == 'all' ? 'checked' }}>
+                                    <label class="search_label" for="search-all">{{ 'In all documents'|trans }}</label>
+                                </li>
+                            </ul>
+                            <hr>
+                        {% endif %}
                         <p>{{ 'Search in'|trans }}</p>
-                        <ul class="search_catalog-list">
+                        <ul class="search_list">
                             <li class="search_item">
                                 <input class="search_radio" id="search-meta" name="scope" type="radio" value="metadata" {{ scope == 'metadata' ? 'checked' }}>
                                 <label class="search_label" for="search-meta">{{ 'Metadata'|trans }}</label>
@@ -37,8 +51,8 @@
                                 <label class="search_label" for="search-full">{{ 'Fulltexts'|trans }}</label>
                             </li>
                             <li class="search_item">
-                                <input class="search_radio" id="search-all" name="scope" type="radio" value="all" {{ scope == 'all' ? 'checked' }}>
-                                <label class="search_label" for="search-all">{{ 'Metadata and fulltexts'|trans }}</label>
+                                <input class="search_radio" id="search-both" name="scope" type="radio" value="all" {{ scope == 'all' ? 'checked' }}>
+                                <label class="search_label" for="search-both">{{ 'Metadata and fulltexts'|trans }}</label>
                             </li>
                         </ul>
                         <button class="search_close" title="Schließen">

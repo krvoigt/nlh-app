@@ -9,12 +9,16 @@ Help for search: Hilfe zur Suche
 
 Imprint: Impressum
 Just scanned: Just scanned
-Metadata: Metadaten
-Metadata and fulltexts: Metadaten und Volltexte
-Quick search: Schnellsuche
-Search in: Durchsuche
 The requested page was not found: Die gewünschte Seite wurde nicht gefunden
 Your feedback has been sent.: Ihre Nachricht wurde übermittelt.
+
+# Search popup
+Metadata: Metadaten
+Metadata and fulltexts: Metadaten und Volltexte
+Only in this document: Nur in diesem Dokument
+In all documents: In allen Dokumenten
+Quick search: Schnellsuche
+Search in: Durchsuche
 
 # Pagination
 Current page:: Aktuelle Seite:
