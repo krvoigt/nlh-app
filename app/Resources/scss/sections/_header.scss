@@ -1,16 +1,3 @@
-%header_element {
-    max-width: $site-width;
-    position: relative;
-
-    @include respond-to(large) {
-        margin: 0 auto;
-    }
-
-    .site.-fixed & {
-        max-width: none;
-    }
-}
-
 .header {
     background: $white; // Prevent off-canvas nav from popping through
     overflow: visible;
@@ -42,6 +29,10 @@
 
     @include respond-to(large) {
         padding: ceil($grid / 4) ($grid / 2) floor($grid / 4);
+    }
+
+    .site.-fixed & {
+        display: none;
     }
 }
 
@@ -99,7 +90,7 @@
 .header_logo {
     background: url($img-path + '/sub-logo.svg') 0 center no-repeat;
     background-size: contain;
-    height: (2 * $grid);
+    height: ($grid * 2);
     max-width: 100%;
     width: 640px; // Width of logo
 
@@ -126,14 +117,73 @@
         width: 100%;
     }
 
+    .site.-fixed & {
+        background-position: round($grid / 4);
+        background-size: auto $grid;
+        height: ($grid * 1.5);
+    }
+
     a {
         display: block;
         height: 100%;
         min-height: (1.5 * $grid);
+
+        .site.-fixed & {
+            left: round($grid / 4);
+            height: ($grid * 1.5);
+            top: round($grid / 2);
+        }
+    }
+}
+
+.header_nav {
+    position: absolute;
+    right: 364px; // TODO
+    top: $grid;
+    z-index: 1;
+
+    a {
+        color: $white;
+        display: block;
+        padding: round($grid / 4) 1em;
+
+        .site.-fixed & {
+            padding: 0 1em;
+        }
+    }
+
+    li {
+        float: left;
+
+        + li {
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .site.-fixed & {
+        right: round($grid / 4);
+        top: round($grid / 4);
+    }
+}
+
+.header_nav-item {
+    &.-fixed {
+        display: none;
+
+        .site.-fixed & {
+            display: block;
+        }
     }
 }
 
 .header_search-toggle {
+    background: 0;
+    border: 0;
+    color: $white;
+    cursor: pointer;
+    padding: 0 1em;
+
     @include icon(search, false);
 
     @include hover {
@@ -155,7 +205,7 @@
     display: table-cell; // Center text vertically inside element
     font-family: $font-family-display;
     height: ($grid * 3);
-    left: 142px; // 1
+    left: 143px; // 1
     margin: $grid 0 0;
     padding: 0 ($grid / 2);
     position: relative;
@@ -189,6 +239,14 @@
         width: 100%;
     }
 
+    .site.-fixed & {
+        font-size: inherit;
+        height: ($grid * 1.5 - 1px);
+        left: 78px;
+        padding: 0 round($grid / 4);
+        top: 1px;
+    }
+
     a {
         color: $white;
     }
@@ -218,24 +276,25 @@
     }
 }
 
-.header_nav {
-    a {
-        color: $white;
-    }
-}
-
 .header_top {
-    @extend %header_element;
     @extend %full-width-background;
     background: $brand-color;
     padding: $grid;
+    position: relative;
+    max-width: $site-width;
 
     @include respond-to(large) {
+        margin: 0 auto;
         padding: ($grid / 2);
     }
 
     // Make sure small logo does not overlap menu and language
     @media (max-width: 319px) {
         padding-top: (1.75 * $grid);
+    }
+
+    .site.-fixed & {
+        max-width: none;
+        padding: 0;
     }
 }

@@ -22,7 +22,7 @@
         background: $text-color-light;
         color: $white;
         font-weight: bold;
-        text-shadow: 0 -1px rgba(#000, .5);
+        text-shadow: $shadow-inset;
     }
 
     &.-last {
@@ -47,6 +47,7 @@
 
         @include hover {
             background: none;
+            color: inherit;
         }
     }
 }

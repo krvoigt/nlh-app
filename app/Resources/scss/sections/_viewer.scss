@@ -13,13 +13,22 @@
 .viewer_controls {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    margin: round($grid / 4) round(-$grid / 4) round(-$grid / 4) 0;
     z-index: 1;
+
+    &.-left {
+        float: left;
+    }
+
+    &.-right {
+        float: right;
+    }
 }
 
 .viewer_control {
     @include button(light);
     border-radius: 0;
+    box-shadow: none;
 
     &.-active {
         @include button;
@@ -126,14 +135,14 @@
     border-radius: $br;
     box-shadow: $card-shadow;
     display: flex;
-    margin: 0 ($grid / 4) ($grid / 4) 0;
+    margin: 0 round($grid / 4) round($grid / 4) 0;
 }
 
 .viewer_header {
     @include separator(1, 0);
     background: $header-bg;
     display: table;
-    padding: ($grid / 4 - $border-width) 0 0 ($grid / 4);
+    padding: round($grid / 4);
     table-layout: fixed;
     vertical-align: top;
     width: 100%;
@@ -225,11 +234,10 @@
 }
 
 .viewer_title {
+    font-size: 20px !important;
     margin: 0;
     overflow: hidden;
-    padding: floor($grid / 4);
     text-overflow: ellipsis;
-    vertical-align: top;
     white-space: nowrap;
 }
 

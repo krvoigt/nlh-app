@@ -1,9 +1,8 @@
 .search {
-    @extend %header_element;
     @extend %clearfix;
     @include transition(margin);
     float: right;
-    margin: (-2.5 * $grid) (-$grid / 2) 0 0;
+    margin: (-2.5 * $grid + 3px) (-$grid / 2) 0 0;
     max-width: 100%;
     position: relative;
     z-index: 99;
