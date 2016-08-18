@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html>
-{% include "partials/site/head.html.twig" %}
-<body>
-    <div class="wrap">
-        {% include 'partials/site/header.html.twig' %}
+    {% include "partials/site/head.html.twig" %}
+    <body>
+        <div class="wrap">
+            {% include 'partials/site/header.html.twig' %}
 
-        <div class="content">
-            {% include "partials/site/flashmessage.html.twig" %}
+            <div class="content">
+                {% include "partials/site/flashmessage.html.twig" %}
 
-            {% block contentabove %}{% endblock %}
+                {% block contentabove %}{% endblock %}
 
-            <div class="navigation -top">
-                {% block findnavigation %}{% endblock %}
+                <div class="navigation -top">
+                    {% block findnavigation %}{% endblock %}
+                </div>
+
+                <div class="results">
+                    <section class="facets">
+                        {% block sidebar %}{% endblock %}
+                    </section>
+                    {% block content %}{% endblock %}
+                </div>
+
+                <div class="navigation -bottom">
+                    {% block footer %}{% endblock %}
+                </div>
             </div>
 
-            <div class="results">
-                <section class="facets">
-                    {% block sidebar %}{% endblock %}
-                </section>
-                {% block content %}{% endblock %}
-            </div>
-
-            <div class="navigation -bottom">
-                {% block footer %}{% endblock %}
-            </div>
+            {% include 'partials/site/footer.html.twig' %}
+            {% include 'partials/site/colophon.html.twig' %}
         </div>
 
-        {% include 'partials/site/footer.html.twig' %}
-        {% include 'partials/site/colophon.html.twig' %}
-    </div>
-
-    {% block javascripts %}
-        <script src="{{ asset('js/vendor.js') }}"></script>
-        <script src="{{ asset('js/sub-legacy.js') }}"></script>
-        <script src="{{ asset('js/script.js') }}"></script>
-    {% endblock %}
-</body>
+        {% block javascripts %}
+            <script src="{{ asset('js/vendor.js') }}"></script>
+            <script src="{{ asset('js/sub-legacy.js') }}"></script>
+            <script src="{{ asset('js/script.js') }}"></script>
+        {% endblock %}
+    </body>
 </html>
