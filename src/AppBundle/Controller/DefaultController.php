@@ -31,8 +31,8 @@ class DefaultController extends BaseController
             $select->addFilterQuery($collectionFilter);
         }
         $pagination = $this->getPagination($request, $select);
-        $facets = $this->getSolrClient()->select($select)->getFacetSet()->getFacets();
-        $facetCounter = $this->getQueryService()->getFacetCounter($activeFacets);
+        $facets = $this->get('solarium.client')->select($select)->getFacetSet()->getFacets();
+        $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
         return $this->render('SubugoeFindBundle:Default:index.html.twig', [
                 'facets' => $facets,
