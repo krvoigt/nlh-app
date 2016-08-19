@@ -1,6 +1,10 @@
 {% set subset = app.request.query.get('document') | default('this') %}
 {% set scope = app.request.query.get('scope') | default('metadata') %}
 
+{%  if app.request.query.get('collection') is defined %}
+    {% set collection = app.request.query.get('collection') %}
+{% endif %}
+
 <header class="header" data-role="header">
     <div class="header_top">
         <button class="header_toggle-nav" title="Navigation">Menü</button>
@@ -54,6 +58,24 @@
                                 <input class="search_radio" id="search-both" name="scope" type="radio" value="all" {{ scope == 'all' ? 'checked' }}>
                                 <label class="search_label" for="search-both">{{ 'Metadata and fulltexts'|trans }}</label>
                             </li>
+                            {% if activeCollection is defined and activeCollection is not empty %}
+                                <li class="search_item">
+                                    <p>{{ 'In'|trans }}</p>
+                                    <ul>
+                                        <li class="search_item">
+                                            <input class="search_radio" id="search-collection" name="collection" type="radio" value="{{ activeCollection }}" {{ collection != 'all' ? 'checked' }}>
+                                            <label class="search_label" for="search-collection">{{ activeCollection|trans }}</label>
+                                        </li>
+                                        <li class="search_item">
+                                            <input class="search_radio" id="search-allCollections" name="collection" type="radio" value="all" {{ collection == 'all' ? 'checked' }}>
+                                            <label class="search_label" for="search-allCollections">{{ 'Everywhere'|trans }}</label>
+                                        </li>
+                                        <li class="search_item">
+                                            <input class="search_radio" id="search-activeCollection" name="activeCollection" type="hidden" value="{{ activeCollection }}">
+                                        </li>
+                                    </ul>
+                                </li>
+                            {% endif %}
                         </ul>
                         <button class="search_close" title="Schließen">
                             <span class="sr-only">{{ 'Close'|trans }}</span>

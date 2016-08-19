@@ -8,3 +8,7 @@ app:
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+_feed:
+    path:     /feed/{_format}/{category}
+    defaults: { _controller: SubugoeFindBundle:Feed:feed, category: "" }

@@ -68,6 +68,7 @@ class CollectionController extends Controller
             'facets' => $results->getFacetSet()->getFacets(),
             'facetCounter' => $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets),
             'queryParams' => $request->get('filter') ?: [],
+            'activeCollection' => $id,
         ]);
     }
 
