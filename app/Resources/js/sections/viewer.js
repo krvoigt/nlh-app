@@ -15,7 +15,7 @@ $(function () {
         zoom: defaultZoom,
         zoomControl: false,
         maxZoom: maxZoom,
-    }).addLayer(L.tileLayer.iiif( $('#viewer_image').data('iiif') ));
+    }).addLayer(L.tileLayer.iiif($('#viewer_image').data('iiif')));
 
     // TODO: 'load' event does not fire for unknown reasons, so we're using 'viewreset' as a workaround.
     // Because this can fire multiple times, event binding is disabled in loadState function.
@@ -52,7 +52,7 @@ $(function () {
     // NOTE: No point in saving fullscreen since this can only be triggered by the user as a security measure
     $('.js-fullscreen').click(function () {
         $(this).toggleClass('-active');
-        if ( document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement ) {
+        if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
             exitFullscreen();
         } else {
             requestFullscreen($('#main')[0]);
@@ -62,10 +62,10 @@ $(function () {
     var page = parseInt($('.js-select-page').val());
 
     $('.js-select-page')
-    .select2()
-    .change(function () {
-        setGetParameter('page', $(this).val());
-    });
+        .select2()
+        .change(function () {
+            setGetParameter('page', $(this).val());
+        });
 
     $('.select2-container').addClass('viewer_control');
 
@@ -77,6 +77,19 @@ $(function () {
     $('.viewer_control').click(function () {
         return false;
     });
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == 37) {
+            $('.js-previous-page').click();
+            return false;
+        }
+
+        if (e.keyCode == 39) {
+            $('.js-next-page').click();
+            return false;
+        }
+    });
+
 
     $('.js-previous-page').click(function () {
         setGetParameter('page', page - 1);
@@ -115,7 +128,7 @@ $(function () {
         $panel.toggleClass('-hidden');
 
         if (panelName === 'toc') {
-            $.get(window.location.origin + window.location.pathname + '/toc/', function(data) {
+            $.get(window.location.origin + window.location.pathname + '/toc/', function (data) {
                 $('.viewer_toc').append(data);
             });
         }
@@ -131,7 +144,7 @@ $(function () {
 
     function loadState() {
         image.off('viewreset', loadState);
-        if ( location.hash ) {
+        if (location.hash) {
             settings = JSON.parse(location.hash.substr(1));
             image.setView([settings.lat, settings.lng], settings.zoom);
             $.each(settings.panels, function (name, show) {
@@ -162,11 +175,11 @@ $(function () {
     }
 
     function exitFullscreen() {
-        if(document.exitFullscreen) {
+        if (document.exitFullscreen) {
             document.exitFullscreen();
-        } else if(document.mozCancelFullScreen) {
+        } else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
-        } else if(document.webkitExitFullscreen) {
+        } else if (document.webkitExitFullscreen) {
             document.webkitExitFullscreen();
         }
     }
