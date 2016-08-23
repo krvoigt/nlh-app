@@ -81,6 +81,7 @@
     a {
         @include icon('chevron-up', false);
         @include transition(background, color);
+        box-shadow: none;
         display: block;
         height: ceil(1.618 * $grid);
         line-height: ceil(1.618 * $grid);
