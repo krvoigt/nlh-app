@@ -64,7 +64,7 @@ $(function () {
     $('.js-select-page')
         .select2()
         .change(function () {
-            setGetParameter('page', $(this).val());
+            setGetParameters({page: $(this).val()});
         });
 
     $('.select2-container').addClass('viewer_control');
@@ -92,11 +92,11 @@ $(function () {
 
 
     $('.js-previous-page').click(function () {
-        setGetParameter('page', page - 1);
+        setGetParameters({page: page - 1});
     });
 
     $('.js-next-page').click(function () {
-        setGetParameter('page', page + 1);
+        setGetParameters({page: page + 1});
     });
 
     $('.js-search-toggle').click(function () {
@@ -144,8 +144,8 @@ $(function () {
 
     function loadState() {
         image.off('viewreset', loadState);
-        if (location.hash) {
-            settings = JSON.parse(location.hash.substr(1));
+        if ( window.location.hash ) {
+            settings = JSON.parse(window.location.hash.substr(1));
             image.setView([settings.lat, settings.lng], settings.zoom);
             $.each(settings.panels, function (name, show) {
                 var buttonName = '.js-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
@@ -160,7 +160,7 @@ $(function () {
     }
 
     function saveState(settings) {
-        // Using replaceState instead of location.hash to prevent a new history step begin added for every change in view settings
+        // Using replaceState instead of window.location.hash to prevent a new history step begin added for every change in view settings
         history.replaceState(undefined, undefined, '#' + JSON.stringify(settings));
     }
 
