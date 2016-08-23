@@ -81,6 +81,36 @@
                 <button class="facet_list-toggle -expand">{{ 'Show all'|trans }}</button>
                 <button class="facet_list-toggle -collapse">{{ 'Show less'|trans }}</button>
                 <ol class="facet_list">
+                    {# Year range (only used with yearpublish #}
+                    {# TODO: Add count #}
+                    {# TODO: Reduce reduncancy #}
+                    {% if key == 'yearpublish' %}
+                        {% for index, value in filterValues %}
+                            {% set tokens = filterValues[index]|slice(1, filterValues[index]|length - 2)|split(' ') %}
+                            {% if tokens|length == 3 %}
+                                <li class="facet_item">
+                                    {% set queryParamsSliced = queryParams %}
+                                    {% for index2, filter in queryParams %}
+                                        {% if filter[key] is defined and filter[key] == filterValues[index] %}
+                                            {% set queryParamsSliced = queryParamsSliced|slice(0, index2)|merge(queryParamsSliced|slice(index2 + 1)) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <a
+                                        class="facet_link -remove"
+                                        href="{{ path(app.request.attributes.get('_route'), {
+                                                'filter': queryParamsSliced,
+                                                'q': (app.request.get('q')),
+                                                'id': (app.request.get('id'))
+                                            }) }}"
+                                        title="{{ 'Remove filter: publishing year range'|trans }}"
+                                    >
+                                        {{tokens.0}}&ndash;{{tokens.2}}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
                     {% for value, count in facet if count > 0 %}
                         <li class="facet_item">
                             {% set queryParamsSliced = queryParams %}
@@ -124,6 +154,15 @@
                         </li>
                     {% endfor %}
                 </ol>
+                {% if key == 'yearpublish' %}
+                    {# TODO: Show counts for years outside of filter range #}
+                    {# Workaround: Remove erroneous year #}
+                    <div
+                        class="facet_histogram"
+                        data-years='[{% for year, count in facet %}{% if year < 2200 %}{{ loop.first ? '' : ','}}[{{year}},{{count}}]{% endif %}{% endfor %}]'
+                    >
+                    </div>
+                {% endif %}
             </article>
         {% endfor %}
     </div>

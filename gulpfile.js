@@ -39,6 +39,8 @@ var paths = {
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/jquery-lazyload/jquery.lazyload.js',
         'node_modules/jquery-mousewheel/jquery.mousewheel.js',
+        'node_modules/flot/jquery.flot.js',
+        'node_modules/flot/jquery.flot.selection.js',
         'node_modules/leaflet/dist/leaflet.js',
         'node_modules/leaflet-iiif/leaflet-iiif.js',
         'node_modules/select2/dist/js/select2.min.js',

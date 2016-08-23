@@ -66,7 +66,7 @@ $(function () {
         $('body').trigger('mousemove');
 
         $('.coverflow_link:not(.-current)').click(function () {
-            window.location = $(this).attr('href') + location.hash;
+            window.location = $(this).attr('href') + window.location.hash;
             return false;
         });
     }

@@ -9,6 +9,10 @@
     line-height: 1;
 }
 
+.facet_histogram {
+    margin: ($grid / 2) 0 0 -20px; // TODO: Why 20? Value can change.
+}
+
 .facet_list-toggle {
     @include button(link);
     margin: 0 -.25em round($grid / 4);
@@ -71,4 +75,12 @@
 .facet_list {
     list-style: none;
     margin: 0;
+}
+
+.facet_tooltip {
+    background: $white;
+    border-radius: $br;
+    box-shadow: $drop-shadow;
+    padding: 0 .25em;
+    position: absolute;
 }
