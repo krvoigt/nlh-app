@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e2ab06ae5e5a16920d94df9ed2b860d0",
+    "hash": "3c26a9cffa164146f694969b95345225",
     "content-hash": "e9dca003873269644a596f67d247172d",
     "packages": [
         {
@@ -2072,12 +2072,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/subugoe/SubugoeFindBundle.git",
-                "reference": "449d1fc82138ea27bb8b1928511368f625560272"
+                "reference": "c37c383b0961e1aade1d92ef490d4dd99ca2bccf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/449d1fc82138ea27bb8b1928511368f625560272",
-                "reference": "449d1fc82138ea27bb8b1928511368f625560272",
+                "url": "https://api.github.com/repos/subugoe/SubugoeFindBundle/zipball/c37c383b0961e1aade1d92ef490d4dd99ca2bccf",
+                "reference": "c37c383b0961e1aade1d92ef490d4dd99ca2bccf",
                 "shasum": ""
             },
             "type": "library",
@@ -2100,7 +2100,7 @@
                 "source": "https://github.com/subugoe/SubugoeFindBundle/tree/master",
                 "issues": "https://github.com/subugoe/SubugoeFindBundle/issues"
             },
-            "time": "2016-08-19 07:23:20"
+            "time": "2016-08-23 11:17:32"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2562,12 +2562,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "94078a09aceeb5b890288a4ae088c5aeee0b1724"
+                "reference": "c14fff01a4b033f1ff1b1cb7609669d6dfaf0a9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/94078a09aceeb5b890288a4ae088c5aeee0b1724",
-                "reference": "94078a09aceeb5b890288a4ae088c5aeee0b1724",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c14fff01a4b033f1ff1b1cb7609669d6dfaf0a9b",
+                "reference": "c14fff01a4b033f1ff1b1cb7609669d6dfaf0a9b",
                 "shasum": ""
             },
             "require": {
@@ -2691,7 +2691,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-08-20 15:15:38"
+            "time": "2016-08-22 17:31:21"
         },
         {
             "name": "twig/twig",
