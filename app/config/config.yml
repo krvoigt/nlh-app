@@ -120,7 +120,6 @@ subugoe_find:
         - { title: yearpublish, field: yearpublish, sort: "index"}
     hidden:
         - { field: dc, value: archaeo18 }
-        - { field: dc, value: aschiana }
 
 knp_paginator:
     page_range: 7                      # default page range used in pagination control
