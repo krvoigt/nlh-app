@@ -5,7 +5,7 @@
         <dd>{{ document.title | first }}</dd>
 
         {% if document.creator is defined %}
-            <dt>{{ 'creator' | transchoice(document.creator | length) }}:</dt>
+            <dt>{{ 'creator' | transchoice(document.creator | length) }}</dt>
             <dd>
                 {% for author in document.creator %}
                     {{ author }}{% if loop.last %}{% else %}, {% endif %}
@@ -14,7 +14,7 @@
         {% endif %}
 
         {% if document.yearpublish is defined %}
-            <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
+            <dt>{{ 'yearpublish' | transchoice(1) }}</dt>
             <dd>{{ document.yearpublish }}</dd>
         {% endif %}
 
@@ -63,7 +63,7 @@
             </dd>
         {% endif %}
 
-        <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
+        <dt>{{ 'docstrct' | transchoice(1) }}</dt>
         <dd>{{ document.docstrct | trans }}</dd>
     </dl>
 </section>
