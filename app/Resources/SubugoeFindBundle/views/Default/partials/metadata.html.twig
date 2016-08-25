@@ -36,6 +36,11 @@
             </dd>
         {% endif %}
 
+        {% if document.docstrct == "volume" %}
+            <dt>{{ 'currentno' | trans }}</dt>
+            <dd>{{ document.currentno }}</dd>
+        {% endif %}
+
         <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
         <dd>
             {% for dc in document.dc %}
