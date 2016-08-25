@@ -85,6 +85,7 @@ facetcreator: Autor|Autoren
 creator: Autor|Autoren
 yearpublish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
+currentno: Band
 
 # Docstrct
 abstract: Abstrakt

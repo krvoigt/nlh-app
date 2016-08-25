@@ -44,7 +44,7 @@
                                 </span>
                                 <br>
                             {% endif %}
-                            {{ result.fields.docstrct | trans }}
+                            {{ result.fields.docstrct | trans }} {% if result.fields.docstrct == "volume" %} — {% trans %}currentno{% endtrans %} {{ result.fields.currentno }}{% endif %}
                         </p>
                     </div>
                 </article>
