@@ -114,10 +114,10 @@ subugoe_find:
     facets:
         - { title: facetcreator, field: facetcreator }
         - { title: facetpublisher, field: facetpublisher}
-        - { title: dc, field: dc}
         - { title: facetplacepublish, field: facetplacepublish}
-        - { title: docstrct, field: docstrct}
         - { title: yearpublish, field: yearpublish, sort: "index"}
+        - { title: dc, field: dc}
+        - { title: docstrct, field: docstrct}
     hidden:
         - { field: dc, value: archaeo18 }
 
