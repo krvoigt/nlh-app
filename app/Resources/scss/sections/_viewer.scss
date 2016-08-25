@@ -10,19 +10,37 @@
     top: 0;
 }
 
+.viewer_column {
+    display: table-cell;
+    position: relative;
+    vertical-align: top;
+
+    & + & {
+        padding-left: ($grid / 2);
+    }
+}
+
 .viewer_controls {
     display: flex;
-    flex-wrap: wrap;
-    margin: round($grid / 4) round(-$grid / 4) round(-$grid / 4) 0;
+    flex-wrap: nowrap;
+    margin: 0 round(-$grid / 4) round(-$grid / 4) 0;
     z-index: 1;
 
-    &.-left {
-        float: left;
+    &.-overlay {
+        margin: round($grid / 4);
+        position: absolute;
     }
 
     &.-right {
-        float: right;
+        justify-content: flex-end;
     }
+}
+
+.viewer_control-group {
+    border-radius: $br;
+    box-shadow: $card-shadow;
+    display: flex;
+    margin: 0 round($grid / 4) round($grid / 4) 0;
 }
 
 .viewer_control {
@@ -131,27 +149,12 @@
     justify-content: center;
 }
 
-.viewer_group {
-    border-radius: $br;
-    box-shadow: $card-shadow;
-    display: flex;
-    margin: 0 round($grid / 4) round($grid / 4) 0;
-}
-
 .viewer_header {
     @include separator(1, 0);
     background: $header-bg;
     display: table;
-    padding: round($grid / 4);
-    table-layout: fixed;
-    vertical-align: top;
+    padding: floor($grid / 4);
     width: 100%;
-}
-
-.viewer_header-column {
-    display: table-cell;
-    max-width: 50%;
-    vertical-align: top;
 }
 
 .viewer_image {
@@ -185,11 +188,6 @@
     .dfgviewer-image {
         height: $grid;
     }
-}
-
-.viewer_overlay {
-    position: absolute;
-    top: 0;
 }
 
 .viewer_panel {
@@ -234,11 +232,13 @@
 }
 
 .viewer_title {
-    font-size: 20px !important;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    @extend %title;
+    font-size: 20px !important; // TODO: Calc
+    margin: round($grid / 4) 0 0;
+}
+
+.viewer_title-toggle {
+    @include title-toggle($header-bg);
 }
 
 .viewer_toc {

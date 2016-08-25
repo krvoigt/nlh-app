@@ -55,6 +55,7 @@
 }
 
 .result_title {
+    @extend %title;
     display: block;
     font: inherit;
     font-weight: bold;
@@ -64,49 +65,10 @@
     > a {
         @include link;
     }
-
-    &.-cut {
-        height: $grid;
-        overflow: hidden;
-    }
-
-    &.-full {
-        height: auto !important;
-        overflow: visible;
-    }
 }
 
 .result_title-toggle {
-    @include button(link);
-    background: $white;
-    display: none;
-    float: right;
-    font-weight: normal;
-    min-height: 0;
-    padding: 0 ($grid / 4);
-
-    &.-expand {
-        @include icon(chevron-down, false);
-        position: absolute;
-        bottom: 0;
-        right: 0;
-
-        &::after {
-            background: linear-gradient(to right, rgba($white, 0), rgba($white, 1));
-            content: '';
-            display: block;
-            height: $grid;
-            margin-left: (-$grid * 3.25); // width + button padding
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            width: ($grid * 3);
-        }
-    }
-
-    &.-collapse {
-        @include icon(chevron-up, false);
-    }
+    @include title-toggle($white);
 }
 
 .result_thumbnail {

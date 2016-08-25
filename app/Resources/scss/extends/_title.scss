@@ -1,0 +1,11 @@
+%title {
+    &.-cut {
+        height: $grid;
+        overflow: hidden;
+    }
+
+    &.-full {
+        height: auto !important;
+        overflow: visible;
+    }
+}

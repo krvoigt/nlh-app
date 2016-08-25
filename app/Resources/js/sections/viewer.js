@@ -2,11 +2,19 @@ $(function () {
     var defaultZoom = 1;
     var maxZoom = 2;
     var settings = {};
-    var $controls = $('.viewer_controls');
+
+    var $viewerControls = $('.viewer_controls');
     var $image = $('.viewer_image');
-    var $zoomInControl = $controls.find('.js-zoom-in');
-    var $zoomOutControl = $controls.find('.js-zoom-out');
-    var $zoomResetControl = $controls.find('.js-zoom-reset');
+
+    var $controls = {
+        fullscreen: $viewerControls.find('.viewer_control.-fullscreen'),
+        nextPage: $viewerControls.find('.viewer_control.-next-page'),
+        pageSelect: $viewerControls.find('.viewer_control.-page-select'),
+        previousPage: $viewerControls.find('.viewer_control.-previous-page'),
+        zoomIn: $viewerControls.find('.viewer_control.-zoom-in'),
+        zoomOut: $viewerControls.find('.viewer_control.-zoom-out'),
+        zoomReset: $(),
+    };
 
     var image = L.map('viewer_image', {
         attributionControl: false,
@@ -16,6 +24,20 @@ $(function () {
         zoomControl: false,
         maxZoom: maxZoom,
     }).addLayer(L.tileLayer.iiif($('#viewer_image').data('iiif')));
+
+    var page = parseInt($controls.pageSelect.val());
+
+    var titleLineHeight = parseInt($('.viewer_title').css('line-height'));
+
+    $(window).on('resize', function () {
+        adjustTitleHeight(titleLineHeight);
+    });
+    adjustTitleHeight(titleLineHeight);
+
+    $('.viewer_title-toggle').click(function () {
+        $(this).siblings('.viewer_title-toggle').addBack().toggle();
+        $(this).closest('.viewer_title').toggleClass('-full');
+    });
 
     // TODO: 'load' event does not fire for unknown reasons, so we're using 'viewreset' as a workaround.
     // Because this can fire multiple times, event binding is disabled in loadState function.
@@ -33,15 +55,15 @@ $(function () {
         saveState(settings);
     });
 
-    $zoomInControl.click(function () {
+    $controls.zoomIn.click(function () {
         image.zoomIn();
     });
 
-    $zoomOutControl.click(function () {
+    $controls.zoomOut.click(function () {
         image.zoomOut();
     });
 
-    $zoomResetControl.click(function () {
+    $controls.zoomReset.click(function () {
         image.setZoom(defaultZoom);
     });
 
@@ -50,7 +72,7 @@ $(function () {
     });
 
     // NOTE: No point in saving fullscreen since this can only be triggered by the user as a security measure
-    $('.js-fullscreen').click(function () {
+    $controls.fullscreen.click(function () {
         $(this).toggleClass('-active');
         if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
             exitFullscreen();
@@ -59,9 +81,7 @@ $(function () {
         }
     });
 
-    var page = parseInt($('.js-select-page').val());
-
-    $('.js-select-page')
+    $controls.pageSelect
         .select2()
         .change(function () {
             setGetParameters({page: $(this).val()});
@@ -71,53 +91,27 @@ $(function () {
 
     // Close page select dropdown when clicking scan
     $('.viewer_scan').click(function (e) {
-        $('.js-select-page').select2('close');
-    });
-
-    $('.viewer_control').click(function () {
-        return false;
+        $controls.pageSelect.select2('close');
     });
 
     $(document).keydown(function (e) {
         if (e.keyCode == 37) {
-            $('.js-previous-page').click();
+            $controls.previousPage.click();
             return false;
         }
 
         if (e.keyCode == 39) {
-            $('.js-next-page').click();
+            $controls.nextPage.click();
             return false;
         }
     });
 
-
-    $('.js-previous-page').click(function () {
+    $controls.previousPage.click(function () {
         setGetParameters({page: page - 1});
     });
 
-    $('.js-next-page').click(function () {
+    $controls.nextPage.click(function () {
         setGetParameters({page: page + 1});
-    });
-
-    $('.js-search-toggle').click(function () {
-        $('.search').addClass('-show-popup').fadeIn();
-        setTimeout(function () {
-            $('.search_input:visible').focus();
-        }, 10);
-        return false;
-    });
-
-    $('.site.-fixed .search_close').click(function () {
-        $('.search').fadeOut();
-        return false;
-    });
-
-    $('.site.-fixed').click(function () {
-        $('.site.-fixed .search_close').click();
-    });
-
-    $('.search').click(function (e) {
-        e.stopPropagation();
     });
 
     $('.js-toggle-panel').click(function () {
@@ -141,6 +135,17 @@ $(function () {
             image.invalidateSize();
         }, 300);
     });
+
+    function adjustTitleHeight(maxHeight) {
+        var $title = $('.viewer_title');
+        $title.height('').removeClass('-cut');
+        if ( $title.height() > maxHeight ) {
+            $title.height(maxHeight).addClass('-cut');
+            $title.children('.viewer_title-toggle.-expand').show();
+        } else {
+            $title.children('.viewer_title-toggle.-expand').hide();
+        }
+    }
 
     function loadState() {
         image.off('viewreset', loadState);

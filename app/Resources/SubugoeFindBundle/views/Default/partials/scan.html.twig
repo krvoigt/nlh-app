@@ -1,5 +1,66 @@
 {# TODO: Show current page via page variable #}
 <section class="viewer_scan">
+    <div class="viewer_controls -overlay">
+        <div class="viewer_control-group">
+            <button
+                class="viewer_control -first-page"
+                title="{{ 'First page'|trans }}"
+                disabled
+            >
+                <span class="sr-only">{{ 'First page'|trans }}</span>
+            </button>
+            <a
+                class="viewer_control -previous-section {{ not document.idparentdoc is defined ? '-disabled' }}"
+                title="{{ 'Previous section'|trans }}"
+                {{ document.idparentdoc is defined ? 'href=' ~ path('_detail', {id: document.idparentdoc | first}) }}
+            >
+                <span class="sr-only">{{ 'Previous section'|trans }}</span>
+            </a>
+            <button
+                class="viewer_control -previous-page js-previous-page"
+                title="{{ 'Previous page'|trans }}" {{ page == 1 ? 'disabled' }}
+            >
+                <span class="sr-only">{{ 'Previous page'|trans }}</span>
+            </button>
+
+            <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
+            <select class="viewer_control -page-select" name="page" id="viewer-page-select">
+                {% for physPage, logPage in pageMappings %}
+                    <option value={{ physPage }} {{ physPage == page ? 'selected' }}>
+                        {{ physPage }} : {{ logPage }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button
+                class="viewer_control -next-page js-next-page"
+                title="{{ 'Next page'|trans }}" {{ page == pageCount ? 'disabled' }}
+            >
+                <span class="sr-only">{{ 'Next page'|trans }}</span>
+            </button>
+            <button
+                class="viewer_control -next-section"
+                title="{{ 'Next section'|trans }}"
+                disabled
+            >
+                <span class="sr-only">{{ 'Next section'|trans }}</span>
+            </button>
+            <button
+                class="viewer_control -last-page"
+                title="{{ 'Last page'|trans }}"
+                disabled
+            >
+                <span class="sr-only">{{ 'Last page'|trans }}</span>
+            </button>
+        </div>
+
+        <div class="viewer_control-group">
+            <button class="viewer_control -zoom-out js-zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
+            <label class="sr-only" for="viewer-zoom-range">{{ 'Set zoom'|trans }}</label>
+            <button class="viewer_control -zoom-in js-zoom-in" title="{{ 'Zoom in'|trans }}"></i><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
+        </div>
+    </div>
+
     {% if isValidPage %}
         {% set identifier = (document.presentation_url[page - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
         <div
