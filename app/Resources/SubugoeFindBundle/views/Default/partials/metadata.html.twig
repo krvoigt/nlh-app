@@ -8,7 +8,7 @@
             <dt>{{ 'creator' | transchoice(document.creator | length) }}</dt>
             <dd>
                 {% for author in document.creator %}
-                    {{ author }}{% if loop.last %}{% else %}, {% endif %}
+                    <a href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}, {% endif %}
                 {% endfor %}
             </dd>
         {% endif %}
