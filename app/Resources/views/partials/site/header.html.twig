@@ -1,9 +1,5 @@
-{% set subset = app.request.query.get('document') | default('this') %}
+{% set collection = app.request.query.get('collection') | default(document is defined ? 'document' : 'all') %}
 {% set scope = app.request.query.get('scope') | default('metadata') %}
-
-{%  if app.request.query.get('collection') is defined %}
-    {% set collection = app.request.query.get('collection') %}
-{% endif %}
 
 <header class="header" data-role="header">
     <div class="header_top">
@@ -31,16 +27,26 @@
                 <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>
                 <div class="search_popup">
                     <div class="search_content -visible">
-                        {% if document is defined %}
+                        {% if document is defined or (activeCollection is defined and activeCollection is not empty) %}
                             <ul class="search_list">
-                                <li class="search_item">
-                                    <input class="search_radio" id="search-this" name="document" type="radio" value="this" {{ subset == 'this' ? 'checked' }}>
-                                    <label class="search_label" for="search-this">{{ 'Only in this document'|trans }}</label>
-                                </li>
-                                <li class="search_item">
-                                    <input class="search_radio" id="search-all" name="document" type="radio" value="all" {{ subset == 'all' ? 'checked' }}>
-                                    <label class="search_label" for="search-all">{{ 'In all documents'|trans }}</label>
-                                </li>
+                                {% if document is defined %}
+                                    <li class="search_item">
+                                        <input class="search_radio" id="search-document" name="collection" type="radio" value="this" {{ collection == 'document' ? 'checked' }}>
+                                        <label class="search_label" for="search-document">{{ 'Only in this document'|trans }}</label>
+                                    </li>
+                                {% endif %}
+                                {% if activeCollection is defined and activeCollection is not empty %}
+                                    <li class="search_item">
+                                        <input class="search_radio" id="search-current-collection" name="collection" type="radio" value="{{ activeCollection }}" {{ collection != 'all' and collection != 'document' ? 'checked' }}>
+                                        <label class="search_label" for="search-current-collection">{{ 'In the collection &ldquo;%collection%&rdquo;'|trans({'%collection%': activeCollection|trans})|raw }}</label>
+                                        {# TODO: Find a way to keep collection name without a hidden input #}
+                                        <input name="activeCollection" type="hidden" value="{{ activeCollection }}">
+                                    </li>
+                                    <li class="search_item">
+                                        <input class="search_radio" id="search-all-collections" name="collection" type="radio" value="all" {{ collection == 'all' ? 'checked' }}>
+                                        <label class="search_label" for="search-all-collections">{{ 'In all documents'|trans }}</label>
+                                    </li>
+                                {% endif %}
                             </ul>
                             <hr>
                         {% endif %}
@@ -58,24 +64,6 @@
                                 <input class="search_radio" id="search-both" name="scope" type="radio" value="all" {{ scope == 'all' ? 'checked' }}>
                                 <label class="search_label" for="search-both">{{ 'Metadata and fulltexts'|trans }}</label>
                             </li>
-                            {% if activeCollection is defined and activeCollection is not empty %}
-                                <li class="search_item">
-                                    <p>{{ 'In'|trans }}</p>
-                                    <ul>
-                                        <li class="search_item">
-                                            <input class="search_radio" id="search-collection" name="collection" type="radio" value="{{ activeCollection }}" {{ collection != 'all' ? 'checked' }}>
-                                            <label class="search_label" for="search-collection">{{ activeCollection|trans }}</label>
-                                        </li>
-                                        <li class="search_item">
-                                            <input class="search_radio" id="search-allCollections" name="collection" type="radio" value="all" {{ collection == 'all' ? 'checked' }}>
-                                            <label class="search_label" for="search-allCollections">{{ 'Everywhere'|trans }}</label>
-                                        </li>
-                                        <li class="search_item">
-                                            <input class="search_radio" id="search-activeCollection" name="activeCollection" type="hidden" value="{{ activeCollection }}">
-                                        </li>
-                                    </ul>
-                                </li>
-                            {% endif %}
                         </ul>
                         <button class="search_close" title="Schließen">
                             <span class="sr-only">{{ 'Close'|trans }}</span>
