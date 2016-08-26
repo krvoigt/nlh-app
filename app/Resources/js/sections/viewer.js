@@ -106,12 +106,10 @@ $(function () {
         }
     });
 
-    $controls.previousPage.click(function () {
-        setGetParameters({page: page - 1});
-    });
-
-    $controls.nextPage.click(function () {
-        setGetParameters({page: page + 1});
+    // Add current hash on click to viewer controls
+    $viewerControls.click( function (e) {
+        $target = $(event.target);
+        $target.attr('href', $target.attr('href') + window.location.hash);
     });
 
     $('.js-toggle-panel').click(function () {
