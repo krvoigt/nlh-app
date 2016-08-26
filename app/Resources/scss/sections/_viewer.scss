@@ -234,7 +234,7 @@
 .viewer_title {
     @extend %title;
     font-size: 20px !important; // TODO: Calc
-    margin: round($grid / 4) 0 0;
+    margin: floor($grid / 4) 0;
 }
 
 .viewer_title-toggle {
