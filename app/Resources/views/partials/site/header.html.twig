@@ -58,12 +58,12 @@
                                 <label class="search_label" for="search-meta">{{ 'Metadata'|trans }}</label>
                             </li>
                             <li class="search_item">
-                                <input class="search_radio" id="search-full" name="scope" type="radio" value="fulltexts" {{ scope == 'fulltexts' ? 'checked' }}>
-                                <label class="search_label" for="search-full">{{ 'Fulltexts'|trans }}</label>
+                                <input class="search_radio" id="search-full" name="scope" type="radio" value="fulltext" {{ scope == 'fulltext' ? 'checked' }}>
+                                <label class="search_label" for="search-full">{{ 'Fulltext'|trans }}</label>
                             </li>
                             <li class="search_item">
                                 <input class="search_radio" id="search-both" name="scope" type="radio" value="all" {{ scope == 'all' ? 'checked' }}>
-                                <label class="search_label" for="search-both">{{ 'Metadata and fulltexts'|trans }}</label>
+                                <label class="search_label" for="search-both">{{ 'Metadata and fulltext'|trans }}</label>
                             </li>
                         </ul>
                         <button class="search_close" title="Schließen">
