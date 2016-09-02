@@ -777,17 +777,17 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v5.0.1",
+            "version": "v5.0.2",
             "target-dir": "EightPoints/Bundle/GuzzleBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/GuzzleBundle.git",
-                "reference": "eda854f74e0751dbc535604a0b36809f6150d04e"
+                "reference": "6cb0e9b89a624a953d51bede314529bfb113530c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/GuzzleBundle/zipball/eda854f74e0751dbc535604a0b36809f6150d04e",
-                "reference": "eda854f74e0751dbc535604a0b36809f6150d04e",
+                "url": "https://api.github.com/repos/8p/GuzzleBundle/zipball/6cb0e9b89a624a953d51bede314529bfb113530c",
+                "reference": "6cb0e9b89a624a953d51bede314529bfb113530c",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +837,7 @@
                 "symfony",
                 "web service"
             ],
-            "time": "2016-07-27 14:15:54"
+            "time": "2016-09-02 08:02:37"
         },
         {
             "name": "eightpoints/guzzle-wsse-middleware",
@@ -2562,12 +2562,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "c14fff01a4b033f1ff1b1cb7609669d6dfaf0a9b"
+                "reference": "35211051fa5a9a6c73dfbd17963bfb6e89d6eeab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/c14fff01a4b033f1ff1b1cb7609669d6dfaf0a9b",
-                "reference": "c14fff01a4b033f1ff1b1cb7609669d6dfaf0a9b",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/35211051fa5a9a6c73dfbd17963bfb6e89d6eeab",
+                "reference": "35211051fa5a9a6c73dfbd17963bfb6e89d6eeab",
                 "shasum": ""
             },
             "require": {
@@ -2585,6 +2585,9 @@
             "conflict": {
                 "phpdocumentor/reflection-docblock": "<3.0",
                 "phpdocumentor/type-resolver": "<0.2.0"
+            },
+            "provide": {
+                "psr/cache-implementation": "1.0"
             },
             "replace": {
                 "symfony/asset": "self.version",
@@ -2607,6 +2610,7 @@
                 "symfony/framework-bundle": "self.version",
                 "symfony/http-foundation": "self.version",
                 "symfony/http-kernel": "self.version",
+                "symfony/inflector": "self.version",
                 "symfony/intl": "self.version",
                 "symfony/ldap": "self.version",
                 "symfony/monolog-bridge": "self.version",
@@ -2691,20 +2695,20 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-08-22 17:31:21"
+            "time": "2016-09-02 02:14:06"
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.1",
+            "version": "v1.24.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
+                "reference": "33093f6e310e6976baeac7b14f3a6ec02f2d79b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
-                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/33093f6e310e6976baeac7b14f3a6ec02f2d79b7",
+                "reference": "33093f6e310e6976baeac7b14f3a6ec02f2d79b7",
                 "shasum": ""
             },
             "require": {
@@ -2752,7 +2756,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-05-30 09:11:59"
+            "time": "2016-09-01 17:50:53"
         }
     ],
     "packages-dev": [
@@ -3327,16 +3331,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.5.2",
+            "version": "5.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502"
+                "reference": "3e6e88e56c912133de6e99b87728cca7ed70c5f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/46ec2d1522ae8c9a12aca6b7650e0be78bbb0502",
-                "reference": "46ec2d1522ae8c9a12aca6b7650e0be78bbb0502",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3e6e88e56c912133de6e99b87728cca7ed70c5f5",
+                "reference": "3e6e88e56c912133de6e99b87728cca7ed70c5f5",
                 "shasum": ""
             },
             "require": {
@@ -3401,20 +3405,20 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-08-18 11:10:44"
+            "time": "2016-08-26 07:11:44"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.4",
+            "version": "3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19"
+                "reference": "46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/4e83390f64e7ce04fcaec2ce95cd72823b431d19",
-                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49",
+                "reference": "46b249b43fd2ed8e127aa0fdb3cbcf56e9bc0e49",
                 "shasum": ""
             },
             "require": {
@@ -3460,7 +3464,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-08-17 09:33:51"
+            "time": "2016-08-26 05:51:59"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4033,12 +4037,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "8755d54fd0bb3c96337a5acc4f164805f62fa8fa"
+                "reference": "c9bb8330540fb5348d7c19b04927346788b87a7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/8755d54fd0bb3c96337a5acc4f164805f62fa8fa",
-                "reference": "8755d54fd0bb3c96337a5acc4f164805f62fa8fa",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/c9bb8330540fb5348d7c19b04927346788b87a7a",
+                "reference": "c9bb8330540fb5348d7c19b04927346788b87a7a",
                 "shasum": ""
             },
             "require": {
@@ -4080,7 +4084,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-08-19 06:48:55"
+            "time": "2016-08-27 10:47:23"
         },
         {
             "name": "webmozart/assert",
