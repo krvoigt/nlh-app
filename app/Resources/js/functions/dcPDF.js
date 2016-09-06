@@ -465,7 +465,7 @@ DCPDF.generatePDF = function (ppn, pictureFormatOptions) {
         DCPDF.internalOptions = pictureFormatOptions;
     } else {
         DCPDF.internalOptions = {
-            url: 'http://localhost:3000/image/',
+            url: window.location.origin + '/image/',
             width: 0,
             height: 0,
             x: 0,
