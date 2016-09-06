@@ -1,5 +1,8 @@
 <section class="viewer_metadata">
     <h2 class="viewer_heading">{{ 'Metadata'|trans }}</h2>
+
+    <button class="download-pdf" data-ppn="{{ document.id }}">PDF</button>
+
     <dl>
         <dt>{{ 'bytitle'|trans }}</dt>
         <dd>{{ document.title | first }}</dd>
