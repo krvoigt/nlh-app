@@ -43,10 +43,8 @@ DCPDF.showError = function (errorText, isInProgress) {
     }
 };
 
-
 DCGlobals = {};
 DCGlobals.getWork = function() {
-
     var doc = {};
     doc.structure = {
         pages_length: 1
@@ -112,7 +110,6 @@ DCPDF.setMaxValueForProgress = function (maxVal) {
  * @param progressVal
  */
 DCPDF.setProgress = function (progressVal) {
-
     var progressBar = jQuery(".progress-bar");
     progressBar.attr("aria-valuenow", progressVal);
     var percentage = Math.floor((parseInt(progressVal) / parseInt(progressBar.attr("aria-valuemax"))) * 100) + "%";
@@ -148,7 +145,7 @@ DCPDF.hideProgressbar = function () {
  * @summary Return a new promise for adding it later to an array of promises. Images will be loaded and returned as data-url.
  * @param path URL of image
  */
-DCPDF.preloadImage = function (path) {
+DCPDF.preloadImage = function (path, physID) {
     return new Promise(function (resolve, reject) {
         // Create a new image from JavaScript
         var image = new Image();
@@ -162,13 +159,13 @@ DCPDF.preloadImage = function (path) {
             canvas.height = this.height;
             var context = canvas.getContext('2d');
             context.drawImage(this, 0, 0);
-            dataURL = canvas.toDataURL('image/jpeg');
-            DCPDF.base64data.push({
+            var dataURL = canvas.toDataURL('image/jpeg');
+            var item = {
                 dataURL: dataURL,
-                phys_id: parseInt(this.src.substr(this.src.length - 8)),
                 width: this.width,
-                height: this.height
-            });
+                height: this.height,
+            };
+            DCPDF.base64data[physID] = item;
             DCPDF.setProgress(DCPDF.getProgress() + 1);
             resolve();
         };
@@ -194,7 +191,7 @@ DCPDF.preload = function (ppn) {
     // gets downloaded by the browser.
     _.each(DCPDF.base64images, function (item, key) {
         if (typeof item !== undefined) {
-            DCPDF.base64images[key] = DCPDF.preloadImage(item);
+            DCPDF.base64images[key] = DCPDF.preloadImage(item, key);
         }
     });
     // When all images have been fetched...
@@ -217,7 +214,7 @@ DCPDF.preload = function (ppn) {
  */
 DCPDF.buildImageBase64Arr = function (phys_id_list, url, ppn, picturewidth) {
     _.each(phys_id_list, function (phys_id) {
-        DCPDF.base64images.push(url + ppn + "/full/full/0/default.jpg");
+        DCPDF.base64images.push(url + ppn + ":" + phys_id + "/full/full/0/default.jpg");
     });
     DCPDF.setMaxValueForProgress(phys_id_list.length);
     DCPDF.preload(ppn);
@@ -395,7 +392,6 @@ DCPDF.buildPDF = function (ppn) {
     var doc = new jsPDF("p", "mm", "a4");
     //doc = DCPDF.addMetadata(doc, ppn);
     var count = 0;
-    var data_length = DCPDF.base64data.length;
     _.each(DCPDF.base64data, function (item) {
         count++;
         if (DCPDF.internalOptions.width === 0 || DCPDF.internalOptions.height === 0) {
@@ -459,23 +455,19 @@ DCPDF.buildPDF = function (ppn) {
  * @param ppn
  * @param pictureFormatOptions
  */
-DCPDF.generatePDF = function (ppn, pictureFormatOptions) {
+DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
     DCPDF.showProgress();
-    if (typeof(pictureFormatOptions) !== "undefined" && pictureFormatOptions) {
-        DCPDF.internalOptions = pictureFormatOptions;
-    } else {
-        DCPDF.internalOptions = {
-            url: window.location.origin + '/image/',
-            width: 0,
-            height: 0,
-            x: 0,
-            y: 0,
-            format: 'JPEG',
-            picturewidth: '',
-            physIDstart: 1,
-            physIDend: 1
-        };
-    }
+    DCPDF.internalOptions = {
+        url: window.location.origin + '/image/',
+        width: 0,
+        height: 0,
+        x: 0,
+        y: 0,
+        format: 'JPEG',
+        picturewidth: '',
+        physIDstart: physIDstart,
+        physIDend: physIDend,
+    };
     var physIDList = DCPDF.turnPageNumbersIntoPhysIDArray(DCPDF.internalOptions.physIDstart, DCPDF.internalOptions.physIDend);
     DCPDF.buildImageBase64Arr(physIDList, DCPDF.internalOptions.url, ppn, DCPDF.internalOptions.picturewidth);
 };
@@ -488,7 +480,6 @@ DCPDF.generatePDF = function (ppn, pictureFormatOptions) {
  *
  */
 DCPDF.showModal = function (ppn, physIDstart, physIDend) {
-
     var progressContainer = jQuery('#PDFprogress');
     DCPDF.resetGUI(ppn, physIDstart, physIDend);
     progressContainer.modal({
@@ -510,12 +501,12 @@ DCPDF.repeat = function (str, times) {
 };
 
 /**
- * @summary Helper function to build a PHYSID from a string like "23" to "PHYS_0023"
+ * @summary Helper function to build a PHYSID from a string like "23" to "00000023"
  * @param theNumberOfPhysID Like 23
- * @returns {string} Like "PHYS_0023"
+ * @returns {string} Like "00000023"
  */
 DCPDF.buildPhysIDs = function (theNumberOfPhysID) {
-    return "PHYS_" + (DCPDF.repeat("0", 4 - theNumberOfPhysID.toString().length)) + theNumberOfPhysID;
+    return ("00000000" + theNumberOfPhysID).substr(-8, 8);
 };
 
 /**

@@ -16,16 +16,6 @@
         {% set page = app.request.get('page') ? app.request.get('page') : 1 %}
         {% set isValidPage = (page >= 1 and page <= pageCount) %}
 
-        <div class="alert"></div>
-        <div class="progress-bar" aria-valuenow="1"></div>
-        <div class="pdf-close"></div>
-        <div id="PDFprogress">
-            <div class="pdf-generation-button"></div>
-        </div>
-        <div id="pdf-range"></div>
-        <div class="modal-title"></div>
-
-
         <main class="main" id="main">
             <section class="viewer">
                 {% include "@SubugoeFind/Default/partials/header.html.twig" %}
@@ -43,6 +33,9 @@
                     </div>
                     <div class="viewer_panel -metadata">
                         {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
+                    </div>
+                    <div class="viewer_panel -export -hidden">
+                        {% include "@SubugoeFind/Default/partials/export.html.twig" %}
                     </div>
                 </div>
                 {% include "@SubugoeFind/Default/partials/coverflow.html.twig" %}

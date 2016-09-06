@@ -108,7 +108,7 @@ $(function () {
 
     // Add current hash on click to viewer controls
     $viewerControls.click( function (e) {
-        $target = $(event.target);
+        var $target = $(e.target);
         $target.attr('href', $target.attr('href') + window.location.hash);
     });
 
@@ -119,6 +119,7 @@ $(function () {
         var $panel = $('.viewer_panel.-' + panelName);
         $panel.toggleClass('-hidden');
 
+        // TODO: Don't reload TOC on every toggle
         if (panelName === 'toc') {
             $.get(window.location.origin + window.location.pathname + '/toc/', function (data) {
                 $('.viewer_toc').append(data);

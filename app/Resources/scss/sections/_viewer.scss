@@ -149,6 +149,11 @@
     justify-content: center;
 }
 
+.viewer_export {
+    min-width: 20em;
+    padding: ($grid / 2);
+}
+
 .viewer_header {
     @include separator(1, 0);
     background: $header-bg;
