@@ -92,7 +92,7 @@ DCPDF.showProgress = function () {
         jQuery(".progress-wrapper").fadeIn();
     });
     jQuery(".modal-title").fadeOut(function () {
-        jQuery(".modal-title").text('pdf_progress_headline');
+        jQuery(".modal-title").text('Ihr PDF wird vorbereitet.');
         jQuery(".modal-title").fadeIn();
     });
 };
