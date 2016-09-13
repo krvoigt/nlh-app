@@ -17,7 +17,7 @@
                 <span class="sr-only">{{ 'Previous section'|trans }}</span>
             </a>
             <a
-                class="viewer_control -previous-page js-previous-page"
+                class="viewer_control -previous-page"
                 title="{{ 'Previous page'|trans }}" {{ page == 1 ? 'disabled' }}
             >
                 <span class="sr-only">{{ 'Previous page'|trans }}</span>
@@ -33,7 +33,7 @@
             </select>
 
             <a
-                class="viewer_control -next-page js-next-page"
+                class="viewer_control -next-page"
                 title="{{ 'Next page'|trans }}" {{ page == pageCount ? 'disabled' }}
                 href="{{ path(app.request.attributes.get('_route'), {
                     'page': (page + 1),
@@ -59,9 +59,9 @@
         </div>
 
         <div class="viewer_control-group">
-            <button class="viewer_control -zoom-out js-zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
+            <button class="viewer_control -zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
             <label class="sr-only" for="viewer-zoom-range">{{ 'Set zoom'|trans }}</label>
-            <button class="viewer_control -zoom-in js-zoom-in" title="{{ 'Zoom in'|trans }}"></i><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
+            <button class="viewer_control -zoom-in" title="{{ 'Zoom in'|trans }}"></i><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
         </div>
     </div>
 
@@ -72,6 +72,9 @@
             id="viewer_image"
             data-iiif="{{ path('_iiifjson', {'identifier': identifier}) }}"
         ></div>
+        <div class="viewer_spinner">
+            <span class="sr-only">{{ 'Loading'|trans }}</span>
+        </div>
     {% else %}
         <div class="viewer_error">
             {{ 'Invalid page'|trans }}

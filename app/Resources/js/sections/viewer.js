@@ -4,8 +4,6 @@ $(function () {
     var settings = {};
 
     var $viewerControls = $('.viewer_controls');
-    var $image = $('.viewer_image');
-
     var $controls = {
         fullscreen: $viewerControls.find('.viewer_control.-fullscreen'),
         nextPage: $viewerControls.find('.viewer_control.-next-page'),
@@ -16,6 +14,11 @@ $(function () {
         zoomReset: $(),
     };
 
+    var $image = $('.viewer_image');
+    var $spinner = $('.viewer_spinner');
+
+    var layer = L.tileLayer.iiif($('#viewer_image').data('iiif'));
+
     var image = L.map('viewer_image', {
         attributionControl: false,
         center: [0, 0],
@@ -23,7 +26,7 @@ $(function () {
         zoom: defaultZoom,
         zoomControl: false,
         maxZoom: maxZoom,
-    }).addLayer(L.tileLayer.iiif($('#viewer_image').data('iiif')));
+    }).addLayer(layer);
 
     var page = parseInt($controls.pageSelect.val());
 
@@ -39,8 +42,7 @@ $(function () {
         $(this).closest('.viewer_title').toggleClass('-full');
     });
 
-    // TODO: 'load' event does not fire for unknown reasons, so we're using 'viewreset' as a workaround.
-    // Because this can fire multiple times, event binding is disabled in loadState function.
+    // Viewreset event can fire multiple times, so binding is disabled in loadState function.
     image.on('viewreset', loadState);
 
     image.on('zoomend', function () {
@@ -53,6 +55,14 @@ $(function () {
         settings.lat = latLng.lat;
         settings.lng = latLng.lng;
         saveState(settings);
+    });
+
+    layer.on('loading', function (event) {
+        $spinner.fadeIn();
+    });
+
+    layer.on('load', function (event) {
+        $spinner.hide();
     });
 
     $controls.zoomIn.click(function () {
