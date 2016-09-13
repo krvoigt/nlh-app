@@ -19,6 +19,7 @@
         <main class="main" id="main">
             <section class="viewer">
                 {% include "@SubugoeFind/Default/partials/header.html.twig" %}
+
                 <div class="viewer_main">
                     <div class="viewer_panel -scan">
                         {% include "@SubugoeFind/Default/partials/scan.html.twig" %}
@@ -31,6 +32,9 @@
                     <div class="viewer_panel -toc -hidden">
                         {% include "@SubugoeFind/Default/partials/toc.html.twig" %}
                     </div>
+                    <div class="viewer_panel -thumbnails -hidden">
+                        {% include "@SubugoeFind/Default/partials/thumbnails.html.twig" %}
+                    </div>
                     <div class="viewer_panel -metadata">
                         {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
                     </div>
@@ -38,7 +42,6 @@
                         {% include "@SubugoeFind/Default/partials/export.html.twig" %}
                     </div>
                 </div>
-                {% include "@SubugoeFind/Default/partials/coverflow.html.twig" %}
             </section>
         </main>
     {% endif %}

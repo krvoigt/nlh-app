@@ -1,15 +1,15 @@
-<footer class="coverflow">
+<section class="thumbnails">
     {% if document.thumbs_url is defined %}
-        <ul id="coverflow" class="coverflow_list">
+        <ul id="thumbnails" class="thumbnails_list">
             {% for physPage, logPage in pageMappings %}
-                <li class="coverflow_item">
+                <li class="thumbnails_item">
                     {% set link = document.id ~ '?page=' ~ physPage %}
                     {% set isCurrent = (physPage == page) %}
                     {# TODO: Find a more elegant way to build image URL #}
                     {% set identifier = (document.presentation_url[physPage - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
-                    <a class="coverflow_link {{ isCurrent ? '-current' }}" {{ not isCurrent ? 'href=' ~ link }}>
+                    <a class="thumbnails_link {{ isCurrent ? '-current' }}" {{ not isCurrent ? 'href=' ~ link }}>
                         <img data-original="{{ path('_image', {'format': 'jpg', 'identifier': identifier, 'region': 'full', 'size': '59,78', 'rotation': 0, 'quality': 'default'})  }}" alt="">
-                        <span class="coverflow_page-number">
+                        <span class="thumbnails_page-number">
                             <span class="sr-only">{% trans %}Go to page{% endtrans %}</span>
                             {{ physPage }} : {{ logPage }}
                         </span>

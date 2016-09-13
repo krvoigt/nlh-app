@@ -1,33 +1,27 @@
-.coverflow {
-    background: $black;
-    min-height: $grid;
+.thumbnails {
+    background: $grey-light;
+    min-width: 20em;
+    overflow-y: auto;
 }
 
-.coverflow_list {
-    margin: 0;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    padding: 0 .25em;
-    position: absolute;
-    vertical-align: bottom;
-    white-space: nowrap;
-    width: 100%;
+.thumbnails_list {
+    margin: round($grid / 8);
 }
 
-.coverflow_item {
+.thumbnails_item {
     box-shadow: $drop-shadow;
     display: inline-block;
+    margin: round($grid / 8);
     box-shadow: $drop-shadow;
     position: relative;
-    vertical-align: bottom;
-    width: round($grid * 2.25);
+    width: round($grid * 3.45);
 
     &::before {
         content: none;
     }
 }
 
-.coverflow_link {
+.thumbnails_link {
     background: $link-hover-bg-color;
     box-shadow: none;
     display: block;
@@ -49,29 +43,29 @@
 
     img {
         @include transition(opacity);
+        display: block;
         min-width: 100%;
-        height: auto;
         vertical-align: top;
     }
 }
 
-.coverflow_page-number {
-    background: linear-gradient(to top right, rgba($white, 0), rgba($white, 0), rgba($white, .5));
+.thumbnails_page-number {
+    background: $light-light;
+    bottom: 0;
     color: $link-color;
     display: block;
     font-size: $font-size-small;
     font-weight: bold;
     line-height: 1;
-    min-width: ($grid);
-    padding: round($grid / 6) round($grid / 6) ($grid * 2) ($grid * 2);
+    width: 100%;
+    padding: round($grid / 6);
     position: absolute;
-    right: 0;
-    text-align: center;
+    text-align: right;
     text-shadow: 0 1px 0 $light;
-    top: 0;
+    white-space: nowrap;
 
-	.coverflow_link.-current & {
-        background: linear-gradient(to top right, rgba($black, 0), rgba($black, 0), rgba($black, .5));
+	.thumbnails_link.-current & {
+        background: $shadow-dark;
         color: $white;
         text-shadow: 0 -1px 0 $shadow-dark;
 	}

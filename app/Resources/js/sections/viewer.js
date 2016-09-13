@@ -112,7 +112,7 @@ $(function () {
         $target.attr('href', $target.attr('href') + window.location.hash);
     });
 
-    $('.js-toggle-panel').click(function () {
+    $('.viewer_control.-toggle-panel').click(function () {
         $(this).toggleClass('-active');
         var panelName = $(this).data('target');
 
@@ -152,7 +152,7 @@ $(function () {
             settings = JSON.parse(window.location.hash.substr(1));
             image.setView([settings.lat, settings.lng], settings.zoom);
             $.each(settings.panels, function (name, show) {
-                var buttonName = '.js-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
+                var buttonName = '.viewer_control.-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
                 var $panel = $('.viewer_panel.-' + name)
                 $panel.css('transitionDuration', '0s');
                 $(buttonName).click();

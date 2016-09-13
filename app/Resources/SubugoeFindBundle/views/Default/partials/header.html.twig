@@ -14,16 +14,17 @@
         <div class="viewer_controls -right">
             <div class="viewer_control-group">
                 {% if document.gdzocr_url is defined %}
-                    <button class="viewer_control js-toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
+                    <button class="viewer_control -toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
                 {% endif %}
                 {% if tableOfContents %}
-                    <button class="viewer_control js-toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
+                    <button class="viewer_control -toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
                 {% endif %}
-                <button class="viewer_control -active js-toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
-                <button class="viewer_control js-toggle-panel" data-target="export">{{ 'Export'|trans }}</button>
+                <button class="viewer_control -toggle-panel" data-target="thumbnails">{{ 'Thumbnails'|trans }}</button>
+                <button class="viewer_control -active -toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
+                <button class="viewer_control -toggle-panel" data-target="export">{{ 'Export'|trans }}</button>
             </div>
             <div class="viewer_control-group">
-                <button class="viewer_control -fullscreen js-fullscreen" title="Vollbildansicht">
+                <button class="viewer_control -fullscreen" title="Vollbildansicht">
                     <span class="sr-only">{{ 'Fullscreen'|trans }}</span>
                 </button>
             </div>
