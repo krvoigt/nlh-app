@@ -1,0 +1,37 @@
+.toc {
+    min-width: 20em;
+    overflow-y: auto;
+    padding: ($grid / 2);
+}
+
+.toc_item {
+    & & {
+        border-left: 1px solid $brand-color-light;
+        margin-left: (-$grid / 2);
+        padding-left: $grid / 2;
+        position: relative;
+    }
+
+    &::before {
+        border-top: 1px solid $brand-color-light;
+        background: none;
+        height: 100%;
+        margin-left: (-$grid / 2 - 1px);
+    }
+
+    &:last-child::before {
+        border-left: 1px solid $white;
+    }
+
+    .toc > .toc_list > &:before {
+        content: none !important;
+    }
+}
+
+.toc_list {
+    margin-left: 0;
+
+    & & {
+        margin-left: $grid;
+    }
+}

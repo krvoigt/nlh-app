@@ -1,7 +1,15 @@
 {% tree item in structure %}
-  {% if treeloop.first %}<ul>{% endif %}
-    <li><a href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}{% if item.physicalPages.0 is defined and item.physicalPages.0 is not null %}?page={{ item.physicalPages.0|split('_').1|abs }}{% endif %}">{% if item.label is not null %}{{ item.label }}{% else %}{{ item.type|lower|trans  }}{% endif %}</a>
-        {% subtree item.children %}
-    </li>
-  {% if treeloop.last %}</ul>{% endif %}
+    {% if treeloop.first %}<ul class="toc_list">{% endif %}
+        <li class="toc_item">
+            {% set page = (item.physicalPages.0 is defined and item.physicalPages.0 is not null ? item.physicalPages.0|split('_').1|abs : '') %}
+            <a class="toc_link" href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}{{ page }}">
+                {% if item.label is null %}
+                    {{ item.type|lower|trans }}
+                {% else %}
+                    {{ item.label }}
+                {% endif %}
+            </a>
+            {% subtree item.children %}
+        </li>
+    {% if treeloop.last %}</ul>{% endif %}
 {% endtree %}
