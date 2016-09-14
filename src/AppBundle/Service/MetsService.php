@@ -48,7 +48,7 @@ class MetsService
      *
      * @return string
      */
-    protected function getMetFile($id)
+    protected function getMetsFile($id)
     {
         $identifier = 'mets.'.sha1($id);
 
@@ -73,51 +73,62 @@ class MetsService
      */
     public function getTableOfContents($id)
     {
+        $storage = [];
+
         try {
-            $metsFile = $this->getMetFile($id);
+            $metsFile = $this->getMetsFile($id);
         } catch (ClientException $e) {
             $id = $this->getParentDocument($id);
-
             try {
-                $metsFile = $this->getMetFile($id);
+                $metsFile = $this->getMetsFile($id);
             } catch (ClientException $e) {
                 $id = $this->getParentDocument($id);
-                $metsFile = $this->getMetFile($id);
+                $metsFile = $this->getMetsFile($id);
             }
         }
+
+        $query = '//mets:mets/mets:structMap/mets:div';
 
         $crawler = new Crawler();
         $crawler->addContent($metsFile);
 
-        $storage = [];
-
-        $documentId = $crawler->filterXPath('//mets:mets/mets:dmdSec/mets:mdWrap/mets:xmlData/mods:mods/mods:recordInfo/mods:recordIdentifier')->text();
-
         $pageMappings = $this->getPageMapping($crawler);
 
-        $storage[] = $crawler
-            ->filterXPath('//mets:mets/mets:structMap/mets:div')
-            ->children()
-            ->each(function (Crawler $node) use ($documentId, $pageMappings) {
+        $storage[] = $crawler->filterXPath($query)->children()->each(function (Crawler $node) use ($pageMappings) {
+            $toc = [];
+            if ($node->getNode(0)->tagName !== 'mets:mptr') {
+                $toc = $this->getTocElement($node, $pageMappings);
+                $children = new \SplObjectStorage();
+                $node->children()->each(
+                          function (Crawler $childNode) use (&$children, &$toc, $pageMappings) {
+                              $childToc = $this->getTocElement($childNode, $pageMappings);
+                              $children = new \SplObjectStorage();
+                              $toc->addChildren($childToc);
+                              $childNode->children()->each(
+                                  function (Crawler $child_1Node) use (&$children, &$childToc, $pageMappings) {
+                                      $child_1Toc = $this->getTocElement($child_1Node, $pageMappings);
+                                      $children = new \SplObjectStorage();
+                                      $childToc->addChildren($child_1Toc);
+                                      $child_1Node->children()->each(function (Crawler $child_2Node) use (&$children, &$child_1Toc, $pageMappings) {
+                                          $child_2Toc = $this->getTocElement($child_2Node, $pageMappings);
+                                          $children = new \SplObjectStorage();
+                                          $child_1Toc->addChildren($child_2Toc);
+                                          $child_2Node->children()->each(function (Crawler $child_3Node) use (&$children, &$child_2Toc, $pageMappings) {
+                                              $child_3Toc = $this->getTocElement($child_3Node, $pageMappings);
+                                              $children = new \SplObjectStorage();
+                                              $child_2Toc->addChildren($child_3Toc);
+                                          });
+                                      });
+                                  });
+                          });
+            }
 
-                $toc = $this->getTocElement($node, $documentId, $pageMappings);
-
-                if ($node->children()->count() > 0) {
-                    $children = new \SplObjectStorage();
-
-                    $node->children()
-                        ->each(function (Crawler $childNode) use (&$children, &$toc, $documentId, $pageMappings) {
-                            $childToc = $this->getTocElement($childNode, $documentId, $pageMappings);
-                            $toc->addChildren($childToc);
-                        });
-                }
-
-                return $toc;
-            });
+            return $toc;
+        });
 
         if (count($storage) === 0) {
             self::getTableOfContents($this->getParentDocument($id));
-        };
+        }
 
         return $storage;
     }
@@ -130,15 +141,15 @@ class MetsService
     public function getScannedPagesMapping($id)
     {
         try {
-            $metsFile = $this->getMetFile($id);
+            $metsFile = $this->getMetsFile($id);
         } catch (ClientException $e) {
             $id = $this->getParentDocument($id);
 
             try {
-                $metsFile = $this->getMetFile($id);
+                $metsFile = $this->getMetsFile($id);
             } catch (ClientException $e) {
                 $id = $this->getParentDocument($id);
-                $metsFile = $this->getMetFile($id);
+                $metsFile = $this->getMetsFile($id);
             }
         }
 
@@ -155,8 +166,7 @@ class MetsService
             if ($node->attr('ORDERLABEL')) {
                 $links[$key] = $node->attr('ORDERLABEL');
             }
-
-         });
+        });
 
         return $links;
     }
@@ -172,12 +182,12 @@ class MetsService
     {
         $links = [];
         $crawler->filterXPath('//mets:mets/mets:structLink')->children()->each(function (Crawler $node) use (&$links) {
-             $key = $node->attr('xlink:from');
-             if (!array_key_exists($key, $links)) {
-                 $links[$key] = [];
-             }
-             array_push($links[$key], $node->attr('xlink:to'));
-         });
+            $key = $node->attr('xlink:from');
+            if (!array_key_exists($key, $links)) {
+                $links[$key] = [];
+            }
+            array_push($links[$key], $node->attr('xlink:to'));
+        });
 
         return $links;
     }
@@ -188,7 +198,7 @@ class MetsService
      *
      * @return TableOfContents
      */
-    protected function getTocElement(Crawler $node, $parent, $linkSegment)
+    protected function getTocElement(Crawler $node, $linkSegment)
     {
         $toc = new TableOfContents();
 
@@ -196,7 +206,6 @@ class MetsService
         $toc->setType($node->attr('TYPE'));
         $toc->setDmdid($node->attr('DMDID'));
         $toc->setLabel($node->attr('LABEL'));
-        $toc->setParentDocument($parent);
 
         if (isset($linkSegment[$node->attr('ID')])) {
             $toc->setPhysicalPages($linkSegment[$node->attr('ID')]);
@@ -224,17 +233,5 @@ class MetsService
         }
 
         return $id;
-    }
-
-    /**
-     * @param string $id
-     *
-     * @return int
-     */
-    public function checkIfTableOfContentsExists($id)
-    {
-        $structure = $this->getTableOfContents($id);
-
-        return count($structure[0]) > 0 ? true : false;
     }
 }

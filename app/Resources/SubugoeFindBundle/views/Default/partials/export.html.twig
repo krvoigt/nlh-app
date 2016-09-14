@@ -47,9 +47,9 @@
                                 <div id="second-step-under-headline">
                                     <input type="number" min="1" class="pdf-textfields" id="physIDstart" value="1">
                                     {{ 'pdf_until'|trans }}
-                                    <input type="number" min="1" class="pdf-textfields" id="physIDend" value={{ pageCount }}>
+                                    <input type="number" min="1" class="pdf-textfields" id="physIDend" value={{ pagination.pageCount }}>
                                     <div class="end-page-range-full-pages">
-                                        {{ 'pdf_from'|trans }} {{ pageCount }} {{ 'pdf_pages'|trans }}
+                                        {{ 'pdf_from'|trans }} {{ pagination.pageCount }} {{ 'pdf_pages'|trans }}
                                     </div>
                                 </div>
                             </div>

@@ -9,12 +9,7 @@
         {{ render(controller('AppBundle:Document:anchorDocument', { 'id': document.id })) }}
     {% else %}
         {# Viewer settings #}
-        {% set pageMappings = metsService.getScannedPagesMapping(app.request.get('id')) %}
-        {% set tableOfContents = metsService.checkIfTableOfContentsExists(app.request.get('id')) %}
-
-        {% set pageCount = pageMappings|length %}
-        {% set page = app.request.get('page') ? app.request.get('page') : 1 %}
-        {% set isValidPage = (page >= 1 and page <= pageCount) %}
+        {% set isValidPage = (pagination.page >= 1 and pagination.page <= pagination.pageCount) %}
 
         <main class="main" id="main">
             <section class="viewer">
