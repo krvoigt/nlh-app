@@ -154,3 +154,9 @@ liip_imagine:
             filters:
                 upscale: { min: [640, 640] }
                 crop: { start: [0, 0], size: [640, 640] }
+
+services:
+    twig.extension.tree:
+        class: Fuz\Jordan\Twig\Extension\TreeExtension
+        tags:
+            - { name: twig.extension }
