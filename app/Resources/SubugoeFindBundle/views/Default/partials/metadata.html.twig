@@ -58,9 +58,9 @@
         <dd><a href="{{ document.purl }}">{{ document.purl }}</a></dd>
 
         {% if document.id_PPNanalog_s is defined %}
-            <dt>{{ 'PPN (original)'|trans }}</dt>
+            <dt>{{ 'Catalogue'|trans }}</dt>
             <dd>
-                <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ document.id_PPNanalog_s.0 }}</a>
+                <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}</a>
             </dd>
         {% endif %}
 
