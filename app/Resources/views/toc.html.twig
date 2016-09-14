@@ -1,13 +1,7 @@
-<ul>
-    {% for element in structure[0] %}
-        <li><a href="{{ path('_detail', {'id': id ~ '|' ~ element.id}) }}">{{ element.label }}</a> {% trans %}pages{% endtrans %} {% for physicalPages in element.physicalPages %}{{ physicalPages}} {% endfor %}
-            {% if element.children is defined %}
-                <ul>
-                    {% for children in element.children %}
-                        <li><a href="{{ path('_detail', {'id': children.parentDocument ~ '|' ~ children.id}) }}">{{ children.label }}</a>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
+{% tree item in structure %}
+  {% if treeloop.first %}<ul>{% endif %}
+    <li><a href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}{% if item.physicalPages.0 is defined and item.physicalPages.0 is not null %}?page={{ item.physicalPages.0|split('_').1|abs }}{% endif %}">{% if item.label is not null %}{{ item.label }}{% else %}{{ item.type }}{% endif %}</a>
+        {% subtree item.children %}
+    </li>
+  {% if treeloop.last %}</ul>{% endif %}
+{% endtree %}

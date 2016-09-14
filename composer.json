@@ -48,7 +48,8 @@
         "symfony/form": "^3.2",
         "symfony/dom-crawler": "^3.2",
         "eightpoints/guzzle-bundle": "^5.0",
-        "liip/imagine-bundle": "^1.6"
+        "liip/imagine-bundle": "^1.6",
+        "ninsuo/jordan-tree": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

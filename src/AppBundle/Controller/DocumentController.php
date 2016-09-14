@@ -42,9 +42,13 @@ class DocumentController extends Controller
      */
     public function tocAction($id)
     {
+        if (strchr($id, '|')) {
+            $id = explode('|', $id)[0];
+        }
+
         $metsService = $this->get('mets_service');
 
-        $structure = $metsService->getTableOfContents($id);
+        $structure = array_filter($metsService->getTableOfContents($id)[0]);
 
         return $this->render('toc.html.twig', [
             'structure' => $structure,

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c26a9cffa164146f694969b95345225",
-    "content-hash": "e9dca003873269644a596f67d247172d",
+    "hash": "811a2a497dbd04854f408e763b281277",
+    "content-hash": "19470791f9d3ecafd8359ae798c24aac",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1671,6 +1671,43 @@
                 "solr"
             ],
             "time": "2016-03-29 12:17:10"
+        },
+        {
+            "name": "ninsuo/jordan-tree",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ninsuo/jordan-tree.git",
+                "reference": "c58eaedcf2ce480a30204dfa2579b550f08c0ca8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ninsuo/jordan-tree/zipball/c58eaedcf2ce480a30204dfa2579b550f08c0ca8",
+                "reference": "c58eaedcf2ce480a30204dfa2579b550f08c0ca8",
+                "shasum": ""
+            },
+            "require": {
+                "twig/twig": "^1.20"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Fuz\\Jordan\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alain Tiemblo",
+                    "email": "alain@fuz.org"
+                }
+            ],
+            "description": "A Twig extension for succinctly traversing nested lists (e.g. navigation menus).",
+            "homepage": "https://github.com/ninsuo/jordan-tree",
+            "time": "2016-05-13 19:22:27"
         },
         {
             "name": "paragonie/random_compat",
@@ -4140,7 +4177,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "subugoe/find-bundle": 20
+        "subugoe/find-bundle": 20,
+        "ninsuo/jordan-tree": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
