@@ -16,7 +16,7 @@
                 {% if document.gdzocr_url is defined %}
                     <button class="viewer_control -toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
                 {% endif %}
-                {% if pagination.tableOfContents %}
+                {% if documentStructure.tableOfContents %}
                     <button class="viewer_control -toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
                 {% endif %}
                 <button class="viewer_control -toggle-panel" data-target="thumbnails">{{ 'Thumbnails'|trans }}</button>

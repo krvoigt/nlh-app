@@ -4,7 +4,7 @@
             {% for physPage, logPage in pageMappings %}
                 <li class="thumbnails_item">
                     {% set link = document.id ~ '?page=' ~ physPage %}
-                    {% set isCurrent = (physPage == pagination.page) %}
+                    {% set isCurrent = (physPage == documentStructure.page) %}
                     {# TODO: Find a more elegant way to build image URL #}
                     {% set identifier = (document.presentation_url[physPage - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
                     <a class="thumbnails_link {{ isCurrent ? '-current' }}" {{ not isCurrent ? 'href=' ~ link }}>

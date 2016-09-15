@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use AppBundle\Entity\Pagination;
+use AppBundle\Entity\DocumentStructure;
 
 class DefaultController extends BaseController
 {
@@ -55,7 +55,7 @@ class DefaultController extends BaseController
      */
     public function detailAction($id)
     {
-        $pagination = new Pagination();
+        $documentStructure = new DocumentStructure();
 
         $request = $this->get('request_stack')->getCurrentRequest();
 
@@ -85,36 +85,38 @@ class DefaultController extends BaseController
             $identifier = $documentId.':'.str_pad($page, strlen($identifier), 0, STR_PAD_LEFT);
         }
 
-        $metsService = $this->get('mets_service');
-        $pageMappings = $metsService->getScannedPagesMapping($documentId);
-        $pageCount = count($pageMappings);
-        $structure = $metsService->getTableOfContents($documentId);
-        $tableOfContents = count($structure[0]) > 0 ? true : false;
+        if (!$document[0]->isanchor) {
+            $metsService = $this->get('mets_service');
+            $pageMappings = $metsService->getScannedPagesMapping($documentId);
+            $pageCount = count($pageMappings);
+            $structure = $metsService->getTableOfContents($documentId);
+            $tableOfContents = count($structure[0]) > 0 ? true : false;
+        }
 
-        if (count($structure[0]) > 0) {
+        if (isset($structure[0]) && count($structure[0]) > 0) {
             $chapterArr = $this->flattenStructure(array_filter($structure[0]));
             $firstChapter = $chapterArr[0]['chapterId'];
             $lastChapter = $chapterArr[count($chapterArr) - 1]['chapterId'];
         }
 
-        if ($pageMappings !== []) {
+        if (isset($pageMappings) && $pageMappings !== []) {
             $documentFirstPage = array_keys($pageMappings)[0];
             $documentLastPage = array_keys($pageMappings)[count($pageMappings) - 1];
         }
 
-        $pagination->setPage($page);
-        $pagination->setPageCount($pageCount);
-        $pagination->setTableOfContents($tableOfContents);
-        $pagination->setIdentifier(isset($identifier) ? $identifier : null);
-        $pagination->setFirstChapter(isset($firstChapter) ? $firstChapter : null);
-        $pagination->setLastChapter(isset($lastChapter) ? $lastChapter : null);
-        $pagination->setDocumentFirstPage(isset($documentFirstPage) ? $documentFirstPage : null);
-        $pagination->setDocumentLastPage(isset($documentLastPage) ? $documentLastPage : null);
+        $documentStructure->setPage($page);
+        $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);
+        $documentStructure->setTableOfContents(isset($tableOfContents) ? $tableOfContents : null);
+        $documentStructure->setIdentifier(isset($identifier) ? $identifier : null);
+        $documentStructure->setFirstChapter(isset($firstChapter) ? $firstChapter : null);
+        $documentStructure->setLastChapter(isset($lastChapter) ? $lastChapter : null);
+        $documentStructure->setDocumentFirstPage(isset($documentFirstPage) ? $documentFirstPage : null);
+        $documentStructure->setDocumentLastPage(isset($documentLastPage) ? $documentLastPage : null);
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
                         'document' => $document[0]->getFields(),
-                        'pageMappings' => $pageMappings,
-                        'pagination' => $pagination,
+                        'pageMappings' => isset($pageMappings) ? $pageMappings : null,
+                        'documentStructure' => $documentStructure,
                 ]);
     }
 

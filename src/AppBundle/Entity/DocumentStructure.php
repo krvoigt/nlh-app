@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 /**
- * Entity for pagination.
+ * Entity for document structure.
  */
-class Pagination
+class DocumentStructure
 {
     /**
      * @var int

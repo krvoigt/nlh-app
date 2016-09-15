@@ -3,9 +3,9 @@
     <div class="viewer_controls -overlay">
         <div class="viewer_control-group">
             <a
-               class="viewer_control -first-page{{ pagination.page == 1 ? ' -disabled' }}"
+               class="viewer_control -first-page{{ documentStructure.page == 1 ? ' -disabled' }}"
                title="{{ 'First page'|trans }}"
-               {{ pagination.page != 1 ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ pagination.firstChapter}) }}{{ '?page=' ~ pagination.documentFirstPage }}
+               {{ documentStructure.page != 1 ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.firstChapter}) }}{{ '?page=' ~ documentStructure.documentFirstPage }}
            >
                <span class="sr-only">{{ 'First page'|trans }}</span>
            </a>
@@ -18,7 +18,7 @@
             </a>
             <a
                 class="viewer_control -previous-page js-previous-page -disabled"
-                title="{{ 'Previous page'|trans }}" {{ pagination.page == 1 ? 'disabled' }}
+                title="{{ 'Previous page'|trans }}" {{ documentStructure.page == 1 ? 'disabled' }}
             >
                 <span class="sr-only">{{ 'Previous page'|trans }}</span>
             </a>
@@ -26,7 +26,7 @@
             <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
             <select class="viewer_control -page-select" name="page" id="viewer-page-select">
                 {% for physPage, logPage in pageMappings %}
-                    <option value={{ physPage }} {{ physPage == pagination.page ? 'selected' }}>
+                    <option value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
                         {{ physPage }} : {{ logPage }}
                     </option>
                 {% endfor %}
@@ -34,9 +34,9 @@
 
             <a
                 class="viewer_control -next-page js-next-page -disabled"
-                title="{{ 'Next page'|trans }}" {{ pagination.page == pagination.pageCount ? 'disabled' }}
+                title="{{ 'Next page'|trans }}" {{ documentStructure.page == documentStructure.pageCount ? 'disabled' }}
                 href="{{ path(app.request.attributes.get('_route'), {
-                    'page': (pagination.page + 1),
+                    'page': (documentStructure.page + 1),
                     'id': (app.request.get('id'))
                 }) }}"
             >
@@ -50,9 +50,9 @@
                 <span class="sr-only">{{ 'Next section'|trans }}</span>
             </a>
             <a
-               class="viewer_control -last-page{{ pagination.page == pagination.documentLastPage ? ' -disabled' }}"
+               class="viewer_control -last-page{{ documentStructure.page == documentStructure.documentLastPage ? ' -disabled' }}"
                title="{{ 'Last page'|trans }}"
-               {{ pagination.page != pagination.documentLastPage ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ pagination.lastChapter}) }}{{ '?page=' ~ pagination.documentLastPage }}
+               {{ documentStructure.page != documentStructure.documentLastPage ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.lastChapter}) }}{{ '?page=' ~ documentStructure.documentLastPage }}
            >
                <span class="sr-only">{{ 'Last page'|trans }}</span>
            </a>
@@ -69,7 +69,7 @@
         <div
             class="viewer_image"
             id="viewer_image"
-            data-iiif="{{ path('_iiifjson', {'identifier': pagination.identifier}) }}"
+            data-iiif="{{ path('_iiifjson', {'identifier': documentStructure.identifier}) }}"
         ></div>
         <div class="viewer_spinner">
             <span class="sr-only">{{ 'Loading'|trans }}</span>

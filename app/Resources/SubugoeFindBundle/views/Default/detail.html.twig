@@ -9,7 +9,7 @@
         {{ render(controller('AppBundle:Document:anchorDocument', { 'id': document.id })) }}
     {% else %}
         {# Viewer settings #}
-        {% set isValidPage = (pagination.page >= 1 and pagination.page <= pagination.pageCount) %}
+        {% set isValidPage = (documentStructure.page >= 1 and documentStructure.page <= documentStructure.pageCount) %}
 
         <main class="main" id="main">
             <section class="viewer">
