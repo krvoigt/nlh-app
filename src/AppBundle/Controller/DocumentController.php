@@ -15,11 +15,22 @@ class DocumentController extends Controller
     public function anchorDocumentAction($id)
     {
         $client = $this->get('solarium.client');
-        $select = $client->createSelect()->setQuery(sprintf('idparentdoc:%s', $id));
-        $documents = array_filter($client->select($select)->getDocuments(), [$this, 'onlyOneParent']);
 
+        $selectParentDocument = $client->createSelect()
+                ->setQuery(sprintf('id:%s', $id));
+        $parentDocument = $this->get('solarium.client')
+                ->select($selectParentDocument)
+                ->getDocuments()[0]
+                ->getFields();
+
+        $selectChildrenDocuments = $client->createSelect()->setRows(100)
+                ->addSort('bytitle', 'ASC')
+                ->setQuery(sprintf('idparentdoc:%s AND docstrct:volume', $id));
+        $childrenDocuments = $client->select($selectChildrenDocuments)->getDocuments();
+        
         return $this->render('partials/app/anchor.html.twig', [
-            'documents' => $documents,
+            'parentDocument' => $parentDocument,
+            'childrenDocuments' => $childrenDocuments,
         ]);
     }
 
@@ -121,4 +132,5 @@ class DocumentController extends Controller
             'document' => $client->select($select)->getDocuments()[0],
         ]);
     }
+
 }
