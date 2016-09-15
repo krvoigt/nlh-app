@@ -1,13 +1,32 @@
 <ul>
-    {% for document in documents %}
-        <li>
-            <a href="{{ path('_detail', {'id': document.fields.id}) }}">
-                {% if document.fields.title is defined %}
-                    {{ document.fields.title.0 }}
-                {% else %}
-                    {{ document.fields.id }}
-                {% endif %}
-            </a>
-        </li>
-    {% endfor %}
+    <li>
+        {% if parentDocument.title is defined %}
+            {{ parentDocument.title.0 }}
+        {% else %}
+            {{ parentDocument.bytitle }}
+        {% endif %}
+    </li>
+    <li>
+        <ul>
+        {% for childrenDocument in childrenDocuments %}
+            <li>
+                <a href="{{ path('_detail', {'id': childrenDocument.fields.id}) }}">
+                    {% if childrenDocument.fields.title is defined %}
+                        {{ childrenDocument.fields.title.0 }}
+                    {% elseif childrenDocument.fields.bytitle is defined  %}
+                        {{ childrenDocument.fields.bytitle }}
+                    {% else %}
+                        {{ childrenDocument.fields.id }}
+                    {% endif %}
+                </a>
+            </li>
+            <li>
+                <ul>
+                    <li>{{ 'creator'|trans }}: {{ childrenDocument.creator|join(', ') }}</li>
+                    <li>{{ 'currentno'|trans }}: {{ childrenDocument.currentno }}</li>
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+    </li>
 </ul>
