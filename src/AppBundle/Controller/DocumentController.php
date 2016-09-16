@@ -23,11 +23,11 @@ class DocumentController extends Controller
                 ->getDocuments()[0]
                 ->getFields();
 
-        $selectChildrenDocuments = $client->createSelect()->setRows(100)
-                ->addSort('bytitle', 'ASC')
+        $selectChildrenDocuments = $client->createSelect()->setRows(500)
+                ->addSort('currentno', 'ASC')
                 ->setQuery(sprintf('idparentdoc:%s AND docstrct:volume', $id));
         $childrenDocuments = $client->select($selectChildrenDocuments)->getDocuments();
-        
+
         return $this->render('partials/app/anchor.html.twig', [
             'parentDocument' => $parentDocument,
             'childrenDocuments' => $childrenDocuments,
@@ -132,5 +132,4 @@ class DocumentController extends Controller
             'document' => $client->select($select)->getDocuments()[0],
         ]);
     }
-
 }

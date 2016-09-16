@@ -68,7 +68,11 @@ class DefaultController extends BaseController
         $documentId = $id;
 
         if (strchr($id, '|')) {
-            $documentId = explode('|', $id)[0];
+            $idArr = explode('|', $id);
+            $documentId = $idArr[0];
+            if (isset($idArr[1]) && !empty($idArr[1])) {
+                $activeChapterId = $idArr[1];
+            }
         }
 
         $client = $this->get('solarium.client');
@@ -97,6 +101,26 @@ class DefaultController extends BaseController
             $chapterArr = $this->flattenStructure(array_filter($structure[0]));
             $firstChapter = $chapterArr[0]['chapterId'];
             $lastChapter = $chapterArr[count($chapterArr) - 1]['chapterId'];
+
+            if (!isset($activeChapterId)) {
+                $activeChapterId = $firstChapter;
+            }
+
+            $activeChapterkey = array_search($activeChapterId, array_column($chapterArr, 'chapterId'));
+            $chapterArrLastKey = array_keys($chapterArr);
+            $chapterArrLastKey = end($chapterArrLastKey);
+
+            if ($activeChapterkey > 0) {
+                $previousChapterId = $chapterArr[$activeChapterkey - 1]['chapterId'];
+                $previousChapterFirstPage = abs(explode('_', $chapterArr[$activeChapterkey - 1]['chapterFirstPage'])[1]);
+                $isThereAPreviousChapter = true;
+            }
+
+            if ($activeChapterkey < $chapterArrLastKey) {
+                $nextChapterId = $chapterArr[$activeChapterkey + 1]['chapterId'];
+                $nextChapterFirstPage = abs(explode('_', $chapterArr[$activeChapterkey + 1]['chapterFirstPage'])[1]);
+                $isThereANextChapter = true;
+            }
         }
 
         if (isset($pageMappings) && $pageMappings !== []) {
@@ -112,6 +136,12 @@ class DefaultController extends BaseController
         $documentStructure->setLastChapter(isset($lastChapter) ? $lastChapter : null);
         $documentStructure->setDocumentFirstPage(isset($documentFirstPage) ? $documentFirstPage : null);
         $documentStructure->setDocumentLastPage(isset($documentLastPage) ? $documentLastPage : null);
+        $documentStructure->setIsThereAPreviousChapter(isset($isThereAPreviousChapter) ? $isThereAPreviousChapter : false);
+        $documentStructure->setIsThereANextChapter(isset($isThereANextChapter) ? $isThereANextChapter : false);
+        $documentStructure->setPreviousChapterId(isset($previousChapterId) ? $previousChapterId : null);
+        $documentStructure->setPreviousChapterFirstPage(isset($previousChapterFirstPage) ? $previousChapterFirstPage : null);
+        $documentStructure->setNextChapterId(isset($nextChapterId) ? $nextChapterId : null);
+        $documentStructure->setNextChapterFirstPage(isset($nextChapterFirstPage) ? $nextChapterFirstPage : null);
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
                         'document' => $document[0]->getFields(),

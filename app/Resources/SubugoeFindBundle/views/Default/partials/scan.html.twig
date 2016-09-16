@@ -10,9 +10,9 @@
                <span class="sr-only">{{ 'First page'|trans }}</span>
            </a>
             <a
-                class="viewer_control -previous-section -disabled"
+                class="viewer_control -previous-section{{ documentStructure.isThereAPreviousChapter is empty ? ' -disabled' }}"
                 title="{{ 'Previous section'|trans }}"
-                {{ document.idparentdoc is defined ? 'href=' ~ path('_detail', {id: document.idparentdoc | first}) }}
+                {{ not documentStructure.isThereAPreviousChapter is null ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId}) }}{{ not documentStructure.isThereAPreviousChapter is null ? '?page=' ~ documentStructure.previousChapterFirstPage }}
             >
                 <span class="sr-only">{{ 'Previous section'|trans }}</span>
             </a>
@@ -31,7 +31,6 @@
                     </option>
                 {% endfor %}
             </select>
-
             <a
                 class="viewer_control -next-page js-next-page -disabled"
                 title="{{ 'Next page'|trans }}" {{ documentStructure.page == documentStructure.pageCount ? 'disabled' }}
@@ -43,9 +42,9 @@
                 <span class="sr-only">{{ 'Next page'|trans }}</span>
             </a>
             <a
-                class="viewer_control -next-section"
+                class="viewer_control -next-section{{ documentStructure.isThereANextChapter is empty ? ' -disabled' }}"
                 title="{{ 'Next section'|trans }}"
-                disabled
+                {{ not documentStructure.isThereANextChapter is null ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId}) }}{{ not documentStructure.isThereANextChapter is null ? '?page=' ~ documentStructure.nextChapterFirstPage }}
             >
                 <span class="sr-only">{{ 'Next section'|trans }}</span>
             </a>
