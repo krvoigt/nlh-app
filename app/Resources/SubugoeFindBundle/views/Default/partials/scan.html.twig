@@ -12,7 +12,7 @@
             <a
                 class="viewer_control -previous-section{{ documentStructure.isThereAPreviousChapter is empty ? ' -disabled' }}"
                 title="{{ 'Previous section'|trans }}"
-                {{ not documentStructure.isThereAPreviousChapter is null ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId}) }}{{ not documentStructure.isThereAPreviousChapter is null ? '?page=' ~ documentStructure.previousChapterFirstPage }}
+                {{ not documentStructure.isThereAPreviousChapter is empty ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId}) }}{{ not documentStructure.isThereAPreviousChapter is empty ? '?page=' ~ documentStructure.previousChapterFirstPage }}
             >
                 <span class="sr-only">{{ 'Previous section'|trans }}</span>
             </a>
@@ -44,7 +44,7 @@
             <a
                 class="viewer_control -next-section{{ documentStructure.isThereANextChapter is empty ? ' -disabled' }}"
                 title="{{ 'Next section'|trans }}"
-                {{ not documentStructure.isThereANextChapter is null ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId}) }}{{ not documentStructure.isThereANextChapter is null ? '?page=' ~ documentStructure.nextChapterFirstPage }}
+                {{ not documentStructure.isThereANextChapter is empty ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId}) }}{{ not documentStructure.isThereANextChapter is empty ? '?page=' ~ documentStructure.nextChapterFirstPage }}
             >
                 <span class="sr-only">{{ 'Next section'|trans }}</span>
             </a>
