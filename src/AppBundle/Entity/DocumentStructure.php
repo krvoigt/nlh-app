@@ -58,7 +58,7 @@ class DocumentStructure
     protected $isThereANextChapter;
 
     /**
-     * @var int
+     * @var string
      */
     protected $previousChapterId;
 
@@ -68,7 +68,7 @@ class DocumentStructure
     protected $previousChapterFirstPage;
 
     /**
-     * @var int
+     * @var string
      */
     protected $nextChapterId;
 
@@ -76,6 +76,16 @@ class DocumentStructure
      * @var int
      */
     protected $nextChapterFirstPage;
+
+    /**
+     * @var string
+     */
+    protected $nextPageChapterId;
+
+    /**
+     * @var string
+     */
+    protected $previousPageChapterId;
 
     /**
      * @return int
@@ -238,7 +248,7 @@ class DocumentStructure
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getPreviousChapterId()
     {
@@ -270,7 +280,7 @@ class DocumentStructure
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getNextChapterId()
     {
@@ -299,5 +309,37 @@ class DocumentStructure
     public function setNextChapterFirstPage($nextChapterFirstPage)
     {
         $this->nextChapterFirstPage = $nextChapterFirstPage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNextPageChapterId()
+    {
+        return $this->nextPageChapterId;
+    }
+
+    /**
+     * @param int $nextPageChapterId
+     */
+    public function setNextPageChapterId($nextPageChapterId)
+    {
+        $this->nextPageChapterId = $nextPageChapterId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreviousPageChapterId()
+    {
+        return $this->previousPageChapterId;
+    }
+
+    /**
+     * @param int $previousPageChapterId
+     */
+    public function setPreviousPageChapterId($previousPageChapterId)
+    {
+        $this->previousPageChapterId = $previousPageChapterId;
     }
 }

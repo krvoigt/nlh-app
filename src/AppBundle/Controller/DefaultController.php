@@ -72,6 +72,8 @@ class DefaultController extends BaseController
             $documentId = $idArr[0];
             if (isset($idArr[1]) && !empty($idArr[1])) {
                 $activeChapterId = $idArr[1];
+                $previousPageChapterId = $activeChapterId;
+                $nextPageChapterId = $activeChapterId;
             }
         }
 
@@ -110,6 +112,9 @@ class DefaultController extends BaseController
             $chapterArrLastKey = array_keys($chapterArr);
             $chapterArrLastKey = end($chapterArrLastKey);
 
+            $activeChapterFirstPage = abs(explode('_', $chapterArr[$activeChapterkey]['chapterFirstPage'])[1]);
+            $activeChapterLastPage = abs(explode('_', $chapterArr[$activeChapterkey]['chapterLastPage'])[1]);
+
             if ($activeChapterkey > 0) {
                 $previousChapterId = $chapterArr[$activeChapterkey - 1]['chapterId'];
                 $previousChapterFirstPage = abs(explode('_', $chapterArr[$activeChapterkey - 1]['chapterFirstPage'])[1]);
@@ -120,6 +125,14 @@ class DefaultController extends BaseController
                 $nextChapterId = $chapterArr[$activeChapterkey + 1]['chapterId'];
                 $nextChapterFirstPage = abs(explode('_', $chapterArr[$activeChapterkey + 1]['chapterFirstPage'])[1]);
                 $isThereANextChapter = true;
+            }
+
+            if ($page !== 1 && !empty($activeChapterFirstPage) && $page <= $activeChapterFirstPage && isset($previousChapterId)) {
+                $previousPageChapterId = $previousChapterId;
+            }
+
+            if (isset($activeChapterLastPage) && $page >= $activeChapterLastPage && isset($nextChapterId)) {
+                $nextPageChapterId = $nextChapterId;
             }
         }
 
@@ -142,6 +155,8 @@ class DefaultController extends BaseController
         $documentStructure->setPreviousChapterFirstPage(isset($previousChapterFirstPage) ? $previousChapterFirstPage : null);
         $documentStructure->setNextChapterId(isset($nextChapterId) ? $nextChapterId : null);
         $documentStructure->setNextChapterFirstPage(isset($nextChapterFirstPage) ? $nextChapterFirstPage : null);
+        $documentStructure->setNextPageChapterId(isset($nextPageChapterId) ? $nextPageChapterId : null);
+        $documentStructure->setPreviousPageChapterId(isset($previousPageChapterId) ? $previousPageChapterId : null);
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
                         'document' => $document[0]->getFields(),

@@ -17,12 +17,12 @@
                 <span class="sr-only">{{ 'Previous section'|trans }}</span>
             </a>
             <a
-                class="viewer_control -previous-page js-previous-page -disabled"
-                title="{{ 'Previous page'|trans }}" {{ documentStructure.page == 1 ? 'disabled' }}
+                class="viewer_control -previous-page{{ documentStructure.page == 1 ? ' -disabled' }}"
+                title="{{ 'Previous page'|trans }}"
+                {{ documentStructure.page != 1 ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId}) }}{{ '?page=' ~ (documentStructure.page - 1) }}
             >
                 <span class="sr-only">{{ 'Previous page'|trans }}</span>
             </a>
-
             <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
             <select class="viewer_control -page-select" name="page" id="viewer-page-select">
                 {% for physPage, logPage in pageMappings %}
@@ -32,12 +32,9 @@
                 {% endfor %}
             </select>
             <a
-                class="viewer_control -next-page js-next-page -disabled"
-                title="{{ 'Next page'|trans }}" {{ documentStructure.page == documentStructure.pageCount ? 'disabled' }}
-                href="{{ path(app.request.attributes.get('_route'), {
-                    'page': (documentStructure.page + 1),
-                    'id': (app.request.get('id'))
-                }) }}"
+                class="viewer_control -next-page{{ documentStructure.page == documentStructure.pageCount ? ' -disabled' }}"
+                title="{{ 'Next page'|trans }}"
+                {{ documentStructure.page != documentStructure.pageCount ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId}) }}{{ '?page=' ~ (documentStructure.page + 1) }}
             >
                 <span class="sr-only">{{ 'Next page'|trans }}</span>
             </a>
