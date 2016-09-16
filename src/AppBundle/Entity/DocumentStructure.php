@@ -18,7 +18,7 @@ class DocumentStructure
     protected $pageCount;
 
     /**
-     * @var int
+     * @var bool
      */
     protected $tableOfContents;
 
@@ -46,6 +46,36 @@ class DocumentStructure
      * @var int
      */
     protected $documentLastPage;
+
+    /**
+     * @var bool
+     */
+    protected $isThereAPreviousChapter;
+
+    /**
+     * @var bool
+     */
+    protected $isThereANextChapter;
+
+    /**
+     * @var int
+     */
+    protected $previousChapterId;
+
+    /**
+     * @var int
+     */
+    protected $previousChapterFirstPage;
+
+    /**
+     * @var int
+     */
+    protected $nextChapterId;
+
+    /**
+     * @var int
+     */
+    protected $nextChapterFirstPage;
 
     /**
      * @return int
@@ -173,5 +203,101 @@ class DocumentStructure
     public function setDocumentLastPage($documentLastPage)
     {
         $this->documentLastPage = $documentLastPage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsThereAPreviousChapter()
+    {
+        return $this->isThereAPreviousChapter;
+    }
+
+    /**
+     * @param bool $isThereAPreviousChapter
+     */
+    public function setIsThereAPreviousChapter($isThereAPreviousChapter)
+    {
+        $this->isThereAPreviousChapter = $isThereAPreviousChapter;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsThereANextChapter()
+    {
+        return $this->isThereANextChapter;
+    }
+
+    /**
+     * @param bool $isThereANextChapter
+     */
+    public function setIsThereANextChapter($isThereANextChapter)
+    {
+        $this->isThereANextChapter = $isThereANextChapter;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPreviousChapterId()
+    {
+        return $this->previousChapterId;
+    }
+
+    /**
+     * @param int $previousChapterId
+     */
+    public function setPreviousChapterId($previousChapterId)
+    {
+        $this->previousChapterId = $previousChapterId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPreviousChapterFirstPage()
+    {
+        return $this->previousChapterFirstPage;
+    }
+
+    /**
+     * @param int $previousChapterFirstPage
+     */
+    public function setPreviousChapterFirstPage($previousChapterFirstPage)
+    {
+        $this->previousChapterFirstPage = $previousChapterFirstPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextChapterId()
+    {
+        return $this->nextChapterId;
+    }
+
+    /**
+     * @param int $nextChapterId
+     */
+    public function setNextChapterId($nextChapterId)
+    {
+        $this->nextChapterId = $nextChapterId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNextChapterFirstPage()
+    {
+        return $this->nextChapterFirstPage;
+    }
+
+    /**
+     * @param int $nextChapterFirstPage
+     */
+    public function setNextChapterFirstPage($nextChapterFirstPage)
+    {
+        $this->nextChapterFirstPage = $nextChapterFirstPage;
     }
 }

@@ -22,8 +22,12 @@
             </li>
             <li>
                 <ul>
-                    <li>{{ 'creator'|trans }}: {{ childrenDocument.creator|join(', ') }}</li>
-                    <li>{{ 'currentno'|trans }}: {{ childrenDocument.currentno }}</li>
+                    {% if childrenDocument.creator is defined %}
+                        <li>{{ 'creator'|trans }}: {{ childrenDocument.creator|join(', ') }}</li>
+                    {% endif %}
+                    {% if childrenDocument.currentno is defined %}
+                        <li>{{ 'currentno'|trans }}: {{ childrenDocument.currentno }}</li>
+                    {% endif %}
                 </ul>
             </li>
         {% endfor %}
