@@ -42,6 +42,11 @@
             <dd>{{ document.currentno }}</dd>
         {% endif %}
 
+        {% if document.idparentdoc %}
+            <dt>{{ 'Contained in' | trans }}</dt>
+            <dd><a href="{{ path('_detail', {id: document.idparentdoc.0}) }}">{{ url('_detail', {id: document.idparentdoc.0}) }}</a></dd>
+        {% endif %}
+
         <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
         <dd>
             {% for dc in document.dc %}
