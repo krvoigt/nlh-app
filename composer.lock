@@ -2599,12 +2599,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "835176c932839fa7185dda4449d08babb6a038b9"
+                "reference": "a86583d226b907fdcb506123a00a65c31952af67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/835176c932839fa7185dda4449d08babb6a038b9",
-                "reference": "835176c932839fa7185dda4449d08babb6a038b9",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/a86583d226b907fdcb506123a00a65c31952af67",
+                "reference": "a86583d226b907fdcb506123a00a65c31952af67",
                 "shasum": ""
             },
             "require": {
@@ -2733,7 +2733,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-09-14 22:49:28"
+            "time": "2016-09-17 19:51:23"
         },
         {
             "name": "twig/twig",
@@ -2875,16 +2875,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991"
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/94e5ca3e90aa5b34663780393e10914f7438f991",
-                "reference": "94e5ca3e90aa5b34663780393e10914f7438f991",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
+                "reference": "ea74994a3dc7f8d2f65a06009348f2d63c81e61f",
                 "shasum": ""
             },
             "require": {
@@ -2913,7 +2913,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2016-09-07 15:34:10"
+            "time": "2016-09-16 13:37:59"
         },
         {
             "name": "phpdocumentor/reflection-common",
