@@ -1,36 +1,32 @@
-<ul>
-    <li>
-        {% if parentDocument.title is defined %}
-            {{ parentDocument.title.0 }}
-        {% else %}
-            {{ parentDocument.bytitle }}
-        {% endif %}
-    </li>
-    <li>
-        <ul>
+<h1>
+    {% if parentDocument.title is defined %}
+        {{ parentDocument.title.0 }}
+    {% else %}
+        {{ parentDocument.bytitle }}
+    {% endif %}
+</h1>
+<li>
+    <ol class="result_list">
         {% for childrenDocument in childrenDocuments %}
-            <li>
+            <li class="result_item">
                 <a href="{{ path('_detail', {'id': childrenDocument.fields.id}) }}">
                     {% if childrenDocument.fields.title is defined %}
                         {{ childrenDocument.fields.title.0 }}
-                    {% elseif childrenDocument.fields.bytitle is defined  %}
+                    {% elseif childrenDocument.fields.bytitle is defined %}
                         {{ childrenDocument.fields.bytitle }}
                     {% else %}
                         {{ childrenDocument.fields.id }}
                     {% endif %}
                 </a>
+                {% if childrenDocument.creator is defined %}
+                    <p>{{ 'creator'|transchoice(childrenDocument.creator | length) }}
+                        : {{ childrenDocument.creator|join(', ') }}</p>
+                {% endif %}
+                {% if childrenDocument.currentno is defined %}
+                    <p>{{ 'currentno'|trans }}: {{ childrenDocument.currentno }}</p>
+                {% endif %}
             </li>
-            <li>
-                <ul>
-                    {% if childrenDocument.creator is defined %}
-                        <li>{{ 'creator'|trans }}: {{ childrenDocument.creator|join(', ') }}</li>
-                    {% endif %}
-                    {% if childrenDocument.currentno is defined %}
-                        <li>{{ 'currentno'|trans }}: {{ childrenDocument.currentno }}</li>
-                    {% endif %}
-                </ul>
-            </li>
+
         {% endfor %}
-        </ul>
-    </li>
-</ul>
+    </ol>
+</li>
