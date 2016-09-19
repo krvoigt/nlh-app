@@ -132,7 +132,7 @@ $(function () {
         // TODO: Don't reload TOC on every toggle
         if (panelName === 'toc') {
             $.get(window.location.origin + window.location.pathname + '/toc/', function (data) {
-                $('.viewer_toc').append(data);
+                $('.viewer_toc').html(data);
             });
         }
 
