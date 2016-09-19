@@ -16,13 +16,18 @@
             >
                 <span class="sr-only">{{ 'Previous section'|trans }}</span>
             </a>
+            {%  if documentStructure.page != 1 %}
             <a
-                class="viewer_control -previous-page{{ documentStructure.page == 1 ? ' -disabled' }}"
+                class="viewer_control -previous-page"
                 title="{{ 'Previous page'|trans }}"
-                {{ documentStructure.page != 1 ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId}) }}{{ '?page=' ~ (documentStructure.page - 1) }}
+                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId}) }}{{ documentStructure.page != 1 ? '?page=' ~ (documentStructure.page - 1) }}
             >
                 <span class="sr-only">{{ 'Previous page'|trans }}</span>
             </a>
+            {% else %}
+                <button class="viewer_control -previous-page -disabled"></button>
+            {% endif %}
+
             <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
             <select class="viewer_control -page-select" name="page" id="viewer-page-select">
                 {% for physPage, logPage in pageMappings %}
@@ -31,13 +36,22 @@
                     </option>
                 {% endfor %}
             </select>
+
+
+
+            {% if documentStructure.page != documentStructure.pageCount %}
             <a
-                class="viewer_control -next-page{{ documentStructure.page == documentStructure.pageCount ? ' -disabled' }}"
+                class="viewer_control -next-page"
                 title="{{ 'Next page'|trans }}"
-                {{ documentStructure.page != documentStructure.pageCount ? 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId}) }}{{ '?page=' ~ (documentStructure.page + 1) }}
+                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId}) }}{{ '?page=' ~ (documentStructure.page + 1) }}
             >
                 <span class="sr-only">{{ 'Next page'|trans }}</span>
             </a>
+            {% else %}
+            <button class="viewer_control -next-page -disabled"></button>
+            {% endif %}
+
+
             <a
                 class="viewer_control -next-section{{ documentStructure.isThereANextChapter is empty ? ' -disabled' }}"
                 title="{{ 'Next section'|trans }}"
