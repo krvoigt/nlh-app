@@ -104,8 +104,10 @@ class DefaultController extends BaseController
             $firstChapter = $chapterArr[0]['chapterId'];
             $lastChapter = $chapterArr[count($chapterArr) - 1]['chapterId'];
 
-            if (!isset($activeChapterId)) {
+            if (!isset($activeChapterId) && $page === 1) {
                 $activeChapterId = $firstChapter;
+            } else {
+                $activeChapterId = $this->getChapterId($chapterArr, $page);
             }
 
             $activeChapterkey = array_search($activeChapterId, array_column($chapterArr, 'chapterId'));
@@ -129,10 +131,14 @@ class DefaultController extends BaseController
 
             if ($page !== 1 && !empty($activeChapterFirstPage) && $page <= $activeChapterFirstPage && isset($previousChapterId)) {
                 $previousPageChapterId = $previousChapterId;
+            } else {
+                $previousPageChapterId = $this->getChapterId($chapterArr, $page - 1);
             }
 
             if (isset($activeChapterLastPage) && $page >= $activeChapterLastPage && isset($nextChapterId)) {
                 $nextPageChapterId = $nextChapterId;
+            } else {
+                $nextPageChapterId = $this->getChapterId($chapterArr, $page + 1);
             }
         }
 
@@ -203,5 +209,29 @@ class DefaultController extends BaseController
         }
 
         return $chapterArr;
+    }
+
+    /*
+     * This returns the chapter id for a given page
+     *
+     * @param array $chapterArr The chapter array
+     * @param integer $page The page number
+     *
+     * @return string $chapterId The chapter id
+     */
+    protected function getChapterId($chapterArr, $page)
+    {
+        foreach ($chapterArr as $chapter) {
+            $chapterFirstPage = ltrim(explode('_', $chapter['chapterFirstPage'])[1], 0);
+            $chapterLastPage = ltrim(explode('_', $chapter['chapterLastPage'])[1], 0);
+
+            if (in_array($page, range($chapterFirstPage, $chapterLastPage))) {
+                $chapterId = $chapter['chapterId'];
+
+                return $chapterId;
+            }
+        }
+
+        return false;
     }
 }
