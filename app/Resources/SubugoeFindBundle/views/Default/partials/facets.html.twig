@@ -1,0 +1,112 @@
+<div class="facets_header">
+    <button class="facets_toggle -show">{{ 'Show filters'|trans }}</button>
+    <button class="facets_toggle -hide hidden">{{ 'Hide filters'|trans }}</button>
+</div>
+<div class="facets_body">
+    {% if queryParams %}
+        <a
+                class="facets_remove"
+                href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'filter': null})) }}"
+        >
+            {{ 'Remove all filters'|trans }}
+        </a>
+    {% endif %}
+
+    {% for key, facet in facets %}
+        {% set filterValues = [] %}
+        {% for index, filter in queryParams %}
+            {% if filter[key] is defined %}
+                {% set filterValues = filterValues|merge([filter[key]]) %}
+            {% endif %}
+        {% endfor %}
+
+        <article class="facet">
+            <h2>{{ key|transchoice(facet|length) }}</h2>
+            <button class="facet_list-toggle -expand">{{ 'Show all'|trans }}</button>
+            <button class="facet_list-toggle -collapse">{{ 'Show less'|trans }}</button>
+            <ol class="facet_list">
+                {# Year range (only used with yearpublish #}
+                {# TODO: Add count #}
+                {# TODO: Reduce reduncancy #}
+                {% if key == 'yearpublish' %}
+                    {% for index, value in filterValues %}
+                        {% set tokens = filterValues[index]|slice(1, filterValues[index]|length - 2)|split(' ') %}
+                        {% if tokens|length == 3 %}
+                            <li class="facet_item">
+                                {% set queryParamsSliced = queryParams %}
+                                {% for index2, filter in queryParams %}
+                                    {% if filter[key] is defined and filter[key] == filterValues[index] %}
+                                        {% set queryParamsSliced = queryParamsSliced|slice(0, index2)|merge(queryParamsSliced|slice(index2 + 1)) %}
+                                    {% endif %}
+                                {% endfor %}
+                                <a
+                                        class="facet_link -remove"
+                                        href="{{ path(app.request.attributes.get('_route'), {
+                                            'filter': queryParamsSliced,
+                                            'q': (app.request.get('q')),
+                                            'id': (app.request.get('id'))
+                                        }) }}"
+                                        title="{{ 'Remove filter: publishing year range'|trans }}"
+                                >
+                                    {{ tokens.0 }}&ndash;{{ tokens.2 }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% for value, count in facet if count > 0 %}
+                    <li class="facet_item">
+                        {% set queryParamsSliced = queryParams %}
+                        {% for index, filter in queryParams %}
+                            {% if filter[key] is defined and filter[key] == value %}
+                                {% set queryParamsSliced = queryParamsSliced|slice(0, index)|merge(queryParamsSliced|slice(index + 1)) %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if value in filterValues %}
+                            <a
+                                    class="facet_link -remove"
+                                    href="{{ path(app.request.attributes.get('_route'), {
+                                        'filter': queryParamsSliced,
+                                        'q': (app.request.get('q')),
+                                        'id': (app.request.get('id'))
+                                    }) }}"
+                                    title="{{ 'Remove filter &ldquo;%name% is %value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw }}"
+                            >
+                                {{ value|trans }}
+                                <span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
+                            </a>
+                        {% else %}
+                            <a
+                                    class="facet_link"
+                                    href="{{ path(app.request.attributes.get('_route'), {
+                                        'filter': queryParams|merge({
+                                            (facetCounter):  {
+                                                (key) : (value)
+                                            }
+                                        }),
+                                        'q': (app.request.get('q')),
+                                        'id': (app.request.get('id'))
+                                    }) }}"
+                                    title="{{ 'Add filter &ldquo;%name% is %value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw }}"
+                            >
+                                {{ value|trans }}
+                                <span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ol>
+            {% if key == 'yearpublish' %}
+                {# TODO: Show counts for years outside of filter range #}
+                {# Workaround: Remove erroneous year #}
+                <div
+                        class="facet_histogram"
+                        data-years='[{% for year, count in facet %}{% if year < 2200 %}{{ loop.first ? '' : ',' }}[{{ year }},{{ count }}]{% endif %}{% endfor %}]'
+                >
+                </div>
+            {% endif %}
+        </article>
+    {% endfor %}
+</div>
