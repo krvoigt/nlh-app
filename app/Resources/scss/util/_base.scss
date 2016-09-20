@@ -323,6 +323,10 @@ select {
     @include input;
 }
 
+select {
+    cursor: pointer;
+}
+
 textarea {
     @include input;
     height: (8 * $grid);

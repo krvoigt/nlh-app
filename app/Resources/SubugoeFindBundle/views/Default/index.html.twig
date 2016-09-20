@@ -5,7 +5,24 @@
 {% endif %}
 
 {% block findnavigation %}
-    <div class="find_count">{{ pagination.getTotalItemCount | number_format(0, ',', '.') }} {{ 'results'|trans }}</div>
+    <div class="find_aside">
+        <span class="find_count">{{ pagination.getTotalItemCount }} {{ 'results'|trans }}</span>,
+        <span class="find_sort">
+            {% set sort = app.request.get('sort') %}
+            <label for="sort">{{ 'sorted by' | trans }}</label>
+            <select class="find_sort-order" id="sort">
+                <option value="score" {{ sort == 'score' ? 'selected' }}>
+                    {{ 'score' | trans }}
+                </option>
+                <option value="yearpublish" {{ sort == 'yearpublish' ? 'selected' }}>
+                    {{ 'yearpublish' | transchoice(1) }}
+                </option>
+                <option value="datemodified" {{ sort == 'datemodified' ? 'selected' }}>
+                    {{ 'datemodified' | trans }}
+                </option>
+            </select>
+        </span>
+    </div>
     {{ knp_pagination_render(pagination) }}
 {% endblock %}
 
@@ -54,21 +71,6 @@
 {% endblock %}
 
 {% block sidebar %}
-
-    <div class="sort_header">
-        <h2>{{ 'Sort by' | trans }}</h2>
-        <div class="sort_body">
-            <div class="sort_item">
-                <input type="radio" name="sortby" class="sort_item_input -yearpublish" id="yearpublish"/><label for="yearpublish">{{ 'yearpublish' | transchoice(1) }}</label>
-            </div>
-            <div class="sort_body_item">
-                <input type="radio" name="sortby" class="sort_item_input -score" id="score"/><label for="score">{{ 'score' | trans }}</label>
-            </div>
-            <div class="sort_body_item">
-                <input type="radio" name="sortby" class="sort_item_input -datemodified" id="datemodified"/><label for="datemodified">{{ 'datemodified' | trans }}</label>
-            </div>
-        </div>
-    </div>
     <div class="facets_header">
         <button class="facets_toggle -show">{{ 'Show filters'|trans }}</button>
         <button class="facets_toggle -hide hidden">{{ 'Hide filters'|trans }}</button>

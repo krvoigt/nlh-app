@@ -1,6 +1,4 @@
-.find_count {
-    color: $text-color-lightest;
+.find_aside {
     float: right;
-    font-weight: bold;
-    margin: 0 0 ($grid / 2) ($grid / 2);
+    margin: round($grid / 4) 0 0 1em;
 }
