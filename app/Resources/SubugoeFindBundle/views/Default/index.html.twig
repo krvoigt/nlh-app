@@ -20,6 +20,11 @@
                 <option value="datemodified" {{ sort == 'datemodified' ? 'selected' }}>
                     {{ 'datemodified' | trans }}
                 </option>
+                {% if app.request.attributes.get('_route') == '_volumes' %}
+                <option value="currentno" {{ sort == 'currentno' or sort is empty ? 'selected' }}>
+                    {{ 'currentno' | trans }}
+                </option>
+                {% endif %}
             </select>
         </span>
     </div>

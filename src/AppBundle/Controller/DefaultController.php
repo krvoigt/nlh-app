@@ -187,6 +187,53 @@ class DefaultController extends BaseController
         return $this->render('partials/site/content.html.twig', ['content' => $content]);
     }
 
+    /**
+     * @Route("/volumes/{id}", name="_volumes", methods={"GET"})
+     *
+     * @param Request $request A request instance
+     * @param string  $id      The document id
+     *
+     * @return Response
+     */
+    public function volumesAction(Request $request, $id)
+    {
+        $client = $this->get('solarium.client');
+
+        $search = $this->getSearchEntity($request);
+        $select = $this->getQuerySelect($request);
+        $this->addQuerySort($select);
+        $activeFacets = $request->get('filter');
+        $this->addQueryFilters($select, $activeFacets);
+        $facets = $client->select($select)->getFacetSet()->getFacets();
+        $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
+
+        if ($request->get('sort')) {
+            $sort = $request->get('sort');
+            if ($sort === 'currentno') {
+                $_GET['direction'] = 'asc';
+            }
+        }
+        
+        $selectChildrenDocuments = $client->createSelect()->setRows((int) 500);
+
+        if (isset($sort) && !empty($sort)) {
+            $selectChildrenDocuments->addSort(trim($sort), 'asc');
+        } else {
+            $selectChildrenDocuments->addSort('currentno', 'asc');
+        }
+
+        $selectChildrenDocuments->setQuery(sprintf('idparentdoc:%s AND docstrct:volume', $id));
+        $pagination = $this->getPagination($request, $selectChildrenDocuments);
+
+        return $this->render('SubugoeFindBundle:Default:index.html.twig', [
+                    'facets' => $facets,
+                    'facetCounter' => $facetCounter,
+                    'queryParams' => $request->get('filter') ?: [],
+                    'search' => $search,
+                    'pagination' => $pagination,
+                ]);
+    }
+
     /*
      * This flattens the document structure for navigation
      *
