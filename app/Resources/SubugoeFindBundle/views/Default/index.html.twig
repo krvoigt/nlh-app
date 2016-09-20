@@ -54,6 +54,21 @@
 {% endblock %}
 
 {% block sidebar %}
+
+    <div class="sort_header">
+        <h2>{{ 'Sort by' | trans }}</h2>
+        <div class="sort_body">
+            <div class="sort_item">
+                <input type="radio" name="sortby" class="sort_item_input -yearpublish" id="yearpublish"/><label for="yearpublish">{{ 'yearpublish' | transchoice(1) }}</label>
+            </div>
+            <div class="sort_body_item">
+                <input type="radio" name="sortby" class="sort_item_input -score" id="score"/><label for="score">{{ 'score' | trans }}</label>
+            </div>
+            <div class="sort_body_item">
+                <input type="radio" name="sortby" class="sort_item_input -datemodified" id="datemodified"/><label for="datemodified">{{ 'datemodified' | trans }}</label>
+            </div>
+        </div>
+    </div>
     <div class="facets_header">
         <button class="facets_toggle -show">{{ 'Show filters'|trans }}</button>
         <button class="facets_toggle -hide hidden">{{ 'Hide filters'|trans }}</button>

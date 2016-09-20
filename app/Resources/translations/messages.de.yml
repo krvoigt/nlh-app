@@ -76,6 +76,7 @@ Contained in: Enthalten in
 PURL: PURL
 Thumbnails: Thumbnails
 Loading: Lade …
+Sort by: Sortierung
 
 # Fields
 docstrct: Strukturtyp|Strukturtypen
@@ -90,6 +91,8 @@ yearpublish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
 currentno: Band
 Catalogue: Katalogeintrag
+datemodified: Importdatum
+score: Relevanz
 
 # Docstrct
 abstract: Abstrakt
