@@ -1,12 +1,8 @@
 .content {
     @include column(medium);
-    margin: $grid 0;
+    margin: ($grid  / 2) 0;
     position: relative;
     z-index: 0;
-
-    @include respond-to(medium) {
-        margin: ($grid / 2) 0;
-    }
 
     > :last-child:not(:only-child) {
         margin-bottom: 0;

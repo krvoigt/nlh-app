@@ -1,4 +1,6 @@
 .navigation {
+    min-height: ($grid * 1.5);
+
     &.-top {
         margin-bottom: ($grid / 2);
     }
