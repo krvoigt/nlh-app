@@ -115,7 +115,7 @@ subugoe_find:
         - { title: facetcreator, field: facetcreator }
         - { title: facetpublisher, field: facetpublisher}
         - { title: facetplacepublish, field: facetplacepublish}
-        - { title: yearpublish, field: yearpublish, sort: "index"}
+        - { title: yearpublish, field: yearpublish, sort: "index", quantity: 1000}
         - { title: dc, field: dc}
         - { title: docstrct, field: docstrct}
     hidden:
