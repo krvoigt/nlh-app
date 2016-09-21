@@ -1,25 +1,19 @@
 <section class="viewer_export">
-    <h2 class="viewer_heading">{{ 'Export'|trans }}</h2>
+    <h2 class="viewer_heading">{{ 'pdf_headline'|trans }}</h2>
 
     <div id="PDFprogress" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">{{ 'pdf_headline'|trans }}</h3>
-                </div>
 
                 <div class="alert"></div>
                 <div id="pdf-range"></div>
 
                 <div class="modal-body">
                     <div class="choose-inner">
-                        <div class="step">
-                            <div class="step-circle">
-                                <span>1</span>
-                            </div>
+                        <div class="step" data-step-number="1">
                             <div>
                                 <div id="step-circle-one-headline">
-                                    <h3>{{ 'pdf_first_step_headline'|trans }}</h3>
+                                    <h4>{{ 'pdf_first_step_headline'|trans }}</h4>
                                 </div>
                                 <div class="input-elements">
                                     <div class="radio">
@@ -33,18 +27,15 @@
                                     <div class="radio">
                                         <input type="radio" name="optradio" value="choose-free" id="pdf-resolution-3">
                                         <label for="pdf-resolution-3">{{ 'pdf_first_step_option3'|trans }}</label>
-                                        <input type="number" min="1" name="choose-free" id="choose-free"> Pixel
+                                        <input type="number" min="1" name="choose-free" class="choose-free" id="choose-free"> Pixel
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="step">
-                            <div class="step-circle">
-                                <span>2</span>
-                            </div>
+                        <div class="step" data-step-number="2">
                             <div class="textfields">
-                                <h3>{{ 'pdf_second_step_headline'|trans }}</h3>
-                                <div id="second-step-under-headline">
+                                <h4>{{ 'pdf_second_step_headline'|trans }}</h4>
+                                <div id="second-step-under-headline" class="second-step-under-headline">
                                     <input type="number" min="1" class="pdf-textfields" id="physIDstart" value="1">
                                     {{ 'pdf_until'|trans }}
                                     <input type="number" min="1" class="pdf-textfields" id="physIDend" value={{ documentStructure.pageCount }}>
@@ -67,8 +58,8 @@
                             </div>
                         </div>
                         <div class="progress-item-bottom">
-                            <span class="notice-pdfProgress">{{ 'pdf_progress_hint_headline'|trans }}</span>
-                            <span> <br>{{ 'pdf_progress_hint'|trans }}</span>
+                            <h4 class="notice-pdfProgress">{{ 'pdf_progress_hint_headline'|trans }}</h4>
+                            <p>{{ 'pdf_progress_hint'|trans }}</p>
                         </div>
                     </div>
                 </div>

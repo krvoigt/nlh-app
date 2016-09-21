@@ -1,0 +1,27 @@
+.choose-free,
+.pdf-textfields {
+    @include input;
+    @include transition(width);
+    border: $border-width solid $input-border-color;
+    box-shadow: .1em .1em .5em rgba($black, .2) inset;
+    height: $grid;
+    margin-left: $grid;
+    width: (6 * $grid);
+}
+
+.pdf-textfields {
+    width: (3 * $grid);
+    margin-left: 0;
+}
+
+.download-pdf {
+    @include button();
+}
+
+.progress-wrapper {
+    display: none;
+}
+
+.second-step-under-headline {
+    margin: ($grid / 2) 0;
+}
