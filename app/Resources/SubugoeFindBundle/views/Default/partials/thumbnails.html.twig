@@ -1,6 +1,6 @@
 <section class="thumbnails">
     {% if document.thumbs_url is defined %}
-        <ul id="thumbnails" class="thumbnails_list">
+        <ul class="thumbnails_list">
             {% for physPage, logPage in pageMappings %}
                 <li class="thumbnails_item">
                     {% set link = document.id ~ '?page=' ~ physPage %}
