@@ -105,13 +105,14 @@ $(function () {
     });
 
     $(document).keydown(function (e) {
+
         if (e.keyCode == 37) {
-            $controls.previousPage.click();
+            location.href = $controls.previousPage.attr('href');
             return false;
         }
 
         if (e.keyCode == 39) {
-            $controls.nextPage.click();
+            location.href = $controls.nextPage.attr('href');
             return false;
         }
     });
