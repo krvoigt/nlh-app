@@ -1,5 +1,5 @@
 {# TODO: Show current page via page variable #}
-<section class="viewer_scan">
+<section class="scan">
     <div class="viewer_controls -overlay">
         <div class="viewer_control-group">
             {% if documentStructure.page != 1 %}
@@ -88,15 +88,15 @@
 
     {% if isValidPage %}
         <div
-            class="viewer_image"
-            id="viewer_image"
+            class="scan_image"
+            id="scan_image"
             data-iiif="{{ path('_iiifjson', {'identifier': documentStructure.identifier}) }}"
         ></div>
-        <div class="viewer_spinner">
+        <div class="scan_spinner">
             <span class="sr-only">{{ 'Loading'|trans }}</span>
         </div>
     {% else %}
-        <div class="viewer_error">
+        <div class="scan_error">
             {{ 'Invalid page'|trans }}
         </div>
     {% endif %}
