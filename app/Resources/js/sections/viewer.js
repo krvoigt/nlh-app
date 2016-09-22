@@ -209,7 +209,11 @@ var Viewer = {
             return false;
         }
 
-        this.settings = JSON.parse(decodeURIComponent(window.location.hash.substr(1)));
+        try {
+            this.settings = JSON.parse(decodeURIComponent(window.location.hash.substr(1)));
+        } catch(e) {
+            this.settings = {};
+        }
     },
 
     saveState: function () {
