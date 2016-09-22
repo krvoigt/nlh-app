@@ -2,7 +2,7 @@
     {% if treeloop.first %}<ul class="toc_list">{% endif %}
         <li class="toc_item">
             {% set page = (item.physicalPages.0 is defined and item.physicalPages.0 is not null ? item.physicalPages.0|split('_').1|abs : '') %}
-            <a class="toc_link" href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}{{ page }}">
+            <a class="toc_link" href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}?page={{ page }}">
                 {% if item.label is null %}
                     {{ item.type|lower|trans }}
                 {% else %}
