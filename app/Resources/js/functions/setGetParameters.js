@@ -1,7 +1,7 @@
-function setGetParameters(params) {
-    var url = window.location.href;
+function setGetParameters(params, changeLocation) {
+    var url = window.location.href.replace(hash, '');
     var hash = window.location.hash;
-    url = url.replace(hash, '');
+
     for (var key in params) {
         var value = params[key];
         if (url.indexOf(key + '=') >= 0) {
@@ -19,5 +19,10 @@ function setGetParameters(params) {
             url += key + '=' + value;
         }
     }
-    window.location.href = url + hash;
+
+    if (changeLocation) {
+        window.location.href = url + hash;
+    } else {
+        return url + hash
+    }
 }

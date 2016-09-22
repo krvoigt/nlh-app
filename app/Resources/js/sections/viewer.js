@@ -84,7 +84,11 @@ var Viewer = {
 
         $controls.fullscreen.click(this.toggleFullscreen.bind(this));
         $controls.pageSelect.change(function () {
-            setGetParameters({page: $(this).val()});
+            // Remove LOG_xxxx part from ID to prevent wrong document section being loaded
+            var newUrl = setGetParameters({page: $(this).val()}, false);
+            newUrl = decodeURI(newUrl).replace(/\|LOG_[0-9_]+/, '');
+            window.location = newUrl;
+            return false;
         });
         $controls.titleToggle.click(this.toggleTitle.bind(this));
         $controls.zoomIn.click(this.zoomIn.bind(this));
