@@ -20,6 +20,11 @@ class DocumentStructure
     /**
      * @var bool
      */
+    protected $isValidPage;
+
+    /**
+     * @var bool
+     */
     protected $tableOfContents;
 
     /**
@@ -119,6 +124,22 @@ class DocumentStructure
         $this->pageCount = $pageCount;
     }
 
+    /**
+     * @return bool
+     */
+    public function getIsValidPage()
+    {
+        return $this->isValidPage;
+    }
+
+    /**
+     * @param bool $isValidPage
+     */
+    public function setIsValidPage($isValidPage)
+    {
+        $this->isValidPage = $isValidPage;
+    }
+    
     /**
      * @return bool
      */

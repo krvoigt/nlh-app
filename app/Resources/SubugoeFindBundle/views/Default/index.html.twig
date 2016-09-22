@@ -21,7 +21,7 @@
                     {{ 'datemodified' | trans }}
                 </option>
                 {% if app.request.attributes.get('_route') == '_volumes' %}
-                <option value="currentno" {{ sort == 'currentno' or sort is empty ? 'selected' }}>
+                <option value="currentnosort" {{ sort == 'currentnosort' or sort is empty ? 'selected' }}>
                     {{ 'currentno' | trans }}
                 </option>
                 {% endif %}
@@ -41,14 +41,24 @@
                 <article class="result_wrap">
                     <div class="result_left">
                         {% if result.fields.presentation_url is defined %}
-                            <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
-                            </a>
+                            {% if result.fields.isanchor %}
+                                <a class="result_link -image" href="{{ path('_volumes', {'id': result.fields.id}) }}">
+                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                </a>
+                            {% else %}
+                                <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
+                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                </a>
+                            {% endif %}
                         {% endif %}
                     </div>
                     <div class="result_metadata">
                         <h2 class="result_title">
-                            <a class="result_link" title="{{ result.fields.title | first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                            {% if result.fields.isanchor %}
+                                <a class="result_link" title="{{ result.fields.title | first }}" href="{{ path('_volumes', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                            {% else %}
+                                <a class="result_link" title="{{ result.fields.title | first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                            {% endif %}
                             <button class="result_title-toggle -expand">
                                 {{ 'Show full title'|trans }}
                             </button>

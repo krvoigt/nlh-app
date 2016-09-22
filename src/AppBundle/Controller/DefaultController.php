@@ -147,8 +147,11 @@ class DefaultController extends BaseController
             $documentLastPage = array_keys($pageMappings)[count($pageMappings) - 1];
         }
 
+        $isValidPage = ($page >= 1 and $page <= $pageCount) ? true:false;
+
         $documentStructure->setPage($page);
         $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);
+        $documentStructure->setIsValidPage($isValidPage);
         $documentStructure->setTableOfContents(isset($tableOfContents) ? $tableOfContents : null);
         $documentStructure->setIdentifier(isset($identifier) ? $identifier : null);
         $documentStructure->setFirstChapter(isset($firstChapter) ? $firstChapter : null);
@@ -188,7 +191,7 @@ class DefaultController extends BaseController
     }
 
     /**
-     * @Route("/volumes/{id}", name="_volumes", methods={"GET"})
+     * @Route("/volumes/id/{id}", name="_volumes", methods={"GET"})
      *
      * @param Request $request A request instance
      * @param string  $id      The document id
@@ -209,17 +212,17 @@ class DefaultController extends BaseController
 
         if ($request->get('sort')) {
             $sort = $request->get('sort');
-            if ($sort === 'currentno') {
+            if ($sort === 'currentnosort') {
                 $_GET['direction'] = 'asc';
             }
         }
-        
+
         $selectChildrenDocuments = $client->createSelect()->setRows((int) 500);
 
         if (isset($sort) && !empty($sort)) {
             $selectChildrenDocuments->addSort(trim($sort), 'asc');
         } else {
-            $selectChildrenDocuments->addSort('currentno', 'asc');
+            $selectChildrenDocuments->addSort('currentnosort', 'asc');
         }
 
         $selectChildrenDocuments->setQuery(sprintf('idparentdoc:%s AND docstrct:volume', $id));

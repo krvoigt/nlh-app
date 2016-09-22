@@ -1,6 +1,6 @@
 {# TODO: Get fulltext dynamically #}
 
-{% if document['gdzocr_url'] is defined and isValidPage %}
+{% if document['gdzocr_url'] is defined and documentStructure.isValidPage %}
     <section class="viewer_transcript">
         <h2 class="viewer_heading">{{ 'Transcript'|trans }}</h2>
         <div class="viewer_transcript-page">
