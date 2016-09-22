@@ -104,10 +104,12 @@ class DefaultController extends BaseController
             $firstChapter = $chapterArr[0]['chapterId'];
             $lastChapter = $chapterArr[count($chapterArr) - 1]['chapterId'];
 
-            if (!isset($activeChapterId) && $page === 1) {
-                $activeChapterId = $firstChapter;
-            } else {
-                $activeChapterId = $this->getChapterId($chapterArr, $page);
+            if (!isset($activeChapterId)) {
+                if ($page === 1) {
+                    $activeChapterId = $firstChapter;
+                } else {
+                    $activeChapterId = $this->getChapterId($chapterArr, $page);
+                }
             }
 
             $activeChapterkey = array_search($activeChapterId, array_column($chapterArr, 'chapterId'));
@@ -275,7 +277,7 @@ class DefaultController extends BaseController
             $chapterFirstPage = ltrim(explode('_', $chapter['chapterFirstPage'])[1], 0);
             $chapterLastPage = ltrim(explode('_', $chapter['chapterLastPage'])[1], 0);
 
-            if (in_array($page, range($chapterFirstPage, $chapterLastPage))) {
+            if (in_array($page, range($chapterFirstPage, $chapterLastPage)) && $page !== $chapterLastPage) {
                 $chapterId = $chapter['chapterId'];
 
                 return $chapterId;
