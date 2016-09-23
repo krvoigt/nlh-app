@@ -5,13 +5,13 @@
 }
 
 .thumbnails_list {
-    margin: round($grid / 8);
+    margin: round($grid / 4);
 }
 
 .thumbnails_item {
     box-shadow: $drop-shadow;
     display: inline-block;
-    margin: round($grid / 8);
+    margin: round($grid / 12);
     box-shadow: $drop-shadow;
     position: relative;
     width: round($grid * 3.45);
