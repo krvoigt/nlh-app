@@ -28,22 +28,14 @@
                 <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>
                 <div class="search_popup">
                     <div class="search_content -visible">
-                        {% if document is defined or activeCollection %}
+                        {% if activeCollection is not null %}
                             <ul class="search_list">
-                                {% if document is defined %}
-                                    <li class="search_item">
-                                        <input class="search_radio" id="search-document" name="collection" type="radio" value="this" {{ collection == 'document' ? 'checked' }}>
-                                        <label class="search_label" for="search-document">{{ 'Only in this document'|trans }}</label>
-                                    </li>
-                                {% endif %}
-                                {% if activeCollection %}
-                                    <li class="search_item">
-                                        <input class="search_radio" id="search-current-collection" name="collection" type="radio" value="{{ activeCollection }}" {{ collection != 'all' and collection != 'document' ? 'checked' }}>
-                                        <label class="search_label" for="search-current-collection">{{ 'In the collection &ldquo;%collection%&rdquo;'|trans({'%collection%': activeCollection|trans})|raw }}</label>
-                                        {# TODO: Find a way to keep collection name without a hidden input #}
-                                        <input name="activeCollection" type="hidden" value="{{ activeCollection }}">
-                                    </li>
-                                {% endif %}
+                                <li class="search_item">
+                                    <input class="search_radio" id="search-current-collection" name="collection" type="radio" value="{{ activeCollection }}" {{ collection != 'all' and collection != 'document' ? 'checked' }}>
+                                    <label class="search_label" for="search-current-collection">{{ 'In the collection &ldquo;%collection%&rdquo;'|trans({'%collection%': activeCollection|trans})|raw }}</label>
+                                    {# TODO: Find a way to keep collection name without a hidden input #}
+                                    <input name="activeCollection" type="hidden" value="{{ activeCollection }}">
+                                </li>
                                 <li class="search_item">
                                     <input class="search_radio" id="search-all-collections" name="collection" type="radio" value="all" {{ collection == 'all' ? 'checked' }}>
                                     <label class="search_label" for="search-all-collections">{{ 'In all documents'|trans }}</label>
@@ -62,7 +54,7 @@
                                 <label class="search_label" for="search-full">{{ 'Fulltext'|trans }}</label>
                             </li>
                             <li class="search_item">
-                                <input class="search_radio" id="search-both" name="scope" type="radio" value="all" {{ scope == 'all' ? 'checked' }}>
+                                <input class="search_radio" id="search-both" name="scope" type="radio" value="default" {{ scope == 'default' ? 'checked' }}>
                                 <label class="search_label" for="search-both">{{ 'Metadata and fulltext'|trans }}</label>
                             </li>
                         </ul>

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use AppBundle\Entity\DocumentStructure;
+use Subugoe\FindBundle\Entity\Search;
 
 class DefaultController extends BaseController
 {
@@ -149,7 +150,7 @@ class DefaultController extends BaseController
             $documentLastPage = array_keys($pageMappings)[count($pageMappings) - 1];
         }
 
-        $isValidPage = ($page >= 1 and $page <= $pageCount) ? true:false;
+        $isValidPage = ($page >= 1 and $page <= $pageCount) ? true : false;
 
         $documentStructure->setPage($page);
         $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);
@@ -285,5 +286,29 @@ class DefaultController extends BaseController
         }
 
         return false;
+    }
+
+    /*
+     * @param Request $request A request instance
+     *
+     * @return Search $search A Search entity instance
+     */
+    protected function getSearchEntity(Request $request)
+    {
+        $search = new Search();
+
+        $scope = $request->get('scope');
+
+        if (!empty($scope)) {
+            $search->setQuery($scope.':'.$request->get('q'));
+        } else {
+            $search->setQuery($request->get('q'));
+        }
+
+        $search
+            ->setRows((int) $this->getParameter('results_per_page'))
+            ->setCurrentPage((int) $request->get('page') ?: 1);
+
+        return $search;
     }
 }

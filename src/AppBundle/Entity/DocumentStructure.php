@@ -139,7 +139,7 @@ class DocumentStructure
     {
         $this->isValidPage = $isValidPage;
     }
-    
+
     /**
      * @return bool
      */
