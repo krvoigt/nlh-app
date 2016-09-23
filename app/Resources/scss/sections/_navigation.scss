@@ -2,7 +2,7 @@
     min-height: ($grid * 1.5);
 
     &.-top {
-        margin-bottom: ($grid / 2);
+        margin: (-$grid / 2) 0 ($grid / 2);
     }
 
     &.-bottom {
