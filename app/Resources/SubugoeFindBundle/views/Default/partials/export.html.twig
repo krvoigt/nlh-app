@@ -4,7 +4,8 @@
     <div id="pdf-options">
         <h3>{{ 'Download as PDF'|trans }}</h3>
 
-        <div class="export_step">
+        {# TODO: Quality selection is not working yet #}
+        {#<div class="export_step">
             <h4>{{ 'Choose quality'|trans }}</h4>
 
             <input type="radio" checked="checked" name="pdf-resolution" value="1000px" id="pdf-resolution-1">
@@ -18,7 +19,7 @@
 
             <input type="number" class="export_input -indent" min="1" name="pdf-resolution-free" id="pdf-resolution-input">
             <label for="pdf-resolution-input">Pixel</label>
-        </div>
+        </div>#}
 
         <div class="export_step">
             <h4>{{ 'Page range'|trans }}</h4>
@@ -47,5 +48,17 @@
         <p>{{ 'pdf_progress_hint'|trans }}</p>
 
         <button class="export_reset">{{ 'Go back'|trans }}</button>
+    </div>
+
+    <div class="pdf_metadata">
+        <div id="pdf_title">{{ document.title.0 }}</div>
+        <div id="pdf_author">
+            {% for author in document.creator %}
+                {{ author }}{% if not loop.last %}; {% endif %}
+            {% endfor %}
+        </div>
+        <div id="pdf_year-publish">{{ document.yearpublish }}</div>
+        <div id="pdf_purl">{{ document.purl }}</div>
+        <div id="pdf_license">AGPL</div>
     </div>
 </section>

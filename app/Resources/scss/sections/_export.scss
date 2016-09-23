@@ -8,6 +8,7 @@
     border: $border-width solid $red;
     border-radius: $br;
     color: $red;
+    display: none;
     margin-bottom: $grid;
     padding: round($grid / 4);
 }
