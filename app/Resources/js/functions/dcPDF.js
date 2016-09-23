@@ -22,29 +22,20 @@ DCPDF.internalOptions = [];
  * @param isInProgress Boolean, if you want to show the error-message during the process or in the choosing phase.
  */
 DCPDF.showError = function (errorText, isInProgress) {
-    if (!isInProgress) {
-        var $alert = jQuery('.alert');
+    var $alert = $('.export_alert');
+    if ($alert.length < 1) {
+        return;
+    }
 
-        if ($alert.length) {
-            $alert.replaceWith('<div class="alert alert-danger" style="display: none">' + errorText + '</div>');
-            $alert.fadeIn();
-        } else {
-            jQuery('.choose-inner').prepend('<div class="alert alert-danger" style="display: none">' + errorText + '</div>');
-            $alert.fadeIn();
-        }
-    } else {
-        jQuery('.modal-body').prepend('<div class="alert alert-danger" style="display: none">' + errorText + '</div>');
-        jQuery('.alert').fadeIn();
-        DCPDF.setProgress("100%");
-        jQuery('.progress-bar').removeClass('progress-bar-sbb');
-        jQuery('.progress-bar').addClass('progress-bar-danger');
-        jQuery('.pdf-generation-button').hide();
-        jQuery('.pdf-close').show();
+    $alert.text(errorText);
+
+    if (isInProgress) {
+        DCPDF.setProgress(100);
     }
 };
 
 DCGlobals = {};
-DCGlobals.getWork = function() {
+DCGlobals.getWork = function () {
     var doc = {};
     doc.structure = {
         pages_length: 1
@@ -60,41 +51,32 @@ DCGlobals.getWork = function() {
  * @param physIDend Work end
  */
 DCPDF.resetGUI = function (ppn, physIDstart, physIDend) {
-    jQuery('#pdf-range').remove();
-    jQuery(".pdf-generation-button").text('pdf_progress_gen');
+    // TODO
+    DCPDF.base64images = [];
+    DCPDF.base64data = [];
+    DCPDF.internalOptions = [];
+
+    $('#pdf-options').show();
+    $('#pdf-progress').hide();
+    $(".export_reset").hide();
     if (physIDstart || physIDend) {
-        jQuery("input[name='physIDstart']").val(DCPDF.extractPhysIDs(physIDstart));
-        jQuery("input[name='physIDend']").val(DCPDF.extractPhysIDs(physIDend));
+        $("input[name='physIDstart']").val(DCPDF.extractPhysIDs(physIDstart));
+        $("input[name='physIDend']").val(DCPDF.extractPhysIDs(physIDend));
         DCPDF.calculatePDFGenerationStatistics(DCPDF.extractPhysIDs(physIDstart), DCPDF.extractPhysIDs(physIDend));
     } else {
-        jQuery("input[name='physIDstart']").val(1);
-        jQuery("input[name='physIDend']").val(DCGlobals.getWork().structure.pages_length);
+        $("input[name='physIDstart']").val(1);
+        $("input[name='physIDend']").val(DCGlobals.getWork().structure.pages_length);
         DCPDF.calculatePDFGenerationStatistics(1, DCGlobals.getWork().structure.pages_length);
     }
-    jQuery('.progress-wrapper').css('display', 'none');
-    jQuery('.choose-inner').fadeIn();
-    jQuery(".progress-bar").attr("aria-valuenow", 0);
+    DCPDF.setMaxValueForProgress(1);
     DCPDF.setProgress(0);
-    jQuery('.pdf-generation-button').prop('disabled', false);
-    jQuery('.alert').remove();
-    jQuery('.progress-bar').removeClass('progress-bar-danger').addClass('active');
-    jQuery('.pdf-generation-button').show();
-    jQuery('.modal-title').text('pdf_headline');
-    jQuery('.pdf-close').hide();
-    jQuery().removeClass('progress-bar-danger');
 };
 
 /**
  * @summary Switches to progress view after choosing options.
  */
 DCPDF.showProgress = function () {
-    jQuery(".choose-inner").fadeOut(function () {
-        jQuery(".progress-wrapper").fadeIn();
-    });
-    jQuery(".modal-title").fadeOut(function () {
-        jQuery(".modal-title").text('Ihr PDF wird vorbereitet.');
-        jQuery(".modal-title").fadeIn();
-    });
+    $('#pdf-options, #pdf-progress').toggle();
 };
 
 /**
@@ -102,7 +84,7 @@ DCPDF.showProgress = function () {
  * @param maxVal
  */
 DCPDF.setMaxValueForProgress = function (maxVal) {
-    jQuery(".progress-bar").attr("aria-valuemax", maxVal);
+    $(".export_progress").data("max", maxVal);
 };
 
 /**
@@ -110,19 +92,12 @@ DCPDF.setMaxValueForProgress = function (maxVal) {
  * @param progressVal
  */
 DCPDF.setProgress = function (progressVal) {
-    var progressBar = jQuery(".progress-bar");
-    progressBar.attr("aria-valuenow", progressVal);
-    var percentage = Math.floor((parseInt(progressVal) / parseInt(progressBar.attr("aria-valuemax"))) * 100) + "%";
-    progressBar.css("width", percentage);
-    progressBar.text(percentage);
-    if (percentage === "100%") {
-        jQuery(".progress-bar").removeClass("active");
-    }
-    if (progressVal === "100%") {
-        progressBar.removeClass("active");
-        progressBar.css("width", "100%");
-        jQuery(".progress-text").text("100%");
-    }
+    var $progressBar = $(".export_progress");
+    var percentage = Math.floor(progressVal / $progressBar.data("max") * 100);
+    $progressBar
+        .css("width", percentage + "%")
+        .data("value", progressVal)
+        .html(percentage + "&nbsp;%");
 };
 
 /**
@@ -130,17 +105,9 @@ DCPDF.setProgress = function (progressVal) {
  * @returns {Number}
  */
 DCPDF.getProgress = function () {
-    return parseInt(jQuery(".progress-bar").attr("aria-valuenow"));
+    return $(".export_progress").data("value");
 };
 
-/**
- * @summary Hide progressbar.
- */
-DCPDF.hideProgressbar = function () {
-    jQuery(".progress-wrapper").fadeOut();
-};
-
-//
 /**
  * @summary Return a new promise for adding it later to an array of promises. Images will be loaded and returned as data-url.
  * @param path URL of image
@@ -245,13 +212,13 @@ DCPDF.addMetadata = function (doc, ppn) {
     var headlineSize = 0;
     var fontSize = 0;
     var linesize = 0;
-    var input_choice = jQuery("input:radio[name=optradio]:checked").val();
+    var input_choice = $("input:radio[name='pdf-resolution']:checked").val();
     var input_size = 1000;
     var format, divisor;
 
     // For input 'choose-free' get the given input size.
     if (input_choice == 'choose-free') {
-        input_size = parseInt(jQuery("#choose-free").val(), 10);
+        input_size = parseInt($("#pdf-resolution-input").val(), 10);
     }
     if (input_choice == '1000px' || input_choice == 'choose-free') {
         // Calculate the barely input size in milli meter.
@@ -430,9 +397,7 @@ DCPDF.buildPDF = function (ppn) {
     });
     try {
         doc.save(ppn + '.pdf');
-        setTimeout(function () {
-            jQuery('#PDFprogress').modal('hide');
-        }, 2000);
+        $(".export_reset").show();
     } catch (e) {
         console.log('error ' + e);
         DCPDF.showError('pdf_error_too_big');
@@ -470,24 +435,6 @@ DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
     };
     var physIDList = DCPDF.turnPageNumbersIntoPhysIDArray(DCPDF.internalOptions.physIDstart, DCPDF.internalOptions.physIDend);
     DCPDF.buildImageBase64Arr(physIDList, DCPDF.internalOptions.url, ppn, DCPDF.internalOptions.picturewidth);
-};
-
-/**
- * @summary Show the modal dialog from bootstrap.
- * @param ppn like PPN 0123456789
- * @param physIDstart Like PHYS_0001
- * @param physIDend Like PHYS_0003
- *
- */
-DCPDF.showModal = function (ppn, physIDstart, physIDend) {
-    var progressContainer = jQuery('#PDFprogress');
-    DCPDF.resetGUI(ppn, physIDstart, physIDend);
-    progressContainer.modal({
-        backdrop: 'static',
-        keyboard: false
-    });
-    progressContainer.modal('show');
-    jQuery(".pdf-generation-button").focus();
 };
 
 /**
@@ -558,7 +505,7 @@ DCPDF.calculatePDFGenerationStatistics = function (pageStart, pageEnd) {
         var result = Math.abs(Math.abs(pageEnd) - Math.abs(pageStart)) + 1;
         if (!isNaN(result)) {
             var calculatedSize = 0;
-            switch (jQuery("input:radio[name=optradio]:checked").val()) {
+            switch ($("input:radio[name='pdf-resolution']:checked").val()) {
                 case "1000px":
                     calculatedSize = 0.21 * result;
                     break;
@@ -566,7 +513,7 @@ DCPDF.calculatePDFGenerationStatistics = function (pageStart, pageEnd) {
                     calculatedSize = 1.4 * result;
                     break;
                 case "choose-free":
-                    var chooseFreeValue = jQuery("#choose-free").val();
+                    var chooseFreeValue = $("#pdf-resolution-input").val();
                     var factor = chooseFreeValue / 1000.0;
                     calculatedSize = 0.21 * factor * result;
                     break;
@@ -577,19 +524,20 @@ DCPDF.calculatePDFGenerationStatistics = function (pageStart, pageEnd) {
             if (calculatedSize === 0) {
                 calculatedSize = "> 1";
             }
-            if (result === 1 && calculatedSize === -1) {
-                jQuery(".pdf-generation-button").text('pdf_button_onePage');
-            } else if (result === 1 && calculatedSize !== -1) {
-                jQuery(".pdf-generation-button").text('pdf_button_onePage_size'  + calculatedSize + " MB");
-            } else if (result !== 1 && calculatedSize === -1) {
-                jQuery(".pdf-generation-button").text('pdf_button_size_part1' + result + 'pdf_button_size_part2');
-            } else {
-                jQuery(".pdf-generation-button").text('pdf_button_size_part1' + result + 'pdf_button_size_part2' + " (ca. " + calculatedSize + " MB");
-            }
+            // TODO: Show PDF size on button
+            // if (result === 1 && calculatedSize === -1) {
+            //     $(".export_generate-pdf").text('pdf_button_onePage');
+            // } else if (result === 1 && calculatedSize !== -1) {
+            //     $(".export_generate-pdf").text('pdf_button_onePage_size'  + calculatedSize + " MB");
+            // } else if (result !== 1 && calculatedSize === -1) {
+            //     $(".export_generate-pdf").text('pdf_button_size_part1' + result + 'pdf_button_size_part2');
+            // } else {
+            //     $(".export_generate-pdf").text('pdf_button_size_part1' + result + 'pdf_button_size_part2' + " (ca. " + calculatedSize + " MB");
+            // }
         } else {
-            jQuery(".pdf-generation-button").text('pdf_progress_gen');
+            // $(".export_generate-pdf").text('pdf_progress_gen');
         }
     } else {
-        jQuery(".pdf-generation-button").text('pdf_progress_gen');
+        // $(".export_generate-pdf").text('pdf_progress_gen');
     }
 };

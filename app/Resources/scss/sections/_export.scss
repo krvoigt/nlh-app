@@ -1,27 +1,63 @@
-.choose-free,
-.pdf-textfields {
+.export {
+    min-width: 20em;
+    padding: ($grid / 2);
+}
+
+.export_error {
+    background: tint($red, 90);
+    border: $border-width solid $red;
+    border-radius: $br;
+    color: $red;
+    margin-bottom: $grid;
+    padding: round($grid / 4);
+}
+
+.export_generate-pdf {
+    @include button;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: .25;
+    }
+}
+
+.export_input {
     @include input;
     @include transition(width);
-    border: $border-width solid $input-border-color;
-    box-shadow: .1em .1em .5em rgba($black, .2) inset;
-    height: $grid;
-    margin-left: $grid;
-    width: (6 * $grid);
+    width: (4.5 * $grid);
+
+    &.-error {
+        background: tint($red, 90);
+        border-color: $red;
+    }
+
+    &.-indent {
+        margin-left: $grid;
+    }
+
+    &.-narrow {
+        width: (3 * $grid);
+        margin-left: 0;
+    }
 }
 
-.pdf-textfields {
-    width: (3 * $grid);
-    margin-left: 0;
+.export_progress {
+    background: $border-color;
+    padding: 0 .2em;
+    text-align: right;
 }
 
-.download-pdf {
-    @include button();
-}
-
-.progress-wrapper {
-    display: none;
-}
-
-.second-step-under-headline {
+.export_progress-wrap {
+    border: $border-width solid $border-color;
+    border-radius: $br;
     margin: ($grid / 2) 0;
+}
+
+.export_step {
+    margin-bottom: $grid;
+}
+
+.export_reset {
+    @include button;
+    @include icon('arrow-left')
 }

@@ -233,18 +233,18 @@ theologie: Theologie
 
 # Export
 Export: Export
-pdf_headline: Download als PDF
-pdf_first_step_headline: Wählen Sie Ihre gewünschte Qualität des PDF aus
+Download as PDF: Download als PDF
+Choose quality: Bildqualität
+Go back: Zurück
 pdf_first_step_option1: Mittlere Qualität (1000 Pixel Breite pro Bild)
 pdf_first_step_option2: Originale Scanauflösung
 pdf_first_step_option3: Breite selbst wählen:
 
-pdf_second_step_headline: Wählen Sie den Seitenbereich aus
+Page range: Seitenbereich
 pdf_until: bis
-pdf_from: von insgesamt
+pdf_from: von
 pdf_pages: Seiten
-pdf_progress_hint_headline: Hinweis
-pdf_progress_hint: Je mehr Seiten das Werk hat, desto länger dauert die Erstellung und kann bei zu vielen (ab ca. 300 Seiten) Seiten abbrechen.
+pdf_progress_hint: Der Download startet automatisch, sobald das PDF erstellt wurde. Je mehr Seiten das Werk hat, desto länger dauert die Erstellung und kann bei zu vielen (ab ca. 300 Seiten) Seiten abbrechen.
 Generate PDF: PDF erzeugen
-pdf_preparing: Ihr PDF wird vorbereitet
-pdf_progress_headline: Ihr PDF wird vorbereitet.
+pdf_preparing: PDF wird vorbereitet
+Invalid page range: Ungültiger Seitenbereich
