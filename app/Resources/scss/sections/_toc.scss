@@ -10,14 +10,15 @@
 
     & & {
         border-left: 1px solid $brand-color-light;
-        margin-left: (-$grid / 2);
+        margin-left: (-$grid);
         padding-left: $grid;
         position: relative;
     }
 
     &::before {
-        border-top: 1px solid $brand-color-light;
         background: none;
+        border-radius: 0;
+        border-top: 1px solid $brand-color-light;
         height: 100%;
         margin-left: (-$grid / 2 - 1px);
     }
