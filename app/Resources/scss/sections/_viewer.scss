@@ -175,26 +175,6 @@
     overflow: hidden;
 }
 
-.viewer_metadata {
-    min-width: 20em;
-    overflow-y: auto;
-    padding: ($grid / 2);
-
-    dt {
-        float: none;
-        width: auto;
-    }
-
-    dd {
-        margin-bottom: 1em;
-        width: auto;
-    }
-
-    .dfgviewer-image {
-        height: $grid;
-    }
-}
-
 .viewer_panel {
     background: $white;
     border-left: $border-width solid $border-color;
@@ -286,19 +266,5 @@
         ul {
             margin-left: $grid;
         }
-    }
-}
-
-.viewer_transcript {
-    min-width: 20em;
-    overflow-y: auto;
-    padding: ($grid / 2);
-}
-
-.viewer_transcript-page {
-    & + & {
-        border-top: $border-width solid $border-color;
-        margin-top: $grid;
-        padding-top: $grid;
     }
 }

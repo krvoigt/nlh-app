@@ -1,0 +1,12 @@
+.transcript {
+    overflow-y: auto;
+    padding: ($grid / 2);
+}
+
+.transcript_page {
+    & + & {
+        border-top: $border-width solid $border-color;
+        margin-top: $grid;
+        padding-top: $grid;
+    }
+}

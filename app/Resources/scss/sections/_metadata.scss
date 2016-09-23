@@ -1,0 +1,19 @@
+.metadata {
+    min-width: 20em;
+    overflow-y: auto;
+    padding: ($grid / 2);
+
+    dt {
+        float: none;
+        width: auto;
+    }
+
+    dd {
+        margin-bottom: 1em;
+        width: auto;
+    }
+}
+
+    .metadata_dfg-viewer {
+        height: $grid;
+    }

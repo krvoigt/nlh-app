@@ -1,4 +1,4 @@
-<section class="viewer_metadata">
+<section class="metadata">
     <h2 class="viewer_heading">{{ 'Metadata'|trans }}</h2>
 
     <dl>
@@ -56,7 +56,7 @@
 
         <dt>DFG-Viewer</dt>
         <dd class="dfgviewer">
-            <a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}"><img class="dfgviewer-image" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ document.title | first }}"></a>
+            <a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}"><img class="metadata_dfg-viewer" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ document.title | first }}"></a>
         </dd>
 
         <dt>Mets</dt>
