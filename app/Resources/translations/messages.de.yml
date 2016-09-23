@@ -94,6 +94,14 @@ Catalogue: Katalogeintrag
 datemodified: Importdatum
 score: Relevanz
 
+# sorts
+yearpublish_desc: Erscheinungsjahr absteigend
+yearpublish_asc: Erscheinungsjahr aufsteigend
+datemodified_desc: Importdatum absteigend
+datemodified_asc: Importdatum aufsteigend
+currentnosort_desc: Band absteigend
+currentnosort_asc: Band aufsteigend
+
 # Docstrct
 abstract: Abstrakt
 acknowledgment: Danksagung
