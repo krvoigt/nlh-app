@@ -1,8 +1,15 @@
-$(function () {
-    $('.find_sort-order').change(function(){
-        var order = $(this).val();
-        var sortby = _.split(order, '_');
+var Find = {
+    init: function () {
+        this.bindEvents();
+    },
 
-        setGetParameters({sort: sortby[0], direction: sortby[1]}, true);
-    });
-});
+    bindEvents: function () {
+        $('.find_sort-order').change(function(){
+            var order = $(this).val();
+            var sortby = _.split(order, '_');
+            setGetParameters({sort: order}, direction: sortby[1]}, true);
+        });
+    },
+}
+
+Find.init();
