@@ -7,7 +7,7 @@ var Find = {
         $('.find_sort-order').change(function(){
             var order = $(this).val();
             var sortby = _.split(order, '_');
-            setGetParameters({sort: order}, direction: sortby[1]}, true);
+            setGetParameters({sort: order, direction: sortby[1]}, true);
         });
     },
 }
