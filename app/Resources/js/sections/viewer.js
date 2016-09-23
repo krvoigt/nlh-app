@@ -181,9 +181,9 @@ var Viewer = {
 
         // TODO: Don't reload TOC on every toggle
         if (panelName === 'toc') {
-            $.get(window.location.origin + window.location.pathname + '/toc/', function (data) {
-                $('.toc').html(data);
-            });
+            if (! TOC.isInited) {
+                TOC.init();
+            }
         }
 
         this.settings.panels = this.settings.panels || {};

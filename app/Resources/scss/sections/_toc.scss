@@ -27,7 +27,7 @@
         border-left: 1px solid $white;
     }
 
-    .toc > .toc_list > &:before {
+    .toc_content > .toc_list > &::before {
         content: none !important;
     }
 }
