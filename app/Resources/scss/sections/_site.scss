@@ -1,0 +1,35 @@
+
+.site {
+    &.-fixed {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        max-width: none;
+    }
+
+    &.-⛧ {
+        &::before {
+            animation: ⛧ 7s infinite 3s;
+            color: #900;
+            content: '⛧';
+            font-size: 666px;
+            left: 0;
+            line-height: 1;
+            position: fixed;
+            text-align: center;
+            text-shadow: 0 0 50px #d00;
+            visibility: hidden;
+            width: 100%;
+            z-index: 9;
+        }
+    }
+}
+
+@keyframes ⛧ {
+    0% {
+        visibility: visible;
+    }
+    1% {
+        visibility: hidden;
+    }
+}
