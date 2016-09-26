@@ -10,6 +10,8 @@ use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use AppBundle\Entity\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
+use Solarium\QueryType\Select\Query\Query;
 
 class DefaultController extends BaseController
 {
@@ -22,9 +24,15 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
+        $sort = $request->get('sort');
+        if (isset($sort) && empty($sort)) {
+            throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
+        }
+        $order = $request->get('direction');
+
         $search = $this->getSearchEntity($request);
         $select = $this->getQuerySelect($request);
-        $this->addQuerySort($select);
+        $this->addQuerySort($select, $sort, $order);
         $activeFacets = $request->get('filter');
         $this->addQueryFilters($select, $activeFacets);
         $collection = $request->get('collection');
@@ -203,6 +211,11 @@ class DefaultController extends BaseController
      */
     public function volumesAction(Request $request, $id)
     {
+        $sort = $request->get('sort');
+        if (isset($sort) && empty($sort)) {
+            throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
+        }
+
         $client = $this->get('solarium.client');
 
         $search = $this->getSearchEntity($request);
@@ -212,13 +225,6 @@ class DefaultController extends BaseController
         $this->addQueryFilters($select, $activeFacets);
         $facets = $client->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
-
-        if ($request->get('sort')) {
-            $sort = $request->get('sort');
-            if ($sort === 'currentnosort') {
-                $_GET['direction'] = 'asc';
-            }
-        }
 
         $selectChildrenDocuments = $client->createSelect()->setRows((int) 500);
 
@@ -310,5 +316,23 @@ class DefaultController extends BaseController
             ->setCurrentPage((int) $request->get('page') ?: 1);
 
         return $search;
+    }
+
+    /*
+     * @param Query $select A Query instance
+     */
+    protected function addQuerySort(Query $select, $sort = '', $order = '')
+    {
+        $queryService = $this->get('subugoe_find.query_service');
+
+        if (!empty($sort) && !empty($order)) {
+            $sort = $queryService->getSorting($sort.' '.$order);
+        } else {
+            $sort = $queryService->getSorting();
+        }
+
+        if (is_array($sort) && $sort != []) {
+            $select->addSort($sort[0], $sort[1]);
+        }
     }
 }

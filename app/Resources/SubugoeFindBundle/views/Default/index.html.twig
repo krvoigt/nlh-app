@@ -8,17 +8,19 @@
     <div class="find_aside">
         <span class="find_count">{{ pagination.getTotalItemCount }} {{ 'results'|trans }}</span>,
         <span class="find_sort">
-            {% set sort = app.request.get('sort') ~ '_' ~ app.request.get('direction') %}
+            {% set sortandorder = app.request.get('sort') ~ '_' ~ app.request.get('direction') %}
+            {% set sort = app.request.get('sort') %}
+            {% set route = app.request.attributes.get('_route') %}
             <label for="sort">{{ 'sorted by' | trans }}</label>
             <select class="find_sort-order" id="sort">
-                <option value="score_desc" {{ sort == 'score_desc' ? 'selected' }}>{{ 'score' | trans }}</option>
-                <option value="yearpublish_desc" {{ sort == 'yearpublish_desc' ? 'selected' }}>{{ 'yearpublish_desc' | transchoice(1) }}</option>
-                <option value="yearpublish_asc" {{ sort == 'yearpublish_asc' ? 'selected' }}>{{ 'yearpublish_asc' | transchoice(1) }}</option>
-                <option value="datemodified_desc" {{ sort == 'datemodified_desc' ? 'selected' }}>{{ 'datemodified_desc' | trans }}</option>
-                <option value="datemodified_asc" {{ sort == 'datemodified_asc' ? 'selected' }}>{{ 'datemodified_asc' | trans }}</option>
-                {% if app.request.attributes.get('_route') == '_volumes' %}
-                <option value="currentnosort_asc" {{ sort == 'currentnosort_asc' or sort is empty ? 'selected' }}>{{ 'currentnosort_asc' | trans }}</option>
-                <option value="currentnosort_desc" {{ sort == 'currentnosort_desc' or sort is empty ? 'selected' }}>{{ 'currentnosort_desc' | trans }}</option>
+                <option value="score_desc" {{ sortandorder == 'score_desc' ? 'selected' }}>{{ 'score' | trans }}</option>
+                <option value="yearpublish_desc" {{ sortandorder == 'yearpublish_desc' ? 'selected' }}>{{ 'yearpublish_desc' | transchoice(1) }}</option>
+                <option value="yearpublish_asc" {{ sortandorder == 'yearpublish_asc' ? 'selected' }}>{{ 'yearpublish_asc' | transchoice(1) }}</option>
+                <option value="datemodified_desc" {{ (sortandorder == 'datemodified_desc' or sort is empty or sort is not defined) and (route != '_volumes') ? 'selected' }}>{{ 'datemodified_desc' | trans }}</option>
+                <option value="datemodified_asc" {{ sortandorder == 'datemodified_asc' ? 'selected' }}>{{ 'datemodified_asc' | trans }}</option>
+                {% if route == '_volumes' %}
+                    <option value="currentnosort_asc" {{ sortandorder == 'currentnosort_asc' or sort is empty or sort is not defined ? 'selected' }}>{{ 'currentnosort_asc' | trans }}</option>
+                    <option value="currentnosort_desc" {{ sortandorder == 'currentnosort_desc' ? 'selected' }}>{{ 'currentnosort_desc' | trans }}</option>
                 {% endif %}
             </select>
         </span>
