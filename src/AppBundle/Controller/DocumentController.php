@@ -111,7 +111,7 @@ class DocumentController extends Controller
             $file,
             Response::HTTP_OK,
             [
-                'content-type' => 'application/mets+xml',
+                'content-type' => 'application/xml',
             ]
         );
 
