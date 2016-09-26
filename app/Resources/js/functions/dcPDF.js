@@ -162,7 +162,7 @@ DCPDF.preload = function (ppn) {
     DCPDF.base64data = [];
     // Replace the image path with a promise that will resolve when the image
     // gets downloaded by the browser.
-    _.each(DCPDF.base64images, function (item, key) {
+    $.each(DCPDF.base64images, function (key, item) {
         if (typeof item !== undefined) {
             DCPDF.base64images[key] = DCPDF.preloadImage(item, key);
         }
@@ -186,7 +186,7 @@ DCPDF.preload = function (ppn) {
  * @param picturewidth Defines the rendered picture-width of every pic. The height is accordingly calculated to the width.
  */
 DCPDF.buildImageBase64Arr = function (phys_id_list, url, ppn, picturewidth) {
-    _.each(phys_id_list, function (phys_id) {
+    $.each(phys_id_list, function (key, phys_id) {
         DCPDF.base64images.push(url + ppn + ":" + phys_id + "/full/full/0/default.jpg");
     });
     DCPDF.setMaxValueForProgress(phys_id_list.length);
@@ -276,7 +276,7 @@ DCPDF.createPdfWithCover = function (ppn) {
  */
 DCPDF.buildPDF = function (ppn) {
     var doc = DCPDF.createPdfWithCover(ppn);
-    _.each(DCPDF.base64data, function (item) {
+    $.each(DCPDF.base64data, function (key, item) {
         // TODO: We assume the scans have a resolution of 200 dpi, which is not always the case
         var itemWidthInMM = item.width * 25.4 / 200;
         var itemHeightInMM = item.height * 25.4 / 200;
@@ -289,7 +289,6 @@ DCPDF.buildPDF = function (ppn) {
             itemWidthInMM,
             itemHeightInMM
         );
-
     });
 
     try {

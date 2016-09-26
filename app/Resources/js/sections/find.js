@@ -5,9 +5,10 @@ var Find = {
 
     bindEvents: function () {
         $('.find_sort-order').change(function(){
-            var order = $(this).val();
-            var sortby = _.split(order, '_');
-            setGetParameters({sort: order, direction: sortby[1]}, true);
+            var params = $(this).val().split('_');
+            var sort = params[0];
+            var direction = params[1];
+            setGetParameters({sort: sort, direction: direction}, true);
         });
     },
 }
