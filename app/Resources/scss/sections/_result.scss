@@ -1,3 +1,23 @@
+.result_import-date {
+	color: $text-color-light;
+	font-size: $font-size-small;
+    line-height: 1;
+}
+
+.result_info {
+    margin-bottom: round($grid / 4);
+
+    dt {
+        font-weight: normal;
+        width: 6em;
+    }
+
+    dd {
+        margin: 0;
+        width: auto;
+    }
+}
+
 .result_item {
     background: $white;
     border-radius: $br;
@@ -48,10 +68,10 @@
 .result_metadata {
     display: table-cell;
     vertical-align: top;
-}
 
-.result_paragraph {
-    margin: 0;
+    p {
+        margin: 0;
+    }
 }
 
 .result_title {
@@ -59,7 +79,7 @@
     display: block;
     font: inherit;
     font-weight: bold;
-    margin: 0 0 ($grid / 2);
+    margin: 0 0 round($grid / 4);
     position: relative;
 
     > a {

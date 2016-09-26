@@ -61,17 +61,30 @@
                                 {{ 'Collapse title'|trans }}
                             </button>
                         </h2>
-                        <p class="result_paragraph">
+                        <dl class="result_info">
                             {% if result.fields.creator is defined %}
-                                {{ 'creator' | transchoice(result.fields.creator | length) }}:
-                                <span class="result_author-name">
+                                <dt>{{ 'creator' | transchoice(result.fields.creator | length) }}:</dt>
+                                <dd>
                                     {% for author in result.fields.creator %}
                                         {{ author }}{% if not loop.last %}; {% endif %}
                                     {% endfor %}
-                                </span>
-                                <br>
+                                </dd>
                             {% endif %}
-                            {{ result.fields.docstrct | trans }} {% if result.fields.docstrct == "volume" %} — {% trans %}currentno{% endtrans %} {{ result.fields.currentno }}{% endif %}
+                            {% if result.fields.yearpublish is defined %}
+                                <dt>{{ 'Published' | trans }}:</dt>
+                                <dd>
+                                    {{ result.fields.yearpublish }}
+                                    <span class="result_import-date">
+                                        {{ '(imported: %date%)'|trans({'%date%': result.fields.datemodified|date('Y-m-d')}) }}
+                                    </span>
+                                </dd>
+                            {% endif %}
+                        </dl>
+                        <p>
+                            {{ result.fields.docstrct | trans }}
+                            {% if result.fields.docstrct == "volume" %}
+                                — {{ 'currentno'|trans }} {{ result.fields.currentno }}
+                            {% endif %}
                         </p>
                     </div>
                 </article>

@@ -32,6 +32,8 @@ Go to next page: Zur nächsten Seite
 Add filter &ldquo;%name% is %value%&rdquo;: 'Filter hinzufügen: &bdquo;%name% ist %value%&ldquo;'
 Collapse title: Titel verkleinern
 Hide filters: Filter ausblenden
+"(imported: %date%)": "(importiert: %date%)"
+Published: Erschienen
 Remove all filters: Alle Filter entfernen
 Remove filter &ldquo;%name% is %value%&rdquo;: 'Filter entfernen: &bdquo;%name% ist %value%&ldquo;'
 results: Treffer
