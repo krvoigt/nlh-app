@@ -59,8 +59,19 @@
                 {% endfor %}
             </div>
         {% endif %}
-        <div id="pdf_year-publish">{{ document.yearpublish }}</div>
+        {% if document.yearpublish is defined %}
+            <div id="pdf_year-publish">{{ document.yearpublish }}</div>
+        {% endif %}
         <div id="pdf_purl">{{ document.purl }}</div>
-        <div id="pdf_license">AGPL</div>
+        <div id="pdf_license">The Göttingen State and University Library provides access to digitized documents strictly for noncommercial
+        educational, research and private purposes and makes no warranty with regard to their use for other
+        purposes. Some of our collections are protected by copyright. Publication and/or broadcast in any form
+        (including electronic) requires prior written permission from the Goettingen State- and University Library.
+        Each copy of any part of this document must contain there Terms and Conditions. With the usage of the
+        library's online system to access or download a digitized document you accept there Terms and Conditions.
+        Reproductions of material on the web site may not be made for or donated to other repositories, nor may be
+        further reproduced without written permission from the Goettingen State- and University Library
+        For reproduction requests and permissions, please contact us. If citing materials, please
+        give proper attribution of the source.</div>
     </div>
 </section>
