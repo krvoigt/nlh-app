@@ -45,7 +45,7 @@ DCGlobals.getWork = function () {
         author: $('#pdf_author').text().trim(),
         yearPublish: $('#pdf_year-publish').text().trim(),
         purl: $('#pdf_purl').text().trim(),
-        license: 'AGPL',
+        license: $('#pdf_license').text().trim()
     };
 };
 
@@ -237,7 +237,7 @@ DCPDF.createPdfWithCover = function (ppn) {
     }
     doc.setFontSize(fontSize);
 
-    y += rowSpace * .6
+    y += rowSpace * .6;
     doc.setLineWidth(.5);
     doc.line(x, y, lineWidth, y);
 
@@ -260,12 +260,14 @@ DCPDF.createPdfWithCover = function (ppn) {
     doc.setTextColor(0, 0, 0);
 
     y += rowSpace;
-    doc.text(x, y, 'Lizenz:');
-    doc.text(x + gap, y, work.license);
-
-    y += rowSpace;
     doc.text(x, y, 'Seiten:');
     doc.text(x + gap, y, DCPDF.internalOptions.physIDstart + '–' + DCPDF.internalOptions.physIDend); // That's an ndash.
+
+    y += rowSpace;
+    doc.text(x, y, 'Lizenz:');
+    y += rowSpace;
+    doc.setFontSize(headlineFontSize * .75);
+    doc.text(x, y, doc.splitTextToSize(work.license, wrapSize));
 
     return doc;
 };
