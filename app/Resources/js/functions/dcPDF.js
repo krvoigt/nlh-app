@@ -12,8 +12,9 @@
  */
 
 DCPDF = {};
-DCPDF.base64images = [];
 DCPDF.base64data = [];
+DCPDF.base64images = [];
+DCPDF.images = [];
 DCPDF.internalOptions = [];
 DCPDF.isRunning = false;
 
@@ -51,6 +52,11 @@ DCGlobals.getWork = function () {
  */
 DCPDF.reset = function () {
     DCPDF.isRunning = false;
+
+    // Cancel loading of images if in progress
+    $.each(DCPDF.images, function(index, image) {
+        image.src = '';
+    });
 
     $('#pdf-options, .export_cancel').show();
     $('#pdf-progress, .export_reset').hide();
@@ -126,6 +132,7 @@ DCPDF.preloadImage = function (path, physID) {
         image.onerror = resolve;
         // Apply the path as `src` to the image so that the browser fetches it
         image.src = path;
+        DCPDF.images.push(image);
     });
 };
 
@@ -141,13 +148,9 @@ DCPDF.preload = function (ppn) {
     DCPDF.base64data = [];
     // Replace the image path with a promise that will resolve when the image
     // gets downloaded by the browser.
-    $.each(DCPDF.base64images, function (key, item) {
-        if (! DCPDF.isRunning) {
-            return false;
-        }
-
-        if (typeof item !== undefined) {
-            DCPDF.base64images[key] = DCPDF.preloadImage(item, key);
+    $.each(DCPDF.base64images, function (key, src) {
+        if (typeof src !== undefined) {
+            DCPDF.base64images[key] = DCPDF.preloadImage(src, key);
         }
     });
 
@@ -267,10 +270,6 @@ DCPDF.createPdfWithCover = function (ppn) {
 DCPDF.buildPDF = function (ppn) {
     var doc = DCPDF.createPdfWithCover(ppn);
     $.each(DCPDF.base64data, function (key, item) {
-        if (! DCPDF.isRunning) {
-            return false;
-        }
-
         // TODO: We assume the scans have a resolution of 200 dpi, which is not always the case
         var itemWidthInMM = item.width * 25.4 / 200;
         var itemHeightInMM = item.height * 25.4 / 200;
@@ -284,10 +283,6 @@ DCPDF.buildPDF = function (ppn) {
             itemHeightInMM
         );
     });
-
-    if (! DCPDF.isRunning) {
-        return false;
-    }
 
     try {
         doc.save(ppn + '.pdf');
@@ -322,6 +317,7 @@ DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
 
     DCPDF.base64images = [];
     DCPDF.base64data = [];
+    DCPDF.images = [];
     DCPDF.setMaxValueForProgress(1);
     DCPDF.setProgress(0);
 
@@ -343,32 +339,12 @@ DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
 };
 
 /**
- * @summary Helper function to repeat a string given times.
- * @param str Like "marry "
- * @param times Like "3"
- * @returns {string} Result is "marry marry marry"
- */
-DCPDF.repeat = function (str, times) {
-    return new Array(times + 1).join(str);
-};
-
-/**
  * @summary Helper function to build a PHYSID from a string like "23" to "00000023"
  * @param theNumberOfPhysID Like 23
  * @returns {string} Like "00000023"
  */
 DCPDF.buildPhysIDs = function (theNumberOfPhysID) {
     return ("00000000" + theNumberOfPhysID).substr(-8, 8);
-};
-
-/**
- * @summary Extract a number from a string like "PHYS_0001" to "1"
- * @param physid Like "PHYS_0001"
- * @returns {Number} Like "1"
- */
-DCPDF.extractPhysIDs = function (physid) {
-    numbersOfPhysID = physid.substring(physid.length - 4);
-    return parseInt(numbersOfPhysID);
 };
 
 /**
