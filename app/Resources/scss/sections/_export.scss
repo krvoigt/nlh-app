@@ -3,6 +3,10 @@
     padding: ($grid / 2);
 }
 
+.export_cancel {
+    @include button;
+}
+
 .export_error {
     background: tint($red, 90);
     border: $border-width solid $red;
@@ -60,5 +64,5 @@
 
 .export_reset {
     @include button;
-    @include icon('arrow-left')
+    @include icon('arrow-left');
 }

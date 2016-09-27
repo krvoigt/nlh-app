@@ -47,21 +47,29 @@
 
         <p>{{ 'pdf_progress_hint'|trans }}</p>
 
+        <button class="export_cancel">{{ 'Cancel'|trans }}</button>
+
         <button class="export_reset">{{ 'Go back'|trans }}</button>
     </div>
 
     <div class="pdf_metadata">
         <div id="pdf_title">{{ document.title.0 }}</div>
-        {% if document.creator is defined %}
-            <div id="pdf_author">
+        <div id="pdf_author">
+            {% if document.creator is defined %}
                 {% for author in document.creator %}
                     {{ author }}{% if not loop.last %}; {% endif %}
                 {% endfor %}
-            </div>
-        {% endif %}
-        {% if document.yearpublish is defined %}
-            <div id="pdf_year-publish">{{ document.yearpublish }}</div>
-        {% endif %}
+            {% else %}
+                {{ '[unbekannt]'|trans }}
+            {% endif %}
+        </div>
+        <div id="pdf_year-publish">
+            {% if document.yearpublish is defined %}
+                {{ document.yearpublish }}
+            {% else %}
+                {{ '[unbekannt]'|trans }}
+            {% endif %}
+        </div>
         <div id="pdf_purl">{{ document.purl }}</div>
         <div id="pdf_license">{% trans %}disclaimer{% endtrans %}</div>
     </div>

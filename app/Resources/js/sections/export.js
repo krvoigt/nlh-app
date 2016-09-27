@@ -1,6 +1,6 @@
 var Export = {
     init: function () {
-        DCPDF.resetGUI();
+        DCPDF.reset();
 
         this.bindEvents();
     },
@@ -16,8 +16,8 @@ var Export = {
             DCPDF.generatePDF(ppn, physIDstart, physIDend);
         });
 
-        $('.export_reset').click(function () {
-            DCPDF.resetGUI();
+        $('.export_cancel, .export_reset').click(function () {
+            DCPDF.reset();
         });
     },
 

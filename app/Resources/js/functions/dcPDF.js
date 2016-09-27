@@ -15,6 +15,7 @@ DCPDF = {};
 DCPDF.base64images = [];
 DCPDF.base64data = [];
 DCPDF.internalOptions = [];
+DCPDF.isRunning = false;
 
 /**
  * @summary Show an error message in the progress gui for pdf-generation.
@@ -28,10 +29,6 @@ DCPDF.showError = function (errorText, isInProgress) {
     }
 
     $alert.text(errorText);
-
-    if (isInProgress) {
-        DCPDF.setProgress(100);
-    }
 };
 
 // TODO add options dynamically
@@ -51,30 +48,12 @@ DCGlobals.getWork = function () {
 
 /**
  * @summary Resets the Dialog and calculates the begin and start of the selected Section.
- * @param ppn like PPN13204823
- * @param physIDstart Work start
- * @param physIDend Work end
  */
-DCPDF.resetGUI = function (ppn, physIDstart, physIDend) {
-    // TODO alles von null anfangen
-    DCPDF.base64images = [];
-    DCPDF.base64data = [];
-    DCPDF.internalOptions = [];
+DCPDF.reset = function () {
+    DCPDF.isRunning = false;
 
-    $('#pdf-options').show();
-    $('#pdf-progress').hide();
-    $(".export_reset").hide();
-    if (physIDstart || physIDend) {
-        $("input[name='physIDstart']").val(DCPDF.extractPhysIDs(physIDstart));
-        $("input[name='physIDend']").val(DCPDF.extractPhysIDs(physIDend));
-        DCPDF.calculatePDFGenerationStatistics(DCPDF.extractPhysIDs(physIDstart), DCPDF.extractPhysIDs(physIDend));
-    } else {
-        $("input[name='physIDstart']").val(1);
-        $("input[name='physIDend']").val(DCGlobals.getWork().structure.pages_length);
-        DCPDF.calculatePDFGenerationStatistics(1, DCGlobals.getWork().structure.pages_length);
-    }
-    DCPDF.setMaxValueForProgress(1);
-    DCPDF.setProgress(0);
+    $('#pdf-options, .export_cancel').show();
+    $('#pdf-progress, .export_reset').hide();
 };
 
 /**
@@ -156,19 +135,28 @@ DCPDF.preloadImage = function (path, physID) {
  */
 DCPDF.preload = function (ppn) {
     // Promises are not supported, let's leave
-    if (!('Promise' in window)) {
+    if (! ('Promise' in window)) {
         return;
     }
     DCPDF.base64data = [];
     // Replace the image path with a promise that will resolve when the image
     // gets downloaded by the browser.
     $.each(DCPDF.base64images, function (key, item) {
+        if (! DCPDF.isRunning) {
+            return false;
+        }
+
         if (typeof item !== undefined) {
             DCPDF.base64images[key] = DCPDF.preloadImage(item, key);
         }
     });
+
     // When all images have been fetched...
     Promise.all(DCPDF.base64images).then(function () {
+        if (! DCPDF.isRunning) {
+            return false;
+        }
+
         // ...execute the callback
         DCPDF.buildPDF(ppn);
     }).catch(function (err) {
@@ -279,6 +267,10 @@ DCPDF.createPdfWithCover = function (ppn) {
 DCPDF.buildPDF = function (ppn) {
     var doc = DCPDF.createPdfWithCover(ppn);
     $.each(DCPDF.base64data, function (key, item) {
+        if (! DCPDF.isRunning) {
+            return false;
+        }
+
         // TODO: We assume the scans have a resolution of 200 dpi, which is not always the case
         var itemWidthInMM = item.width * 25.4 / 200;
         var itemHeightInMM = item.height * 25.4 / 200;
@@ -293,8 +285,13 @@ DCPDF.buildPDF = function (ppn) {
         );
     });
 
+    if (! DCPDF.isRunning) {
+        return false;
+    }
+
     try {
         doc.save(ppn + '.pdf');
+        $('.export_cancel').hide();
         $('.export_reset').show();
     } catch (e) {
         console.log('error ' + e);
@@ -320,7 +317,16 @@ DCPDF.buildPDF = function (ppn) {
  * @param physIDend
  */
 DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
+    DCPDF.isRunning = true;
     DCPDF.showProgress();
+
+    DCPDF.base64images = [];
+    DCPDF.base64data = [];
+    DCPDF.setMaxValueForProgress(1);
+    DCPDF.setProgress(0);
+
+    DCPDF.calculatePDFGenerationStatistics(1, DCGlobals.getWork().structure.pages_length);
+
     DCPDF.internalOptions = {
         url: window.location.origin + '/image/',
         width: 0,

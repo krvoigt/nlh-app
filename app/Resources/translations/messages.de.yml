@@ -235,9 +235,10 @@ manuscriptae: Manuscripta
 theologie: Theologie
 
 # Export
-Export: Export
 Download as PDF: Download als PDF
+Cancel: Abbrechen
 Choose quality: Bildqualität
+Export: Export
 Go back: Zurück
 pdf_first_step_option1: Mittlere Qualität (1000 Pixel Breite pro Bild)
 pdf_first_step_option2: Originale Scanauflösung
