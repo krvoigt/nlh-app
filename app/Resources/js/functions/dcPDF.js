@@ -15,6 +15,7 @@ DCPDF = {};
 DCPDF.base64data = [];
 DCPDF.base64images = [];
 DCPDF.images = [];
+DCPDF.imagesInfos = [];
 DCPDF.internalOptions = [];
 DCPDF.isRunning = false;
 
@@ -101,9 +102,9 @@ DCPDF.getProgress = function () {
 /**
  * @summary Return a new promise for adding it later to an array of promises. Images will be loaded and returned as data-url.
  * @param path URL of image
- * @param physID
+ * @param physId
  */
-DCPDF.preloadImage = function (path, physID) {
+DCPDF.preloadImage = function (path, physId) {
     return new Promise(function (resolve, reject) {
         // Create a new image from JavaScript
         var image = new Image();
@@ -123,7 +124,7 @@ DCPDF.preloadImage = function (path, physID) {
                 width: this.width,
                 height: this.height
             };
-            DCPDF.base64data[physID] = item;
+            DCPDF.base64data[physId] = item;
             DCPDF.setProgress(DCPDF.getProgress() + 1);
             resolve();
         };
@@ -150,12 +151,13 @@ DCPDF.preload = function (ppn) {
     // gets downloaded by the browser.
     $.each(DCPDF.base64images, function (key, src) {
         if (typeof src !== undefined) {
-            DCPDF.base64images[key] = DCPDF.preloadImage(src, key);
+            DCPDF.base64images[key] = DCPDF.preloadImage(src + "full/full/0/default.jpg", key);
+            DCPDF.imagesInfos[key] = DCPDF.loadMetadata(src + "info.json");
         }
     });
 
     // When all images have been fetched...
-    Promise.all(DCPDF.base64images).then(function () {
+    Promise.all( DCPDF.base64images.concat(DCPDF.imagesInfos) ).then(function () {
         if (! DCPDF.isRunning) {
             return false;
         }
@@ -170,17 +172,25 @@ DCPDF.preload = function (ppn) {
 };
 
 /**
- * Build an array with urls assembled from the given phys_ids. Need a list of physIDs to assemble the right ngcs(Content Server) url.
- * @param phys_id_list Like [PHYS_0001, PHYS_0002]
+ * @summary Load IIIF metdata for image (info.json)
+ * @param ppn Like PPN123456789
+ */
+DCPDF.loadMetadata = function (src) {
+    return Promise.resolve($.getJSON(src));
+}
+
+/**
+ * Build an array with urls assembled from the given physIds. Need a list of physIds to assemble the right ngcs(Content Server) url.
+ * @param physIdList Like [PHYS_0001, PHYS_0002]
  * @param url Like http://digital-test.sbb.spk-berlin.de:83/
  * @param ppn Like PPN123456789
  * @param picturewidth Defines the rendered picture-width of every pic. The height is accordingly calculated to the width.
  */
-DCPDF.buildImageBase64Arr = function (phys_id_list, url, ppn, picturewidth) {
-    $.each(phys_id_list, function (key, phys_id) {
-        DCPDF.base64images.push(url + ppn + ":" + phys_id + "/full/full/0/default.jpg");
+DCPDF.buildImageBase64Arr = function (physIdList, url, ppn, picturewidth) {
+    $.each(physIdList, function (key, physId) {
+        DCPDF.base64images.push(url + ppn + ':' + physId + '/');
     });
-    DCPDF.setMaxValueForProgress(phys_id_list.length);
+    DCPDF.setMaxValueForProgress(physIdList.length);
     DCPDF.preload(ppn);
 };
 
@@ -252,7 +262,7 @@ DCPDF.createPdfWithCover = function (ppn) {
 
     y += rowSpace;
     doc.text(x, y, 'Seiten:');
-    doc.text(x + gap, y, DCPDF.internalOptions.physIDstart + '–' + DCPDF.internalOptions.physIDend); // That's an ndash.
+    doc.text(x + gap, y, DCPDF.internalOptions.physIdstart + '–' + DCPDF.internalOptions.physIdend); // That's an ndash.
 
     y += rowSpace;
     doc.text(x, y, 'Lizenz:');
@@ -270,9 +280,11 @@ DCPDF.createPdfWithCover = function (ppn) {
 DCPDF.buildPDF = function (ppn) {
     var doc = DCPDF.createPdfWithCover(ppn);
     $.each(DCPDF.base64data, function (key, item) {
-        // TODO: We assume the scans have a resolution of 200 dpi, which is not always the case
-        var itemWidthInMM = item.width * 25.4 / 200;
-        var itemHeightInMM = item.height * 25.4 / 200;
+        // TODO: Find a way to work with promise without accessing _detail
+        ppiX = DCPDF.imagesInfos[key]._detail.ppi[0];
+        ppiY = DCPDF.imagesInfos[key]._detail.ppi[1];
+        var itemWidthInMM = item.width * 25.4 / ppiX;
+        var itemHeightInMM = item.height * 25.4 / ppiY;
         doc.addPage(itemWidthInMM, itemHeightInMM);
         doc.addImage(
             item.dataURL,
@@ -304,20 +316,21 @@ DCPDF.buildPDF = function (ppn) {
  *    y: 0, // position y
  *    format: 'JPEG', // picture format
  *    picturewidth: '1000', // picture width in px which are rendered from the ngcs (Content Server).
- *    physIDstart: 2,
- *    physIDend: 5
+ *    physIdstart: 2,
+ *    physIdend: 5
  * } and the PPN of the work.
  * @param ppn
- * @param physIDstart
- * @param physIDend
+ * @param physIdstart
+ * @param physIdend
  */
-DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
+DCPDF.generatePDF = function (ppn, physIdstart, physIdend) {
     DCPDF.isRunning = true;
     DCPDF.showProgress();
 
     DCPDF.base64images = [];
     DCPDF.base64data = [];
     DCPDF.images = [];
+    DCPDF.imagesInfos = [];
     DCPDF.setMaxValueForProgress(1);
     DCPDF.setProgress(0);
 
@@ -331,47 +344,47 @@ DCPDF.generatePDF = function (ppn, physIDstart, physIDend) {
         y: 0,
         format: 'JPEG',
         picturewidth: '',
-        physIDstart: physIDstart,
-        physIDend: physIDend
+        physIdstart: physIdstart,
+        physIdend: physIdend
     };
-    var physIDList = DCPDF.turnPageNumbersIntoPhysIDArray(physIDstart, physIDend);
-    DCPDF.buildImageBase64Arr(physIDList, DCPDF.internalOptions.url, ppn, DCPDF.internalOptions.picturewidth);
+    var physIdList = DCPDF.turnPageNumbersIntophysIdArray(physIdstart, physIdend);
+    DCPDF.buildImageBase64Arr(physIdList, DCPDF.internalOptions.url, ppn, DCPDF.internalOptions.picturewidth);
 };
 
 /**
- * @summary Helper function to build a PHYSID from a string like "23" to "00000023"
- * @param theNumberOfPhysID Like 23
+ * @summary Helper function to build a physId from a string like "23" to "00000023"
+ * @param theNumberOfphysId Like 23
  * @returns {string} Like "00000023"
  */
-DCPDF.buildPhysIDs = function (theNumberOfPhysID) {
-    return ("00000000" + theNumberOfPhysID).substr(-8, 8);
+DCPDF.buildphysIds = function (theNumberOfphysId) {
+    return ("00000000" + theNumberOfphysId).substr(-8, 8);
 };
 
 /**
- * @summary Turn page numbers like 20-23 to an array with PHYSIDs like [PHYS_0020, PHYS_0021, PHYS_0022, PHYS_0023].
+ * @summary Turn page numbers like 20-23 to an array with physIds like [PHYS_0020, PHYS_0021, PHYS_0022, PHYS_0023].
  * @param scope First page number
  * @param scopeEnd Last page number
  * @returns {*}
  */
-DCPDF.turnPageNumbersIntoPhysIDArray = function (scope, scopeEnd) {
-    var outputArrayWithPhysIDs = [];
+DCPDF.turnPageNumbersIntophysIdArray = function (scope, scopeEnd) {
+    var outputArrayWithphysIds = [];
     if (typeof scopeEnd !== 'undefined' && scopeEnd) {
         if (parseInt(scopeEnd) > parseInt(scope)) {
             for (var i = parseInt(scope); i < parseInt(scopeEnd) + 1; ++i) {
-                outputArrayWithPhysIDs.push(DCPDF.buildPhysIDs(i));
+                outputArrayWithphysIds.push(DCPDF.buildphysIds(i));
             }
         } else if (parseInt(scopeEnd) < parseInt(scope)) {
             console.log("Scope start is bigger than scope end or equal. Please fix your parameters.");
             return null;
         } else if (parseInt(scopeEnd) == parseInt(scope)) {
-            outputArrayWithPhysIDs.push(DCPDF.buildPhysIDs(scope));
+            outputArrayWithphysIds.push(DCPDF.buildphysIds(scope));
         }
     } else {
         for (var i = 1; i < parseInt(scope) + 1; i++) {
-            outputArrayWithPhysIDs.push(DCPDF.buildPhysIDs(i));
+            outputArrayWithphysIds.push(DCPDF.buildphysIds(i));
         }
     }
-    return outputArrayWithPhysIDs;
+    return outputArrayWithphysIds;
 };
 
 /**
