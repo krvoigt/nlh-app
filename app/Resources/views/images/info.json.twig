@@ -3,10 +3,7 @@
   "@id": "{{ url('_iiifjson', {'identifier': identifier}) }}",
   "width": {{ size.width }},
   "height": {{ size.height }},
-  "ppi": {
-    x: {{ ppi.x }},
-    y: {{ ppi.y }}
-  },
+  "ppi": [{{ ppi.x}}, {{ ppi.y }}],
   "protocol": "http://iiif.io/api/image",
   "sizes": [
     {
