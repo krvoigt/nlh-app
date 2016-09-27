@@ -94,12 +94,14 @@ class IIIFController extends Controller
             throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
         }
 
+        $ppi = $image->getImagick()->getImageResolution();
         $image->strip();
 
         $response = new Response(
             $this->renderView(
                 'images/info.json.twig', [
                     'size' => $image->getSize(),
+                    'ppi' => $ppi,
                     'identifier' => $identifier,
                 ]
             )
