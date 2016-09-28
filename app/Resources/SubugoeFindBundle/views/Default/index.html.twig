@@ -48,7 +48,9 @@
                     </li>
                 {% endif %}
 
-                <li>{{ 'yearpublish' | transchoice(1) }}: {{ parentDocument.yearpublish }}</li>
+                {% if parentDocument.yearpublish is defined %}
+                    <li>{{ 'yearpublish' | transchoice(1) }}: {{ parentDocument.yearpublish }}</li>
+                {% endif %}
 
                 {% if parentDocument.placepublish is defined %}
                     <li>{{ 'placepublish' | transchoice(parentDocument.placepublish | length) }}: {{ parentDocument.placepublish|join(', ') }}</li>
@@ -66,10 +68,10 @@
                     </li>
                 {% endif %}
 
-                <li>DFG-Viewer<br><a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}" target="_blank"><img class="metadata_dfg-viewer" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ parentDocument.title | first }}"></a></li>
-                <li>Mets<br><a href="{{ url('_mets', {id: parentDocument.id}) }}" target="_blank">{{ url('_mets', {id: parentDocument.id}) }}</a></li>
-                <li>{{ 'PURL'|trans }}<br><a href="{{ parentDocument.purl }}" target="_blank">{{ parentDocument.purl }}</a> </li>
-                <li>{{ 'Catalogue'|trans }}<br><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}" target="_blank">http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}</a></li>
+                <li>DFG-Viewer <a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}" target="_blank"><img class="metadata_dfg-viewer" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ parentDocument.title | first }}"></a></li>
+                <li><a href="{{ url('_mets', {id: parentDocument.id}) }}" target="_blank">Mets</a></li>
+                <li><a href="{{ parentDocument.purl }}" target="_blank">{{ 'PURL'|trans }}</a> </li>
+                <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}" target="_blank">{{ 'Catalogue'|trans }}</a></li>
             </ul>
         </div>
     {% endif %}
