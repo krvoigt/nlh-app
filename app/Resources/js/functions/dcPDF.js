@@ -245,6 +245,18 @@ DCPDF.createPdfWithCover = function (ppn) {
     doc.text(x + gap, y, DCPDF.internalOptions.physIdstart + '–' + DCPDF.internalOptions.physIdend); // That's an ndash.
 
     y += rowSpace;
+    doc.text(x, y, 'Kontakt:');
+    doc.text(x + gap, y, 'Niedersächsische Staats- und Universitätsbibliothek');
+    y += rowSpace / 2;
+    doc.text(x + gap, y, 'GDZ | Reproduktion');
+    y += rowSpace / 2;
+    doc.text(x + gap, y, '37070 Göttingen');
+    y += rowSpace / 2;
+    doc.text(x + gap, y, 'Germany');
+    y += rowSpace / 2;
+    doc.text(x + gap, y, 'E-Mail: gdz@sub.uni-goettingen.de');
+
+    y += rowSpace;
     doc.setFontSize(headlineFontSize * .75);
     doc.text(x, y, doc.splitTextToSize(work.license, wrapSize));
 
