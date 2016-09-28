@@ -245,8 +245,6 @@ DCPDF.createPdfWithCover = function (ppn) {
     doc.text(x + gap, y, DCPDF.internalOptions.physIdstart + '–' + DCPDF.internalOptions.physIdend); // That's an ndash.
 
     y += rowSpace;
-    doc.text(x, y, 'Lizenz:');
-    y += rowSpace;
     doc.setFontSize(headlineFontSize * .75);
     doc.text(x, y, doc.splitTextToSize(work.license, wrapSize));
 
