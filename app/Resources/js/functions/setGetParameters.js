@@ -1,6 +1,6 @@
 function setGetParameters(params, changeLocation) {
-    var url = window.location.href.replace(hash, '');
     var hash = window.location.hash;
+    var url = window.location.href.replace(hash, '');
 
     for (var key in params) {
         var value = params[key];
