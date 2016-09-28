@@ -231,7 +231,7 @@ DCPDF.createPdfWithCover = function (ppn) {
     doc.text(x + gap, y, work.yearPublish);
 
     y += rowSpace;
-    doc.text(x, y, 'PPN:');
+    doc.text(x, y, 'Identifier:');
     doc.text(x + gap, y, ppn);
 
     y += rowSpace;
