@@ -1,14 +1,19 @@
 {% tree item in structure %}
+
+    {% set page_start = item.physicalPages|first %}
+    {% set page_start = (page_start is defined and page_start is not null ? page_start|split('_').1|abs : '') %}
+    {% set page_end = item.physicalPages|last %}
+    {% set page_end = (page_end is defined and page_end is not null ? page_end|split('_').1|abs : '') %}
+
     {% if treeloop.first %}<ul class="toc_list">{% endif %}
-        <li class="toc_item">
-            {% set page = (item.physicalPages.0 is defined and item.physicalPages.0 is not null ? item.physicalPages.0|split('_').1|abs : '') %}
-            <a class="toc_link" href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}?page={{ page }}">
+        <li class="toc_item" data-start="{{ page_start }}" data-end="{{ page_end }}">
+            <a class="toc_link" href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) }}?page={{ page_start }}">
                 {% if item.label is null %}
                     {{ item.type|lower|trans }}
                 {% else %}
                     {{ item.label }}
                 {% endif %}
-            </a> {{ page }}
+            </a> {{ page_start }}
             {% subtree item.children %}
         </li>
     {% if treeloop.last %}</ul>{% endif %}
