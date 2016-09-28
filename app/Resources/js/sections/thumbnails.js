@@ -6,11 +6,6 @@ var Thumbnails = {
             return;
         }
 
-        $('img').lazyload({
-            container: $thumbnails,
-            effect: 'fadeIn',
-        });
-
         this.bindEvents();
     },
 
@@ -19,7 +14,16 @@ var Thumbnails = {
             window.location = $(this).attr('href') + window.location.hash;
             return false;
         });
-    },
+
+
+        $('*[data-target="thumbnails"]').click(function () {
+            $('img').lazyload({
+                container: $('.thumbnails'),
+                effect: 'fadeIn'
+            });
+
+        })
+    }
 };
 
 Thumbnails.init();
