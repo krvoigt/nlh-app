@@ -56,6 +56,7 @@ page: Seite
 pages: Seiten
 Current page: Derzeitige Seite
 Current pages: Derzeitige Seiten
+DFG Viewer: DFG-Viewer
 Go to page: Gehe zu Seite
 First page: Erste Seite
 Fullscreen: Vollbildansicht
@@ -75,7 +76,7 @@ Transcript: Transkript
 Zoom in: Vergrößern
 Zoom out: Verkleinern
 Contained in: Enthalten in
-PURL: PURL
+PURL: Zitierlink (PURL)
 Thumbnails: Thumbnails
 Loading: Lade …
 sorted by: sortiert nach

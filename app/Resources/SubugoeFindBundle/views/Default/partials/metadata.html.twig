@@ -37,6 +37,9 @@
             </dd>
         {% endif %}
 
+        <dt>{{ 'docstrct' | transchoice(1) }}</dt>
+        <dd>{{ document.docstrct | trans }}</dd>
+
         {% if document.docstrct == "volume" %}
             <dt>{{ 'currentno' | trans }}</dt>
             <dd>{{ document.currentno }}</dd>
@@ -53,27 +56,13 @@
             {% endfor %}
         </dd>
 
-        <dt>DFG-Viewer</dt>
-        <dd class="dfgviewer">
-            <a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}"><img class="metadata_dfg-viewer" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ document.title | first }}"></a>
-        </dd>
-
-        <dt></dt>
-        <dd>
-            <a href="{{ url('_mets', {id: document.id}) }}">Mets</a>
-        </dd>
-
-        <dt></dt>
-        <dd><a href="{{ document.purl }}">{{ 'PURL'|trans }}</a></dd>
-
-        {% if document.id_PPNanalog_s is defined %}
-            <dt></dt>
-            <dd>
-                <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a>
-            </dd>
-        {% endif %}
-
-        <dt>{{ 'docstrct' | transchoice(1) }}</dt>
-        <dd>{{ document.docstrct | trans }}</dd>
+        <ul class="metadata_links">
+            <li><a href="{{ document.purl }}">{{ 'PURL'|trans }}</a></li>
+            {% if document.id_PPNanalog_s is defined %}
+                <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+            {% endif %}
+            <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
+            <li><a href="{{ url('_mets', {id: document.id}) }}">Mets</a></li>
+        </ul>
     </dl>
 </section>
