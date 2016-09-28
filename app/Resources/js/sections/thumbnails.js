@@ -1,4 +1,6 @@
 var Thumbnails = {
+    firstLoad: true,
+
     init: function () {
         var $thumbnails = $('.thumbnails');
 
@@ -15,15 +17,21 @@ var Thumbnails = {
             return false;
         });
 
+        $('.viewer_control.-toggle-panel[data-target="thumbnails"]').click(this.lazyLoad.bind(this));
+    },
 
-        $('*[data-target="thumbnails"]').click(function () {
-            $('img').lazyload({
-                container: $('.thumbnails'),
-                effect: 'fadeIn'
-            });
+    lazyLoad: function () {
+        if (! this.firstLoad) {
+            return;
+        }
 
-        })
-    }
+        this.firstLoad = false;
+
+        $('img').lazyload({
+            container: $('.thumbnails'),
+            effect: 'fadeIn'
+        });
+    },
 };
 
 Thumbnails.init();
