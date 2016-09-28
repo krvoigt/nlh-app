@@ -92,7 +92,7 @@
             @include icon('chevron-up', false);
             @include transition(background, color);
             background: $brand-color-light;
-            text-shadow: 0 -1px 0 $shadow-dark;
+            text-shadow: 0 -1px 0 $shade-dark;
         }
     }
 }

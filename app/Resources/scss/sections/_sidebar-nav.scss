@@ -2,7 +2,7 @@
 
 .sidebar-nav {
     @include icon('info-circle');
-    background: $shadow-light;
+    background: $shade-light;
     display: none;
     margin: 0 0 $grid;
     table-layout: fixed;
@@ -13,7 +13,7 @@
     }
 
     &::before {
-        background-color: $shadow-light;
+        background-color: $shade-light;
         background-size: $grid;
         color: $text-color-light;
         display: table-cell;
@@ -42,6 +42,6 @@
     box-shadow: none !important;
 
     &:hover {
-        background: $shadow-light !important;
+        background: $shade-light !important;
     }
 }

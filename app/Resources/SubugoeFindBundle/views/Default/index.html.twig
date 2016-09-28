@@ -33,50 +33,58 @@
 
 {% block content %}
 
-    {% if parentDocument is defined %}
-        <h2 class="viewer_heading">{{ 'Metadata'|trans }}</h2>
-        <div>
-            <ul>
-                <li>{{ 'docstrct' | transchoice(1) }}: {{ parentDocument.docstrct | trans }}</li>
-                <li>{{ 'bytitle'|trans }}: {{ parentDocument.title | first }}</li>
-
-                {% if parentDocument.creator is defined %}
-                    <li>{{ 'creator' | transchoice(parentDocument.creator | length) }}
-                        {% for author in parentDocument.creator %}
-                            <a href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}, {% endif %}
-                        {% endfor %}
-                    </li>
-                {% endif %}
-
-                {% if parentDocument.yearpublish is defined %}
-                    <li>{{ 'yearpublish' | transchoice(1) }}: {{ parentDocument.yearpublish }}</li>
-                {% endif %}
-
-                {% if parentDocument.placepublish is defined %}
-                    <li>{{ 'placepublish' | transchoice(parentDocument.placepublish | length) }}: {{ parentDocument.placepublish|join(', ') }}</li>
-                {% endif %}
-
-                {% if parentDocument.publisher is defined %}
-                    <li>{{ 'publisher' | transchoice(parentDocument.publisher | length) }}: {{ parentDocument.publisher|join(', ') }}</li>
-                {% endif %}
-
-                {% if parentDocument.dc is defined %}
-                    <li>{{ 'dc' | transchoice(parentDocument.dc | length) }}:
-                    {% for dc in parentDocument.dc %}
-                        <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
-                    {% endfor %}
-                    </li>
-                {% endif %}
-
-                <li>DFG-Viewer <a class="dfgviewer-link" href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}" target="_blank"><img class="metadata_dfg-viewer" src="{{ asset("images/dfg-viewer.gif") }}" alt="DFG-Viewer {{ parentDocument.title | first }}"></a></li>
-                <li><a href="{{ url('_mets', {id: parentDocument.id}) }}" target="_blank">Mets</a></li>
-                <li><a href="{{ parentDocument.purl }}" target="_blank">{{ 'PURL'|trans }}</a> </li>
-                <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}" target="_blank">{{ 'Catalogue'|trans }}</a></li>
-            </ul>
-        </div>
-    {% endif %}
-
     <ol class="result_list" start="{{ search.offset + 1 }}">
+        {% if parentDocument is defined %}
+            <li class="result_item">
+                <h2 class="viewer_heading">{{ parentDocument.title|first }}</h2>
+
+                <dl class="result_info -no-clear">
+                    <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
+                    <dd>{{ parentDocument.docstrct | trans }}</dd>
+
+                    {% if parentDocument.creator is defined %}
+                        <dt>{{ 'creator' | transchoice(parentDocument.creator | length) }}:</dt>
+                        <dd>
+                            {% for author in parentDocument.creator %}
+                                <a href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
+                            {% endfor %}
+                        </dd>
+                    {% endif %}
+
+                    {% if parentDocument.yearpublish is defined %}
+                        <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
+                        <dd>{{ parentDocument.yearpublish }}</dd>
+                    {% endif %}
+
+                    {% if parentDocument.placepublish is defined %}
+                        <dt>{{ 'placepublish' | transchoice(parentDocument.placepublish | length) }}:</dt>
+                        <dd>{{ parentDocument.placepublish|join(', ') }}</dd>
+                    {% endif %}
+
+                    {% if parentDocument.publisher is defined %}
+                        <dt>{{ 'publisher' | transchoice(parentDocument.publisher | length) }}:</dt>
+                        <dd>{{ parentDocument.publisher|join(', ') }}</dd>
+                    {% endif %}
+
+                    {% if parentDocument.dc is defined %}
+                        <dt>{{ 'dc' | transchoice(parentDocument.dc | length) }}:</dt>
+                        <dd>
+                            {% for dc in parentDocument.dc %}
+                                <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
+                            {% endfor %}
+                        </dd>
+                    {% endif %}
+                </dl>
+
+                <ul class="result_links">
+                    <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
+                    <li><a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a></li>
+                    <li><a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a></li>
+                    <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+                </ul>
+            </li>
+        {% endif %}
+
         {% for result in pagination %}
             <li class="result_item">
                 <article class="result_wrap">
@@ -117,7 +125,7 @@
                                 </dd>
                             {% endif %}
                             {% if result.fields.yearpublish is defined %}
-                                <dt>{{ 'Published' | trans }}:</dt>
+                                <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
                                 <dd>
                                     {{ result.fields.yearpublish }}
                                     <span class="result_import-date">

@@ -1,10 +1,10 @@
 .facets {
-    clear: right;
-    float: right;
+    margin-left: $grid;
     width: 200px;
 
     @include respond-to(medium) {
         float: none;
+        margin: 0;
         width: auto;
     }
 }

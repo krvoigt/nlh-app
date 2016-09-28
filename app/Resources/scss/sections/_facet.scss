@@ -55,7 +55,7 @@
         min-height: 0;
         padding: 0 .2em 0 1.7em;
         text-indent: 0;
-        text-shadow: $light-inset;
+        text-shadow: $shine-inset;
         text-align: left;
 
         // icon
@@ -65,7 +65,7 @@
             border-radius: $br 0 0 $br;
             left: 0;
             height: 100%;
-            text-shadow: $shadow-inset;
+            text-shadow: $shade-inset;
             padding: .3em;
             position: absolute;
         }

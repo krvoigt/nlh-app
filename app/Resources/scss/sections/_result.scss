@@ -1,3 +1,12 @@
+.result {
+    display: flex;
+    flex-direction: row-reverse;
+
+    @include respond-to(medium) {
+        flex-direction: column;
+    }
+}
+
 .result_import-date {
 	color: $text-color-light;
 	font-size: $font-size-small;
@@ -9,7 +18,7 @@
 
     dt {
         font-weight: normal;
-        width: 6em;
+        width: 9em;
     }
 
     dd {
@@ -50,13 +59,29 @@
     }
 }
 
+.result_links {
+    border-top: $border-width solid $border-color;
+    clear: left;
+    margin: ($grid / 2) (-$grid / 2) round(-$grid / 2);
+    padding: round($grid / 4) ($grid / 2);
+
+    li {
+        display: inline-block;
+
+        &::before {
+            content: none;
+        }
+
+        & + li {
+            margin-left: .5em;
+        }
+    }
+}
+
 .result_list {
     list-style: none;
-    margin: 0 (9 * $grid) 0 0; // TODO
-
-    @include respond-to(medium) {
-        margin: 0;
-    }
+    flex: 1;
+    margin: 0;
 
     h1 {
         font: inherit;
