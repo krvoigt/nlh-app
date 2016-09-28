@@ -19,7 +19,6 @@ var Viewer = {
             nextPage: $('.viewer_control.-next-page'),
             pageSelect: $('.viewer_control.-page-select'),
             previousPage: $('.viewer_control.-previous-page'),
-            titleToggle: $('.viewer_title-toggle'),
             zoomIn: $('.viewer_control.-zoom-in'),
             zoomOut: $('.viewer_control.-zoom-out'),
         };
@@ -61,9 +60,6 @@ var Viewer = {
 
         var page = parseInt(this.$controls.pageSelect.val());
 
-        this.titleLineHeight = parseInt($('.viewer_title').css('line-height'));
-        this.adjustTitleHeight();
-
         this.$controls.pageSelect.select2();
         $('.select2-container').addClass('viewer_control');
 
@@ -84,8 +80,6 @@ var Viewer = {
         var _this = this;
         var $controls = this.$controls;
 
-        $(window).on('resize', this.onResize.bind(this));
-
         // Add current hash on click to viewer controls
         $('.viewer_controls').click(function (e) {
             var $target = $(e.target);
@@ -105,7 +99,6 @@ var Viewer = {
             window.location = newUrl;
             return false;
         });
-        $controls.titleToggle.click(this.toggleTitle.bind(this));
         $controls.zoomIn.click(this.zoomIn.bind(this));
         $controls.zoomOut.click(this.zoomOut.bind(this));
 
@@ -155,11 +148,6 @@ var Viewer = {
         }
     },
 
-    toggleTitle: function () {
-        this.$controls.titleToggle.toggle();
-        $('.viewer_title').toggleClass('-full');
-    },
-
     showSpinner: function () {
         this.$spinner.fadeIn();
     },
@@ -174,11 +162,6 @@ var Viewer = {
 
     zoomOut: function () {
         this.image.zoomOut();
-    },
-
-    onResize: function () {
-        // this.image.invalidateSize(false);
-        this.adjustTitleHeight.bind(this);
     },
 
     closePageSelect: function () {
@@ -210,17 +193,6 @@ var Viewer = {
         // setTimeout(function () {
         //     _this.image.invalidateSize(false);
         // }, 300);
-    },
-
-    adjustTitleHeight: function () {
-        var $title = $('.viewer_title');
-        $title.height('').removeClass('-cut');
-        if ( $title.height() > this.titleLineHeight ) {
-            $title.height(this.titleLineHeight).addClass('-cut');
-            $title.children('.viewer_title-toggle.-expand').show();
-        } else {
-            $title.children('.viewer_title-toggle.-expand').hide();
-        }
     },
 
     loadState: function () {

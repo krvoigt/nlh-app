@@ -11,11 +11,11 @@
 }
 
 .viewer_column {
-    display: table-cell;
-    position: relative;
-    vertical-align: top;
+    flex-shrink: 1;
+    min-width: 8em;
 
     & + & {
+        flex-shrink: 0;
         padding-left: ($grid / 2);
     }
 }
@@ -157,7 +157,7 @@
 .viewer_header {
     @include separator(1, 0);
     background: $header-bg;
-    display: table;
+    display: flex;
     padding: floor($grid / 4);
     width: 100%;
 }
@@ -245,10 +245,9 @@
     @extend %title;
     font-size: 20px !important; // TODO: Calc
     margin: floor($grid / 4) 0;
-}
-
-.viewer_title-toggle {
-    @include title-toggle($header-bg);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .viewer_toc {
