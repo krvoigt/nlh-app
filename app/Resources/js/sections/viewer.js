@@ -4,6 +4,8 @@ var RIGHT_ARROW_KEY = 39;
 var Viewer = {
     init: function () {
         var $imageContainer = $('#scan_image');
+        var initialZoom = 1;
+        var isLoaded = false;
 
         if ($imageContainer.length < 1) {
             return;
@@ -33,15 +35,28 @@ var Viewer = {
             attributionControl: false,
             center: [this.settings.lat || 0, this.settings.lng || 0],
             crs: L.CRS.Simple,
-            zoom: this.settings.zoom || 1,
+            zoom: this.settings.zoom || initialZoom,
             zoomControl: false,
             maxZoom: 2,
         }).addLayer(this.layer);
 
-        // TODO: Centering the layer would be nicer
         if ($.isEmptyObject(this.settings)) {
-            var neBounds = this.image.getBounds()._northEast;
-            this.image.panTo([-neBounds.lat, neBounds.lng], {animate: false});
+            var _this = this;
+            // Center image on first load
+            this.layer.on('load', function () {
+                if (isLoaded) {
+                    return;
+                }
+
+                isLoaded = true;
+
+                var imageSize = this._imageSizes[initialZoom];
+                var layerLatLng = _this.image.options.crs.pointToLatLng(L.point(imageSize.x, imageSize.y), initialZoom);
+
+                // TODO: Center image if it fits into canvas, otherwise align to upper left
+                var latLng = [layerLatLng.lat / 2, layerLatLng.lng / 2];
+                _this.image.panTo(latLng, {animate: false});
+            });
         }
 
         var page = parseInt(this.$controls.pageSelect.val());
@@ -191,10 +206,10 @@ var Viewer = {
         this.saveState();
 
         // Wait until after panel transition has finished before resetting image size
-        var _this = this;
-        setTimeout(function () {
-            _this.image.invalidateSize(false);
-        }, 300);
+        // var _this = this;
+        // setTimeout(function () {
+        //     _this.image.invalidateSize(false);
+        // }, 300);
     },
 
     adjustTitleHeight: function () {
