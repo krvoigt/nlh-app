@@ -8,7 +8,7 @@
                 {% else %}
                     {{ item.label }}
                 {% endif %}
-            </a>
+            </a> {{ page }}
             {% subtree item.children %}
         </li>
     {% if treeloop.last %}</ul>{% endif %}
