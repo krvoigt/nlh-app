@@ -1,23 +1,13 @@
 /**
- * Created by Tim  Jabs on 15.04.16.
- * Creates PDFs with a given ppn.
+ * Based upon work by Tim Jabs / Staatsbibliothek zu Berlin
  *
- * This Libary needs following dependencies:
+ * Dependencies:
  * FileSaver.js
  * jspdf.debug.js
- * and jQuery
- *
- * The package manipulates the frontend of the digitalisation and is displayed by a modal dialog.
- * TODO: Make this libary more independend. Freedom!
+ * jQuery
  */
 
 DCPDF = {};
-DCPDF.base64data = [];
-DCPDF.base64images = [];
-DCPDF.images = [];
-DCPDF.imagesInfos = [];
-DCPDF.internalOptions = [];
-DCPDF.isRunning = false;
 
 /**
  * @summary Show an error message in the progress gui for pdf-generation.
@@ -71,20 +61,12 @@ DCPDF.showProgress = function () {
 };
 
 /**
- * @summary Set the maximum value for the progress bar.
- * @param maxVal
- */
-DCPDF.setMaxValueForProgress = function (maxVal) {
-    $(".export_progress").data("max", maxVal);
-};
-
-/**
  * @summary Set progress state for the progressbar.
  * @param progressVal
  */
 DCPDF.setProgress = function (progressVal) {
     var $progressBar = $(".export_progress");
-    var percentage = Math.floor(progressVal / $progressBar.data("max") * 100);
+    var percentage = Math.floor(progressVal / DCPDF.maxValueForProgress * 100);
     $progressBar
         .css("width", percentage + "%")
         .data("value", progressVal)
@@ -161,11 +143,9 @@ DCPDF.preload = function (ppn) {
         if (! DCPDF.isRunning) {
             return false;
         }
-
-        // ...execute the callback
+        DCPDF.setProgress(DCPDF.maxValueForProgress);
         DCPDF.buildPDF(ppn);
     }).catch(function (err) {
-        // ...or log the error.
         DCPDF.showError('pdf_error_general');
         console.log(err);
     });
@@ -190,7 +170,7 @@ DCPDF.buildImageBase64Arr = function (physIdList, url, ppn, picturewidth) {
     $.each(physIdList, function (key, physId) {
         DCPDF.base64images.push(url + ppn + ':' + physId + '/');
     });
-    DCPDF.setMaxValueForProgress(physIdList.length);
+    DCPDF.maxValueForProgress = physIdList.length;
     DCPDF.preload(ppn);
 };
 
@@ -325,14 +305,14 @@ DCPDF.buildPDF = function (ppn) {
  */
 DCPDF.generatePDF = function (ppn, physIdstart, physIdend) {
     DCPDF.isRunning = true;
-    DCPDF.showProgress();
-
     DCPDF.base64images = [];
     DCPDF.base64data = [];
     DCPDF.images = [];
     DCPDF.imagesInfos = [];
-    DCPDF.setMaxValueForProgress(1);
+    DCPDF.maxValueForProgress = 1;
+
     DCPDF.setProgress(0);
+    DCPDF.showProgress();
 
     DCPDF.calculatePDFGenerationStatistics(1, DCGlobals.getWork().structure.pages_length);
 
