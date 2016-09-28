@@ -40,11 +40,10 @@
         {% if document.docstrct == "volume" %}
             <dt>{{ 'currentno' | trans }}</dt>
             <dd>{{ document.currentno }}</dd>
-        {% endif %}
-
-        {% if document.idparentdoc is defined %}
-            <dt>{{ 'Contained in' | trans }}</dt>
-            <dd><a href="{{ path('_volumes', {id: document.idparentdoc.0}) }}">{{ url('_detail', {id: document.idparentdoc.0}) }}</a></dd>
+            {% if document.idparentdoc is defined %}
+                <dt>{{ 'Contained in' | trans }}</dt>
+                <dd><a href="{{ path('_volumes', {id: document.idparentdoc.0}) }}">{{ parentDocumentTitle }}</a></dd>
+            {% endif %}
         {% endif %}
 
         <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>

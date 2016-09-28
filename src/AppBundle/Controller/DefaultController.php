@@ -95,6 +95,10 @@ class DefaultController extends BaseController
             throw new NotFoundHttpException(sprintf('Document %s not found', $documentId));
         }
 
+        if ($document[0]->idparentdoc[0]) {
+            $parentDocumentTitle = $this->getDocument($document[0]->idparentdoc[0])['title'][0];
+        }
+
         if (isset($document[0]->presentation_url[0])) {
             $identifier = explode('/', explode('.', $document[0]->presentation_url[0])[3])[3];
             $identifier = $documentId.':'.str_pad($page, strlen($identifier), 0, STR_PAD_LEFT);
@@ -180,6 +184,7 @@ class DefaultController extends BaseController
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
                         'document' => $document[0]->getFields(),
+                        'parentDocumentTitle' => isset($parentDocumentTitle) ? $parentDocumentTitle : null,
                         'pageMappings' => isset($pageMappings) ? $pageMappings : null,
                         'documentStructure' => $documentStructure,
                 ]);
@@ -226,12 +231,7 @@ class DefaultController extends BaseController
         $facets = $client->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
-        $selectParentDocument = $client->createSelect()
-                 ->setQuery(sprintf('id:%s', $id));
-        $parentDocument = $client
-                 ->select($selectParentDocument)
-                 ->getDocuments()[0]
-                 ->getFields();
+        $parentDocument = $this->getDocument($id);
 
         $selectChildrenDocuments = $client->createSelect()->setRows((int) 500);
 
@@ -252,6 +252,27 @@ class DefaultController extends BaseController
                     'pagination' => $pagination,
                     'parentDocument' => $parentDocument,
                 ]);
+    }
+
+    /*
+     * This returns the meta data of a document
+     *
+     * @param string $id The document id
+     *
+     * @return array $document The document meta data
+     */
+    protected function getDocument($id)
+    {
+        $client = $this->get('solarium.client');
+
+        $selectDocument = $client->createSelect()
+                ->setQuery(sprintf('id:%s', $id));
+        $document = $client
+                ->select($selectDocument)
+                ->getDocuments()[0]
+                ->getFields();
+
+        return $document;
     }
 
     /*
