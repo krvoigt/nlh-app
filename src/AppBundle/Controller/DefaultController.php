@@ -16,7 +16,7 @@ use Solarium\QueryType\Select\Query\Query;
 class DefaultController extends BaseController
 {
     /**
-     * @Route("/gdz", name="_homepage")
+     * @Route("/suche", name="_homepage")
      *
      * @param Request $request A request instance
      *
