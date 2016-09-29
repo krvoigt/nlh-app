@@ -327,6 +327,7 @@ select {
     $downArrowSvg: '<svg height="9" width="22" viewBox="0 0 22 9" xmlns="http://www.w3.org/2000/svg"><path fill="#{$brand-color}" d="M 0 2, 7 9, 14 2, 12 0, 7 5, 2 0 z"/></svg>';
     background: $white url('data:image/svg+xml,#{$downArrowSvg}') right center no-repeat;
     cursor: pointer;
+    min-height: 30px; // Work around weird Chrome bug (?) since v53 that displays selects with reduced height
     padding-right: 28px; // Width of down arrow plus margin
 }
 
