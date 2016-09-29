@@ -20,7 +20,7 @@ var Export = {
             if (that.isCompleteDocument()) {
                 var cacheUrlPrefix = 'http://gdz.sub.uni-goettingen.de/download/',
                     identifier = ppn,
-                    element = 'LOG_0000';
+                    element = $('#pdf_logid').text();
                 window.location.href = cacheUrlPrefix + identifier + '/' + identifier + '___' + element + '.pdf';
             } else {
                 DCPDF.generatePDF(ppn, physIDstart, physIDend);
