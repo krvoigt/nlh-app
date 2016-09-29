@@ -252,30 +252,6 @@
     }
 }
 
-.header_toggle-nav {
-    @include icon('bars');
-    @include link(false, true);
-    background: none;
-    border: 0;
-    border-bottom: $border-width solid transparent;
-    display: none;
-    left: 0;
-    outline: 0;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    z-index: 99;
-
-    @include respond-to(large) {
-        display: inline-block;
-        padding: ($grid / 2);
-    }
-
-    .-show-off-canvas & {
-        @include icon('close');
-    }
-}
-
 .header_top {
     @extend %full-width-background;
     background: $brand-color;

@@ -4,7 +4,6 @@
 
 <header class="header" data-role="header">
     <div class="header_top">
-        <button class="header_toggle-nav" title="Navigation">Menü</button>
         <div class="header_logo" role="banner">
             <a href="/">
                 <span class="sr-only">{{ 'Göttingen State and University Library'|trans }} &ndash;</span>
@@ -12,9 +11,6 @@
             </a>
         </div>
         <ul class="header_nav">
-            <li class="header_nav-item">
-                <a href="{{ path('_collections') }}">{{ 'Collections'|trans }}</a>
-            </li>
             <li class="header_nav-item -fixed">
                 <button class="header_search-toggle">
                     <span class="sr-only">{{ 'Search'|trans }}</span>
@@ -22,7 +18,7 @@
             </li>
         </ul>
         <div class="search">
-            <form class="search_form -visible" method="get" role="search" action="/">
+            <form class="search_form -visible" method="get" role="search" action="{{ path('_homepage') }}">
                 <input size="40" placeholder="{{ 'Search'|trans }}" class="search_input" id="q" type="text" name="q" value="{{ app.request.query.get('q') }}">
                 <label for="q" class="sr-only">{{ 'Search'|trans }}</label>
                 <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>
