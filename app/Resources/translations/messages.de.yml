@@ -29,13 +29,13 @@ Go to previous page: Zur vorigen Seite
 Go to next page: Zur nächsten Seite
 
 # Results
-Add filter &ldquo;%name% is %value%&rdquo;: 'Filter hinzufügen: &bdquo;%name% ist %value%&ldquo;'
+Add filter %name% is &ldquo;%value%&rdquo;: 'Filter hinzufügen: %name% ist &bdquo;%value%&ldquo;'
 Collapse title: Titel verkleinern
 Hide filters: Filter ausblenden
 "(imported: %date%)": "(importiert: %date%)"
 Published: Erschienen
 Remove all filters: Alle Filter entfernen
-Remove filter &ldquo;%name% is %value%&rdquo;: 'Filter entfernen: &bdquo;%name% ist %value%&ldquo;'
+Remove filter %name% is &ldquo;%value%&rdquo;: 'Filter entfernen: %name% ist &bdquo;%value%&ldquo;'
 results: Treffer
 Show filters: Filter anzeigen
 Show full title: Voller Titel

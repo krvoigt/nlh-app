@@ -65,36 +65,30 @@
                         {% endfor %}
 
                         {% if value in filterValues %}
-                            <a
-                                    class="facet_link -remove"
-                                    href="{{ path(app.request.attributes.get('_route'), {
-                                        'filter': queryParamsSliced,
-                                        'q': (app.request.get('q')),
-                                        'id': (app.request.get('id'))
-                                    }) }}"
-                                    title="{{ 'Remove filter &ldquo;%name% is %value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw }}"
-                            >
-                                {{ value|trans }}
-                                <span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
-                            </a>
+                            {% set class  = 'facet_link -remove' %}
+                            {% set href = path(app.request.attributes.get('_route'), {
+                                'filter': queryParamsSliced,
+                                'q': (app.request.get('q')),
+                                'id': (app.request.get('id'))
+                            }) %}
+                            {% set title = 'Remove filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans}) %}
                         {% else %}
-                            <a
-                                    class="facet_link"
-                                    href="{{ path(app.request.attributes.get('_route'), {
-                                        'filter': queryParams|merge({
-                                            (facetCounter):  {
-                                                (key) : (value)
-                                            }
-                                        }),
-                                        'q': (app.request.get('q')),
-                                        'id': (app.request.get('id'))
-                                    }) }}"
-                                    title="{{ 'Add filter &ldquo;%name% is %value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw }}"
-                            >
-                                {{ value|trans }}
-                                <span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
-                            </a>
+                            {% set class = 'facet_link' %}
+                            {% set href = path(app.request.attributes.get('_route'), {
+                                'filter': queryParams|merge({
+                                    (facetCounter):  {
+                                        (key) : (value)
+                                    }
+                                }),
+                                'q': (app.request.get('q')),
+                                'id': (app.request.get('id'))
+                            }) %}
+                            {% set title = 'Add filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans}) %}
                         {% endif %}
+
+                        <a class="{{ class }}" href="{{ href }}" title="{{ title|raw }}">
+                            {{ value|trans }}&nbsp;<span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
+                        </a>
                     </li>
                 {% endfor %}
             </ol>
