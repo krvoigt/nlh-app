@@ -16,6 +16,10 @@
     padding: round($grid / 4);
 }
 
+.export_complete-doc {
+    margin-bottom: $grid;
+}
+
 .export_generate-pdf {
     @include button;
 
@@ -64,10 +68,4 @@
 .export_reset {
     @include button;
     @include icon('arrow-left');
-}
-
-.export_alert {
-    &.-get-full {
-        display: none;
-    }
 }

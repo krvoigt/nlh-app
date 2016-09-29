@@ -187,12 +187,6 @@ var Viewer = {
         this.settings.panels = this.settings.panels || {};
         this.settings.panels[panelName] = $control.hasClass('-active');
         this.saveState();
-
-        // Wait until after panel transition has finished before resetting image size
-        // var _this = this;
-        // setTimeout(function () {
-        //     _this.image.invalidateSize(false);
-        // }, 300);
     },
 
     loadState: function () {

@@ -247,13 +247,13 @@ Go back: Zurück
 pdf_first_step_option1: Mittlere Qualität (1000 Pixel Breite pro Bild)
 pdf_first_step_option2: Originale Scanauflösung
 pdf_first_step_option3: "Breite selbst wählen:"
-Selected too many pages - get full document: Die Seitenauswahl darf 200 Seiten nicht überschreiten. Ab 200 Seiten wird das gesamte Dokument heruntergeladen, da dieses vorgeneriert ist.
+Selected too many pages - get full document: Bei über 200 ausgewählten Seiten wird das vollständige, vorgenerierte Dokument heruntergeladen, was deutlich schneller geht als ein Teildokument neu zu erstellen.
 
 Page range: Seitenbereich
 pdf_until: bis
 pdf_from: von
 pdf_pages: Seiten
-pdf_progress_hint: Der Download startet automatisch, sobald das PDF erstellt wurde. Je mehr Seiten das Werk hat, desto länger dauert die Erstellung und kann bei zu vielen (ab ca. 300 Seiten) Seiten abbrechen.
+pdf_progress_hint: Der Download startet automatisch, sobald das PDF erstellt wurde.
 Generate PDF: PDF erzeugen
 pdf_preparing: PDF wird vorbereitet
 Invalid page range: Ungültiger Seitenbereich
