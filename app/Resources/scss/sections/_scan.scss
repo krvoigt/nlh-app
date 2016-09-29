@@ -20,26 +20,9 @@
 }
 
 .scan_spinner {
-    animation: viewer-spinner 1.2s infinite ease-in-out;
-    background: $brand-color-light;
+    @extend %spinner;
     bottom: ($grid / 2);
-    height: ($grid * 1.5);
     position: absolute;
     right: ($grid / 2);
-    width: ($grid * 1.5);
     z-index: 9;
-
-    @keyframes viewer-spinner {
-        0% {
-            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-        }
-
-        50% {
-            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
-        }
-
-        100% {
-            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
-        }
-    }
 }
