@@ -16,6 +16,7 @@ parameters:
       - { id: "bucherhaltung", image: "bucherhaltung.jpg" }
       - { id: "varia", image: "varia.jpg" }
       - { id: "nordamericana", image: "nordamericana.jpg" }
+      - { id: "fid.mathematica", image: "fid.mathematica.jpg" }
       - { id: "blumenbachiana", image: "blumenbachiana.jpg" }
       - { id: "zoologica", image: "zoologica.jpg" }
       - { id: "wissenschaftsgeschichte", image: "wissenschaftsgeschichte.jpg" }
