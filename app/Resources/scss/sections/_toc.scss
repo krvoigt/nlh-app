@@ -5,13 +5,10 @@
 }
 
 .toc_item {
-    padding-left: ($grid / 2);
-    text-indent: (-$grid / 2);
-
     & & {
         border-left: 1px solid $brand-color-light;
-        margin-left: (-$grid);
-        padding-left: $grid;
+        margin-left: (-$grid / 2);
+        padding-left: ($grid / 2);
         position: relative;
     }
 
@@ -32,10 +29,39 @@
     }
 }
 
+.toc_link {
+    box-shadow: none;
+    margin-right: 3.75em; // Make room for page number
+    position: relative;
+
+    // Dotted line to page number
+    &::after {
+        bottom: 2px;
+        content: '';
+        margin-left: .25em;
+        min-width: 4em;
+        border-bottom: 1px dotted;
+        position: absolute;
+        width: 99em;
+    }
+}
+
 .toc_list {
     margin-left: 0;
 
     & & {
         margin-left: $grid;
     }
+}
+
+.toc_page-number {
+    background: $white;
+    float: right;
+	margin: 0 -9em 0 -3em;
+    padding: 0 9em 0 .25em;
+    position: relative;
+}
+
+.toc_pdf {
+    @include icon('file-pdf-o', false);
 }

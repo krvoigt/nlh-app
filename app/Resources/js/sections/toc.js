@@ -14,6 +14,13 @@ var TOC = {
             window.location = $target.attr('href') + window.location.hash;
             return false;
         });
+
+        $('.toc_pdf').click(function () {
+            $('.viewer_control.-toggle-panel[data-target="export"]:not(.-active)').click();
+            $('#physIDstart').val( $(this).data('start') );
+            $('#physIDend').val( $(this).data('end') );
+            return false;
+        });
     },
 
     isInited: false,
