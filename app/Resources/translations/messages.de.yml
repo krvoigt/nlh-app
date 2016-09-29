@@ -245,7 +245,8 @@ Export: Export
 Go back: Zurück
 pdf_first_step_option1: Mittlere Qualität (1000 Pixel Breite pro Bild)
 pdf_first_step_option2: Originale Scanauflösung
-pdf_first_step_option3: Breite selbst wählen:
+pdf_first_step_option3: "Breite selbst wählen:"
+Selected too many pages - get full document: Die Seitenauswahl darf 200 Seiten nicht überschreiten. Ab 200 Seiten wird das gesamte Dokument heruntergeladen, da dieses vorgeneriert ist.
 
 Page range: Seitenbereich
 pdf_until: bis

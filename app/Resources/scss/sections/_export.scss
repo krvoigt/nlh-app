@@ -66,3 +66,9 @@
     @include button;
     @include icon('arrow-left');
 }
+
+.export_alert {
+    &.-get-full {
+        display: none;
+    }
+}
