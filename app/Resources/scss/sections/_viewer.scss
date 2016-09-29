@@ -158,6 +158,7 @@
     @include separator(1, 0);
     background: $header-bg;
     display: flex;
+    justify-content: space-between;
     padding: floor($grid / 4);
     width: 100%;
 }
