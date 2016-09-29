@@ -86,7 +86,7 @@
         </div>
     </div>
 
-    {% if documentStructure.isValidPage %}
+    {% if documentStructure.isValidPage and documentStructure.identifier is not null %}
         <div
             class="scan_image"
             id="scan_image"
