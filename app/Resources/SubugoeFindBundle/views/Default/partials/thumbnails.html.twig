@@ -11,7 +11,7 @@
                         <img data-original="{{ path('_image', {'format': 'jpg', 'identifier': identifier, 'region': 'full', 'size': '90,119', 'rotation': 0, 'quality': 'default'})  }}" alt="">
                         <span class="thumbnails_page-number">
                             <span class="sr-only">{% trans %}Go to page{% endtrans %}</span>
-                            {{ physPage }} : {{ logPage }}
+                            {{ physPage }} : {{ logPage|trans }}
                         </span>
                     </a>
                 </li>

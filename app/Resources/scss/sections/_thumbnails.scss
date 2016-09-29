@@ -5,7 +5,7 @@
 }
 
 .thumbnails_list {
-    margin: round($grid / 4);
+    margin: floor($grid / 4);
 }
 
 .thumbnails_item {
