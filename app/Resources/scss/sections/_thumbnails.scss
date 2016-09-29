@@ -1,17 +1,16 @@
 .thumbnails {
     background: $grey-light;
-    min-width: 20em;
     overflow-y: auto;
 }
 
 .thumbnails_list {
-    margin: floor($grid / 4);
+    margin: round($grid / 4);
 }
 
 .thumbnails_item {
     box-shadow: $drop-shadow;
     display: inline-block;
-    margin: round($grid / 12);
+    margin: round($grid / 8);
     box-shadow: $drop-shadow;
     position: relative;
     width: round($grid * 3.45);

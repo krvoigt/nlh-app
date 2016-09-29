@@ -7,13 +7,17 @@
 
     {% if treeloop.first %}<ul class="toc_list">{% endif %}
         <li class="toc_item">
-            {% set href = path('_detail', {'id': id ~ '|' ~ item.id}) ~ '?page=' ~ page_start %}
-            <a class="toc_link" href="{{ href }}">{{ item.label is null ? item.type|lower|trans : item.label }}</a>
-            <span class="toc_page-number">
-                {{ page_start }}
-                <button class="toc_pdf" title="{{ 'Download this section as PDF'|trans }}" data-start="{{ page_start }}" data-end="{{ page_end }}">
-                    <span class="sr-only">{{ 'Download this section as PDF'|trans }}</span>
-                </button>
+            <span class="toc_row">
+                <span class="toc_column">
+                    {% set href = path('_detail', {'id': id ~ '|' ~ item.id}) ~ '?page=' ~ page_start %}
+                    <a class="toc_link" href="{{ href }}">{{ item.label is null ? item.type|lower|trans : item.label }}</a>
+                </span>
+                <span class="toc_column -right">
+                    <span class="toc_page-number">{{ page_start }}</span>
+                    <button class="toc_pdf" title="{{ 'Download this section as PDF'|trans }}" data-start="{{ page_start }}" data-end="{{ page_end }}">
+                        <span class="sr-only">{{ 'Download this section as PDF'|trans }}</span>
+                    </button>
+                </span>
             </span>
             {% subtree item.children %}
         </li>

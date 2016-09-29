@@ -1,7 +1,26 @@
 .toc {
-    min-width: 20em;
+    min-width: 22em;
     overflow-y: auto;
     padding: ($grid / 2);
+    position: relative;
+    z-index: 0;
+}
+
+.toc_column {
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+
+    &.-right {
+        background: $white;
+        padding-left: .25em;
+        position: relative;
+        text-align: right;
+        vertical-align: bottom;
+        white-space: nowrap;
+        width: 0;
+        z-index: 9;
+    }
 }
 
 .toc_item {
@@ -30,20 +49,11 @@
 }
 
 .toc_link {
+    background: $white;
     box-shadow: none;
-    margin-right: 3.75em; // Make room for page number
+    padding-right: .25em;
     position: relative;
-
-    // Dotted line to page number
-    &::after {
-        bottom: 2px;
-        content: '';
-        margin-left: .25em;
-        min-width: 4em;
-        border-bottom: 1px dotted;
-        position: absolute;
-        width: 99em;
-    }
+    z-index: 9;
 }
 
 .toc_list {
@@ -54,14 +64,23 @@
     }
 }
 
-.toc_page-number {
-    background: $white;
-    float: right;
-	margin: 0 -9em 0 -3em;
-    padding: 0 9em 0 .25em;
-    position: relative;
-}
-
 .toc_pdf {
     @include icon('file-pdf-o', false);
+}
+
+.toc_row {
+    display: table;
+    position: relative;
+    width: 100%;
+
+    // Dotted line below
+    &::after {
+        bottom: 7px;
+        content: '';
+        left: 0;
+        min-width: 4em;
+        border-bottom: 1px dotted;
+        position: absolute;
+        right: 0;
+    }
 }

@@ -149,11 +149,6 @@
     justify-content: center;
 }
 
-.viewer_export {
-    min-width: 20em;
-    padding: ($grid / 2);
-}
-
 .viewer_header {
     @include separator(1, 0);
     background: $header-bg;
@@ -182,7 +177,7 @@
     display: flex;
     position: relative;
     transition: visibility .2s, width .2s;
-    width: 20em;
+    width: 21em;
 
     &:first-child {
         border: 0;
@@ -202,6 +197,10 @@
     &.-transcript {
         white-space: nowrap; // TODO
         width: 40em;
+    }
+
+    > section {
+        min-width: 21em;
     }
 }
 
@@ -249,22 +248,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-.viewer_toc {
-    min-width: 20em;
-    overflow-y: auto;
-    padding: ($grid / 2);
-
-    li:before {
-        content: none !important;
-    }
-
-    ul {
-        margin-left: 0;
-
-        ul {
-            margin-left: $grid;
-        }
-    }
 }
