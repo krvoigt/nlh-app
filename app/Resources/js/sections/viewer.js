@@ -49,11 +49,11 @@ var Viewer = {
 
                 isLoaded = true;
 
+                // Center image horizontally, top-align vertically, leave some room for controls
                 var imageSize = this._imageSizes[initialZoom];
                 var layerLatLng = _this.image.options.crs.pointToLatLng(L.point(imageSize.x, imageSize.y), initialZoom);
-
-                // TODO: Center image if it fits into canvas, otherwise align to upper left
-                var latLng = [layerLatLng.lat / 2, layerLatLng.lng / 2];
+                var neBounds = _this.image.getBounds()._northEast;
+                var latLng = [-neBounds.lat + 26, layerLatLng.lng / 2];
                 _this.image.panTo(latLng, {animate: false});
             });
         }
