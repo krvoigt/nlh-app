@@ -2,33 +2,31 @@
 <html>
     {% include "partials/site/head.html.twig" %}
     <body class="site {{ app.request.get('q') == 'satan' ? '-⛧' }}">
-        <div class="wrap">
-            {% include 'partials/site/header.html.twig' %}
+        {% include 'partials/site/header.html.twig' %}
 
-            <div class="content">
-                {% include "partials/site/flashmessage.html.twig" %}
+        <div class="content">
+            {% include "partials/site/flashmessage.html.twig" %}
 
-                {% block contentabove %}{% endblock %}
+            {% block contentabove %}{% endblock %}
 
-                <div class="navigation -top">
-                    {% block findnavigation %}{% endblock %}
-                </div>
-
-                <div class="result">
-                    <section class="facets">
-                        {% block sidebar %}{% endblock %}
-                    </section>
-                    {% block content %}{% endblock %}
-                </div>
-
-                <div class="navigation -bottom">
-                    {% block footer %}{% endblock %}
-                </div>
+            <div class="navigation -top">
+                {% block findnavigation %}{% endblock %}
             </div>
 
-            {% include 'partials/site/footer.html.twig' %}
-            {% include 'partials/site/colophon.html.twig' %}
+            <div class="result">
+                <section class="facets">
+                    {% block sidebar %}{% endblock %}
+                </section>
+                {% block content %}{% endblock %}
+            </div>
+
+            <div class="navigation -bottom">
+                {% block footer %}{% endblock %}
+            </div>
         </div>
+
+        {% include 'partials/site/footer.html.twig' %}
+        {% include 'partials/site/colophon.html.twig' %}
 
         {% block javascripts %}
             <script src="{{ asset('js/vendor.js') }}"></script>
