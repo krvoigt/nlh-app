@@ -1,4 +1,8 @@
 <div class="colophon">
+    <div class="colophon_above">
+        <h6>{{ 'Just scanned'|trans }}</h6>
+        {{ render(controller('AppBundle:Document:justScanned')) }}
+    </div>
     <div class="colophon_links">
         <div class="colophon_column">
             <h6><a href="http://www.zvdd.de" title="ZVDD - Zentrales Verzeichnis digitalisierter Drucke"
@@ -22,10 +26,6 @@
             <h6><a href="http://www.gutenbergdigital.de/" title="Gutenberg Digital" target="_blank"
                    class="external-link-new-window">Gutenberg Digital</a></h6>
             <p class="colophon-copy">Besuchen Sie das Faksimile der Göttinger Gutenberg Bibel.</p>
-        </div>
-        <div class="colophon_column">
-            <h6>{{ 'Just scanned'|trans }}</h6>
-            {{ render(controller('AppBundle:Document:justScanned')) }}
         </div>
     </div>
     <div class="colophon_top-link">

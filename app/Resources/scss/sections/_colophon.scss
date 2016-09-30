@@ -2,7 +2,24 @@
     @extend %full-width-background;
     @include auto-color($brand-color);
     background: $brand-color;
-    position: relative;
+
+    a {
+        @include link(false, true);
+    }
+
+    h6 {
+        font-weight: bold;
+        margin-bottom: ($grid / 2);
+    }
+}
+
+.colophon_above {
+    @include separator(0, 0, 1);
+    padding: ($grid / 2) $grid;
+
+    @include respond-to(medium) {
+        padding: ($grid / 2);
+    }
 }
 
 .colophon_links {
@@ -11,10 +28,6 @@
 
     @include respond-to(medium) {
         padding: 0;
-    }
-
-    a {
-        @include link(false, true);
     }
 }
 
@@ -29,11 +42,6 @@
 
     @include respond-to(small) {
         width: 100%;
-    }
-
-    h6 {
-        font-weight: bold;
-        margin-bottom: ($grid / 2);
     }
 
     ul {
@@ -92,7 +100,7 @@
             @include icon('chevron-up', false);
             @include transition(background, color);
             background: $brand-color-light;
-            text-shadow: 0 -1px 0 $shade-dark;
+            text-shadow: $shade-inset;
         }
     }
 }

@@ -1,0 +1,19 @@
+.just-scanned {
+    @include clearfix;
+}
+
+.just-scanned_image {
+    float: left;
+    margin: 0 1em 1em 0;
+    position: relative;
+    top: ($grid - $font-size) / 2;
+}
+
+.just-scanned_title {
+    margin-bottom: ($grid / 2);
+}
+
+.just-scanned_author {
+    display: inline-block;
+    margin-top: ($grid / 2);
+}
