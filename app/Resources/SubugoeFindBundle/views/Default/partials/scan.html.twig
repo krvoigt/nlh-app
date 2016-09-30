@@ -2,7 +2,7 @@
 <section class="scan">
     <div class="viewer_controls -overlay">
         <div class="viewer_control-group">
-            {% if documentStructure.page != 1 %}
+            {% if documentStructure.page != 1 and documentStructure.identifier is not null %}
                 <a
                 class="viewer_control -first-page"
                 title="{{ 'First page'|trans }}"
@@ -13,7 +13,7 @@
             {% else %}
                 <button class="viewer_control -first-page -disabled"></button>
             {% endif %}
-            {% if documentStructure.isThereAPreviousChapter is not empty %}
+            {% if documentStructure.isThereAPreviousChapter is not empty and documentStructure.identifier is not null %}
                 <a
                 class="viewer_control -previous-section"
                 title="{{ 'Previous section'|trans }}"
@@ -24,7 +24,7 @@
             {% else %}
                 <button class="viewer_control -previous-section -disabled"></button>
             {% endif %}
-            {% if documentStructure.page != 1 %}
+            {% if documentStructure.page != 1 and documentStructure.identifier is not null %}
                 <a
                 class="viewer_control -previous-page"
                 title="{{ 'Previous page'|trans }}"
@@ -36,14 +36,16 @@
                 <button class="viewer_control -previous-page -disabled"></button>
             {% endif %}
             <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
-            <select class="viewer_control -page-select" name="page" id="viewer-page-select">
+            <select class="viewer_control -page-select{{ documentStructure.identifier is null ? ' -disabled'  }}" name="page" id="viewer-page-select">
+            {% if documentStructure.identifier is not null %}
                 {% for physPage, logPage in pageMappings %}
                     <option value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
                         {{ physPage }} : {{ logPage|trans }}
                     </option>
                 {% endfor %}
+            {% endif %}
             </select>
-            {% if documentStructure.page != documentStructure.pageCount %}
+            {% if documentStructure.page != documentStructure.pageCount and documentStructure.identifier is not null %}
                 <a
                 class="viewer_control -next-page"
                 title="{{ 'Next page'|trans }}"
@@ -54,7 +56,7 @@
             {% else %}
                 <button class="viewer_control -next-page -disabled"></button>
             {% endif %}
-            {% if documentStructure.isThereANextChapter is not empty %}
+            {% if documentStructure.isThereANextChapter is not empty and documentStructure.identifier is not null %}
                 <a
                 class="viewer_control -next-section"
                 title="{{ 'Next section'|trans }}"
@@ -65,7 +67,7 @@
             {% else %}
                 <button class="viewer_control -next-section -disabled"></button>
             {% endif %}
-            {% if documentStructure.page != documentStructure.documentLastPage %}
+            {% if documentStructure.page != documentStructure.documentLastPage and documentStructure.identifier is not null %}
                 <a
                 class="viewer_control -last-page"
                 title="{{ 'Last page'|trans }}"
