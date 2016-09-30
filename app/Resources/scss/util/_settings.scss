@@ -39,8 +39,10 @@ $brand-color-lighter: lighten($brand-color, 65);
 $grey: #666;
 $grey-light: #e7e7e7;
 $grey-dark: #333;
+$shade: rgba(black, .24);
 $shade-light: rgba(black, .08);
-$shade-dark: rgba(black, .24);
+$shade-dark: rgba(black, .6);
+
 $shine: rgba(white, .9);
 $shine-light: rgba(white, .6);
 $white: #fff;
@@ -59,7 +61,7 @@ $highlight-color: $brand-color-lighter;
 
 $link-color: $brand-color;
 $link-hover-bg-color: $brand-color-lighter;
-$link-hover-bg-color-dark: $shade-dark;
+$link-hover-bg-color-dark: $shade;
 
 $input-bg-color: $white;
 $input-border-color: $brand-color;
@@ -68,10 +70,10 @@ $input-border-color-focus: $brand-color;
 $alert-color: $red;
 
 // Combined values
-$card-shadow: 0 0 1px $shade-light, 0 1px 2px $shade-dark;
+$card-shadow: 0 0 1px $shade-light, 0 1px 2px $shade;
 $drop-shadow: 0 0 ($grid / 4) rgba($black, .5);
 $outline: 1px dotted $text-color-light;
-$shade-inset: 0 -1px $shade-dark;
+$shade-inset: 0 -1px $shade;
 $shine-inset: 0 1px $shine;
 
 // Legacy icons for infobox social links

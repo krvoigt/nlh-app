@@ -1,11 +1,16 @@
 .content {
-    @include column(medium);
-    margin: $grid 0;
+    flex: 1;
+    margin: $grid;
     position: relative;
     z-index: 0;
 
-    @include respond-to(medium) {
-        margin: ($grid  / 2) 0;
+    h1 {
+        font-size: $grid;
+        line-height: $grid;
+    }
+
+    @include respond-to(large) {
+        margin: $grid ($grid  / 2);
     }
 
     > :last-child:not(:only-child) {
@@ -16,6 +21,5 @@
         display: flex;
         flex-direction: column;
         margin: 0;
-        padding: 0;
     }
 }

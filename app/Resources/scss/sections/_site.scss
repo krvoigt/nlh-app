@@ -1,9 +1,21 @@
 
 .site {
+    background: $grey-light;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0 auto;
+    max-width: $site-width;
+    min-height: 100%;
+
+    @include respond-to(large) {
+        box-shadow: 0 0 $grid rgba($black, .5);
+        margin: 0;
+        min-width: 100%;
+        overflow-x: hidden;
+    }
+
     &.-fixed {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
         max-width: none;
     }
 

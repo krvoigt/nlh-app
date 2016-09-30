@@ -36,6 +36,14 @@
     &.-show-popup {
         width: 20 * $grid !important;
     }
+
+    .site.-fixed & {
+        display: none;
+        margin: 0;
+        position: absolute;
+        right: ($grid / 2);
+        top: ($grid / 2);
+    }
 }
 
 .search_close {

@@ -36,34 +36,7 @@
     }
 }
 
-.header_image {
-    border-bottom: ($grid / 2) solid $white;
-    max-height: (10 * $grid);
-    margin: 0 $grid;
-    overflow: hidden;
-    position: relative;
-
-    @include respond-to(large) {
-        margin: 0 ($grid / 2);
-    }
-
-    @include respond-to(medium) {
-        display: none;
-    }
-
-    img {
-        display: block;
-        height: auto;
-        width: 100%;
-    }
-}
-
-.header_image-license {
-    bottom: 0;
-    position: absolute;
-    right: 0;
-}
-
+// NOTE: Currently unused, but kept for extensibility
 .header_language {
     float: right;
 
@@ -94,27 +67,27 @@
     max-width: 100%;
     width: 640px; // Width of logo
 
-    // Fit logo left of search
-    @include respond-to(large) {
-        background-size: 400px auto;
-        margin: (1.5 * $grid) 0 0;
-        width: 400px;
-    }
+    .site:not(.-fixed) & {
+        // Fit logo left of search
+        @include respond-to(large) {
+            background-size: 400px auto;
+            width: 400px;
+        }
 
-    @include respond-to(medium) {
-        background-size: 322px auto;
-        margin: (1.5 * $grid) 0 0;
-        width: 322px;
-    }
+        @include respond-to(medium) {
+            background-size: 322px auto;
+            width: 322px;
+        }
 
-    // Center logo above search
-    @include respond-to(small) {
-        background: url($img-path + '/sub-logo-centered.svg') center 0 no-repeat;
-        background-size: auto (2.5 * $grid);
-        height: auto;
-        margin: 2px auto 0;
-        min-height: (2.5 * $grid);
-        width: 100%;
+        // Center logo above search
+        @include respond-to(small) {
+            background: url($img-path + '/sub-logo-centered.svg') center 0 no-repeat;
+            background-size: auto (2.5 * $grid);
+            height: auto;
+            margin: 2px auto 0;
+            min-height: (2.5 * $grid);
+            width: 100%;
+        }
     }
 
     .site.-fixed & {
@@ -213,30 +186,32 @@
     vertical-align: middle;
     width: 490px; // 2
 
-    @include respond-to(large) {
-        font-size: $font-size;
-        line-height: 18px; // Making two rows same height as logo
-        height: ($grid * 2);
-        left: 99px; // 1
-        padding: 0 9px;
-        top: 0;
-        width: 310px;
-    }
+    .site:not(.-fixed) {
+        @include respond-to(large) {
+            font-size: $font-size;
+            line-height: 18px; // Making two rows same height as logo
+            height: ($grid * 2);
+            left: 99px; // 1
+            padding: 0 9px;
+            top: 0;
+            width: 310px;
+        }
 
 
-    @include respond-to(medium) {
-        left: 77px;
-        width: 275px; // 3
-    }
+        @include respond-to(medium) {
+            left: 77px;
+            width: 275px; // 3
+        }
 
-    @include respond-to(small) {
-        display: inline-block;
-        height: auto;
-        left: 0;
-        margin-top: 39px; // Just below logo blip
-        padding: 5px; // Ensure logo text is overlapped
-        text-align: center;
-        width: 100%;
+        @include respond-to(small) {
+            display: inline-block;
+            height: auto;
+            left: 0;
+            margin-top: 39px; // Just below logo blip
+            padding: 5px; // Ensure logo text is overlapped
+            text-align: center;
+            width: 100%;
+        }
     }
 
     .site.-fixed & {
@@ -256,7 +231,6 @@
     @extend %full-width-background;
     background: $brand-color;
     padding: $grid;
-    position: relative;
     max-width: $site-width;
 
     @include respond-to(large) {
@@ -264,13 +238,13 @@
         padding: ($grid / 2);
     }
 
-    // Make sure small logo does not overlap menu and language
-    @media (max-width: 319px) {
-        padding-top: (1.75 * $grid);
-    }
-
     .site.-fixed & {
         max-width: none;
         padding: 0;
+
+        &::before,
+        &::after {
+            content: none;
+        }
     }
 }

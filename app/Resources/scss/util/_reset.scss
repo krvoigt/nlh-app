@@ -146,6 +146,7 @@ button,
 input,
 select,
 textarea {
+    -moz-appearance: none;
     -webkit-appearance: none;
     -webkit-border-radius: 0;
 }

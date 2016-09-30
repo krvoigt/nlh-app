@@ -1,6 +1,11 @@
 .find_aside {
     float: right;
     margin: round($grid / 8) 0 0 1em;
+
+    @include respond-to(large) {
+        float: none;
+        margin: 0 0 ($grid / 2);
+    }
 }
 
 .find_sort-order {
