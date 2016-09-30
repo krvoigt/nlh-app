@@ -57,8 +57,9 @@
     bottom: 0;
     display: block;
     font-family: $font-family-display;
-    padding: round($grid / 2) .5em;
+    padding: round($grid / 4) .25em;
     position: absolute;
+    text-align: center;
     text-shadow: $shade-inset,  0 0 .5em $black, 0 0 1em $black, 0 0 2em $black;
     width: 100%;
 
