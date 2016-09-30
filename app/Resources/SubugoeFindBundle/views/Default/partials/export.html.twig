@@ -24,9 +24,9 @@
         <div class="export_step">
             <h4>{{ 'Page range'|trans }}</h4>
 
-            <input type="number" class="export_input -narrow -page-start" min="1" id="physIDstart" value="1">
+            <input type="number" class="export_input -narrow -page-start" min="1" max={{ documentStructure.pageCount }} id="physIDstart" value="1">
             {{ 'pdf_until'|trans }}
-            <input type="number" class="export_input -narrow -page-end" min="1" id="physIDend" value={{ documentStructure.pageCount }}>
+            <input type="number" class="export_input -narrow -page-end" min="1" max={{ documentStructure.pageCount }} id="physIDend" value={{ documentStructure.pageCount }}>
             {{ 'pdf_from'|trans }} <span class="export_page-count">{{ documentStructure.pageCount }}</span>
         </div>
 
