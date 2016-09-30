@@ -1,10 +1,12 @@
 .thumbnails {
     background: $grey-light;
     overflow-y: auto;
+    position: relative;
+    top: 0;
 }
 
 .thumbnails_list {
-    margin: round($grid / 4);
+    margin: round($grid / 4) 0 round($grid / 4) round($grid / 4);
 }
 
 .thumbnails_item {
@@ -13,7 +15,7 @@
     margin: round($grid / 8);
     box-shadow: $drop-shadow;
     position: relative;
-    width: round($grid * 3.45);
+
 
     &::before {
         content: none;
@@ -21,51 +23,49 @@
 }
 
 .thumbnails_link {
-    background: $link-hover-bg-color;
+    background: $grey;
     box-shadow: none;
     display: block;
+    height: ($grid * 4.5);
+    overflow: hidden;
+    width: round($grid * 3.55);
 
     @include hover {
         img {
-            opacity: .5;
+            opacity: .7;
         }
     }
-
-	&.-current {
-        background: $black;
-        opacity: 1;
-
-		img {
-			opacity: .5;
-		}
-	}
 
     img {
         @include transition(opacity);
         display: block;
-        min-width: 100%;
-        vertical-align: top;
+        width: 100%;
     }
+
+	.thumbnails_item.-current & {
+        background: $white;
+
+		img {
+			opacity: .4;
+		}
+	}
 }
 
 .thumbnails_page-number {
-    background: $shine-light;
+    background: $shade-dark;
     bottom: 0;
-    color: $link-color;
+    color: $white;
     display: block;
     font-size: $font-size-small;
     font-weight: bold;
-    line-height: 1;
     width: 100%;
-    padding: round($grid / 6);
     position: absolute;
-    text-align: right;
-    text-shadow: 0 1px 0 $shine;
-    white-space: nowrap;
+    text-align: center;
+    text-shadow: $shade-inset;
 
-	.thumbnails_link.-current & {
-        background: $shade-dark;
-        color: $white;
-        text-shadow: $shade-inset;
+	.thumbnails_item.-current & {
+        background: $shine-light;
+        color: $text-color;
+        text-shadow: $shine-inset;
 	}
 }
