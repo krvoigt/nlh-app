@@ -27,6 +27,7 @@ parameters:
       - { id: "göttingeruniversitätsgeschichte-gedrucktewerke", image: "göttingeruniversitätsgeschichte-gedrucktewerke.jpg" }
       - { id: "digiwunschbuch", image: "digiwunschbuch.jpg" }
       - { id: "antiquitates.und.archaeologia.archaeo18", image: "antiquitates.und.archaeologia.archaeo18.jpg" }
+      - { id: "itineraria", image: "itineraria.jpg" }
 
 framework:
     #esi:             ~
