@@ -136,7 +136,7 @@
                         </dl>
                         <p>
                             {{ result.fields.docstrct | trans }}
-                            {% if result.fields.docstrct == "volume" %}
+                            {% if result.fields.docstrct == "volume" and result.fields.currentn is defined %}
                                 — {{ 'currentno'|trans }} {{ result.fields.currentno }}
                             {% endif %}
                         </p>
