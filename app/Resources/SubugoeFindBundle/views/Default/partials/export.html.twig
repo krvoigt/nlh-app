@@ -34,11 +34,12 @@
             {{ 'Invalid page range'|trans }}
         </div>
 
+        <button class="export_generate-pdf" data-ppn="{{ document.id }}">{{ 'Generate PDF'|trans }}</button>
+
         <div class="export_complete-doc">
             {{ 'Selected too many pages - get full document'|trans }}
         </div>
 
-        <button class="export_generate-pdf" data-ppn="{{ document.id }}">{{ 'Generate PDF'|trans }}</button>
     </div>
 
     <div id="pdf-progress">
