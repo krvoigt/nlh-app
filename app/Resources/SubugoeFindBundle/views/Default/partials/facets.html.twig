@@ -6,7 +6,7 @@
     {% if queryParams %}
         <a
                 class="facets_remove"
-                href="{{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'filter': null})) }}"
+                href="{{ path(app.request.attributes.get('_route'), {'id': app.request.get('id')}, app.request.query.all|merge({'filter': null})) }}"
         >
             {{ 'Remove all filters'|trans }}
         </a>
