@@ -40,7 +40,7 @@
             {% if documentStructure.identifier is not null %}
                 {% for physPage, logPage in pageMappings %}
                     <option value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
-                        {{ physPage }} : {{ logPage|trans }}
+                        {{ physPage }} : {{ logPage }}
                     </option>
                 {% endfor %}
             {% endif %}
