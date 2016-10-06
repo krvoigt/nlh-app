@@ -8,7 +8,7 @@
                 {% set identifier = (document.presentation_url[physPage - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
                 <li class="thumbnails_item {{ isCurrent ? '-current' }}">
                     <a class="thumbnails_link" {{ not isCurrent ? 'href=' ~ link }}>
-                        <img data-original="{{ path('_image', {'format': 'jpg', 'identifier': identifier, 'region': 'full', 'size': '92,', 'rotation': 0, 'quality': 'default'})  }}" alt="">
+                        <img data-original="{{ path('_image', {'format': 'jpg', 'identifier': identifier, 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'})  }}" alt="">
                         <span class="thumbnails_page-number">
                             <span class="sr-only">{% trans %}Go to page{% endtrans %}</span>
                             {{ physPage }} : {{ logPage }}

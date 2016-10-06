@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: de
+    thumbnail_size: '92,'
     image_cache: "%kernel.root_dir%/../var/images"
     collections:
       - { id: "vd18.digital", image: "vd18.digital.jpg" }
@@ -62,6 +63,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         metsService: "@mets_service"
+        thumbnail_size: "%thumbnail_size%"
 
 # Swiftmailer Configuration
 swiftmailer:
