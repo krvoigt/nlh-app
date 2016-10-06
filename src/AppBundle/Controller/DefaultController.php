@@ -12,6 +12,7 @@ use AppBundle\Entity\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Solarium\QueryType\Select\Query\Query;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DefaultController extends BaseController
 {
@@ -64,15 +65,6 @@ class DefaultController extends BaseController
      */
     public function detailAction($id)
     {
-        $documentStructure = new DocumentStructure();
-
-        $request = $this->get('request_stack')->getCurrentRequest();
-
-        if ($request->get('page')) {
-            $page = $request->get('page');
-        } else {
-            $page = 1;
-        }
 
         $documentId = $id;
 
@@ -93,6 +85,20 @@ class DefaultController extends BaseController
         $document = $document->getDocuments();
         if (count($document) === 0) {
             throw new NotFoundHttpException(sprintf('Document %s not found', $documentId));
+        }
+
+        if ($document[0]->isanchor) {
+            $url = $this->generateUrl(('_volumes'), array('id' => $documentId));
+
+            return new RedirectResponse($url, 301);
+        }
+
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        if ($request->get('page')) {
+            $page = $request->get('page');
+        } else {
+            $page = 1;
         }
 
         if ($document[0]->idparentdoc[0]) {
@@ -168,6 +174,8 @@ class DefaultController extends BaseController
         }
 
         $isValidPage = ($page >= 1 and $page <= $pageCount) ? true : false;
+
+        $documentStructure = new DocumentStructure();
 
         $documentStructure->setPage($page);
         $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);
