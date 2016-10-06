@@ -1,8 +1,8 @@
 {
-  "name": "gdz-app",
+  "name": "nlh-app",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/subugoe/gdz-app.git"
+    "url": "git+https://github.com/subugoe/nlh-app.git"
   },
   "scripts": {
     "test": "node_modules/casperjs/bin/casperjs test --includes=tests/config.js ./tests/**/*.js"

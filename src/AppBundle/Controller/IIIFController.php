@@ -32,10 +32,6 @@ class IIIFController extends Controller
             ->setQuality($quality)
             ->setFormat($format);
 
-        $errors = $this->get('validator')->validate($imageEntity);
-
-        $this->processErrors($errors);
-
         $hash = sha1(serialize(func_get_args()));
         $cachedFile = vsprintf(
             '%s/%s.%s',
@@ -119,17 +115,17 @@ class IIIFController extends Controller
      */
     protected function getOriginalFileContents(Image $image, $originalIdentifier)
     {
-        $client = $this->get('guzzle.client.tiff');
+        $client = $this->get('guzzle.client.presentation');
         $fs = new Filesystem();
 
-        $originalImageCacheFile = $this->getParameter('kernel.cache_dir').'/originals/'.$originalIdentifier.'.tif';
+        $originalImageCacheFile = $this->getParameter('kernel.cache_dir').'/originals/'.$originalIdentifier.'.jpg';
 
         $this->createCacheDirectory($originalImageCacheFile);
 
         if ($fs->exists($originalImageCacheFile)) {
             $originalImage = file_get_contents($originalImageCacheFile);
         } else {
-            $originalImage = $client->get($image->getIdentifier().'.tif', ['sink' => $originalImageCacheFile])->getBody();
+            $originalImage = $client->get($image->getIdentifier().'/full/full/0/default.jpg', ['sink' => $originalImageCacheFile])->getBody();
         }
 
         return $originalImage;

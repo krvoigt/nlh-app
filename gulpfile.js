@@ -17,7 +17,7 @@ var paths = {
         'app/config/*.yml',
         'app/Resources/**/*.{md,php,twig,yml}'
     ],
-    proxy: 'localhost:8000',
+    proxy: 'localhost:8001',
     serveDir: '/',
 
     scriptSrc: 'app/Resources/js/**/*.js',

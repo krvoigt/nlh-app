@@ -90,7 +90,7 @@ placepublish: Erscheinungsort|Erscheinungsorte
 dc: Sammlung|Sammlungen
 facetpublisher: Verlag|Verlage
 publisher: Verlag|Verlage
-facetcreator: Autor|Autoren
+parentdoc_title_abbreviated: Serie|Serien
 creator: Autor|Autoren
 yearpublish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel

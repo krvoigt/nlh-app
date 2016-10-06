@@ -126,7 +126,7 @@ class DocumentController extends Controller
         $client = $this->get('solarium.client');
         $select = $client->createSelect();
         $select->setRows(1);
-        $select->addSort('dateindexed', 'desc');
+        $select->addSort('date_indexed', 'desc');
 
         return $this->render('partials/app/just-scanned.html.twig', [
             'document' => $client->select($select)->getDocuments()[0],

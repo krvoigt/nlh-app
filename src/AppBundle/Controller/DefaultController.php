@@ -12,12 +12,11 @@ use AppBundle\Entity\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Solarium\QueryType\Select\Query\Query;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class DefaultController extends BaseController
 {
     /**
-     * @Route("/suche", name="_homepage")
+     * @Route("/", name="_homepage")
      *
      * @param Request $request A request instance
      *
@@ -65,6 +64,15 @@ class DefaultController extends BaseController
      */
     public function detailAction($id)
     {
+        $documentStructure = new DocumentStructure();
+
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        if ($request->get('page')) {
+            $page = $request->get('page');
+        } else {
+            $page = 1;
+        }
 
         $documentId = $id;
 
@@ -87,20 +95,6 @@ class DefaultController extends BaseController
             throw new NotFoundHttpException(sprintf('Document %s not found', $documentId));
         }
 
-        if ($document[0]->isanchor) {
-            $url = $this->generateUrl(('_volumes'), array('id' => $documentId));
-
-            return new RedirectResponse($url, 301);
-        }
-
-        $request = $this->get('request_stack')->getCurrentRequest();
-
-        if ($request->get('page')) {
-            $page = $request->get('page');
-        } else {
-            $page = 1;
-        }
-
         if ($document[0]->idparentdoc[0]) {
             $parentDocumentTitle = $this->getDocument($document[0]->idparentdoc[0])['title'][0];
         }
@@ -108,14 +102,6 @@ class DefaultController extends BaseController
         if (isset($document[0]->presentation_url[0])) {
             $identifier = explode('/', explode('.', $document[0]->presentation_url[0])[3])[3];
             $identifier = $documentId.':'.str_pad($page, strlen($identifier), 0, STR_PAD_LEFT);
-        }
-
-        if (!$document[0]->isanchor) {
-            $metsService = $this->get('mets_service');
-            $pageMappings = $metsService->getScannedPagesMapping($documentId);
-            $pageCount = count($pageMappings);
-            $structure = $metsService->getTableOfContents($documentId);
-            $tableOfContents = count($structure[0]) > 0 ? true : false;
         }
 
         if (isset($pageMappings) && $pageMappings !== []) {
@@ -174,8 +160,6 @@ class DefaultController extends BaseController
         }
 
         $isValidPage = ($page >= 1 and $page <= $pageCount) ? true : false;
-
-        $documentStructure = new DocumentStructure();
 
         $documentStructure->setPage($page);
         $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);

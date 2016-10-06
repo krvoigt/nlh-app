@@ -1,8 +1,8 @@
 {
-    "name": "subugoe/gdz",
+    "name": "subugoe/nlh",
     "license": "AGPL-3.0",
     "type": "project",
-    "description": "GDZ Website",
+    "description": "NLH Website",
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "autoload": {

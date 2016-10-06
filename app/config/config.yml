@@ -7,28 +7,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: de
-    thumbnail_size: '92,'
     image_cache: "%kernel.root_dir%/../var/images"
     collections:
-      - { id: "vd18.digital", image: "vd18.digital.jpg" }
-      - { id: "vd17-nova", image: "vd17-nova.jpg" }
-      - { id: "mathematica", image: "mathematica.jpg" }
-      - { id: "vd17-mainstream", image: "vd17-mainstream.jpg" }
-      - { id: "bucherhaltung", image: "bucherhaltung.jpg" }
-      - { id: "varia", image: "varia.jpg" }
-      - { id: "nordamericana", image: "nordamericana.jpg" }
-      - { id: "fid.mathematica", image: "fid.mathematica.jpg" }
-      - { id: "blumenbachiana", image: "blumenbachiana.jpg" }
-      - { id: "zoologica", image: "zoologica.jpg" }
-      - { id: "wissenschaftsgeschichte", image: "wissenschaftsgeschichte.jpg" }
-      - { id: "sibirica", image: "sibirica.jpg" }
-      - { id: "rusdml", image: "rusdml.jpg" }
-      - { id: "rezensionszeitschriften", image: "rezensionszeitschriften.jpg" }
-      - { id: "juridica", image: "juridica.jpg" }
-      - { id: "göttingeruniversitätsgeschichte-gedrucktewerke", image: "göttingeruniversitätsgeschichte-gedrucktewerke.jpg" }
-      - { id: "digiwunschbuch", image: "digiwunschbuch.jpg" }
-      - { id: "antiquitates.und.archaeologia.archaeo18", image: "antiquitates.und.archaeologia.archaeo18.jpg" }
-      - { id: "itineraria", image: "itineraria.jpg" }
 
 framework:
     #esi:             ~
@@ -63,7 +43,6 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         metsService: "@mets_service"
-        thumbnail_size: "%thumbnail_size%"
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -78,30 +57,23 @@ nelmio_solarium:
         default:
             scheme: http
             host: "%solr_host%"
-            port: 80
-            path: /gdz2
-            core: collection1
+            port: 8443
+            path: /solr
+            core: nlh
             timeout: 5
     clients:
         default:
             endpoints: [default]
 
 subugoe_find:
-    default_query: "ismets:true"
-    default_sort: "datemodified desc"
-    feed_sort: "dateindexed DESC"
+    default_query: "doctype:work"
+    default_sort: "date_modified desc"
+    feed_sort: "date_modified DESC"
     feed_rows: 15
     feed_category: dc
     feed_fields: ["title", "purl", "dateindexed"]
     facets:
-        - { title: facetcreator, field: facetcreator }
-        - { title: facetpublisher, field: facetpublisher}
-        - { title: facetplacepublish, field: facetplacepublish}
-        - { title: yearpublish, field: yearpublish, quantity: 1000}
-        - { title: dc, field: dc}
-        - { title: docstrct, field: docstrct}
-    hidden:
-        - { field: dc, value: archaeo18 }
+      - { title: parentdoc_title_abbreviated, field: parentdoc_title_abbreviated }
 
 knp_paginator:
     page_range: 7                      # default page range used in pagination control
@@ -120,8 +92,8 @@ guzzle:
         base_url: "http://gdz.sub.uni-goettingen.de/mets/"
       fulltext:
         base_url: "http://gdz.sub.uni-goettingen.de/gdzocr/"
-      tiff:
-        base_url: "http://gdz.sub.uni-goettingen.de/tiff/"
+      presentation:
+        base_url: "https://nl.sub.uni-goettingen.de/image/"
 
 liip_imagine:
     resolvers:
