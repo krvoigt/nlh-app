@@ -1,6 +1,4 @@
-# GDZ
-
-[![Build Status](https://travis-ci.org/subugoe/gdz-app.svg?branch=develop)](https://travis-ci.org/subugoe/gdz-app)
+# NLH
 
 ## Requirements
 
