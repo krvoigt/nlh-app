@@ -41,7 +41,7 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
                     $output->write($image);
                     $start = microtime(true);
                     try {
-                        $controller->indexAction($image, 'full', $this->getContainer()->getParameter('thumbnail_size'), 0, 'default', 'jpg');
+                        $controller->indexAction($image, 'full', $this->getContainer()->getParameter('thumbnail_size'), '0', 'default', 'jpg');
                     } catch (\Exception $e) {
                         $this->getContainer()->get('logger')->log(Logger::ERROR, $e->getMessage());
                     }
