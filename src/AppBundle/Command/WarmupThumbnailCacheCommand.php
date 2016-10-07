@@ -26,7 +26,7 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = $this->getContainer()->get('solarium.client');
-        $query = $client->createSelect()->addSort('dateindexed', 'desc')->setRows(10000);
+        $query = $client->createSelect()->addSort('dateindexed', 'desc')->setRows(1000);
         $resultset = $client->select($query);
 
         $controller = new IIIFController();
@@ -39,14 +39,14 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
                     $image = str_replace('.tif', '', $image);
                     $image = str_replace('/', ':', $image);
                     $output->write($image);
-                    $start = microtime();
+                    $start = microtime(true);
                     try {
                         $controller->indexAction($image, 'full', $this->getContainer()->getParameter('thumbnail_size'), 0, 'default', 'jpg');
                     } catch (\Exception $e) {
                         $this->getContainer()->get('logger')->log(Logger::ERROR, $e->getMessage());
                     }
-                    $end = microtime();
-                    $output->write(' in '.($end - $start), true);
+                    $end = microtime(true);
+                    $output->write(' in '.number_format($end - $start, 2).'s', true);
                 }
             }
         }
