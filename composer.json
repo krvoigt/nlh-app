@@ -40,7 +40,8 @@
         "subugoe/find-bundle": "dev-master",
         "eightpoints/guzzle-bundle": "^5.0",
         "liip/imagine-bundle": "^1.6",
-        "ninsuo/jordan-tree": "dev-master"
+        "ninsuo/jordan-tree": "dev-master",
+        "oneup/flysystem-bundle": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

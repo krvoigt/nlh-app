@@ -116,9 +116,11 @@ class IIIFController extends Controller
     protected function getOriginalFileContents(Image $image, $originalIdentifier)
     {
         $id = explode(':', $originalIdentifier);
-        $originalImageFile = $this->getParameter('storage').'/image/'.$id[0].'/'.$id[1].'/'.$id[2].'.jpg';
 
-        return file_get_contents($originalImageFile);
+        $filesystem = $this->get('oneup_flysystem.nlh_filesystem');
+        $originalImageFile = $filesystem->read('/image/'.$id[0].'/'.$id[1].'/'.$id[2].'.jpg');
+
+        return $originalImageFile;
     }
 
     /**

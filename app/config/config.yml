@@ -9,7 +9,6 @@ parameters:
     locale: de
     image_cache: "%kernel.root_dir%/../var/images"
     collections:
-    storage: "%kernel.root_dir%/../var/storage"
 
 framework:
     #esi:             ~
@@ -115,3 +114,12 @@ services:
         class: Fuz\Jordan\Twig\Extension\TreeExtension
         tags:
             - { name: twig.extension }
+
+oneup_flysystem:
+    adapters:
+        storage:
+            local:
+                directory: "%kernel.root_dir%/../var/storage"
+    filesystems:
+        nlh:
+            adapter: storage
