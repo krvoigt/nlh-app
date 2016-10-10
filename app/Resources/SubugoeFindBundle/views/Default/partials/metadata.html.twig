@@ -3,7 +3,7 @@
 
     <dl>
         <dt>{{ 'bytitle'|trans }}</dt>
-        <dd>{{ document.title | first }}</dd>
+        <dd>{{ document.subtitle | first }}</dd>
 
         {% if document.creator is defined %}
             <dt>{{ 'creator' | transchoice(document.creator | length) }}</dt>
@@ -49,15 +49,14 @@
             {% endif %}
         {% endif %}
 
-        <dt>{{ 'dc' | transchoice(document.dc | length) }}</dt>
+        <dt>{{ 'parentdoc_title_abbreviated' | transchoice(document.parentdoc_title_abbreviated | length) }}</dt>
         <dd>
-            {% for dc in document.dc %}
+            {% for dc in document.parentdoc_title_abbreviated %}
                 <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
 
         <ul class="metadata_links">
-            <li><a href="{{ document.purl }}">{{ 'PURL'|trans }}</a></li>
             {% if document.id_PPNanalog_s is defined %}
                 <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
             {% endif %}

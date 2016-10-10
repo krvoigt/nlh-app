@@ -115,20 +115,10 @@ class IIIFController extends Controller
      */
     protected function getOriginalFileContents(Image $image, $originalIdentifier)
     {
-        $client = $this->get('guzzle.client.presentation');
-        $fs = new Filesystem();
+        $id = explode(':', $originalIdentifier);
+        $originalImageFile = $this->getParameter('storage').'/image/'.$id[0].'/'.$id[1].'/'.$id[2].'.jpg';
 
-        $originalImageCacheFile = $this->getParameter('kernel.cache_dir').'/originals/'.$originalIdentifier.'.jpg';
-
-        $this->createCacheDirectory($originalImageCacheFile);
-
-        if ($fs->exists($originalImageCacheFile)) {
-            $originalImage = file_get_contents($originalImageCacheFile);
-        } else {
-            $originalImage = $client->get($image->getIdentifier().'/full/full/0/default.jpg', ['sink' => $originalImageCacheFile])->getBody();
-        }
-
-        return $originalImage;
+        return file_get_contents($originalImageFile);
     }
 
     /**

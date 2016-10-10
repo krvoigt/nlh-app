@@ -9,6 +9,7 @@ parameters:
     locale: de
     image_cache: "%kernel.root_dir%/../var/images"
     collections:
+    storage: "%kernel.root_dir%/../var/storage"
 
 framework:
     #esi:             ~
@@ -70,8 +71,8 @@ subugoe_find:
     default_sort: "date_modified desc"
     feed_sort: "date_modified DESC"
     feed_rows: 15
-    feed_category: dc
-    feed_fields: ["title", "purl", "dateindexed"]
+    feed_category: parentdoc_title_abbreviated
+    feed_fields: ["subtitle", "date_indexed"]
     facets:
       - { title: parentdoc_title_abbreviated, field: parentdoc_title_abbreviated }
 

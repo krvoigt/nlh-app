@@ -91,7 +91,7 @@
             <li class="result_item">
                 <article class="result_wrap">
                     <div class="result_left">
-                        {% if result.fields.presentation_url is not defined %}
+                        {% if result.fields.presentation_url is defined %}
                             <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
                                 <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'https://nl.sub.uni-goettingen.de/image/': '','/full/full/0/default.jpg': ''})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
                             </a>

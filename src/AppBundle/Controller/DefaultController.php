@@ -159,7 +159,7 @@ class DefaultController extends BaseController
             }
         }
 
-        $isValidPage = ($page >= 1 and $page <= $pageCount) ? true : false;
+        $isValidPage = true;
 
         $documentStructure->setPage($page);
         $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);
