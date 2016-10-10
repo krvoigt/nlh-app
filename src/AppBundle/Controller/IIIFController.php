@@ -54,9 +54,11 @@ class IIIFController extends Controller
         $imageService = $this->get('image_service');
 
         try {
-            $image = $imagine->load($this->getOriginalFileContents($imageEntity, $identifier));
+            $image = $imagine->load($this->getOriginalFileContents($imageEntity,
+                $this->getRealIdentifier($identifier)));
         } catch (\Exception $e) {
-            throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
+            throw new NotFoundHttpException(sprintf('Image with identifier %s not found',
+                $imageEntity->getIdentifier()));
         }
 
         $imageService->getRegion($imageEntity->getRegion(), $image);
@@ -73,21 +75,43 @@ class IIIFController extends Controller
         return new BinaryFileResponse($cachedFile);
     }
 
+    protected function getRealIdentifier($identifier)
+    {
+        $id = explode(':', $identifier);
+        $counter = (int) $id[1];
+        $counter = $counter - 1;
+
+        $client = $this->get('solarium.client');
+        $selectDocument = $client->createSelect()
+            ->setQuery(sprintf('id:%s', $id[0]));
+
+        $document = $client->select($selectDocument)->getDocuments()[0];
+
+        $identifier = $document->presentation_url[$counter];
+
+        $identifier = str_replace('https://nl.sub.uni-goettingen.de/image/', '', $identifier);
+        $identifier = str_replace('/full/full/0/default.jpg', '', $identifier);
+
+        return $identifier;
+    }
+
     /**
      * @Route("/image/{identifier}/info.json", name="_iiifjson", methods={"GET"})
      */
     public function infoJsonAction($identifier)
     {
         $imageEntity = new \AppBundle\Entity\Image();
-        $imageEntity->setIdentifier($identifier);
+
+        $imageEntity->setIdentifier($this->getRealIdentifier($identifier));
 
         $imagine = $this->get('liip_imagine');
-        $originalImage = $this->getOriginalFileContents($imageEntity, $identifier);
+        $originalImage = $this->getOriginalFileContents($imageEntity, $this->getRealIdentifier($identifier));
 
         try {
             $image = $imagine->load($originalImage);
         } catch (\Exception $e) {
-            throw new NotFoundHttpException(sprintf('Image with identifier %s not found', $imageEntity->getIdentifier()));
+            throw new NotFoundHttpException(sprintf('Image with identifier %s not found',
+                $imageEntity->getIdentifier()));
         }
 
         $ppi = $image->getImagick()->getImageResolution();
