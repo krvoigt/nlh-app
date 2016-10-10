@@ -9,7 +9,7 @@ var Thumbnails = {
         }
 
         $current = $thumbnails.find('.thumbnails_item.-current');
-        $thumbnails.scrollTop($current.position().top - 99);
+//        $thumbnails.scrollTop($current.position().top - 99);
 
         this.bindEvents();
     },

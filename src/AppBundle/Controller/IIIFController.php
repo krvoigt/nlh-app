@@ -75,12 +75,21 @@ class IIIFController extends Controller
         return new BinaryFileResponse($cachedFile);
     }
 
+    /**
+     * @param string $identifier
+     *
+     * @return string
+     */
     protected function getRealIdentifier($identifier)
     {
         $id = explode(':', $identifier);
-        $counter = (int) $id[1];
-        $counter = $counter - 1;
 
+        if (isset($id[1])) {
+            $counter = (int) $id[1];
+            --$counter;
+        } else {
+            $counter = 0;
+        }
         $client = $this->get('solarium.client');
         $selectDocument = $client->createSelect()
             ->setQuery(sprintf('id:%s', $id[0]));
