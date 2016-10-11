@@ -74,6 +74,10 @@ subugoe_find:
     feed_fields: ["subtitle", "date_indexed"]
     facets:
       - { title: parentdoc_title_abbreviated, field: parentdoc_title_abbreviated }
+      - { title: creator, field: facet_creator }
+      - { title: facetplacepublish, field: facet_place_publish }
+      - { title: facetpublisher, field: facet_publisher }
+      - { title: yearpublish, field: year_publish }
 
 knp_paginator:
     page_range: 7                      # default page range used in pagination control
