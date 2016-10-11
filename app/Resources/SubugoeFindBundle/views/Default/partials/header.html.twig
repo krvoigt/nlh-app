@@ -7,7 +7,7 @@
     <div class="viewer_column">
         <div class="viewer_controls -right">
             <div class="viewer_control-group">
-                {% if document.gdzocr_url is defined %}
+                {% if document.fulltext_url is defined %}
                     <button class="viewer_control -toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
                 {% endif %}
                 {% if documentStructure.tableOfContents %}
