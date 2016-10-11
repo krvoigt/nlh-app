@@ -54,11 +54,9 @@ class IIIFController extends Controller
         $imageService = $this->get('image_service');
 
         try {
-            $image = $imagine->load($this->getOriginalFileContents($imageEntity,
-                $this->getRealIdentifier($identifier)));
+            $image = $imagine->load($this->getOriginalFileContents($identifier));
         } catch (\Exception $e) {
-            throw new NotFoundHttpException(sprintf('Image with identifier %s not found',
-                $imageEntity->getIdentifier()));
+            $image = $imagine->load($this->getOriginalFileContents($this->getRealIdentifier($identifier)));
         }
 
         $imageService->getRegion($imageEntity->getRegion(), $image);
@@ -85,10 +83,9 @@ class IIIFController extends Controller
         $id = explode(':', $identifier);
 
         if (isset($id[1])) {
-            $counter = (int) $id[1];
-            --$counter;
+            $counter = (int) $id[1] -1;
         } else {
-            $counter = 0;
+            $counter = 1;
         }
         $client = $this->get('solarium.client');
         $selectDocument = $client->createSelect()
@@ -114,7 +111,7 @@ class IIIFController extends Controller
         $imageEntity->setIdentifier($this->getRealIdentifier($identifier));
 
         $imagine = $this->get('liip_imagine');
-        $originalImage = $this->getOriginalFileContents($imageEntity, $this->getRealIdentifier($identifier));
+        $originalImage = $this->getOriginalFileContents($this->getRealIdentifier($identifier));
 
         try {
             $image = $imagine->load($originalImage);
@@ -142,16 +139,16 @@ class IIIFController extends Controller
     }
 
     /**
-     * @param Image $image
+     * @param string $originalIdentifier
      *
      * @return \Psr\Http\Message\StreamInterface|string
      */
-    protected function getOriginalFileContents(Image $image, $originalIdentifier)
+    protected function getOriginalFileContents($originalIdentifier)
     {
         $id = explode(':', $originalIdentifier);
+        $filename = vsprintf('/image/%s/%s/%s.jpg', [$id[0], $id[1], $id[2]]);
 
-        $filesystem = $this->get('oneup_flysystem.nlh_filesystem');
-        $originalImageFile = $filesystem->read('/image/'.$id[0].'/'.$id[1].'/'.$id[2].'.jpg');
+        $originalImageFile = $this->get('oneup_flysystem.nlh_filesystem')->read($filename);
 
         return $originalImageFile;
     }
