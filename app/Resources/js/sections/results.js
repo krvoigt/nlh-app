@@ -32,7 +32,7 @@ $.fn.extend({
             var metadataHeight = $this.find('.result_metadata').height();
             var thumbnailHeight = $this.find('.result_thumbnail').height();
             var excessHeight = Math.floor(metadataHeight - thumbnailHeight);
-            if ( excessHeight > 0 ) {
+            if ( $title.height() > minHeight && excessHeight > 0 ) {
                 $title.height( Math.max($title.height() - Math.ceil(excessHeight / minHeight) * minHeight, minHeight) ).addClass('-cut');
                 $this.find('.result_title-toggle.-expand').show();
             } else {
