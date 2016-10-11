@@ -3,10 +3,8 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\TableOfContents;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use Symfony\Component\Cache\Adapter\AbstractAdapter;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use League\Flysystem\Filesystem;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -20,12 +18,7 @@ class MetsService
     protected $solrService;
 
     /**
-     * @var AbstractAdapter
-     */
-    protected $cache;
-
-    /**
-     * @var Client
+     * @var Filesystem
      */
     protected $metsClient;
 
@@ -33,13 +26,11 @@ class MetsService
      * MetsService constructor.
      *
      * @param \Solarium\Client $solrService
-     * @param AdapterInterface $cache
-     * @param Client           $metsClient
+     * @param Filesystem       $metsClient
      */
-    public function __construct(\Solarium\Client $solrService, AdapterInterface $cache, Client $metsClient)
+    public function __construct(\Solarium\Client $solrService, Filesystem $metsClient)
     {
         $this->solrService = $solrService;
-        $this->cache = $cache;
         $this->metsClient = $metsClient;
     }
 
@@ -50,20 +41,18 @@ class MetsService
      */
     protected function getMetsFile($id)
     {
-        $identifier = 'mets.'.sha1($id);
+        $client = $this->solrService;
+        $select = $client->createSelect()->setQuery(sprintf('id:%s', $id));
+        $document = $client->select($select)->getDocuments()[0];
 
-        $metsFile = $this->cache->getItem($identifier);
+        $identifier = $document->presentation_url[0];
+        $identifier = str_replace('https://nl.sub.uni-goettingen.de/image/', '', $identifier);
+        $identifier = str_replace('/full/full/0/default.jpg', '', $identifier);
+        $identifierParts = explode(':', $identifier);
 
-        if (!$metsFile->isHit()) {
-            $file = $this->metsClient
-                ->get($id.'.xml')
-                ->getBody()->__toString();
+        $file = $this->metsClient->read(vsprintf('/mets/%s/%s.mets.xml', [$identifierParts[0], $identifierParts[1]]));
 
-            $metsFile->set($file);
-            $this->cache->save($metsFile);
-        }
-
-        return $metsFile->get();
+        return $file;
     }
 
     /**
