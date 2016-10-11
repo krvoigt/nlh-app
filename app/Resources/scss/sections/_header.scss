@@ -70,13 +70,13 @@
     .site:not(.-fixed) & {
         // Fit logo left of search
         @include respond-to(large) {
-            background-size: 400px auto;
-            width: 400px;
+            background-size: 392px auto;
+            width: 392px;
         }
 
         @include respond-to(medium) {
-            background-size: 322px auto;
-            width: 322px;
+            background-size: 314px auto;
+            width: 314px;
         }
 
         // Center logo above search
@@ -186,12 +186,11 @@
     vertical-align: middle;
     width: 490px; // 2
 
-    .site:not(.-fixed) {
+    .site:not(.-fixed) & {
         @include respond-to(large) {
-            font-size: $font-size;
-            line-height: 18px; // Making two rows same height as logo
+            @include typo-scale(1);
             height: ($grid * 2);
-            left: 99px; // 1
+            left: 96px; // 1
             padding: 0 9px;
             top: 0;
             width: 310px;
@@ -199,8 +198,10 @@
 
 
         @include respond-to(medium) {
-            left: 77px;
-            width: 275px; // 3
+            font-size: $font-size;
+            left: 76px;
+            line-height: 18px; // Making two rows same height as logo
+            width: 260px; // 3
         }
 
         @include respond-to(small) {
