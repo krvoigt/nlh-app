@@ -1,22 +1,21 @@
 @mixin link($with-border: true, $on-dark-background: false) {
-    $bg-color: if($on-dark-background, $link-hover-bg-color-dark, $link-hover-bg-color);
+    @include transition(background, box-shadow);
 
-    @include transition(background);
-    color: $link-color;
+    @if $on-dark-background {
+        color: $white;
+    } @else {
+        color: $link-color;
+    }
 
     @if $with-border {
-        box-shadow: 0 -5px 0 $bg-color inset; // depends on font metrics
+        box-shadow: 0 -5px 0 $link-hover-bg-color inset; // depends on font metrics
     } @else {
         box-shadow: none;
     }
 
-    @if $on-dark-background {
-        box-shadow: none;
-        color: $white;
-    }
-
     @include hover {
-        background: $bg-color;
+        background: $link-hover-bg-color;
+        box-shadow: 0 -5px 0 transparent inset;
 
         @if $on-dark-background {
             color: $white;

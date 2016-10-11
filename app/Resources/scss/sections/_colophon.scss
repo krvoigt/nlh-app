@@ -4,7 +4,7 @@
     background: $brand-color;
 
     a {
-        @include link(false, true);
+        @include link(true, true);
     }
 
     h6 {
