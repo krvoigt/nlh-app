@@ -19,7 +19,6 @@ class AppKernel extends Kernel
             new Nelmio\SolariumBundle\NelmioSolariumBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new EightPoints\Bundle\GuzzleBundle\GuzzleBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Oneup\FlysystemBundle\OneupFlysystemBundle(),
         ];

@@ -38,7 +38,6 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "knplabs/knp-markdown-bundle": "^1.5",
         "subugoe/find-bundle": "dev-master",
-        "eightpoints/guzzle-bundle": "^5.0",
         "liip/imagine-bundle": "^1.6",
         "ninsuo/jordan-tree": "dev-master",
         "oneup/flysystem-bundle": "^1.4"

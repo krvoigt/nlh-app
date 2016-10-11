@@ -90,13 +90,6 @@ knp_paginator:
         pagination: sliding.html.twig  # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
 
-guzzle:
-    clients:
-      mets:
-        base_url: "http://gdz.sub.uni-goettingen.de/mets/"
-      fulltext:
-        base_url: "http://gdz.sub.uni-goettingen.de/gdzocr/"
-
 liip_imagine:
     resolvers:
        default:
