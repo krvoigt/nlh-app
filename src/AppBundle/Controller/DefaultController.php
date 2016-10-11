@@ -104,6 +104,14 @@ class DefaultController extends BaseController
             $identifier = $documentId.':'.str_pad($page, strlen($identifier), 0, STR_PAD_LEFT);
         }
 
+        if (!$document[0]->isanchor) {
+            $metsService = $this->get('mets_service');
+            $pageMappings = $metsService->getScannedPagesMapping($documentId);
+            $pageCount = count($pageMappings);
+            $structure = $metsService->getTableOfContents($documentId);
+            $tableOfContents = count($structure[0]) > 0 ? true : false;
+        }
+        
         if (isset($pageMappings) && $pageMappings !== []) {
             $documentFirstPage = array_keys($pageMappings)[0];
             $documentLastPage = array_keys($pageMappings)[count($pageMappings) - 1];

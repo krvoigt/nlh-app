@@ -76,7 +76,7 @@ class MetsService
             }
         }
 
-        $query = '//mets:mets/mets:structMap/mets:div';
+        $query = '//mets:mets/mets:structMap[@TYPE="LOGICAL"]/mets:div';
 
         $crawler = new Crawler();
         $crawler->addContent($metsFile);
