@@ -69,26 +69,22 @@ class DocumentController extends Controller
     }
 
     /**
-     * @param string $url
+     * @Route("/{id}/tei.xml", name="_tei", methods={"GET"})
+     *
+     * @param string $id
      *
      * @return Response
      */
-    public function fullTextAction($url)
+    public function fullTextAction($id)
     {
         $teiProcessor = $this->get('tei_processor');
-        $teiFile = $this->get('cache.app')->getItem('tei.'.sha1($url));
+        $identifier = str_replace('https://nl.sub.uni-goettingen.de/image/', '', $id);
+        $identifier = str_replace('/full/full/0/default.jpg', '', $identifier);
+        $identifierParts = explode(':', $identifier);
 
-        if (!$teiFile->isHit()) {
-            $client = $this->get('guzzle.client.fulltext');
-            $file = $client
-            ->get($url)
-            ->getBody()->__toString();
+        $file = $this->get('oneup_flysystem.nlh_filesystem')->read(vsprintf('/tei/%s/%s/%s.tei.xml', [$identifierParts[0], $identifierParts[1], $identifierParts[2]]));
 
-            $teiFile->set($file);
-            $this->get('cache.app')->save($teiFile);
-        }
-
-        $text = $teiProcessor->process($teiFile->get());
+        $text = $teiProcessor->process($file);
 
         return new Response($text);
     }
