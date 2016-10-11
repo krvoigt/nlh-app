@@ -102,10 +102,16 @@ class DocumentController extends Controller
      */
     public function metsAction($id)
     {
-        $client = $this->get('guzzle.client.mets');
-        $file = $client
-            ->get($id.'.xml')
-            ->getBody();
+        $client = $this->get('solarium.client');
+        $select = $client->createSelect()->setQuery(sprintf('id:%s', $id));
+        $document = $client->select($select)->getDocuments()[0];
+
+        $identifier = $document->presentation_url[0];
+        $identifier = str_replace('https://nl.sub.uni-goettingen.de/image/', '', $identifier);
+        $identifier = str_replace('/full/full/0/default.jpg', '', $identifier);
+        $identifierParts = explode(':', $identifier);
+
+        $file = $this->get('oneup_flysystem.nlh_filesystem')->read(vsprintf('/mets/%s/%s.mets.xml', [$identifierParts[0], $identifierParts[1]]));
 
         $response = new Response(
             $file,

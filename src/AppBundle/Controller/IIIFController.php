@@ -83,7 +83,7 @@ class IIIFController extends Controller
         $id = explode(':', $identifier);
 
         if (isset($id[1])) {
-            $counter = (int) $id[1] -1;
+            $counter = (int) $id[1] - 1;
         } else {
             $counter = 1;
         }
