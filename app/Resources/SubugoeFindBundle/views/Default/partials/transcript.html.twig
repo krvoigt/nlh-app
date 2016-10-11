@@ -1,10 +1,12 @@
-{% set page = app.request.get('page') %}
+{% set page = app.request.get('page') ?: 1 %}
 
-<section class="transcript">
-    <h2 class="viewer_heading">{{ 'Transcript'|trans }}</h2>
-    <div class="transcript_page">
-        {% autoescape %}
-            {{ render(controller('AppBundle:Document:fullText', { 'id': document['presentation_url'][page] })) | nl2br }}
-        {% endautoescape %}
-    </div>
-</section>
+{% if document['fulltext_url'] is defined %}
+    <section class="transcript">
+        <h2 class="viewer_heading">{{ 'Transcript'|trans }}</h2>
+        <div class="transcript_page">
+            {% autoescape %}
+                {{ render(controller('AppBundle:Document:fullText', { 'id': document['presentation_url'][page] })) | nl2br }}
+            {% endautoescape %}
+        </div>
+    </section>
+{% endif %}
