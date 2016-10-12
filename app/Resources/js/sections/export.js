@@ -3,10 +3,6 @@ var Export = {
         DCPDF.reset();
 
         this.bindEvents();
-
-        if (! this.isCompleteDocument()) {
-            $('.export_complete-doc').show();
-        }
     },
 
     bindEvents: function () {
@@ -28,7 +24,6 @@ var Export = {
         $.merge($pageStart, $pageEnd).toggleClass('-error', isError);
         $('.export_error.-page-range').toggle(isError);
         $('.export_generate-pdf').prop('disabled', isError);
-        $('.export_complete-doc').toggle(this.isCompleteDocument());
     },
 
     downloadPdf: function () {
@@ -37,15 +32,9 @@ var Export = {
         var physIDstart = parseInt($('#physIDstart').val());
         var physIDend = parseInt($('#physIDend').val());
 
-        if (this.isCompleteDocument()) {
-            var cacheUrlPrefix = 'http://gdz.sub.uni-goettingen.de/download/',
-                identifier = ppn,
-                element = $('#pdf_logid').text();
-            window.location.href = cacheUrlPrefix + identifier + '/' + identifier + '___' + element + '.pdf';
-        } else {
-            DCPDF.generatePDF(ppn, physIDstart, physIDend);
+        DCPDF.generatePDF(ppn, physIDstart, physIDend);
 
-        }
+
     },
 
     isCompleteDocument: function () {
