@@ -28,7 +28,7 @@
                 {# Year range (only used with yearpublish #}
                 {# TODO: Add count #}
                 {# TODO: Reduce reduncancy #}
-                {% if key == 'yearpublish' %}
+                {% if key == 'year_publish' %}
                     {% for index, value in filterValues %}
                         {% set tokens = filterValues[index]|slice(1, filterValues[index]|length - 2)|split(' ') %}
                         {% if tokens|length == 3 %}
@@ -92,7 +92,7 @@
                     </li>
                 {% endfor %}
             </ol>
-            {% if key == 'yearpublish' %}
+            {% if key == 'year_publish' %}
                 {# TODO: Show counts for years outside of filter range #}
                 {# Workaround: Remove erroneous year #}
                 <div

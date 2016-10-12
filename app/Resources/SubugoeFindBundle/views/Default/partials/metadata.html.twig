@@ -14,9 +14,9 @@
             </dd>
         {% endif %}
 
-        {% if document.yearpublish is defined %}
-            <dt>{{ 'yearpublish' | transchoice(1) }}</dt>
-            <dd>{{ document.yearpublish }}</dd>
+        {% if document['year_publish'] is defined %}
+            <dt>{{ 'year_publish' | transchoice(1) }}</dt>
+            <dd>{{ document['year_publish'] }}</dd>
         {% endif %}
 
         {% if document.placepublish is defined %}

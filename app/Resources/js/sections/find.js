@@ -5,7 +5,7 @@ var Find = {
 
     bindEvents: function () {
         $('.find_sort-order').change(function(){
-            var params = $(this).val().split('_');
+            var params = $(this).val().split('-');
             var sort = params[0];
             var direction = params[1];
             setGetParameters({sort: sort, direction: direction}, true);

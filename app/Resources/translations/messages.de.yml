@@ -85,14 +85,15 @@ Download this section as PDF: Diesen Abschnitt als PDF herunterladen
 
 # Fields
 docstrct: Strukturtyp|Strukturtypen
-facetplacepublish: Erscheinungsort|Erscheinungsorte
+facet_place_publish: Erscheinungsort|Erscheinungsorte
 placepublish: Erscheinungsort|Erscheinungsorte
 dc: Sammlung|Sammlungen
-facetpublisher: Verlag|Verlage
+facet_publisher: Verlag|Verlage
 publisher: Verlag|Verlage
 parentdoc_title_abbreviated: Serie|Serien
 creator: Autor|Autoren
-yearpublish: Erscheinungsjahr|Erscheinungsjahre
+facet_creator: Autor|Autoren
+year_publish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
 currentno: Band
 Catalogue: Katalogeintrag
@@ -101,12 +102,12 @@ score: Relevanz
 disclaimer: The Göttingen State and University Library provides access to digitized documents strictly for noncommercial educational, research and private purposes and makes no warranty with regard to their use for other purposes. Some of our collections are protected by copyright. Publication and/or broadcast in any form (including electronic) requires prior written permission from the Goettingen State- and University Library. Each copy of any part of this document must contain there Terms and Conditions. With the usage of the ibrary's online system to access or download a digitized document you accept there Terms and Conditions. Reproductions of material on the web site may not be made for or donated to other repositories, nor may be further reproduced without written permission from the Goettingen State- and University Library For reproduction requests and permissions, please contact us. If citing materials, please give proper attribution of the source.
 
 # sorts
-yearpublish_desc: Erscheinungsjahr absteigend
-yearpublish_asc: Erscheinungsjahr aufsteigend
-datemodified_desc: Importdatum absteigend
-datemodified_asc: Importdatum aufsteigend
-currentnosort_desc: Band absteigend
-currentnosort_asc: Band aufsteigend
+year_publish-desc: Erscheinungsjahr absteigend
+year_publish-asc: Erscheinungsjahr aufsteigend
+date_modified-desc: Importdatum absteigend
+date_modified-asc: Importdatum aufsteigend
+currentnosort-desc: Band absteigend
+currentnosort-asc: Band aufsteigend
 
 # Docstrct
 abstract: Abstrakt

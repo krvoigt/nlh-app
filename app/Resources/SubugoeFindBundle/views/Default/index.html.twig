@@ -8,19 +8,19 @@
     <div class="find_aside">
         <span class="find_count">{{ pagination.getTotalItemCount }} {{ 'results'|trans }}</span>,
         <span class="find_sort">
-            {% set sortandorder = app.request.get('sort') ~ '_' ~ app.request.get('direction') %}
+            {% set sortandorder = app.request.get('sort') ~ '-' ~ app.request.get('direction') %}
             {% set sort = app.request.get('sort') %}
             {% set route = app.request.attributes.get('_route') %}
             <label for="sort">{{ 'sorted by' | trans }}</label>
             <select class="find_sort-order" id="sort">
-                <option value="score_desc" {{ sortandorder == 'score_desc' ? 'selected' }}>{{ 'score' | trans }}</option>
-                <option value="yearpublish_desc" {{ sortandorder == 'yearpublish_desc' ? 'selected' }}>{{ 'yearpublish_desc' | transchoice(1) }}</option>
-                <option value="yearpublish_asc" {{ sortandorder == 'yearpublish_asc' ? 'selected' }}>{{ 'yearpublish_asc' | transchoice(1) }}</option>
-                <option value="datemodified_desc" {{ (sortandorder == 'datemodified_desc' or sort is empty or sort is not defined) and (route != '_volumes') ? 'selected' }}>{{ 'datemodified_desc' | trans }}</option>
-                <option value="datemodified_asc" {{ sortandorder == 'datemodified_asc' ? 'selected' }}>{{ 'datemodified_asc' | trans }}</option>
+                <option value="score-desc" {{ sortandorder == 'score_desc' ? 'selected' }}>{{ 'score' | trans }}</option>
+                <option value="year_publish-desc" {{ sortandorder == 'year_publish_desc' ? 'selected' }}>{{ 'year_publish-desc' | transchoice(1) }}</option>
+                <option value="year_publish-asc" {{ sortandorder == 'year_publish-asc' ? 'selected' }}>{{ 'year_publish-asc' | transchoice(1) }}</option>
+                <option value="date_modified-desc" {{ (sortandorder == 'date_modified-desc' or sort is empty or sort is not defined) and (route != '_volumes') ? 'selected' }}>{{ 'date_modified-desc' | trans }}</option>
+                <option value="date_modified-asc" {{ sortandorder == 'date_modified-asc' ? 'selected' }}>{{ 'date_modified-asc' | trans }}</option>
                 {% if route == '_volumes' %}
-                    <option value="currentnosort_asc" {{ sortandorder == 'currentnosort_asc' or sort is empty or sort is not defined ? 'selected' }}>{{ 'currentnosort_asc' | trans }}</option>
-                    <option value="currentnosort_desc" {{ sortandorder == 'currentnosort_desc' ? 'selected' }}>{{ 'currentnosort_desc' | trans }}</option>
+                    <option value="currentnosort-asc" {{ sortandorder == 'currentnosort-asc' or sort is empty or sort is not defined ? 'selected' }}>{{ 'currentnosort-asc' | trans }}</option>
+                    <option value="currentnosort-desc" {{ sortandorder == 'currentnosort-desc' ? 'selected' }}>{{ 'currentnosort-desc' | trans }}</option>
                 {% endif %}
             </select>
         </span>
@@ -51,9 +51,9 @@
                         </dd>
                     {% endif %}
 
-                    {% if parentDocument.yearpublish is defined %}
-                        <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
-                        <dd>{{ parentDocument.yearpublish }}</dd>
+                    {% if parentDocument['year_publish'] is defined %}
+                        <dt>{{ 'year_publish' | transchoice(1) }}:</dt>
+                        <dd>{{ parentDocument['year_publish'] }}</dd>
                     {% endif %}
 
                     {% if parentDocument.placepublish is defined %}
@@ -117,12 +117,12 @@
                                     {% endfor %}
                                 </dd>
                             {% endif %}
-                            {% if result.fields.yearpublish is defined %}
-                                <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
+                            {% if result.fields['year_publish'] is defined %}
+                                <dt>{{ 'year_publish' | transchoice(1) }}:</dt>
                                 <dd>
-                                    {{ result.fields.yearpublish }}
+                                    {{ result.fields['year_publish'] }}
                                     <span class="result_import-date">
-                                        {{ '(imported: %date%)'|trans({'%date%': result.fields.datemodified|date('Y-m-d')}) }}
+                                        {{ '(imported: %date%)'|trans({'%date%': result.fields['date_modified']|date('Y-m-d')}) }}
                                     </span>
                                 </dd>
                             {% endif %}

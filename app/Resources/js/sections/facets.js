@@ -31,10 +31,10 @@ $(function () {
         // TODO: Load query with yearpublish range (does only accept numbers so far)
         var startSearchWithNewFacet = function (range) {
             var queryString = window.location.search || '?';
-            queryString = queryString.replace(/filter%5B\d+%5D%5Byearpublish%5D=%5B\d+%20TO%20\d+%5D.*?(\&.*)?$/g, '$1');
+            queryString = queryString.replace(/filter%5B\d+%5D%5Byear_publish%5D=%5B\d+%20TO%20\d+%5D.*?(\&.*)?$/g, '$1');
             var index = (queryString.match(/filter%5B\d+%5D/g) || []).length;
             queryString += ( queryString.length > 1 ? '&' : '' );
-            queryString += encodeURIComponent('filter[' + index + '][yearpublish]') + '=' + encodeURIComponent('[' + range.from + ' TO ' + range.to + ']');
+            queryString += encodeURIComponent('filter[' + index + '][year_publish]') + '=' + encodeURIComponent('[' + range.from + ' TO ' + range.to + ']');
             window.location.href = window.location.href.split('?')[0] + queryString;
         };
 

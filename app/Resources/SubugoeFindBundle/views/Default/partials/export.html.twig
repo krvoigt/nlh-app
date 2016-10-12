@@ -64,8 +64,8 @@
             {% endif %}
         </div>
         <div id="pdf_year-publish">
-            {% if document.yearpublish is defined %}
-                {{ document.yearpublish }}
+            {% if document['year_publish'] is defined %}
+                {{ document['year_publish'] }}
             {% else %}
                 {{ '[unbekannt]'|trans }}
             {% endif %}
