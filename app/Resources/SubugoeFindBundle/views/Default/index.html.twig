@@ -121,9 +121,6 @@
                                 <dt>{{ 'year_publish' | transchoice(1) }}:</dt>
                                 <dd>
                                     {{ result.fields['year_publish'] }}
-                                    <span class="result_import-date">
-                                        {{ '(imported: %date%)'|trans({'%date%': result.fields['date_modified']|date('Y-m-d')}) }}
-                                    </span>
                                 </dd>
                             {% endif %}
                         </dl>
