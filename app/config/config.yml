@@ -9,6 +9,7 @@ parameters:
     locale: de
     image_cache: "%kernel.root_dir%/../var/images"
     collections:
+      - { id: "eai1", image: "vd18.digital.jpg" }
 
 framework:
     #esi:             ~
@@ -73,7 +74,7 @@ subugoe_find:
     feed_category: parentdoc_title_abbreviated
     feed_fields: ["title", "date_indexed"]
     facets:
-      - { title: parentdoc_title_abbreviated, field: parentdoc_title_abbreviated }
+      - { title: facet_product, field: facet_product }
       - { title: facet_creator, field: facet_creator }
       - { title: facet_place_publish, field: facet_place_publish }
       - { title: facet_publisher, field: facet_publisher }

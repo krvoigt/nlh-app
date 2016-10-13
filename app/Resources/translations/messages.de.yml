@@ -83,6 +83,9 @@ sorted by: sortiert nach
 uncounted: – # that's an ndash, not a dash
 Download this section as PDF: Diesen Abschnitt als PDF herunterladen
 
+#products
+eai1: Early American imprints
+
 # Fields
 docstrct: Strukturtyp|Strukturtypen
 facet_place_publish: Erscheinungsort|Erscheinungsorte
@@ -90,7 +93,7 @@ placepublish: Erscheinungsort|Erscheinungsorte
 dc: Sammlung|Sammlungen
 facet_publisher: Verlag|Verlage
 publisher: Verlag|Verlage
-parentdoc_title_abbreviated: Serie|Serien
+facet_product: Produkt|Produkte
 creator: Autor|Autoren
 facet_creator: Autor|Autoren
 year_publish: Erscheinungsjahr|Erscheinungsjahre

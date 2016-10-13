@@ -49,9 +49,9 @@
             {% endif %}
         {% endif %}
 
-        <dt>{{ 'parentdoc_title_abbreviated' | transchoice(document.parentdoc_title_abbreviated | length) }}</dt>
+        <dt>{{ 'facet_product' | transchoice(document.facet_product | length) }}</dt>
         <dd>
-            {% for dc in document.parentdoc_title_abbreviated %}
+            {% for dc in document.facet_product %}
                 <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
