@@ -3,7 +3,7 @@
 
     <dl>
         <dt>{{ 'bytitle'|trans }}</dt>
-        <dd>{{ document.subtitle | first }}</dd>
+        <dd>{{ document.title | first }}</dd>
 
         {% if document.creator is defined %}
             <dt>{{ 'creator' | transchoice(document.creator | length) }}</dt>

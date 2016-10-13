@@ -71,7 +71,7 @@ subugoe_find:
     feed_sort: "date_modified DESC"
     feed_rows: 15
     feed_category: parentdoc_title_abbreviated
-    feed_fields: ["subtitle", "date_indexed"]
+    feed_fields: ["title", "date_indexed"]
     facets:
       - { title: parentdoc_title_abbreviated, field: parentdoc_title_abbreviated }
       - { title: facet_creator, field: facet_creator }

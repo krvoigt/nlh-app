@@ -53,7 +53,7 @@
     </div>
 
     <div class="pdf_metadata">
-        <div id="pdf_title">{{ document.subtitle | first }}</div>
+        <div id="pdf_title">{{ document.title | first }}</div>
         <div id="pdf_author">
             {% if document.creator is defined %}
                 {% for author in document.creator %}
