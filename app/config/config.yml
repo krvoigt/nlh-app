@@ -8,6 +8,7 @@ imports:
 parameters:
     locale: de
     image_cache: "%kernel.root_dir%/../var/images"
+    thumbnail_size: "92,"
     collections:
       - { id: "eai1", image: "eai1.jpg" }
 
@@ -44,6 +45,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         metsService: "@mets_service"
+        thumbnail_size: "%thumbnail_size%"
+
 
 # Swiftmailer Configuration
 swiftmailer:
