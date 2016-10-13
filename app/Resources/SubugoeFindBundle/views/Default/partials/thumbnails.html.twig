@@ -5,7 +5,7 @@
                 {% set link = document.id ~ '?page=' ~ loop.index %}
                 {% set isCurrent = (page == documentStructure.page) %}
                 {# TODO: Find a more elegant way to build image URL #}
-                {% set identifier = (document.presentation_url[loop.index0] | replace({'https://nl.sub.uni-goettingen.de/image/': '','/full/full/0/default.jpg': ''})) %}
+                {% set identifier = document['nlh_id'][loop.index0] %}
                 <li class="thumbnails_item {{ isCurrent ? '-current' }}">
                     <a class="thumbnails_link" {{ not isCurrent ? 'href=' ~ link }}>
                         <img data-original="{{ path('_image', {'format': 'jpg', 'identifier': identifier, 'region': 'full', 'size': '92,', 'rotation': 0, 'quality': 'default'})  }}" alt="">

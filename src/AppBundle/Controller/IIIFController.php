@@ -93,11 +93,7 @@ class IIIFController extends Controller
 
         $document = $client->select($selectDocument)->getDocuments()[0];
 
-        $identifier = $document->presentation_url[$counter];
-
-        $identifier = str_replace('https://nl.sub.uni-goettingen.de/image/', '', $identifier);
-        $identifier = str_replace('/full/full/0/default.jpg', '', $identifier);
-
+        $identifier = $document->nlh_id[$counter];
         return $identifier;
     }
 
