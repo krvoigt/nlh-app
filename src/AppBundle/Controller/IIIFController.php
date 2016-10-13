@@ -94,6 +94,7 @@ class IIIFController extends Controller
         $document = $client->select($selectDocument)->getDocuments()[0];
 
         $identifier = $document->nlh_id[$counter];
+
         return $identifier;
     }
 
