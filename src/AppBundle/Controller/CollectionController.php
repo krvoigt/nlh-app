@@ -98,13 +98,9 @@ class CollectionController extends Controller
         $filterQueries = [];
 
         $dcFilter = new FilterQuery();
-        $dcFilter->setKey('dc')->setQuery('dc:'.$id);
-
-        $workQuery = new FilterQuery();
-        $workQuery->setKey('mets')->setQuery('ismets:true');
+        $dcFilter->setKey('facet_product')->setQuery('facet_product:'.$id);
 
         $filterQueries[] = $dcFilter;
-        $filterQueries[] = $workQuery;
 
         return $filterQueries;
     }
