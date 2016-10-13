@@ -1,5 +1,0 @@
-Durch Georg von Asch gelangte eine Sammlung russischer und asiatischer Bücher und Karten in die SUB Göttingen, die das weitgespannte Netz landeskundlicher Erforschung und Landnahme in Russland in der zweiten Hälfte des 18. Jahrhunderts abbildet. Aschs besonderes Interesse galt der Geschichte und Kultur Sibiriens von der Entdeckung bis hin zur Eroberung durch Russland.
-
-Unter den Beständen der Sammlung Asch befinden sich für die Forschung wichtige, bisher schwer zugängliche Bestände und wenig bekannte Materialien. Durch eine Kooperation mit dem amerikanisch-russischen multimedialen Digitalisierungsprojekt „Meeting of Frontiers“ der Library of Congress in Washington wurden nicht nur die forschungsrelevanten Göttinger Materialien dem Benutzer bereitgestellt, sondern darüber hinaus konnten diese Bestände auch mit inhaltlich ergänzenden seltenen Büchern, Photographien, Karten und anderem Quellenmaterial so bedeutender Bibliotheken wie der Library of Congress, der Staatsbibliothek in Moskau und der Nationalbibliothek in St. Petersburg gemeinsam erschlossen und digital frei zugänglich angeboten werden.
-
-**Status:** DFG-gefördert, abgeschlossen 2005

@@ -9,7 +9,7 @@ parameters:
     locale: de
     image_cache: "%kernel.root_dir%/../var/images"
     collections:
-      - { id: "eai1", image: "vd18.digital.jpg" }
+      - { id: "eai1", image: "eai1.jpg" }
 
 framework:
     #esi:             ~
@@ -71,8 +71,8 @@ subugoe_find:
     default_sort: "date_modified desc"
     feed_sort: "date_modified DESC"
     feed_rows: 15
-    feed_category: parentdoc_title_abbreviated
-    feed_fields: ["title", "date_indexed"]
+    feed_category: facet_product
+    feed_fields: ["title", "date_indexed", "id"]
     facets:
       - { title: facet_product, field: facet_product }
       - { title: facet_creator, field: facet_creator }

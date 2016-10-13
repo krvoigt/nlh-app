@@ -2,17 +2,17 @@
 {% set firstElement = feeds|first %}
 <rss version="2.0">
     <channel>
-        <title>GDZ RSS-Feed{% if category is not empty %} - {{ category | trans }}{% endif %}</title>
-        <pubDate>{{ firstElement.dateindexed }}</pubDate>
-        <lastBuildDate>{{ firstElement.dateindexed }}</lastBuildDate>
-        <description>The stream informs about newly added works to the  GDZ document server hosted at the SUB Göttingen.</description>
+        <title>Nationallizenzen RSS-Feed{% if category is not empty %} - {{ category | trans }}{% endif %}</title>
+        <pubDate>{{ firstElement.date_indexed }}</pubDate>
+        <lastBuildDate>{{ firstElement.date_indexed }}</lastBuildDate>
+        <description>The stream informs about newly added works to the  Nationallizenzen document server hosted at the SUB Göttingen.</description>
         {% for feed in feeds %}
             <item>
                 <title>{{ feed.title | first }}</title>
-                <link>{{ feed.purl }}</link>
-                <pubDate>{{ feed.dateindexed }}</pubDate>
+                <link>{{ path('_detail', {id: feed.id}) }}</link>
+                <pubDate>{{ feed.date_indexed }}</pubDate>
                 <description><![CDATA[
-                    {{ feed.dateindexed|date("d.m.Y") }}
+                    {{ feed.date_indexed|date("d.m.Y") }}
                 ]]></description>
             </item>
         {% endfor %}
