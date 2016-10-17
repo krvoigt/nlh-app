@@ -6,6 +6,7 @@ use AppBundle\Controller\IIIFController;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class WarmupThumbnailCacheCommand extends ContainerAwareCommand
@@ -17,7 +18,9 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
     {
         $this
             ->setName('app:warmup_thumbnail_cache')
-            ->setDescription('generates images for iiif');
+            ->setDescription('generates images for iiif')
+            ->addOption('direction', null, InputOption::VALUE_OPTIONAL, 'Sorting direction (asc or desc)', 'desc')
+            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 1000);
     }
 
     /**
@@ -26,7 +29,7 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = $this->getContainer()->get('solarium.client');
-        $query = $client->createSelect()->addSort('dateindexed', 'desc')->setRows(1000);
+        $query = $client->createSelect()->addSort('dateindexed', $input->getOption('direction'))->setRows($input->getOption('rows'));
         $resultset = $client->select($query);
 
         $controller = new IIIFController();
