@@ -120,8 +120,7 @@ liip_imagine:
         collections:
             quality: 75
             filters:
-                upscale: { min: [640, 640] }
-                crop: { start: [0, 0], size: [640, 640] }
+                thumbnail: { size : [640, 640], mode : outbound }
 
 services:
     twig.extension.tree:
