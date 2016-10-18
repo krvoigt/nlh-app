@@ -1,0 +1,134 @@
+<?php
+
+namespace AppBundle\Command;
+
+use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManager;
+use League\Csv\Reader;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
+
+class FetchAuthenticationCommand extends ContainerAwareCommand
+{
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configure()
+    {
+        $this
+            ->setName('app:fetch:authentication')
+            ->setDescription('Get Authentication information');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $this->entityManager = $this->getContainer()->get('doctrine')->getManager();
+        $this->getIps();
+    }
+
+    protected function getIps()
+    {
+        $dir = $this->getContainer()->getParameter('kernel.root_dir').'/../var/auth';
+
+        $finder = new Finder();
+        $files = $finder->in($dir);
+
+        $ipv4Ips = [];
+        foreach ($files as $file) {
+            $reader = Reader::createFromPath($file);
+            $reader->setDelimiter(';');
+            $keys = ['user_name', 'status', 'title', 'street', 'zip', 'city', 'county', 'country', 'telephone', 'fax', 'email', 'url', 'contactperson', 'sigel', 'ezb_id', 'subscriper_group', 'ipv4_allow', 'ipv4_deny', 'zuid', 'mtime', 'mtime_license', 'status_license', 'mtime_status'];
+
+            $results = $reader->fetchAssoc($keys);
+
+            foreach ($results as $key => $row) {
+                if ($key > 0) {
+                    $ipv4 = explode(',', $row['ipv4_allow']);
+                    $ipv4Ips = array_merge($ipv4Ips, $ipv4);
+                }
+            }
+        }
+
+        $product = 'prod';
+        $institution = 'inst';
+
+        $ipThirdPartArr = [];
+        $ipThirdPartElement = '';
+        foreach ($ipv4Ips as $k => $ipv4Ip) {
+            if (strchr($ipv4Ip, '*')) {
+                $ipv4Ip = str_replace('*', '0-255', $ipv4Ip);
+            }
+
+            if (strchr($ipv4Ip, '-')) {
+                $ipParts = explode('.', $ipv4Ip);
+                $ipFirstPart = $ipParts[0];
+                $ipSecondPart = $ipParts[1];
+                $ipThirdPart = $ipParts[2];
+                $ipFourthPart = $ipParts[3];
+
+                if (strchr($ipThirdPart, '-')) {
+                    $rangeNumber = explode('-', $ipThirdPart);
+                    $rangeIps = range($rangeNumber[0], $rangeNumber[1]);
+                    foreach ($rangeIps as $rangeIp) {
+                        $ipThirdPartArr[] = $ipFirstPart.'.'.$ipSecondPart.'.'.$rangeIp;
+                    }
+                } else {
+                    $ipThirdPartElement = $ipFirstPart.'.'.$ipSecondPart.'.'.$ipThirdPart;
+                }
+
+                if (strchr($ipFourthPart, '-')) {
+                    $rangeNumber = explode('-', $ipFourthPart);
+                    $rangeIps = range($rangeNumber[0], $rangeNumber[1]);
+                    foreach ($rangeIps as $rangeIp) {
+                        if (isset($ipThirdPartArr) && $ipThirdPartArr !== []) {
+                            foreach ($ipThirdPartArr as $ipPart) {
+                                $this->addUser($ipPart.'.'.$rangeIp, $institution, $product);
+                            }
+                        } else {
+                            $this->addUser($ipThirdPartElement.'.'.$rangeIp.'.'.$ipFourthPart, $institution, $product);
+                        }
+                    }
+                } else {
+                    if (isset($ipThirdPartArr) && $ipThirdPartArr !== []) {
+                        foreach ($ipThirdPartArr as $ipPart) {
+                            $this->addUser($ipPart.'.'.$ipFourthPart, $institution, $product);
+                        }
+                    } else {
+                        $this->addUser($ipThirdPartElement.'.'.$ipFourthPart, $institution, $product);
+                    }
+                }
+
+                $ipThirdPartArr = [];
+            } else {
+                $this->addUser($ipv4Ip, $institution, $product);
+            }
+        }
+    }
+
+    /**
+     * @param string $ipAddress
+     * @param string $institution
+     * @param string $product
+     */
+    protected function addUser($ipAddress, $institution, $product)
+    {
+        $user = new User();
+        $user
+               ->setIpAddress($ipAddress)
+               ->setInstitution($institution)
+               ->setProduct($product);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+}
