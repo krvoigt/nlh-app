@@ -13,7 +13,8 @@
     line-height: 1;
 }
 
-.result_info {
+.result_info,
+.result_tags {
     margin-bottom: round($grid / 4);
 
     dt {

@@ -46,7 +46,8 @@
                         <dt>{{ 'creator' | transchoice(parentDocument.creator | length) }}:</dt>
                         <dd>
                             {% for author in parentDocument.creator %}
-                                <a href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
+                                <a
+                                href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
                             {% endfor %}
                         </dd>
                     {% endif %}
@@ -70,18 +71,23 @@
                         <dt>{{ 'dc' | transchoice(parentDocument.dc | length) }}:</dt>
                         <dd>
                             {% for dc in parentDocument.dc %}
-                                <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
+                                <a
+                                href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
                             {% endfor %}
                         </dd>
                     {% endif %}
                 </dl>
 
                 <ul class="result_links">
-                    <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
+                    <li>
+                        <a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}">{{ 'DFG Viewer'|trans }}</a>
+                    </li>
                     <li><a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a></li>
                     <li><a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a></li>
                     {% if parentDocument.id_PPNanalog_s is defined %}
-                        <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+                        <li>
+                            <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a>
+                        </li>
                     {% endif %}
                 </ul>
             </li>
@@ -93,14 +99,17 @@
                     <div class="result_left">
                         {% if result.fields.presentation_url is defined %}
                             <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'https://nl.sub.uni-goettingen.de/image/': '','/full/full/0/default.jpg': ''})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                <img class="result_thumbnail"
+                                     src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'https://nl.sub.uni-goettingen.de/image/': '','/full/full/0/default.jpg': ''})), 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
+                                     alt="">
                             </a>
                         {% endif %}
                     </div>
                     <div class="result_metadata">
                         <h2 class="result_title">
 
-                                <a class="result_link" title="{{ result.fields.nonsort | first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.nonsort | first }}</a>
+                            <a class="result_link" title="{{ result.fields.nonsort | first }}"
+                               href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.nonsort | first }}</a>
                             <button class="result_title-toggle -expand">
                                 {{ 'Show full title'|trans }}
                             </button>
@@ -121,6 +130,37 @@
                                 <dt>{{ 'year_publish' | transchoice(1) }}:</dt>
                                 <dd>
                                     {{ result.fields['year_publish'] }}
+                                </dd>
+                            {% endif %}
+                        </dl>
+                        <dl class="result_tags">
+                            {% if result.fields['subject_topic'] is defined and result.fields['subject_topic'][0] != ' ' %}
+
+                                <dt>{{ 'subject_topic' | trans }}</dt>
+                                <dd>
+                                    {% for topic in result.fields.subject_topic %}
+                                        {{ topic }}
+                                        {% if  result.fields.subject_geographic[loop.index0] is defined and result.fields.subject_geographic[loop.index0] != ' ' %}
+                                            , {{ result.fields.subject_geographic[loop.index0] }}
+                                        {% endif %}
+                                        {% if  result.fields.subject_temporal[loop.index0] is defined and result.fields.subject_temporal[loop.index0] != ' ' %}
+                                            ({{ result.fields.subject_temporal[loop.index0] }})
+                                        {% endif %}{% if not loop.last %}; {% endif %}
+                                    {% endfor %}
+                                </dd>
+                            {% endif %}
+                            {% if result.fields['subject_title'] is defined and result.fields['subject_title'][0] != ' ' %}
+                                <dt>{{ 'subject_title' | trans }}</dt>
+                                <dd>
+                                    {% for title in result.fields.subject_title %}
+                                        {{ title }}
+                                        {% if  result.fields.subject_name[loop.index0] is defined and result.fields.subject_name[loop.index0] != ' ' %}
+                                            , {{ result.fields.subject_name[loop.index0] }}
+                                        {% endif %}
+                                        {% if  result.fields.subject_date[loop.index0] is defined and result.fields.subject_date[loop.index0] != ' ' %}
+                                            ({{ result.fields.subject_date[loop.index0] }}
+                                        {% endif %}{% if not loop.last %}; {% endif %}
+                                    {% endfor %}
                                 </dd>
                             {% endif %}
                         </dl>
