@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Image;
+use AppBundle\Model\Image;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
@@ -23,7 +23,7 @@ class IIIFController extends Controller
      */
     public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
     {
-        $imageEntity = new \AppBundle\Entity\Image();
+        $imageEntity = new Image();
         $imageEntity
             ->setIdentifier($identifier)
             ->setRegion($region)
@@ -103,7 +103,7 @@ class IIIFController extends Controller
      */
     public function infoJsonAction($identifier)
     {
-        $imageEntity = new \AppBundle\Entity\Image();
+        $imageEntity = new Image();
 
         $imageEntity->setIdentifier($this->getRealIdentifier($identifier));
 

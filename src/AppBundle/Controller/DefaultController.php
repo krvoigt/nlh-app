@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Solarium\QueryType\Select\Query\FilterQuery;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use AppBundle\Entity\DocumentStructure;
+use AppBundle\Model\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Solarium\QueryType\Select\Query\Query;

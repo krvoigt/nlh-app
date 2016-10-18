@@ -2,7 +2,7 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\TableOfContents;
+use AppBundle\Model\TableOfContents;
 use GuzzleHttp\Exception\ClientException;
 use League\Flysystem\Filesystem;
 use Symfony\Component\DomCrawler\Crawler;
