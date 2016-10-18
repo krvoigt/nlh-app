@@ -94,8 +94,10 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
                             foreach ($ipThirdPartArr as $ipPart) {
                                 $this->addUser($ipPart.'.'.$rangeIp, $institution, $product);
                             }
+                            $this->entityManager->flush();
                         } else {
                             $this->addUser($ipThirdPartElement.'.'.$rangeIp.'.'.$ipFourthPart, $institution, $product);
+                            $this->entityManager->flush();
                         }
                     }
                 } else {
@@ -103,8 +105,10 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
                         foreach ($ipThirdPartArr as $ipPart) {
                             $this->addUser($ipPart.'.'.$ipFourthPart, $institution, $product);
                         }
+                        $this->entityManager->flush();
                     } else {
                         $this->addUser($ipThirdPartElement.'.'.$ipFourthPart, $institution, $product);
+                        $this->entityManager->flush();
                     }
                 }
 
@@ -112,6 +116,8 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
             } else {
                 $this->addUser($ipv4Ip, $institution, $product);
             }
+            $this->entityManager->flush();
+            $this->entityManager->clear();
         }
     }
 
@@ -129,6 +135,5 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
                ->setProduct($product);
 
         $this->entityManager->persist($user);
-        $this->entityManager->flush();
     }
 }
