@@ -139,11 +139,9 @@
                                 <dt>{{ 'subject_topic' | trans }}</dt>
                                 <dd>
                                     {% for topic in result.fields.subject_topic %}
-                                        {{ topic }}
-                                        {% if  result.fields.subject_geographic[loop.index0] is defined and result.fields.subject_geographic[loop.index0] != ' ' %}
-                                            , {{ result.fields.subject_geographic[loop.index0] }}
-                                        {% endif %}
-                                        {% if  result.fields.subject_temporal[loop.index0] is defined and result.fields.subject_temporal[loop.index0] != ' ' %}
+                                        {{ topic }}{% if  result.fields.subject_geographic[loop.index0] is defined and result.fields.subject_geographic[loop.index0] != ' ' %},
+                                            {{ result.fields.subject_geographic[loop.index0] }}
+                                        {% endif %}{% if  result.fields.subject_temporal[loop.index0] is defined and result.fields.subject_temporal[loop.index0] != ' ' %}
                                             ({{ result.fields.subject_temporal[loop.index0] }})
                                         {% endif %}{% if not loop.last and result.fields.subject_topic[loop.index] != ' ' %}; {% endif %}
                                     {% endfor %}
@@ -153,11 +151,9 @@
                                 <dt>{{ 'subject_title' | trans }}</dt>
                                 <dd>
                                     {% for title in result.fields.subject_title %}
-                                        {{ title }}
-                                        {% if  result.fields.subject_name[loop.index0] is defined and result.fields.subject_name[loop.index0] != ' ' %}
-                                            , {{ result.fields.subject_name[loop.index0] }}
-                                        {% endif %}
-                                        {% if  result.fields.subject_date[loop.index0] is defined and result.fields.subject_date[loop.index0] != ' ' %}
+                                        {{ title }}{% if  result.fields.subject_name[loop.index0] is defined and result.fields.subject_name[loop.index0] != ' ' %},
+                                            {{ result.fields.subject_name[loop.index0] }}
+                                        {% endif %}{% if  result.fields.subject_date[loop.index0] is defined and result.fields.subject_date[loop.index0] != ' ' %}
                                             ({{ result.fields.subject_date[loop.index0] }})
                                         {% endif %}{% if not loop.last and result.fields.subject_title[loop.index] != ' ' %}; {% endif %}
                                     {% endfor %}
