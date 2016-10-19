@@ -71,7 +71,7 @@
                                 'q': (app.request.get('q')),
                                 'id': (app.request.get('id'))
                             }) %}
-                            {% set title = 'Remove filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value}) %}
+                            {% set title = 'Remove filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans}) %}
                         {% else %}
                             {% set class = 'facet_link' %}
                             {% set href = path(app.request.attributes.get('_route'), {
@@ -83,11 +83,11 @@
                                 'q': (app.request.get('q')),
                                 'id': (app.request.get('id'))
                             }) %}
-                            {% set title = 'Add filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value}) %}
+                            {% set title = 'Add filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans}) %}
                         {% endif %}
 
                         <a class="{{ class }}" href="{{ href }}" title="{{ title|raw }}">
-                            {{ value }}&nbsp;<span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
+                            {{ value|trans }}&nbsp;<span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
                         </a>
                     </li>
                 {% endfor %}
