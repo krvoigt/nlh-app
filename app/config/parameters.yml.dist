@@ -22,3 +22,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ChangeThisGdzSecret
     solr_host:         solr:password@host
+    auth_keys:
+      - { title: "abc", key: "def"}
+    auth_data: { username: "abc", password: "def" }
