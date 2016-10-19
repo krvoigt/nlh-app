@@ -4,6 +4,7 @@ namespace AppBundle\Command;
 
 use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
+use GuzzleHttp\Cookie\CookieJar;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +34,42 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->entityManager = $this->getContainer()->get('doctrine')->getManager();
+        $this->getAuthenticationFiles();
+        $output->writeln('Downloaded authentication files');
         $this->getIps();
+    }
+
+    /**
+     * Downloads and stores files with authenticatable ip addresses
+     */
+    protected function getAuthenticationFiles()
+    {
+        $client = $this->getContainer()->get('guzzle.client.auth');
+        $jar = new CookieJar();
+        $client->post('login_form', [
+            'cookies' => $jar,
+            'form_params' => [
+                'form.submitted' => 1,
+                '__ac_name' => $this->getContainer()->getParameter('auth_data')['username'],
+                '__ac_password' => $this->getContainer()->getParameter('auth_data')['password'],
+            ],
+        ]);
+
+        $keys = $this->getContainer()->getParameter('auth_keys');
+
+        foreach ($keys as $key) {
+            $csv = $client->get(
+            '/nllicencemodel_export?lmuid='.$key['key'].'&wfstate=authorized&mtype=text/csv',
+            [
+                'cookies' => $jar,
+            ]
+        )->getBody()->__toString();
+
+            $fs = $this->getContainer()->get('filesystem');
+            $target = $this->getContainer()->getParameter('kernel.root_dir').'/../var/auth/'.$key['title'].'.csv';
+
+            $fs->dumpFile($target, $csv);
+        }
     }
 
     protected function getIps()

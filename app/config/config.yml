@@ -136,3 +136,8 @@ oneup_flysystem:
     filesystems:
         nlh:
             adapter: storage
+
+guzzle:
+    clients:
+        auth:
+            base_url: "https://www.nationallizenzen.de/"
