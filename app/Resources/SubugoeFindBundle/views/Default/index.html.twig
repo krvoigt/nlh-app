@@ -6,24 +6,7 @@
 
 {% block findnavigation %}
     <div class="find_aside">
-        <span class="find_count">{{ pagination.getTotalItemCount }} {{ 'results'|trans }}</span>,
-        <span class="find_sort">
-            {% set sortandorder = app.request.get('sort') ~ '-' ~ app.request.get('direction') %}
-            {% set sort = app.request.get('sort') %}
-            {% set route = app.request.attributes.get('_route') %}
-            <label for="sort">{{ 'sorted by' | trans }}</label>
-            <select class="find_sort-order" id="sort">
-                <option value="score-desc" {{ sortandorder == 'score_desc' ? 'selected' }}>{{ 'score' | trans }}</option>
-                <option value="year_publish-desc" {{ sortandorder == 'year_publish_desc' ? 'selected' }}>{{ 'year_publish-desc' | transchoice(1) }}</option>
-                <option value="year_publish-asc" {{ sortandorder == 'year_publish-asc' ? 'selected' }}>{{ 'year_publish-asc' | transchoice(1) }}</option>
-                <option value="date_modified-desc" {{ (sortandorder == 'date_modified-desc' or sort is empty or sort is not defined) and (route != '_volumes') ? 'selected' }}>{{ 'date_modified-desc' | trans }}</option>
-                <option value="date_modified-asc" {{ sortandorder == 'date_modified-asc' ? 'selected' }}>{{ 'date_modified-asc' | trans }}</option>
-                {% if route == '_volumes' %}
-                    <option value="currentnosort-asc" {{ sortandorder == 'currentnosort-asc' or sort is empty or sort is not defined ? 'selected' }}>{{ 'currentnosort-asc' | trans }}</option>
-                    <option value="currentnosort-desc" {{ sortandorder == 'currentnosort-desc' ? 'selected' }}>{{ 'currentnosort-desc' | trans }}</option>
-                {% endif %}
-            </select>
-        </span>
+        <span class="find_count">{{ pagination.getTotalItemCount }} {{ 'results'|trans }}</span>
     </div>
     {{ knp_pagination_render(pagination) }}
 {% endblock %}
