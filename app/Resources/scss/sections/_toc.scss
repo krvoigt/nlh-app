@@ -4,6 +4,12 @@
     padding: ($grid / 2);
     position: relative;
     z-index: 0;
+
+    a {
+        @include hover {
+            background: $brand-color-lighter;
+        }
+    }
 }
 
 .toc_column {
@@ -57,7 +63,7 @@
 }
 
 .toc_list {
-    margin-left: 0;
+    margin: 0;
 
     & & {
         margin-left: $grid;

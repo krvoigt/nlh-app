@@ -33,7 +33,7 @@ $typo-scale-sizing-factor: 1; // Adjust heading font size for different font hei
 // Brand colors
 $brand-color: #1a3771;
 $brand-color-light: #93a8cf;
-$brand-color-lighter: rgba(lighten($brand-color, 50), .3);
+$brand-color-lighter: tint(lighten($brand-color, 50), 70);
 
 // Other base colors
 $grey: #666;
@@ -57,10 +57,10 @@ $text-color-lightest: tint($text-color, 60);
 
 $border-color: $grey-light;
 $header-bg: $grey-light;
-$highlight-color: $brand-color-lighter;
+$highlight-color: rgba(lighten($brand-color, 50), .3);
 
 $link-color: $brand-color;
-$link-hover-bg-color: $brand-color-lighter;
+$link-hover-bg-color: $highlight-color;
 $link-hover-bg-color-dark: $shade;
 
 $input-bg-color: $white;
@@ -75,14 +75,3 @@ $drop-shadow: 0 0 ($grid / 4) rgba($black, .5);
 $outline: 1px dotted $text-color-light;
 $shade-inset: 0 -1px $shade;
 $shine-inset: 0 1px $shine;
-
-// Legacy icons for infobox social links
-$social-icons: (
-    phone,
-    comments,
-    pencil,
-    facebook,
-    facebook-square,
-    twitter,
-    rss,
-);
