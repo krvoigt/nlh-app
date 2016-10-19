@@ -116,33 +116,6 @@
                                 </dd>
                             {% endif %}
                         </dl>
-                        <dl class="result_tags">
-                            {% if result.fields['subject_topic'] is defined and result.fields['subject_topic'][0] != ' ' %}
-
-                                <dt>{{ 'subject_topic' | trans }}</dt>
-                                <dd>
-                                    {% for topic in result.fields.subject_topic %}
-                                        {{ topic }}{% if  result.fields.subject_geographic[loop.index0] is defined and result.fields.subject_geographic[loop.index0] != ' ' %},
-                                            {{ result.fields.subject_geographic[loop.index0] }}
-                                        {% endif %}{% if  result.fields.subject_temporal[loop.index0] is defined and result.fields.subject_temporal[loop.index0] != ' ' %}
-                                            ({{ result.fields.subject_temporal[loop.index0] }})
-                                        {% endif %}{% if not loop.last and result.fields.subject_topic[loop.index] != ' ' %}; {% endif %}
-                                    {% endfor %}
-                                </dd>
-                            {% endif %}
-                            {% if result.fields['subject_title'] is defined and result.fields['subject_title'][0] != ' ' %}
-                                <dt>{{ 'subject_title' | trans }}</dt>
-                                <dd>
-                                    {% for title in result.fields.subject_title %}
-                                        {{ title }}{% if  result.fields.subject_name[loop.index0] is defined and result.fields.subject_name[loop.index0] != ' ' %},
-                                            {{ result.fields.subject_name[loop.index0] }}
-                                        {% endif %}{% if  result.fields.subject_date[loop.index0] is defined and result.fields.subject_date[loop.index0] != ' ' %}
-                                            ({{ result.fields.subject_date[loop.index0] }})
-                                        {% endif %}{% if not loop.last and result.fields.subject_title[loop.index] != ' ' %}; {% endif %}
-                                    {% endfor %}
-                                </dd>
-                            {% endif %}
-                        </dl>
                         <p>
                             {{ result.fields.docstrct | trans }}
                             {% if result.fields.docstrct == "volume" and result.fields.currentn is defined %}
