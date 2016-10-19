@@ -77,7 +77,7 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
 
         foreach ($keys as $key) {
             $csv = $client->get(
-            '/nllicencemodel_export?lmuid='.$key['key'].'&wfstate=authorized&mtype=text/csv',
+            'nllicencemodel_export?lmuid='.$key['key'].'&wfstate=authorized&mtype=text/csv',
             [
                 'cookies' => $jar,
             ]
