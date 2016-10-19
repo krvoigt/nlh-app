@@ -19,6 +19,11 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
     protected $entityManager;
 
     /**
+     * @var string
+     */
+    protected $authenticationDirectory;
+
+    /**
      * {@inheritdoc}
      */
     protected function configure()
@@ -34,13 +39,26 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->entityManager = $this->getContainer()->get('doctrine')->getManager();
+        $this->authenticationDirectory = $this->getContainer()->getParameter('kernel.root_dir').'/../var/auth/';
+
+        $this->emptyAuthenticationFileDirectory();
+        $output->writeln('Removed authentication files');
+
         $this->getAuthenticationFiles();
         $output->writeln('Downloaded authentication files');
         $this->getIps();
     }
 
     /**
-     * Downloads and stores files with authenticatable ip addresses
+     * Deletes the directory containing the downloaded files
+     */
+    protected function emptyAuthenticationFileDirectory()
+    {
+        $this->getContainer()->get('filesystem')->remove($this->authenticationDirectory);
+    }
+
+    /**
+     * Downloads and stores files with authenticatable ip addresses.
      */
     protected function getAuthenticationFiles()
     {
@@ -66,7 +84,7 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
         )->getBody()->__toString();
 
             $fs = $this->getContainer()->get('filesystem');
-            $target = $this->getContainer()->getParameter('kernel.root_dir').'/../var/auth/'.$key['title'].'.csv';
+            $target = $this->authenticationDirectory.$key['title'].'.csv';
 
             $fs->dumpFile($target, $csv);
         }
@@ -74,10 +92,8 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
 
     protected function getIps()
     {
-        $dir = $this->getContainer()->getParameter('kernel.root_dir').'/../var/auth';
-
         $finder = new Finder();
-        $files = $finder->in($dir);
+        $files = $finder->in($this->authenticationDirectory);
 
         $ipv4Ips = [];
         foreach ($files as $file) {
