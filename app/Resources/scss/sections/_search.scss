@@ -68,10 +68,6 @@
     top: 0;
     width: 100%;
 
-    @include respond-to(medium) {
-        border-radius: 0 0 $br $br;
-    }
-
     &.-visible {
         display: block;
     }
