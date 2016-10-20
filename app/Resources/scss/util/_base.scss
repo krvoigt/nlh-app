@@ -4,11 +4,6 @@ html {
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-
-    &.-fixed {
-        min-width: map-get($breakpoints, large);
-        overflow-x: auto;
-    }
 }
 
 *,
@@ -56,7 +51,7 @@ button {
     font-weight: bold;
 
     @include hover {
-        background: $link-hover-bg-color
+        background: $highlight-color;
     }
 
     // Fix button size in Firefox

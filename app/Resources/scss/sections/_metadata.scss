@@ -1,6 +1,10 @@
 .metadata {
     overflow-y: auto;
     padding: ($grid / 2);
+}
+
+.metadata_list {
+    margin: 0;
 
     dt {
         float: none;
@@ -8,20 +12,30 @@
     }
 
     dd {
-        margin-bottom: 1em;
+        margin-bottom: ($grid / 2);
         width: auto;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 
 .metadata_links {
     border-top: $border-width solid $border-color;
     clear: left;
-    margin: ($grid / 2) (-$grid / 2) (-$grid);
+    margin: ($grid / 2) (-$grid / 2) (-$grid / 2);
     padding: ($grid / 2);
 
     li {
         &::before {
             content: none;
         }
+    }
+}
+
+.metadata_link {
+    &.-mets {
+        @include icon(file-code-o);
     }
 }
