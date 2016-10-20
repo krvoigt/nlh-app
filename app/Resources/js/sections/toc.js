@@ -1,9 +1,10 @@
+// TOC is initialized by viewer when TOC panel is first opened
 var TOC = {
     init: function () {
-        var _this = this;
+        var that = this;
         $.get(window.location.origin + window.location.pathname + '/toc/', function (data) {
             $('.toc_content').html(data);
-            _this.bindEvents();
+            that.bindEvents();
         });
         this.isInited = true;
     },
@@ -16,7 +17,7 @@ var TOC = {
         });
 
         $('.toc_pdf').click(function () {
-            $('.viewer_control.-toggle-panel[data-target="export"]:not(.-active)').click();
+            $('.viewer_control.-toggle-panel.-export:not(.-active)').click();
             $('#physIDstart').val( $(this).data('start') );
             $('#physIDend').val( $(this).data('end') );
             return false;
@@ -25,5 +26,3 @@ var TOC = {
 
     isInited: false,
 }
-
-// TOC is initialized by viewer when TOC panel is first opened
