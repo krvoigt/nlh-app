@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html>
-    {% include "partials/site/head.html.twig" %}
-    <body class="site">
+<html lang="de">
+{% include "partials/site/head.html.twig" %}
+<body class="site">
 
-        {% include 'partials/site/header.html.twig' %}
+    {% include 'partials/site/header.html.twig' %}
 
-        <div class="content">
-            {% block body %}{% endblock %}
-        </div>
+    <div class="content">
+        {% block body %}{% endblock %}
+    </div>
 
-        {% include 'partials/site/footer.html.twig' %}
+    {% include 'partials/site/footer.html.twig' %}
 
-        {% include 'partials/site/colophon.html.twig' %}
+    {% include 'partials/site/colophon.html.twig' %}
 
-        {% block javascripts %}
-            <script src="{{ asset('js/vendor.js') }}"></script>
-            <script src="{{ asset('js/sub-legacy.js') }}"></script>
-        {% endblock %}
-    </body>
-</html>
+    {% block javascripts %}
+        <script src="{{ asset('js/vendor.js') }}"></script>
+        <script src="{{ asset('js/sub-legacy.js') }}"></script>
+    {% endblock %}
+</body>
