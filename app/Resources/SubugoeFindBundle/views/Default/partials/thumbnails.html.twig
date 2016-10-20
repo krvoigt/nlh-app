@@ -5,7 +5,7 @@
                 {% set link = document.id ~ '?page=' ~ physPage %}
                 {% set isCurrent = (physPage == documentStructure.page) %}
                 {# TODO: Find a more elegant way to build image URL #}
-                {% set identifier = (document.presentation_url[physPage - 1] | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
+                {% set identifier = (document.presentation_url[physPage - 1]|replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})) %}
                 <li class="thumbnails_item {{ isCurrent ? '-current' }}">
                     <a class="thumbnails_link" {{ not isCurrent ? 'href=' ~ link }}>
                         <img data-original="{{ path('_image', {'format': 'jpg', 'identifier': identifier, 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'})  }}" alt="">

@@ -11,16 +11,16 @@
             {% set sortandorder = app.request.get('sort') ~ '_' ~ app.request.get('direction') %}
             {% set sort = app.request.get('sort') %}
             {% set route = app.request.attributes.get('_route') %}
-            <label for="sort">{{ 'sorted by' | trans }}</label>
+            <label for="sort">{{ 'sorted by'|trans }}</label>
             <select class="find_sort-order" id="sort">
-                <option value="score_desc" {{ sortandorder == 'score_desc' ? 'selected' }}>{{ 'score' | trans }}</option>
-                <option value="yearpublish_desc" {{ sortandorder == 'yearpublish_desc' ? 'selected' }}>{{ 'yearpublish_desc' | transchoice(1) }}</option>
-                <option value="yearpublish_asc" {{ sortandorder == 'yearpublish_asc' ? 'selected' }}>{{ 'yearpublish_asc' | transchoice(1) }}</option>
-                <option value="datemodified_desc" {{ (sortandorder == 'datemodified_desc' or sort is empty or sort is not defined) and (route != '_volumes') ? 'selected' }}>{{ 'datemodified_desc' | trans }}</option>
-                <option value="datemodified_asc" {{ sortandorder == 'datemodified_asc' ? 'selected' }}>{{ 'datemodified_asc' | trans }}</option>
+                <option value="score_desc" {{ sortandorder == 'score_desc' ? 'selected' }}>{{ 'score'|trans }}</option>
+                <option value="yearpublish_desc" {{ sortandorder == 'yearpublish_desc' ? 'selected' }}>{{ 'yearpublish_desc'|transchoice(1) }}</option>
+                <option value="yearpublish_asc" {{ sortandorder == 'yearpublish_asc' ? 'selected' }}>{{ 'yearpublish_asc'|transchoice(1) }}</option>
+                <option value="datemodified_desc" {{ (sortandorder == 'datemodified_desc' or sort is empty or sort is not defined) and (route != '_volumes') ? 'selected' }}>{{ 'datemodified_desc'|trans }}</option>
+                <option value="datemodified_asc" {{ sortandorder == 'datemodified_asc' ? 'selected' }}>{{ 'datemodified_asc'|trans }}</option>
                 {% if route == '_volumes' %}
-                    <option value="currentnosort_asc" {{ sortandorder == 'currentnosort_asc' or sort is empty or sort is not defined ? 'selected' }}>{{ 'currentnosort_asc' | trans }}</option>
-                    <option value="currentnosort_desc" {{ sortandorder == 'currentnosort_desc' ? 'selected' }}>{{ 'currentnosort_desc' | trans }}</option>
+                    <option value="currentnosort_asc" {{ sortandorder == 'currentnosort_asc' or sort is empty or sort is not defined ? 'selected' }}>{{ 'currentnosort_asc'|trans }}</option>
+                    <option value="currentnosort_desc" {{ sortandorder == 'currentnosort_desc' ? 'selected' }}>{{ 'currentnosort_desc'|trans }}</option>
                 {% endif %}
             </select>
         </span>
@@ -39,11 +39,11 @@
                 <h2 class="viewer_heading">{{ parentDocument.title|first }}</h2>
 
                 <dl class="result_info -no-clear">
-                    <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
-                    <dd>{{ parentDocument.docstrct | trans }}</dd>
+                    <dt>{{ 'docstrct'|transchoice(1) }}:</dt>
+                    <dd>{{ parentDocument.docstrct|trans }}</dd>
 
                     {% if parentDocument.creator is defined %}
-                        <dt>{{ 'creator' | transchoice(parentDocument.creator | length) }}:</dt>
+                        <dt>{{ 'creator'|transchoice(parentDocument.creator|length) }}:</dt>
                         <dd>
                             {% for author in parentDocument.creator %}
                                 <a href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
@@ -52,25 +52,25 @@
                     {% endif %}
 
                     {% if parentDocument.yearpublish is defined %}
-                        <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
+                        <dt>{{ 'yearpublish'|transchoice(1) }}:</dt>
                         <dd>{{ parentDocument.yearpublish }}</dd>
                     {% endif %}
 
                     {% if parentDocument.placepublish is defined %}
-                        <dt>{{ 'placepublish' | transchoice(parentDocument.placepublish | length) }}:</dt>
+                        <dt>{{ 'placepublish'|transchoice(parentDocument.placepublish|length) }}:</dt>
                         <dd>{{ parentDocument.placepublish|join(', ') }}</dd>
                     {% endif %}
 
                     {% if parentDocument.publisher is defined %}
-                        <dt>{{ 'publisher' | transchoice(parentDocument.publisher | length) }}:</dt>
+                        <dt>{{ 'publisher'|transchoice(parentDocument.publisher|length) }}:</dt>
                         <dd>{{ parentDocument.publisher|join(', ') }}</dd>
                     {% endif %}
 
                     {% if parentDocument.dc is defined %}
-                        <dt>{{ 'dc' | transchoice(parentDocument.dc | length) }}:</dt>
+                        <dt>{{ 'dc'|transchoice(parentDocument.dc|length) }}:</dt>
                         <dd>
                             {% for dc in parentDocument.dc %}
-                                <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
+                                <a href="{{ path('_collection', {id: dc}) }}">{{ dc|trans }}</a>{% if loop.last %}{% else %}, {% endif %}
                             {% endfor %}
                         </dd>
                     {% endif %}
@@ -81,7 +81,7 @@
                     <li><a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a></li>
                     <li><a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a></li>
                     {% if parentDocument.id_PPNanalog_s is defined %}
-                        <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+                        <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
                     {% endif %}
                 </ul>
             </li>
@@ -94,11 +94,11 @@
                         {% if result.fields.presentation_url is defined %}
                             {% if result.fields.isanchor %}
                                 <a class="result_link -image" href="{{ path('_volumes', {'id': result.fields.id}) }}">
-                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0|replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}" alt="">
                                 </a>
                             {% else %}
                                 <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0 | replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0|replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}" alt="">
                                 </a>
                             {% endif %}
                         {% endif %}
@@ -106,9 +106,9 @@
                     <div class="result_metadata">
                         <h2 class="result_title">
                             {% if result.fields.isanchor %}
-                                <a class="result_link" title="{{ result.fields.title | first }}" href="{{ path('_volumes', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                                <a class="result_link" title="{{ result.fields.title|first }}" href="{{ path('_volumes', {'id': result.fields.id}) }}">{{ result.fields.title|first }}</a>
                             {% else %}
-                                <a class="result_link" title="{{ result.fields.title | first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                                <a class="result_link" title="{{ result.fields.title|first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title|first }}</a>
                             {% endif %}
                             <button class="result_title-toggle -expand">
                                 {{ 'Show full title'|trans }}
@@ -119,7 +119,7 @@
                         </h2>
                         <dl class="result_info">
                             {% if result.fields.creator is defined %}
-                                <dt>{{ 'creator' | transchoice(result.fields.creator | length) }}:</dt>
+                                <dt>{{ 'creator'|transchoice(result.fields.creator|length) }}:</dt>
                                 <dd>
                                     {% for author in result.fields.creator %}
                                         {{ author }}{% if not loop.last %}; {% endif %}
@@ -127,7 +127,7 @@
                                 </dd>
                             {% endif %}
                             {% if result.fields.yearpublish is defined %}
-                                <dt>{{ 'yearpublish' | transchoice(1) }}:</dt>
+                                <dt>{{ 'yearpublish'|transchoice(1) }}:</dt>
                                 <dd>
                                     {{ result.fields.yearpublish }}
                                     <span class="result_import-date">
@@ -137,9 +137,9 @@
                             {% endif %}
                         </dl>
                         <p>
-                            {{ result.fields.docstrct | trans }}
-                            {% if result.fields.docstrct == "volume" and result.fields.currentn is defined %}
-                                — {{ 'currentno'|trans }} {{ result.fields.currentno }}
+                            {{ result.fields.docstrct|trans }}
+                            {% if result.fields.docstrct == 'volume' and result.fields.currentn is defined %}
+                                &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
                             {% endif %}
                         </p>
                     </div>

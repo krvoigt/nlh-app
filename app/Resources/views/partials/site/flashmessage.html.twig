@@ -1,5 +1,5 @@
 {% for flash_message in app.session.flashBag.get('notice') %}
     <div class="flashmessage -notice">
-        {{ flash_message | trans }}
+        {{ flash_message|trans }}
     </div>
 {% endfor %}
