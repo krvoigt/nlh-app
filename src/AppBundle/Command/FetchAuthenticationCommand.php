@@ -46,11 +46,15 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
 
         $this->getAuthenticationFiles();
         $output->writeln('Downloaded authentication files');
+
+        $importStartTime = microtime(true);
         $this->getIps();
+        $importEndTime = microtime(true);
+        $output->writeln('Total import completed in '.number_format($importEndTime - $importStartTime, 2).'s', true);
     }
 
     /**
-     * Deletes the directory containing the downloaded files
+     * Deletes the directory containing the downloaded files.
      */
     protected function emptyAuthenticationFileDirectory()
     {
@@ -97,6 +101,7 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
 
         $ipv4Ips = [];
         foreach ($files as $file) {
+            $product = explode('.', $file->getFilename())[0];
             $reader = Reader::createFromPath($file);
             $reader->setDelimiter(';');
             $keys = ['user_name', 'status', 'title', 'street', 'zip', 'city', 'county', 'country', 'telephone', 'fax', 'email', 'url', 'contactperson', 'sigel', 'ezb_id', 'subscriper_group', 'ipv4_allow', 'ipv4_deny', 'zuid', 'mtime', 'mtime_license', 'status_license', 'mtime_status'];
@@ -105,87 +110,86 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
 
             foreach ($results as $key => $row) {
                 if ($key > 0) {
-                    $ipv4 = explode(',', $row['ipv4_allow']);
-                    $ipv4Ips = array_merge($ipv4Ips, $ipv4);
+                    $ipv4Arr = explode(',', $row['ipv4_allow']);
+                    foreach ($ipv4Arr as $ipv4) {
+                        $ipv4Ips[] = [$product, $row['title'], $ipv4];
+                    }
                 }
             }
         }
 
-        $product = 'prod';
-        $institution = 'inst';
-
-        $ipThirdPartArr = [];
-        $ipThirdPartElement = '';
+        $thirdPartRanges = [];
+        $fourthPartRanges = [];
         foreach ($ipv4Ips as $k => $ipv4Ip) {
-            if (strchr($ipv4Ip, '*')) {
-                $ipv4Ip = str_replace('*', '0-255', $ipv4Ip);
+            if (strchr($ipv4Ip[2], '*')) {
+                $ipv4Ip[2] = str_replace('*', '0-255', $ipv4Ip[2]);
             }
 
-            if (strchr($ipv4Ip, '-')) {
-                $ipParts = explode('.', $ipv4Ip);
-                $ipFirstPart = $ipParts[0];
-                $ipSecondPart = $ipParts[1];
-                $ipThirdPart = $ipParts[2];
-                $ipFourthPart = $ipParts[3];
+            $ipParts = explode('.', $ipv4Ip[2]);
 
-                if (strchr($ipThirdPart, '-')) {
-                    $rangeNumber = explode('-', $ipThirdPart);
-                    $rangeIps = range($rangeNumber[0], $rangeNumber[1]);
-                    foreach ($rangeIps as $rangeIp) {
-                        $ipThirdPartArr[] = $ipFirstPart.'.'.$ipSecondPart.'.'.$rangeIp;
-                    }
-                } else {
-                    $ipThirdPartElement = $ipFirstPart.'.'.$ipSecondPart.'.'.$ipThirdPart;
-                }
+            $ipFirstPart = $ipParts[0];
+            $ipSecondPart = $ipParts[1];
+            $ipThirdPart = $ipParts[2];
+            $ipFourthPart = $ipParts[3];
 
-                if (strchr($ipFourthPart, '-')) {
-                    $rangeNumber = explode('-', $ipFourthPart);
-                    $rangeIps = range($rangeNumber[0], $rangeNumber[1]);
-                    foreach ($rangeIps as $rangeIp) {
-                        if (isset($ipThirdPartArr) && $ipThirdPartArr !== []) {
-                            foreach ($ipThirdPartArr as $ipPart) {
-                                $this->addUser($ipPart.'.'.$rangeIp, $institution, $product);
-                            }
-                            $this->entityManager->flush();
-                        } else {
-                            $this->addUser($ipThirdPartElement.'.'.$rangeIp.'.'.$ipFourthPart, $institution, $product);
-                            $this->entityManager->flush();
-                        }
-                    }
-                } else {
-                    if (isset($ipThirdPartArr) && $ipThirdPartArr !== []) {
-                        foreach ($ipThirdPartArr as $ipPart) {
-                            $this->addUser($ipPart.'.'.$ipFourthPart, $institution, $product);
-                        }
-                        $this->entityManager->flush();
-                    } else {
-                        $this->addUser($ipThirdPartElement.'.'.$ipFourthPart, $institution, $product);
-                        $this->entityManager->flush();
-                    }
-                }
-
-                $ipThirdPartArr = [];
+            if (strchr($ipThirdPart, '-')) {
+                $thirdPartRanges = explode('-', $ipThirdPart);
             } else {
-                $this->addUser($ipv4Ip, $institution, $product);
+                $ipThirdPart = $ipParts[2];
             }
-            $this->entityManager->flush();
-            $this->entityManager->clear();
+
+            if (strchr($ipFourthPart, '-')) {
+                $fourthPartRanges = explode('-', $ipFourthPart);
+            } else {
+                $ipFourthPart = $ipParts[3];
+            }
+
+            $startIp = $ipFirstPart.'.'.$ipSecondPart;
+            if (is_array($thirdPartRanges) && $thirdPartRanges != []) {
+                $startIp .= '.'.$thirdPartRanges[0];
+            } else {
+                $startIp .= '.'.$ipThirdPart;
+            }
+            if (is_array($fourthPartRanges) && $fourthPartRanges != []) {
+                $startIp .= '.'.$fourthPartRanges[0];
+            } else {
+                $startIp .= '.'.$ipFourthPart;
+            }
+
+            $endIp = $ipFirstPart.'.'.$ipSecondPart;
+            if (is_array($thirdPartRanges) && $thirdPartRanges != []) {
+                $endIp .= '.'.$thirdPartRanges[1];
+            } else {
+                $endIp .= '.'.$ipThirdPart;
+            }
+            if (is_array($fourthPartRanges) && $fourthPartRanges != []) {
+                $endIp .= '.'.$fourthPartRanges[1];
+            } else {
+                $endIp .= '.'.$ipFourthPart;
+            }
+
+            $thirdPartRanges = [];
+            $fourthPartRanges = [];
+
+            $this->addUser(ip2long($startIp), ip2long($endIp), $ipv4Ip[1], $ipv4Ip[0]);
         }
     }
 
     /**
-     * @param string $ipAddress
+     * @param string $startIpAddress
+     * @param string $endIpAddress
      * @param string $institution
      * @param string $product
      */
-    protected function addUser($ipAddress, $institution, $product)
+    protected function addUser($startIpAddress, $endIpAddress, $institution, $product)
     {
         $user = new User();
         $user
-               ->setIpAddress($ipAddress)
-               ->setInstitution($institution)
-               ->setProduct($product);
-
+            ->setStartIpAddress($startIpAddress)
+            ->setEndIpAddress($endIpAddress)
+            ->setInstitution($institution)
+            ->setProduct($product);
         $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }

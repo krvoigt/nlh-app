@@ -24,9 +24,16 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="ipAddress", type="string", length=255)
+     * @ORM\Column(name="startIpAddress", type="string", length=255)
      */
-    private $ipAddress;
+    private $startIpAddress;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="endIpAddress", type="string", length=255)
+     */
+    private $endIpAddress;
 
     /**
      * @var string
@@ -53,27 +60,51 @@ class User
     }
 
     /**
-     * Set ipAddress.
+     * Set startIpAddress.
      *
-     * @param string $ipAddress
+     * @param string $startIpAddress
      *
      * @return User
      */
-    public function setIpAddress($ipAddress)
+    public function setStartIpAddress($startIpAddress)
     {
-        $this->ipAddress = $ipAddress;
+        $this->startIpAddress = $startIpAddress;
 
         return $this;
     }
 
     /**
-     * Get ipAddress.
+     * Get startIpAddress.
      *
      * @return string
      */
-    public function getIpAddress()
+    public function getStartIpAddress()
     {
-        return $this->ipAddress;
+        return $this->startIpAddress;
+    }
+
+    /**
+     * Set endIpAddress.
+     *
+     * @param string $endIpAddress
+     *
+     * @return User
+     */
+    public function setEndIpAddress($endIpAddress)
+    {
+        $this->endIpAddress = $endIpAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get endIpAddress.
+     *
+     * @return string
+     */
+    public function getEndIpAddress()
+    {
+        return $this->endIpAddress;
     }
 
     /**

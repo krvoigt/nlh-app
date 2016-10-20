@@ -34,12 +34,13 @@ class ClientIpVoter implements VoterInterface
     public function vote(TokenInterface $token, $object, array $attributes)
     {
         $clientIp = $this->container->get('request_stack')->getMasterRequest()->getClientIp();
-        //$clientIp = '143.93.144.0';
+        //$clientIp = '143.93.144.1';
 
         $repository = $this->container->get('doctrine')->getRepository('AppBundle:User');
-        $result = $repository->findByIpAddress($clientIp);
 
-        if (count($result >= 1)) {
+        $user = $repository->compareIp(ip2long($clientIp));
+
+        if (count($user) >= 1) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
