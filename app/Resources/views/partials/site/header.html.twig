@@ -1,6 +1,6 @@
 {% set activeCollection = activeCollection is defined ? activeCollection : null %}
-{% set collection = app.request.query.get('collection') | default(document is defined ? 'document' : (activeCollection ? 'activeCollection' : 'all')) %}
-{% set scope = app.request.query.get('scope') | default('metadata') %}
+{% set collection = app.request.query.get('collection')|default(document is defined ? 'document' : (activeCollection ? 'activeCollection' : 'all')) %}
+{% set scope = app.request.query.get('scope')|default('metadata') %}
 
 <header class="header" data-role="header">
     <div class="header_top">

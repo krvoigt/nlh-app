@@ -22,11 +22,11 @@
                 <h2 class="viewer_heading">{{ parentDocument.title|first }}</h2>
 
                 <dl class="result_info -no-clear">
-                    <dt>{{ 'docstrct' | transchoice(1) }}:</dt>
-                    <dd>{{ parentDocument.docstrct | trans }}</dd>
+                    <dt>{{ 'docstrct'|transchoice(1) }}:</dt>
+                    <dd>{{ parentDocument.docstrct|trans }}</dd>
 
                     {% if parentDocument.creator is defined %}
-                        <dt>{{ 'creator' | transchoice(parentDocument.creator | length) }}:</dt>
+                        <dt>{{ 'creator'|transchoice(parentDocument.creator|length) }}:</dt>
                         <dd>
                             {% for author in parentDocument.creator %}
                                 <a
@@ -41,17 +41,17 @@
                     {% endif %}
 
                     {% if parentDocument.placepublish is defined %}
-                        <dt>{{ 'placepublish' | transchoice(parentDocument.placepublish | length) }}:</dt>
+                        <dt>{{ 'placepublish'|transchoice(parentDocument.placepublish|length) }}:</dt>
                         <dd>{{ parentDocument.placepublish|join(', ') }}</dd>
                     {% endif %}
 
                     {% if parentDocument.publisher is defined %}
-                        <dt>{{ 'publisher' | transchoice(parentDocument.publisher | length) }}:</dt>
+                        <dt>{{ 'publisher'|transchoice(parentDocument.publisher|length) }}:</dt>
                         <dd>{{ parentDocument.publisher|join(', ') }}</dd>
                     {% endif %}
 
                     {% if parentDocument.dc is defined %}
-                        <dt>{{ 'dc' | transchoice(parentDocument.dc | length) }}:</dt>
+                        <dt>{{ 'dc'|transchoice(parentDocument.dc|length) }}:</dt>
                         <dd>
                             {% for dc in parentDocument.dc %}
                                 <a
@@ -102,7 +102,7 @@
                         </h2>
                         <dl class="result_info">
                             {% if result.fields.creator is defined %}
-                                <dt>{{ 'creator' | transchoice(result.fields.creator | length) }}:</dt>
+                                <dt>{{ 'creator'|transchoice(result.fields.creator|length) }}:</dt>
                                 <dd>
                                     {% for author in result.fields.creator %}
                                         {{ author }}{% if not loop.last %}; {% endif %}
@@ -117,9 +117,9 @@
                             {% endif %}
                         </dl>
                         <p>
-                            {{ result.fields.docstrct | trans }}
-                            {% if result.fields.docstrct == "volume" and result.fields.currentn is defined %}
-                                — {{ 'currentno'|trans }} {{ result.fields.currentno }}
+                            {{ result.fields.docstrct|trans }}
+                            {% if result.fields.docstrct == 'volume' and result.fields.currentn is defined %}
+                                &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
                             {% endif %}
                         </p>
                     </div>
