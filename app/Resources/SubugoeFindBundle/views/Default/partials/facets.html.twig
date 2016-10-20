@@ -5,14 +5,17 @@
 <div class="facets_body">
     {% if queryParams %}
         <a
-                class="facets_remove"
-                href="{{ path(app.request.attributes.get('_route'), {'id': app.request.get('id')}, app.request.query.all|merge({'filter': null})) }}"
+            class="facets_remove"
+            href="{{ path(app.request.attributes.get('_route'), {
+                'id': app.request.get('id'),
+                'q': app.request.get('q')
+            }) }}"
         >
             {{ 'Remove all filters'|trans }}
         </a>
     {% endif %}
 
-    {% for key, facet in facets %}
+    {% for key, facet in facets if facet|length > 0 %}
         {% set filterValues = [] %}
         {% for index, filter in queryParams %}
             {% if filter[key] is defined %}
@@ -43,8 +46,8 @@
                                         class="facet_link -remove"
                                         href="{{ path(app.request.attributes.get('_route'), {
                                             'filter': queryParamsSliced,
-                                            'q': (app.request.get('q')),
-                                            'id': (app.request.get('id'))
+                                            'id': app.request.get('id'),
+                                            'q': app.request.get('q'),
                                         }) }}"
                                         title="{{ 'Remove filter: publishing year range'|trans }}"
                                 >
@@ -87,7 +90,7 @@
                         {% endif %}
 
                         <a class="{{ class }}" href="{{ href }}" title="{{ title|raw }}">
-                            {{ value|trans }}&nbsp;<span class="facet_count">{{ count | number_format(0, ',', '.') }}</span>
+                            {{ value|trans }}&nbsp;<span class="facet_count">{{ count|number_format(0, ',', '.') }}</span>
                         </a>
                     </li>
                 {% endfor %}
