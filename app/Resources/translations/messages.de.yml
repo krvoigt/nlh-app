@@ -51,54 +51,57 @@ E-mail: E-Mail
 Submit: Absenden
 
 # Viewer
+Contained in: Enthalten in
 Contents: Inhalt
-page: Seite
-pages: Seiten
 Current page: Derzeitige Seite
 Current pages: Derzeitige Seiten
 DFG Viewer: DFG-Viewer
-Go to page: Gehe zu Seite
+Download METS file: METS-Datei herunterladen
+Download this section as PDF: Diesen Abschnitt als PDF herunterladen
+Export: Export
 First page: Erste Seite
 Fullscreen: Vollbildansicht
+Fulltext: Volltext
+Go to page: Gehe zu Seite
 Invalid page: Ungültige Seite
 Last page: Letzte Seite
+Loading: Lade …
 Metadata: Metadaten
 Next page: Nächste Seite
 Next section: Nächster Abschnitt
+page: Seite
+Pages: Seiten
+pages: Seiten
 Previous page: Vorige Seite
 Previous section: Voriger Abschnitt
+PURL: Zitierlink (PURL)
 Reset zoom: Zoom zurücksetzen
-Set zoom: Zoomen
-Search: Suchen
+Scan: Scan
 Search in document: Suche im Dokument
+Search: Suchen
+Set zoom: Zoomen
+sorted by: sortiert nach
 Table of contents: Inhaltsverzeichnis
-Transcript: Transkript
+uncounted: – # that's an ndash, not a dash
 Zoom in: Vergrößern
 Zoom out: Verkleinern
-Contained in: Enthalten in
-PURL: Zitierlink (PURL)
-Thumbnails: Thumbnails
-Loading: Lade …
-sorted by: sortiert nach
-uncounted: – # that's an ndash, not a dash
-Download this section as PDF: Diesen Abschnitt als PDF herunterladen
 
 # Fields
-docstrct: Strukturtyp|Strukturtypen
-facetplacepublish: Erscheinungsort|Erscheinungsorte
-placepublish: Erscheinungsort|Erscheinungsorte
-dc: Sammlung|Sammlungen
-facetpublisher: Verlag|Verlage
-publisher: Verlag|Verlage
-facetcreator: Autor|Autoren
-creator: Autor|Autoren
-yearpublish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
-currentno: Band
 Catalogue: Katalogeintrag
+creator: Autor|Autoren
+currentno: Band
 datemodified: Importdatum
-score: Relevanz
+dc: Sammlung|Sammlungen
 disclaimer: The Göttingen State and University Library provides access to digitized documents strictly for noncommercial educational, research and private purposes and makes no warranty with regard to their use for other purposes. Some of our collections are protected by copyright. Publication and/or broadcast in any form (including electronic) requires prior written permission from the Goettingen State- and University Library. Each copy of any part of this document must contain there Terms and Conditions. With the usage of the ibrary's online system to access or download a digitized document you accept there Terms and Conditions. Reproductions of material on the web site may not be made for or donated to other repositories, nor may be further reproduced without written permission from the Goettingen State- and University Library For reproduction requests and permissions, please contact us. If citing materials, please give proper attribution of the source.
+docstrct: Strukturtyp|Strukturtypen
+facetcreator: Autor|Autoren
+facetplacepublish: Erscheinungsort|Erscheinungsorte
+facetpublisher: Verlag|Verlage
+placepublish: Erscheinungsort|Erscheinungsorte
+publisher: Verlag|Verlage
+score: Relevanz
+yearpublish: Erscheinungsjahr|Erscheinungsjahre
 
 # sorts
 yearpublish_desc: Erscheinungsjahr absteigend

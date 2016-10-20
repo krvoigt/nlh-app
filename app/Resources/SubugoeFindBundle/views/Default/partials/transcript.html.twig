@@ -2,10 +2,10 @@
 
 {% if document['gdzocr_url'] is defined and documentStructure.isValidPage %}
     <section class="transcript">
-        <h2 class="viewer_heading">{{ 'Transcript'|trans }}</h2>
+        <h2 class="viewer_heading">{{ 'Fulltext'|trans }}</h2>
         <div class="transcript_page">
             {% autoescape %}
-                {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][documentStructure.page - 1] })) | nl2br }}
+                {{ render(controller('AppBundle:Document:fullText', { 'url': document['gdzocr_url'][documentStructure.page - 1] }))|nl2br }}
             {% endautoescape %}
         </div>
     </section>

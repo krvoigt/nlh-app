@@ -6,16 +6,15 @@
 }
 
 .thumbnails_list {
-    margin: round($grid / 4) 0 round($grid / 4) round($grid / 4);
+    display: flex;
+    flex-wrap: wrap;
+    margin: round($grid / 8);
 }
 
 .thumbnails_item {
     box-shadow: $drop-shadow;
-    display: inline-block;
     margin: round($grid / 8);
-    box-shadow: $drop-shadow;
     position: relative;
-
 
     &::before {
         content: none;
@@ -26,9 +25,10 @@
     background: $grey;
     box-shadow: none;
     display: block;
-    height: ($grid * 4.5);
+    max-height: ($grid * 4.5);
+    min-height: ($grid * 2.5);
     overflow: hidden;
-    width: round($grid * 3.55);
+    width: 92px;
 
     @include hover {
         img {

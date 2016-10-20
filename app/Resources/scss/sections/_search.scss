@@ -11,14 +11,7 @@
         margin-top: (-2.5 * $grid);
 
         &.-show-popup {
-            margin: (-2.5 * $grid) 0;
-            width: 100%;
-        }
-    }
-
-    @include respond-to(medium) {
-        &.-show-popup {
-            margin-top: -1.5 * $grid;
+            margin: (-2 * $grid) 0;
         }
     }
 
@@ -26,15 +19,10 @@
         float: none;
         right: 0;
         margin: 0 auto;
-        width: 20 * $grid;
 
         &.-show-popup {
             margin: 0 auto;
         }
-    }
-
-    &.-show-popup {
-        width: 20 * $grid !important;
     }
 
     .site.-fixed & {
@@ -43,6 +31,11 @@
         position: absolute;
         right: ($grid / 2);
         top: ($grid / 2);
+
+        @include respond-to(tiny) {
+            left: ($grid / 2);
+            width: auto;
+        }
     }
 }
 

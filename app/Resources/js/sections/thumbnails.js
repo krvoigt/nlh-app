@@ -1,26 +1,22 @@
 var Thumbnails = {
     firstLoad: true,
+    panel: $('.viewer_panel.-thumbnails'),
 
     init: function () {
-        var $thumbnails = $('.thumbnails');
-
-        if ($thumbnails.length === 0) {
+        if (this.panel.length === 0) {
             return;
         }
-
-        $current = $thumbnails.find('.thumbnails_item.-current');
-        $thumbnails.scrollTop($current.position().top - 99);
 
         this.bindEvents();
     },
 
     bindEvents: function () {
-        $('.thumbnails_link:not(.-current)').click(function () {
+        this.panel.find('.thumbnails_link[href]').click(function () {
             window.location = $(this).attr('href') + window.location.hash;
             return false;
         });
 
-        $('.viewer_control.-toggle-panel[data-target="thumbnails"]').click(this.lazyLoad.bind(this));
+        $('.viewer_control.-toggle-panel.-thumbnails').click(this.lazyLoad.bind(this));
     },
 
     lazyLoad: function () {
@@ -30,8 +26,15 @@ var Thumbnails = {
 
         this.firstLoad = false;
 
+        // Scroll to current page
+        var that = this;
+        setTimeout(function () {
+            var $current = that.panel.find('.thumbnails_item.-current');
+            that.panel.scrollTop($current.position().top - 52);
+        }, 0);
+
         $('img').lazyload({
-            container: $('.thumbnails'),
+            container: this.panel,
             effect: 'fadeIn'
         });
     },

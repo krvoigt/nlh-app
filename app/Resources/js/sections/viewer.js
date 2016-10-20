@@ -6,15 +6,20 @@ var Viewer = {
         var $imageContainer = $('#scan_image');
         var initialZoom = 1;
         var isLoaded = false;
+        var alwaysShowScan;
 
         if ($imageContainer.length < 1) {
             return;
         }
 
-        this.settings = {};
+        this.checkShowScan();
+
+        this.settings = {}
+        this.settings.panel = this.alwaysShowScan ? 'metadata' : 'scan';
+
         this.loadState.bind(this)();
 
-        this.$controls = {
+        this.controls = {
             fullscreen: $('.viewer_control.-fullscreen'),
             nextPage: $('.viewer_control.-next-page'),
             pageSelect: $('.viewer_control.-page-select'),
@@ -23,7 +28,8 @@ var Viewer = {
             zoomOut: $('.viewer_control.-zoom-out'),
         };
 
-        this.$spinner = $('.scan_spinner');
+
+        this.spinner = $('.scan_spinner');
 
         var layerOptions = {
             fitBounds: false,
@@ -34,51 +40,46 @@ var Viewer = {
             attributionControl: false,
             center: [this.settings.lat || 0, this.settings.lng || 0],
             crs: L.CRS.Simple,
-            zoom: this.settings.zoom || initialZoom,
+            zoom: (typeof this.settings.zoom === 'undefined' ? initialZoom : this.settings.zoom),
             zoomControl: false,
             maxZoom: 2,
         }).addLayer(this.layer);
 
-        if ($.isEmptyObject(this.settings)) {
-            var _this = this;
+        if (typeof this.settings.lat === 'undefined') {
+            var that = this;
             // Center image on first load
             this.layer.on('load', function () {
-                if (isLoaded) {
+                if (that.isLoaded) {
                     return;
                 }
-
-                isLoaded = true;
+                that.isLoaded = true;
 
                 // Center image horizontally, top-align vertically, leave some room for controls
                 var imageSize = this._imageSizes[initialZoom];
-                var layerLatLng = _this.image.options.crs.pointToLatLng(L.point(imageSize.x, imageSize.y), initialZoom);
-                var neBounds = _this.image.getBounds()._northEast;
+                var layerLatLng = that.image.options.crs.pointToLatLng(L.point(imageSize.x, imageSize.y), initialZoom);
+                var neBounds = that.image.getBounds()._northEast;
                 var latLng = [-neBounds.lat + 26, layerLatLng.lng / 2];
-                _this.image.panTo(latLng, {animate: false});
+                that.image.panTo(latLng, {animate: false});
             });
         }
 
-        var page = parseInt(this.$controls.pageSelect.val());
+        var page = parseInt(this.controls.pageSelect.val());
 
-        this.$controls.pageSelect.select2();
+        this.controls.pageSelect.select2();
         $('.select2-container').addClass('viewer_control');
 
+        this.setZoomButtonStates.bind(this)();
         this.bindEvents();
 
-        $.each(this.settings.panels, function (name, show) {
-            var buttonName = '.viewer_control.-toggle-panel' + (show ? ':not(.-active)' : '.-active') + '[data-target=' + name + ']';
-            var $panel = $('.viewer_panel.-' + name)
-            $panel.css('transitionDuration', '0s');
-            $(buttonName).click();
-            setTimeout(function () {
-                    $panel.css('transitionDuration', '');
-            }, 9);
-        });
+        if (! this.alwaysShowScan && (this.settings.panel === 'thumbnails' || this.settings.panel === 'toc')) {
+            $('.viewer_control.-toggle-panel.-scan').click();
+        } else if (this.settings.panel) {
+            $('.viewer_control.-toggle-panel.-' + this.settings.panel).click();
+        }
     },
 
     bindEvents: function () {
-        var _this = this;
-        var $controls = this.$controls;
+        var that = this;
 
         // Add current hash on click to viewer controls
         $('.viewer_controls').click(function (e) {
@@ -87,47 +88,82 @@ var Viewer = {
         });
 
         $('.viewer_control.-toggle-panel').click(function () {
-            var panel = $(this).data('target');
-            _this.togglePanel.bind(_this, $(this), panel)();
+            var panelName = $(this).data('target');
+            that.togglePanel.bind(that, $(this), panelName)();
         });
 
-        $controls.fullscreen.click(this.toggleFullscreen.bind(this));
-        $controls.pageSelect.change(function () {
+        this.controls.fullscreen.click(this.toggleFullscreen.bind(this));
+
+        this.controls.pageSelect.change(function () {
             // Remove LOG_xxxx part from ID to prevent wrong document section being loaded
             var newUrl = setGetParameters({page: $(this).val()}, false);
             newUrl = decodeURI(newUrl).replace(/\|LOG_[0-9_]+/, '');
             window.location = newUrl;
             return false;
         });
-        $controls.zoomIn.click(this.zoomIn.bind(this));
-        $controls.zoomOut.click(this.zoomOut.bind(this));
+
+        this.controls.zoomIn.click(function () {
+            that.image.zoomIn();
+        });
+
+        this.controls.zoomOut.click(function () {
+            that.image.zoomOut();
+        });
 
         this.image.on('moveend', this.saveState.bind(this));
-        this.image.on('zoomend', this.saveState.bind(this));
 
-        this.layer.on('loading', this.showSpinner.bind(this));
-        this.layer.on('load', this.hideSpinner.bind(this));
+        this.image.on('zoomend', function () {
+            that.setZoomButtonStates.bind(that)();
+            that.saveState.bind(that);
+        });
 
-        $('.scan').click(this.closePageSelect.bind(this));
+        this.layer.on('loading', function () {
+            that.spinner.fadeIn();
+        });
+
+        this.layer.on('load', function () {
+            that.spinner.hide();
+        });
+
+        $('.scan').click(function () {
+            that.controls.pageSelect.select2('close');
+        });
+
         $('.scan .select2').click(function () {
             return false;
         });
 
         $(document).keydown(function (e) {
             if (e.keyCode === LEFT_ARROW_KEY) {
-                window.location.href = $controls.previousPage.attr('href');
+                window.location.href = that.controls.previousPage.attr('href');
                 return false;
             }
 
             if (e.keyCode === RIGHT_ARROW_KEY) {
-                window.location.href = $controls.nextPage.attr('href');
+                window.location.href = that.controls.nextPage.attr('href');
                 return false;
             }
         });
+
+        $(window).resize(this.checkShowScan.bind(this));
+    },
+
+    checkShowScan: function () {
+        this.alwaysShowScan = $('.viewer_control.-toggle-panel.-scan').is(':hidden');
+        $('.viewer_panel.-scan').toggleClass('-alwaysActive', this.alwaysShowScan);
+        if (! this.alwaysShowScan && $('.viewer_panel.-active').length < 1) {
+            $('.viewer_control.-scan').click();
+        }
+    },
+
+    setZoomButtonStates: function () {
+        var zoom = this.image.getZoom();
+        this.controls.zoomIn.toggleClass('-disabled', zoom === this.image.getMaxZoom());
+        this.controls.zoomOut.toggleClass('-disabled', zoom === this.image.getMinZoom());
     },
 
     toggleFullscreen: function () {
-        this.$controls.fullscreen.toggleClass('-active');
+        this.controls.fullscreen.toggleClass('-active');
         if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
             if (document.exitFullscreen) {
                 document.exitFullscreen();
@@ -148,44 +184,30 @@ var Viewer = {
         }
     },
 
-    showSpinner: function () {
-        this.$spinner.fadeIn();
-    },
-
-    hideSpinner: function () {
-        this.$spinner.hide();
-    },
-
-    zoomIn: function () {
-        this.image.zoomIn();
-    },
-
-    zoomOut: function () {
-        this.image.zoomOut();
-    },
-
-    closePageSelect: function () {
-        this.$controls.pageSelect.select2('close');
-    },
-
     togglePanel: function () {
         var $control = arguments[0];
         var panelName = arguments[1];
-
-        $control.toggleClass('-active');
-
         var $panel = $('.viewer_panel.-' + panelName);
-        $panel.toggleClass('-hidden');
 
-        // TODO: Don't reload TOC on every toggle
-        if (panelName === 'toc') {
+        $('.viewer_control.-toggle-panel').not($control).removeClass('-active');
+        $('.viewer_panel').not($panel).removeClass('-active');
+
+        var state = ! $control.hasClass('-active') || ! this.alwaysShowScan;
+
+        $control.toggleClass('-active', state);
+        $panel.toggleClass('-active', state);
+
+        if (panelName === 'scan') {
+            this.image.invalidateSize();
+        } else if (panelName === 'toc') {
             if (! TOC.isInited) {
                 TOC.init();
             }
         }
 
-        this.settings.panels = this.settings.panels || {};
-        this.settings.panels[panelName] = $control.hasClass('-active');
+        this.image.invalidateSize();
+
+        this.settings.panel = state ? panelName : false;
         this.saveState();
     },
 
@@ -210,7 +232,7 @@ var Viewer = {
 
         // Using replaceState instead of window.location.hash to prevent a new history step begin added for every change in view settings
         history.replaceState(undefined, undefined, '#' + JSON.stringify(this.settings));
-    }
+    },
 };
 
 Viewer.init();

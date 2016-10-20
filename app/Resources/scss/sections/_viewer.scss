@@ -17,22 +17,34 @@
     & + & {
         flex-shrink: 0;
         padding-left: ($grid / 2);
+
+        @include respond-to(large) {
+            padding: 0;
+        }
     }
 }
 
 .viewer_controls {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     margin: 0 round(-$grid / 4) round(-$grid / 4) 0;
     z-index: 1;
 
     &.-overlay {
         margin: round($grid / 4);
         position: absolute;
+
+        & + & {
+            top: ($grid * 1.75);
+        }
     }
 
     &.-right {
         justify-content: flex-end;
+
+        @include respond-to(large) {
+            justify-content: space-between;
+        }
     }
 }
 
@@ -41,6 +53,12 @@
     box-shadow: $card-shadow;
     display: flex;
     margin: 0 round($grid / 4) round($grid / 4) 0;
+    overflow: hidden;
+    z-index: 1;
+
+    &.-vertical {
+        flex-direction: column-reverse;
+    }
 }
 
 .viewer_control {
@@ -64,19 +82,42 @@
         z-index: 1;
     }
 
+    .viewer_control-group.-vertical label + & {
+        @include separator(0, 0, 1);
+    }
+
     &[type=text] {
         color: $text-color !important;
         text-align: left;
     }
 
-    &:first-child {
-        border-top-left-radius: $br;
-        border-bottom-left-radius: $br;
+    &.-scan {
+        @include icon(file-image-o, false);
+        display: none;
+
+        @include respond-to(large) {
+            display: inline-block;
+        }
     }
 
-    &:last-child {
-        border-top-right-radius: $br;
-        border-bottom-right-radius: $br;
+    &.-toc {
+        @include icon(list, false);
+    }
+
+    &.-transcript {
+        @include icon(file-text-o, false);
+    }
+
+    &.-thumbnails {
+        @include icon(th, false);
+    }
+
+    &.-metadata {
+        @include icon(info-circle, false);
+    }
+
+    &.-export {
+        @include icon(external-link-square, false);
     }
 
     &.-first-page {
@@ -156,6 +197,14 @@
     justify-content: space-between;
     padding: floor($grid / 4);
     width: 100%;
+
+    @include respond-to(large) {
+        display: block;
+    }
+}
+
+.viewer_heading {
+    @include sr-only;
 }
 
 .viewer_image {
@@ -165,54 +214,55 @@
     width: 100%;
 }
 
+.viewer_label {
+    @include respond-to(small) {
+        @include sr-only;
+    }
+}
+
 .viewer_main {
     display: flex;
     flex: 1;
     overflow: hidden;
+
+    @include respond-to(large) {
+        display: block;
+    }
 }
 
 .viewer_panel {
+    @include separator(0, 0, 0, 1);
     background: $white;
-    border-left: $border-width solid $border-color;
-    display: flex;
+    display: none;
+    flex: 1;
+    min-width: 20em;
+    overflow-y: auto;
     position: relative;
     transition: visibility .2s, width .2s;
-    width: 21em;
+
+    @include respond-to(large) {
+        border: 0;
+    }
 
     &:first-child {
         border: 0;
     }
 
-    &.-hidden {
-        border: 0;
-        overflow: hidden;
-        visibility: hidden; // Prevent element from being tab-selectable
-        width: 0 !important;
+    &.-active {
+        display: block;
+
+        @include respond-to(large) {
+            height: 100%;
+        }
+    }
+
+    &.-alwaysActive {
+        display: block !important;
     }
 
     &.-scan {
         flex: 3;
-    }
-
-    &.-transcript {
-        white-space: nowrap; // TODO
-        width: 40em;
-    }
-
-    > section {
-        min-width: 21em;
-    }
-}
-
-.viewer_scan {
-    background: $text-color;
-    flex: 1;
-}
-
-.viewer_switcher {
-    p {
-        display: inline-block;
-        margin: ($grid / 4) .5em 0;
+        height: 100%;
     }
 }
 
@@ -223,4 +273,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @include respond-to(large) {
+        margin-top: 0;
+    }
 }
