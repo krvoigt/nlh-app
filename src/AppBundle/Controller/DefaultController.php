@@ -24,8 +24,6 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('');
-
         $sort = $request->get('sort');
         if (isset($sort) && empty($sort)) {
             throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
