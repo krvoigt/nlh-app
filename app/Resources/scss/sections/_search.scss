@@ -32,7 +32,7 @@
         right: ($grid / 2);
         top: ($grid / 2);
 
-        @include respond-to(tiny) {
+        @include respond-to(small) {
             left: ($grid / 2);
             width: auto;
         }
