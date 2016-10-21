@@ -74,12 +74,10 @@
 
 .colophon_top-link {
     @include transition(opacity, right);
-    background: $brand-color-lighter;
-    border-radius: $br 0 0 $br;
     bottom: (2 * $grid);
     opacity: 0;
     position: fixed;
-    right: floor(-1.618 * $grid);
+    right: floor(-1.5 * $grid);
 
     &.-visible {
         opacity: 1;
@@ -89,18 +87,20 @@
     a {
         @include icon('chevron-up', false);
         @include transition(background, color);
+        background: $brand-color-light;
+        border-radius: $br 0 0 $br;
         box-shadow: none;
         display: block;
-        height: ceil(1.618 * $grid);
-        line-height: ceil(1.618 * $grid);
-        width: ceil(1.618 * $grid);
+        height: ceil(1.5 * $grid);
+        line-height: ceil(1.5 * $grid);
+        width: ceil(1.5 * $grid);
         text-align: center;
 
         @include hover {
             @include icon('chevron-up', false);
             @include transition(background, color);
-            background: $brand-color-light;
-            text-shadow: $shade-inset;
+            background: $brand-color-lighter;
+            color: $link-color;
         }
     }
 }
