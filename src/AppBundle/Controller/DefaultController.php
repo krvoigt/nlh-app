@@ -356,6 +356,8 @@ class DefaultController extends BaseController
 
     /*
      * @param Query $select A Query instance
+     * @param string $sort The sort string
+     * @param string $order The sort order
      */
     protected function addQuerySort(Query $select, $sort = '', $order = '')
     {
