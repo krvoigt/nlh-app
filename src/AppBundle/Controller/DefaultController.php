@@ -40,7 +40,7 @@ class DefaultController extends BaseController
         $collection = $request->get('collection');
         if (!empty($collection) && $collection !== 'all') {
             $dcFilter = new FilterQuery();
-            $collectionFilter = $dcFilter->setKey('dc')->setQuery('dc:'.$collection);
+            $collectionFilter = $dcFilter->setKey('dc')->setQuery('facet_product:'.$collection);
             $select->addFilterQuery($collectionFilter);
         }
         $pagination = $this->getPagination($request, $select);
