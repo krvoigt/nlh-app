@@ -78,7 +78,6 @@
     </ul>
 
     <ul class="metadata_links">
-        <li><a href="{{ document.purl }}">{{ 'PURL'|trans }}</a></li>
         {% if document.id_PPNanalog_s is defined %}
             <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
         {% endif %}
