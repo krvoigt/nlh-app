@@ -1,5 +1,6 @@
 .header {
     background: $white; // Prevent off-canvas nav from popping through
+    flex: none; // Prevent content from being cut off on Android and IE
     overflow: visible;
     position: relative;
     z-index: 1;
@@ -31,7 +32,7 @@
         padding: ceil($grid / 4) ($grid / 2) floor($grid / 4);
     }
 
-    .site.-fixed & {
+    .fixed & {
         display: none;
     }
 }
@@ -90,7 +91,7 @@
         }
     }
 
-    .site.-fixed & {
+    .fixed & {
         background-position: floor($grid / 4);
         background-size: auto $grid;
         height: ($grid * 1.5);
@@ -101,7 +102,7 @@
         height: 100%;
         min-height: (1.5 * $grid);
 
-        .site.-fixed & {
+        .fixed & {
             left: round($grid / 4);
             height: ($grid * 1.5);
             top: round($grid / 2);
@@ -120,7 +121,7 @@
         display: block;
         padding: round($grid / 4) 1em;
 
-        .site.-fixed & {
+        .fixed & {
             padding: 0 1em;
         }
     }
@@ -134,7 +135,7 @@
         }
     }
 
-    .site.-fixed & {
+    .fixed & {
         right: floor($grid / 4);
         top: floor($grid / 4);
     }
@@ -144,7 +145,7 @@
     &.-fixed {
         display: none;
 
-        .site.-fixed & {
+        .fixed & {
             display: block;
         }
     }
@@ -212,7 +213,7 @@
         }
     }
 
-    .site.-fixed & {
+    .fixed & {
         font-size: inherit;
         left: 77px;
         padding: floor($grid / 4);
@@ -247,7 +248,7 @@
         padding: ($grid / 2);
     }
 
-    .site.-fixed & {
+    .fixed & {
         max-width: none;
         padding: 0;
 

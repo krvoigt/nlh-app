@@ -1,6 +1,7 @@
 .footer {
     @extend %clearfix;
     clear: both;
+    flex: none; // Prevent content from being cut off on Android and IE
     margin: ($grid / 2);
     position: relative;
 

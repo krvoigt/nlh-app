@@ -7,13 +7,13 @@ $(function () {
         return false;
     });
 
-    $('.site.-fixed .search_close').click(function () {
+    $('.fixed .search_close').click(function () {
         $('.search').fadeOut();
         return false;
     });
 
-    $('.site.-fixed').click(function () {
-        $('.site.-fixed .search_close').click();
+    $('.fixed').click(function () {
+        $('.fixed .search_close').click();
     });
 
     $('.search').click(function (e) {

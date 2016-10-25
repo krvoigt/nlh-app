@@ -29,6 +29,8 @@
 }
 
 .toc_item {
+    display: block;
+
     & & {
         border-left: 1px solid $brand-color-light;
         margin-left: (-$grid / 2);

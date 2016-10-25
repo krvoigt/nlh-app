@@ -2,6 +2,7 @@
     @extend %full-width-background;
     @include auto-color($brand-color);
     background: $brand-color;
+    flex: none; // Prevent content from being cut off on Android and IE
 
     a {
         @include link(true, true);
