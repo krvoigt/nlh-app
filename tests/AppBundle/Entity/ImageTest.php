@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace tests\AppBundle\Service;
 
-use AppBundle\Entity\Image;
+use AppBundle\Model\Image;
 
 class ImageTest extends \PHPUnit_Framework_TestCase
 {

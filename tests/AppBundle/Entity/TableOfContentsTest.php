@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace tests\AppBundle\Service;
 
-use AppBundle\Entity\TableOfContents;
+use AppBundle\Model\TableOfContents;
 
 class TableOfContentsTest extends \PHPUnit_Framework_TestCase
 {

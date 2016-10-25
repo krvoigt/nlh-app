@@ -2,11 +2,11 @@
 
 namespace tests\AppBundle\Service;
 
-use AppBundle\Entity\TableOfContents;
+use AppBundle\Model\TableOfContents;
 use AppBundle\Service\MetsService;
-use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\BufferStream;
 use GuzzleHttp\Psr7\Response;
+use League\Flysystem\Filesystem;
 use Symfony\Component\Cache\Adapter\NullAdapter;
 use Symfony\Component\Finder\Finder;
 
@@ -41,7 +41,7 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
             ->willReturn('false');
 
         $metsClientMock = $this
-            ->getMockBuilder(Client::class)
+            ->getMockBuilder(Filesystem::class)
             ->setMethods(['get'])
             ->getMock();
 
