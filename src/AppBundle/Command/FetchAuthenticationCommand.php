@@ -3,6 +3,7 @@
 namespace AppBundle\Command;
 
 use AppBundle\Entity\User;
+use AppBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use GuzzleHttp\Cookie\CookieJar;
 use League\Csv\Reader;
@@ -40,17 +41,9 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
     {
         $this->entityManager = $this->getContainer()->get('doctrine')->getManager();
         $this->authenticationDirectory = $this->getContainer()->getParameter('kernel.root_dir').'/../var/auth/';
-
         $this->emptyAuthenticationFileDirectory();
-        $output->writeln('Removed authentication files');
-
         $this->getAuthenticationFiles();
-        $output->writeln('Downloaded authentication files');
-
-        $importStartTime = microtime(true);
         $this->getIps();
-        $importEndTime = microtime(true);
-        $output->writeln('Total import completed in '.number_format($importEndTime - $importStartTime, 2).'s', true);
     }
 
     /**
@@ -96,6 +89,40 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
 
     protected function getIps()
     {
+        $userTempTable = 'user_temp';
+        $userTable = 'user';
+
+        $repository = $this->getRepository($userTable, $userTempTable);
+        $ipv4Ips = $this->downloadAuthenticationFiles();
+
+        $compeleteDataRows = $this->calculateIpAddresses($ipv4Ips);
+
+        $this->insertDataIntoDatabase($repository, $userTempTable, $compeleteDataRows, $userTable);
+    }
+
+    /**
+     * @param string $startIpAddress
+     * @param string $endIpAddress
+     * @param string $institution
+     * @param string $product
+     */
+    protected function addUser($startIpAddress, $endIpAddress, $institution, $product)
+    {
+        $user = new User();
+        $user
+            ->setStartIpAddress($startIpAddress)
+            ->setEndIpAddress($endIpAddress)
+            ->setInstitution($institution)
+            ->setProduct($product);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @return array
+     */
+    protected function downloadAuthenticationFiles():array
+    {
         $finder = new Finder();
         $files = $finder->in($this->authenticationDirectory);
 
@@ -104,7 +131,31 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
             $product = explode('.', $file->getFilename())[0];
             $reader = Reader::createFromPath($file);
             $reader->setDelimiter(';');
-            $keys = ['user_name', 'status', 'title', 'street', 'zip', 'city', 'county', 'country', 'telephone', 'fax', 'email', 'url', 'contactperson', 'sigel', 'ezb_id', 'subscriper_group', 'ipv4_allow', 'ipv4_deny', 'zuid', 'mtime', 'mtime_license', 'status_license', 'mtime_status'];
+            $keys = [
+                'user_name',
+                'status',
+                'title',
+                'street',
+                'zip',
+                'city',
+                'county',
+                'country',
+                'telephone',
+                'fax',
+                'email',
+                'url',
+                'contactperson',
+                'sigel',
+                'ezb_id',
+                'subscriper_group',
+                'ipv4_allow',
+                'ipv4_deny',
+                'zuid',
+                'mtime',
+                'mtime_license',
+                'status_license',
+                'mtime_status',
+            ];
 
             $results = $reader->fetchAssoc($keys);
 
@@ -118,8 +169,45 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
             }
         }
 
+        return $ipv4Ips;
+    }
+
+    /**
+     * @param $userTable
+     * @param $userTempTable
+     *
+     * @return \AppBundle\Repository\UserRepository
+     */
+    protected function getRepository($userTable, $userTempTable):\AppBundle\Repository\UserRepository
+    {
+        $repository = $this->getContainer()->get('doctrine')->getRepository('AppBundle:User');
+        if (!$repository->checkIfTableExists($userTable)) {
+            $repository->createTableByEntity('AppBundle:User');
+
+            return $repository;
+        } else {
+            if (!$repository->checkIfTableExists($userTempTable)) {
+                $suffix = '_temp';
+                $repository->createTableByEntity('AppBundle:User', $suffix);
+
+                return $repository;
+            }
+
+            return $repository;
+        }
+    }
+
+    /**
+     * @param $ipv4Ips
+     *
+     * @return array
+     */
+    protected function calculateIpAddresses($ipv4Ips):array
+    {
         $thirdPartRanges = [];
         $fourthPartRanges = [];
+        $compeleteDataRows = [];
+
         foreach ($ipv4Ips as $k => $ipv4Ip) {
             if (strchr($ipv4Ip[2], '*')) {
                 $ipv4Ip[2] = str_replace('*', '0-255', $ipv4Ip[2]);
@@ -171,25 +259,33 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
             $thirdPartRanges = [];
             $fourthPartRanges = [];
 
-            $this->addUser(ip2long($startIp), ip2long($endIp), $ipv4Ip[1], $ipv4Ip[0]);
+            $compeleteDataRows[] = [ip2long($startIp), ip2long($endIp), $ipv4Ip[1], $ipv4Ip[0]];
         }
+
+        return $compeleteDataRows;
     }
 
     /**
-     * @param string $startIpAddress
-     * @param string $endIpAddress
-     * @param string $institution
-     * @param string $product
+     * @param UserRepository $repository
+     * @param string         $userTempTable
+     * @param array          $compeleteDataRows
+     * @param string         $userTable
      */
-    protected function addUser($startIpAddress, $endIpAddress, $institution, $product)
+    protected function insertDataIntoDatabase($repository, $userTempTable, $compeleteDataRows, $userTable)
     {
-        $user = new User();
-        $user
-            ->setStartIpAddress($startIpAddress)
-            ->setEndIpAddress($endIpAddress)
-            ->setInstitution($institution)
-            ->setProduct($product);
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        if (!$repository->checkIfTableExists($userTempTable)) {
+            foreach ($compeleteDataRows as $dataRow) {
+                $this->addUser($dataRow[0], $dataRow[1], $dataRow[2], $dataRow[3]);
+            }
+        } else {
+            foreach ($compeleteDataRows as $dataRow) {
+                $repository->storeTempDataRow($userTempTable, $dataRow[0], $dataRow[1], $dataRow[2], $dataRow[3]);
+            }
+
+            if ($repository->checkIfTableExists($userTempTable) && $repository->checkIfTableExists($userTable)) {
+                $repository->dropUserTable($userTable);
+                $repository->renameUserTempTable($userTable, $userTempTable);
+            }
+        }
     }
 }
