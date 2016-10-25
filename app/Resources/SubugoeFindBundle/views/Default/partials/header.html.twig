@@ -1,24 +1,37 @@
 <header class="viewer_header">
     <div class="viewer_column">
         <h1 class="viewer_title" title="{{ document.title|first }}">
-            {{ document.title | first }}
+            {{ document.title|first }}
         </h1>
     </div>
     <div class="viewer_column">
         <div class="viewer_controls -right">
-            <div class="viewer_control-group">
+            <div class="viewer_control-group -top">
+                <button class="viewer_control -toggle-panel -scan" data-target="scan">
+                    <span class="viewer_label">{{ 'Scan'|trans }}</span>
+                </button>
                 {% if document.fulltext_url is defined %}
-                    <button class="viewer_control -toggle-panel" data-target="transcript">{{ 'Transcript'|trans }}</button>
+                    <button class="viewer_control -toggle-panel -transcript" data-target="transcript">
+                        <span class="viewer_label">{{ 'Fulltext'|trans }}</span>
+                    </button>
                 {% endif %}
+                <button class="viewer_control -toggle-panel -thumbnails" data-target="thumbnails">
+                    <span class="viewer_label">{{ 'Pages'|trans }}</span>
+                </button>
                 {% if documentStructure.tableOfContents %}
-                    <button class="viewer_control -toggle-panel" data-target="toc">{{ 'Contents'|trans }}</button>
+                    <button class="viewer_control -toggle-panel -toc" data-target="toc">
+                        <span class="viewer_label">{{ 'Contents'|trans }}</span>
+                    </button>
                 {% endif %}
-                <button class="viewer_control -toggle-panel" data-target="thumbnails">{{ 'Thumbnails'|trans }}</button>
-                <button class="viewer_control -active -toggle-panel" data-target="metadata">{{ 'Metadata'|trans }}</button>
-                <button class="viewer_control -toggle-panel" data-target="export">{{ 'Export'|trans }}</button>
+                <button class="viewer_control -toggle-panel -metadata " data-target="metadata">
+                    <span class="viewer_label">{{ 'Metadata'|trans }}</span>
+                </button>
             </div>
             <div class="viewer_control-group">
-                <button class="viewer_control -fullscreen" title="Vollbildansicht">
+                <button class="viewer_control -toggle-panel -export" data-target="export" title="{{ 'Export'|trans }}">
+                    <span class="sr-only">{{ 'Export'|trans }}</span>
+                </button>
+                <button class="viewer_control -fullscreen" title="{{ 'Fullscreen'|trans }}">
                     <span class="sr-only">{{ 'Fullscreen'|trans }}</span>
                 </button>
             </div>

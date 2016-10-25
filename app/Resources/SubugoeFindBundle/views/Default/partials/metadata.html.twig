@@ -1,12 +1,12 @@
 <section class="metadata">
     <h2 class="viewer_heading">{{ 'Metadata'|trans }}</h2>
 
-    <dl>
+    <dl class="metadata_list">
         <dt>{{ 'bytitle'|trans }}</dt>
-        <dd>{{ document.title | first }}</dd>
+        <dd>{{ document.title|first }}</dd>
 
         {% if document.creator is defined %}
-            <dt>{{ 'creator' | transchoice(document.creator | length) }}</dt>
+            <dt>{{ 'creator'|transchoice(document.creator|length) }}</dt>
             <dd>
                 {% for author in document.creator %}
                     <a href="{{ path('_homepage', {'filter': {0: {'facet_creator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}, {% endif %}
@@ -20,7 +20,7 @@
         {% endif %}
 
         {% if document.placepublish is defined %}
-            <dt>{{ 'placepublish' | transchoice(document.placepublish | length) }}</dt>
+            <dt>{{ 'placepublish'|transchoice(document.placepublish|length) }}</dt>
             <dd>
                 {% for place in document.placepublish %}
                     {{ place }}{% if loop.last %}{% else %}, {% endif %}
@@ -29,7 +29,7 @@
         {% endif %}
 
         {% if document.publisher is defined %}
-            <dt>{{ 'publisher' | transchoice(document.publisher | length) }}</dt>
+            <dt>{{ 'publisher'|transchoice(document.publisher|length) }}</dt>
             <dd>
                 {% for publisher in document.publisher %}
                     {{ publisher }}{% if loop.last %}{% else %}, {% endif %}
@@ -37,14 +37,14 @@
             </dd>
         {% endif %}
 
-        <dt>{{ 'docstrct' | transchoice(1) }}</dt>
-        <dd>{{ document.docstrct | trans }}</dd>
+        <dt>{{ 'docstrct'|transchoice(1) }}</dt>
+        <dd>{{ document.docstrct|trans }}</dd>
 
         {% if document.docstrct == "volume" and document.currentno is defined %}
-            <dt>{{ 'currentno' | trans }}</dt>
+            <dt>{{ 'currentno'|trans }}</dt>
             <dd>{{ document.currentno }}</dd>
             {% if document.idparentdoc is defined %}
-                <dt>{{ 'Contained in' | trans }}</dt>
+                <dt>{{ 'Contained in'|trans }}</dt>
                 <dd><a href="{{ path('_volumes', {id: document.idparentdoc.0}) }}">{{ parentDocumentTitle }}</a></dd>
             {% endif %}
         {% endif %}
@@ -55,11 +55,13 @@
                 <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
+    </dl>
 
         <ul class="metadata_links">
             {% if document.id_PPNanalog_s is defined %}
                 <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0 | replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
             {% endif %}
+            <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
             <li><a href="{{ url('_mets', {id: document.id}) }}">Mets</a></li>
         </ul>
     </dl>

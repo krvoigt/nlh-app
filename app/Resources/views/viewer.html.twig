@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html class="-fixed" lang="de">
-    {% include "partials/site/head.html.twig" %}
-    <body class="site -fixed">
-        {% include 'partials/site/header.html.twig' %}
+<html lang="de">
+{% include "partials/site/head.html.twig" %}
+<body class="site -fixed">
+    {% include 'partials/site/header.html.twig' %}
 
-        <div class="content">
-            {% block content %}{% endblock %}
-        </div>
-        
-        <script src="{{ asset('js/vendor.js') }}"></script>
-        <script src="{{ asset('js/sub-legacy.js') }}"></script>
-        <script src="{{ asset('js/script.js') }}"></script>
-    </body>
-</html>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/sub-legacy.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+</body>

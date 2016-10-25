@@ -9,7 +9,13 @@
 }
 
 .find_sort-order {
-    background-color: #f3f3f3;
+    @include transition(background);
+    background-color: $shine-light;
     border: 0;
     color: $link-color;
+
+    @include hover {
+        background-color: $white;
+        transition: none;
+    }
 }

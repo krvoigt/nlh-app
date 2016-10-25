@@ -19,7 +19,7 @@
                     {% endif %}
                 </a>
                 {% if childrenDocument.creator is defined %}
-                    <p>{{ 'creator'|transchoice(childrenDocument.creator | length) }}
+                    <p>{{ 'creator'|transchoice(childrenDocument.creator|length) }}
                         : {{ childrenDocument.creator|join(', ') }}</p>
                 {% endif %}
                 {% if childrenDocument.currentno is defined %}

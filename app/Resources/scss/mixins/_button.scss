@@ -29,6 +29,7 @@
 
         @include hover {
             background: linear-gradient(to bottom, shade(#fff, 5), shade(#fff, 10));
+            box-shadow: $card-shadow;
             color: shade($text-color, 20);
         }
     } @else {

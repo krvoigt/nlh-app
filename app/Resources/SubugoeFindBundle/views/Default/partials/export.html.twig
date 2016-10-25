@@ -72,4 +72,15 @@
         </div>
         <div id="pdf_license">{% trans %}disclaimer{% endtrans %}</div>
     </div>
+
+    <ul class="metadata_links">
+        <li><a class="metadata_link -mets" href="{{ url('_mets', {id: document.id}) }}" download>{{ 'Download METS file'|trans }}</a></li>
+    </ul>
+
+    <ul class="metadata_links">
+        {% if document.id_PPNanalog_s is defined %}
+            <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+        {% endif %}
+        <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
+    </ul>
 </section>

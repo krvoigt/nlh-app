@@ -1,17 +1,17 @@
-{% set title = app.request.get('id') | trans %}
+{% set title = app.request.get('id')|trans %}
 
 {% extends "@SubugoeFind/Default/index.html.twig" %}
 
 {% block contentabove %}
     <div class="collections_above">
         <header class="collections_header">
-            <h1 class="collections_title">{{ title | trans }}</h1>
+            <h1 class="collections_title">{{ title|trans }}</h1>
             <div class="collection_rss-link">
                 <a href="{{ path('_feed', {'_format': 'rss', 'category': app.request.get('id')}) }}">
-                    {{ title | trans }} RSS Feed
+                    {{ title|trans }} RSS Feed
                 </a>
             </div>
         </header>
-        {{ content | markdown }}
+        {{ content|markdown }}
     </div>
 {% endblock %}

@@ -1,9 +1,14 @@
 .toc {
-    min-width: 22em;
     overflow-y: auto;
     padding: ($grid / 2);
     position: relative;
     z-index: 0;
+
+    a {
+        @include hover {
+            background: $brand-color-lighter;
+        }
+    }
 }
 
 .toc_column {
@@ -57,7 +62,7 @@
 }
 
 .toc_list {
-    margin-left: 0;
+    margin: 0;
 
     & & {
         margin-left: $grid;
@@ -87,5 +92,4 @@
 
 .toc_spinner {
     @extend %spinner;
-    margin-top: $grid;
 }

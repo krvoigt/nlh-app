@@ -11,6 +11,11 @@
 
 .facet_histogram {
     margin: ($grid / 2) 0 0 -20px; // TODO: Why 20? Value can change.
+
+    // TODO: Broken on small screens
+    @include respond-to(medium) {
+        display: none;
+    }
 }
 
 .facet_list-toggle {
@@ -40,7 +45,6 @@
 
 .facet_link {
     @include button(link);
-    display: block;
     margin: 0 -.2em;
     padding: 0 .2em 0 1.2em;
     position: relative;
