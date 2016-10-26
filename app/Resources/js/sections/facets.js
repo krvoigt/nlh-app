@@ -1,28 +1,43 @@
-$(function () {
-    $('.facets_toggle').click(function () {
-        $(this).siblings('.facets_toggle').addBack().toggleClass('hidden');
-        $('.facets_body').slideToggle(function () {
-            $(this).toggleClass('-visible').css('display', '');
+var Facets = {
+    container: $('.facets'),
+    controls: {
+        listToggle: $('.facet_list-toggle', this.container),
+        toggle: $('.facets_toggle', this.container),
+    },
+
+    init: function () {
+        this.bindEvents();
+
+        $('.facet', this.container).each(function () {
+            if ($(this).find('.facet_item').length < 7) {
+                $(this).find('.facet_list-toggle.-expand').hide();
+            }
         });
-    });
 
-    $('.facet').each(function () {
-        if ($(this).find('.facet_item').length < 7) {
-            $(this).find('.facet_list-toggle.-expand').hide();
+        $histogramContainer = $('.facet_histogram', this.container);
+        if ( $histogramContainer.length > 0 ) {
+            this.createHistogram($histogramContainer.closest('.facet'), $histogramContainer, {barWidth: 1}); // TODO
         }
-    });
+    },
 
-    $('.facet_list-toggle').click(function () {
-        var $facetList = $(this).siblings('.facet_list');
-        $facetList.find('li:nth-child(n+6)').toggle();
-        $(this).siblings('.facet_list-toggle').addBack().toggle();
-    });
+    bindEvents: function () {
+        var that = this;
 
-    $histogramContainer = $('.facet_histogram');
-    if ( $histogramContainer.length > 0 ) {
-        createHistogramForTermsInContainer($histogramContainer.closest('.facet'), $histogramContainer, {barWidth: 1}); // TODO
-    }
-    function createHistogramForTermsInContainer($parent, $graphDiv, config) {
+        this.controls.toggle.click(function () {
+            $(this).siblings('.facets_toggle').addBack().toggleClass('hidden');
+            $('.facets_body', that.container).slideToggle(function () {
+                $(this).toggleClass('-visible').css('display', '');
+            });
+        });
+
+        this.controls.listToggle.click(function () {
+            var $facetList = $(this).siblings('.facet_list');
+            $facetList.find('li:nth-child(n+6)').toggle();
+            $(this).siblings('.facet_list-toggle').addBack().toggle();
+        });
+    },
+
+    createHistogram: function($parent, $graphDiv, config) {
         // TODO: Show all values even if facet selected
         var graphWidth = $parent.width() + 20; // TODO
         var canvasHeight = 150;
@@ -184,5 +199,7 @@ $(function () {
         });
 
         $graphDiv.mouseout(hideTooltip);
-    };
-});
+    },
+}
+
+Facets.init();

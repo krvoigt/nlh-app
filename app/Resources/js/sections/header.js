@@ -1,22 +1,38 @@
-$(function () {
-    $('.header_search-toggle').click(function () {
-        $('.search').addClass('-show-popup').fadeIn();
-        setTimeout(function () {
-            $('.search_input:visible').focus();
-        }, 10);
-        return false;
-    });
+var Header = {
+    container: $('.header'),
+    controls: {
+        searchClose: $('.search_close', '.root.-fixed'),
+        searchToggle: $('.header_search-toggle', this.container),
+    },
 
-    $('.root.-fixed .search_close').click(function () {
-        $('.search').fadeOut();
-        return false;
-    });
+    init: function () {
+        this.bindEvents();
+    },
 
-    $('.root.-fixed').click(function () {
-        $('.root.-fixed .search_close').click();
-    });
+    bindEvents: function () {
+        var that = this;
 
-    $('.search').click(function (e) {
-        e.stopPropagation();
-    });
-});
+        this.controls.searchToggle.click(function () {
+            $('.search', that.container).addClass('-show-popup').fadeIn();
+            setTimeout(function () {
+                $('.search_input:visible', that.container).focus();
+            }, 10);
+            return false;
+        });
+
+        this.controls.searchClose.click(function () {
+            $('.search').fadeOut();
+            return false;
+        });
+
+        $('.root.-fixed').click(function () {
+            that.controls.searchClose.click();
+        });
+
+        $('.search', this.container).click(function (e) {
+            e.stopPropagation();
+        });
+    },
+}
+
+Header.init();

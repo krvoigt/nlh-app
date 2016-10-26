@@ -1,39 +1,38 @@
-var LEFT_ARROW_KEY = 37;
-var RIGHT_ARROW_KEY = 39;
-
 var Viewer = {
+    container: $('.viewer'),
+    controls: {
+        nextPage: $('.viewer_control.-next-page', this.container),
+        pageSelect: $('.viewer_control.-page-select', this.container),
+        previousPage: $('.viewer_control.-previous-page', this.container),
+        togglePanel: $('.viewer_control.-toggle-panel', this.container),
+        zoomIn: $('.viewer_control.-zoom-in', this.container),
+        zoomOut: $('.viewer_control.-zoom-out', this.container),
+    },
+    keys: {
+        leftArrow: 37,
+        rightArrow: 39,
+    },
+    settings: {},
+    spinner: $('.scan_spinner'),
+
     init: function () {
-        var $imageContainer = $('#scan_image');
+        var alwaysShowScan;
+        var imageContainer = $('#scan_image');
         var initialZoom = 1;
         var isLoaded = false;
-        var alwaysShowScan;
 
-        if ($imageContainer.length < 1) {
+        if (this.container.length < 1) {
             return;
         }
 
+        ViewerExport.init();
+        ViewerThumbnails.init();
+
         this.checkShowScan();
-
-        this.settings = {}
         this.settings.panel = this.alwaysShowScan ? 'metadata' : 'scan';
-
         this.loadState.bind(this)();
 
-        this.controls = {
-            nextPage: $('.viewer_control.-next-page'),
-            pageSelect: $('.viewer_control.-page-select'),
-            previousPage: $('.viewer_control.-previous-page'),
-            zoomIn: $('.viewer_control.-zoom-in'),
-            zoomOut: $('.viewer_control.-zoom-out'),
-        };
-
-        this.spinner = $('.scan_spinner');
-
-        var layerOptions = {
-            fitBounds: false,
-        };
-        this.layer = L.tileLayer.iiif( $imageContainer.data('iiif'), layerOptions );
-
+        this.layer = L.tileLayer.iiif(imageContainer.data('iiif'), {fitBounds: false});
         this.image = L.map('scan_image', {
             attributionControl: false,
             center: [this.settings.lat || 0, this.settings.lng || 0],
@@ -64,15 +63,17 @@ var Viewer = {
         var page = parseInt(this.controls.pageSelect.val());
 
         this.controls.pageSelect.select2();
-        $('.select2-container').addClass('viewer_control');
+        $('.select2-container', this.container).addClass('viewer_control');
 
         this.setZoomButtonStates.bind(this)();
         this.bindEvents();
 
         if (! this.alwaysShowScan && (this.settings.panel === 'thumbnails' || this.settings.panel === 'toc')) {
-            $('.viewer_control.-toggle-panel.-scan').click();
+            // When page is changed via thumbnails or TOC, go back to scan on small screens
+            this.controls.togglePanel.filter('.-scan').click();
         } else if (this.settings.panel) {
-            $('.viewer_control.-toggle-panel.-' + this.settings.panel).click();
+            // Open last shown panel
+            this.controls.togglePanel.filter('.-' + this.settings.panel).click();
         }
     },
 
@@ -80,12 +81,12 @@ var Viewer = {
         var that = this;
 
         // Add current hash on click to viewer controls
-        $('.viewer_controls').click(function (e) {
-            var $target = $(e.target);
+        $('.viewer_controls', this.container).click(function (e) {
+            var $target = $(e.target, this.container);
             $target.attr('href', $target.attr('href') + window.location.hash);
         });
 
-        $('.viewer_control.-toggle-panel').click(function () {
+        this.controls.togglePanel.click(function () {
             var panelName = $(this).data('target');
             that.togglePanel.bind(that, $(this), panelName)();
         });
@@ -121,21 +122,19 @@ var Viewer = {
             that.spinner.hide();
         });
 
-        $('.scan').click(function () {
+        $('.scan', this.container).click(function () {
             that.controls.pageSelect.select2('close');
         });
 
-        $('.scan .select2').click(function () {
+        $('.scan .select2', this.container).click(function () {
             return false;
         });
 
         $(document).keydown(function (e) {
-            if (e.keyCode === LEFT_ARROW_KEY) {
+            if (e.keyCode === that.keys.leftArrow) {
                 window.location.href = that.controls.previousPage.attr('href');
                 return false;
-            }
-
-            if (e.keyCode === RIGHT_ARROW_KEY) {
+            } else if (e.keyCode === that.keys.rightArrow) {
                 window.location.href = that.controls.nextPage.attr('href');
                 return false;
             }
@@ -145,8 +144,8 @@ var Viewer = {
     },
 
     checkShowScan: function () {
-        this.alwaysShowScan = $('.viewer_control.-toggle-panel.-scan').is(':hidden');
-        $('.viewer_panel.-scan').toggleClass('-alwaysActive', this.alwaysShowScan);
+        this.alwaysShowScan = this.controls.togglePanel.filter('.-scan').is(':hidden');
+        $('.viewer_panel.-scan', this.container).toggleClass('-alwaysActive', this.alwaysShowScan);
         if (! this.alwaysShowScan && $('.viewer_panel.-active').length < 1) {
             $('.viewer_control.-scan').click();
         }
@@ -161,10 +160,10 @@ var Viewer = {
     togglePanel: function () {
         var $control = arguments[0];
         var panelName = arguments[1];
-        var $panel = $('.viewer_panel.-' + panelName);
+        var $panel = $('.viewer_panel.-' + panelName, this.container);
 
-        $('.viewer_control.-toggle-panel').not($control).removeClass('-active');
-        $('.viewer_panel').not($panel).removeClass('-active');
+        this.controls.togglePanel.not($control).removeClass('-active');
+        $('.viewer_panel', this.container).not($panel).removeClass('-active');
 
         var state = ! $control.hasClass('-active') || ! this.alwaysShowScan;
 
@@ -174,8 +173,8 @@ var Viewer = {
         if (panelName === 'scan') {
             this.image.invalidateSize();
         } else if (panelName === 'toc') {
-            if (! TOC.isInited) {
-                TOC.init();
+            if (! ViewerToc.isInited) {
+                ViewerToc.init();
             }
         }
 
