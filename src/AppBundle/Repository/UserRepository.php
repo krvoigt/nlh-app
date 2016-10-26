@@ -74,7 +74,7 @@ class UserRepository extends EntityRepository
      */
     public function storeTempDataRow($userTempTable, $startIpAddress, $endIpAddress, $institution, $product)
     {
-        $sql = 'INSERT INTO '.$userTempTable.' ("startIpAddress", "endIpAddress", "institution", "product") VALUES (:startIpAddress, :endIpAddress, :institution, :product)';
+        $sql = 'INSERT INTO '.$userTempTable.' (startIpAddress, endIpAddress, institution, product) VALUES (:startIpAddress, :endIpAddress, :institution, :product)';
         $stmt = $this->getEntityManager()->getConnection()->prepare($sql);
         $stmt->bindValue('startIpAddress', $startIpAddress);
         $stmt->bindValue('endIpAddress', $endIpAddress);

@@ -62,7 +62,7 @@ class User
     /**
      * Set startIpAddress.
      *
-     * @param int $startIpAddress
+     * @param string $startIpAddress
      *
      * @return User
      */
@@ -76,7 +76,7 @@ class User
     /**
      * Get startIpAddress.
      *
-     * @return int
+     * @return string
      */
     public function getStartIpAddress()
     {
@@ -86,7 +86,7 @@ class User
     /**
      * Set endIpAddress.
      *
-     * @param int $endIpAddress
+     * @param string $endIpAddress
      *
      * @return User
      */
@@ -100,7 +100,7 @@ class User
     /**
      * Get endIpAddress.
      *
-     * @return int
+     * @return string
      */
     public function getEndIpAddress()
     {
