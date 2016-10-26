@@ -14,7 +14,7 @@
         overflow-x: hidden;
     }
 
-    .fixed & {
+    .root.-fixed & {
         height: 100%; // IE fix
         max-width: none;
     }

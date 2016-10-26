@@ -4,7 +4,7 @@
     max-width: $site-width;
     padding: 0 $grid;
 
-    .fixed & {
+    .root.-fixed & {
         max-width: none;
     }
 }

@@ -32,7 +32,7 @@
         padding: ceil($grid / 4) ($grid / 2) floor($grid / 4);
     }
 
-    .fixed & {
+    .root.-fixed & {
         display: none;
     }
 }
@@ -68,7 +68,7 @@
     max-width: 100%;
     width: 640px; // Width of logo
 
-    .site:not(.-fixed) & {
+    .root:not(.-fixed) & {
         // Fit logo left of search
         @include respond-to(large) {
             background-size: 392px auto;
@@ -91,7 +91,7 @@
         }
     }
 
-    .fixed & {
+    .root.-fixed & {
         background-position: floor($grid / 4);
         background-size: auto $grid;
         height: ($grid * 1.5);
@@ -102,7 +102,7 @@
         height: 100%;
         min-height: (1.5 * $grid);
 
-        .fixed & {
+        .root.-fixed & {
             left: round($grid / 4);
             height: ($grid * 1.5);
             top: round($grid / 2);
@@ -121,7 +121,7 @@
         display: block;
         padding: round($grid / 4) 1em;
 
-        .fixed & {
+        .root.-fixed & {
             padding: 0 1em;
         }
     }
@@ -135,19 +135,17 @@
         }
     }
 
-    .fixed & {
+    .root.-fixed & {
         right: floor($grid / 4);
         top: floor($grid / 4);
     }
 }
 
 .header_nav-item {
-    &.-fixed {
-        display: none;
+    display: none;
 
-        .fixed & {
-            display: block;
-        }
+    .root.-fixed & {
+        display: block;
     }
 }
 
@@ -183,7 +181,7 @@
     position: relative;
     width: 490px; // 2
 
-    .site:not(.-fixed) & {
+    .root:not(.-fixed) & {
         &.-short {
             display: none;
         }
@@ -213,7 +211,7 @@
         }
     }
 
-    .fixed & {
+    .root.-fixed & {
         font-size: inherit;
         left: 77px;
         padding: floor($grid / 4);
@@ -248,7 +246,7 @@
         padding: ($grid / 2);
     }
 
-    .fixed & {
+    .root.-fixed & {
         max-width: none;
         padding: 0;
 
