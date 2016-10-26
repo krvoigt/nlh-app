@@ -35,10 +35,10 @@
         content: '';
         display: block;
         height: $border-width;
-        left: ($grid / 2);
+        left: 0;
         margin-top: (-$grid / 2);
         position: absolute;
-        right: ($grid / 2);
+        right: 0;
     }
 }
 
