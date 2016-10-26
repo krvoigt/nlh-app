@@ -31,8 +31,3 @@ monolog:
         #    level:  info
 
 # Doctrine Configuration
-doctrine:
-    dbal:
-        driver:   pdo_sqlite
-        path: '%kernel.root_dir%/../var/sqlite.db'
-        charset:  UTF8

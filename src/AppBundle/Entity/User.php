@@ -3,11 +3,12 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * User.
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="user", indexes={@Index(name="search_idx", columns={"startIpAddress", "endIpAddress"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User
