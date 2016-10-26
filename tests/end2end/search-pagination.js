@@ -6,9 +6,9 @@ casper.test.assertSelectorHasLabel = function(selector, label, message) {
 };
 
 casper.test.begin('Search: Pagination', function suite(test) {
-    var current = '.pagination_item.-current';
+    var current = '.pagination:first-of-type .pagination_item.-current';
 
-    casper.start(config.base, function () {
+    casper.start(config.base + '/suche', function () {
         test.assertSelectorHasLabel(current, 'Aktuelle Seite: 1', 'Page 1 should be highlighted');
     });
 

@@ -1,13 +1,13 @@
 casper.test.begin('Search: Facets', function suite(test) {
-    casper.start(config.base, function () {
-        test.assertExists('.facetsBody', 'Facets exist');
+    casper.start(config.base + '/suche', function () {
+        test.assertExists('.facets', 'Facets exist');
     });
 
     casper.then(function () {
         this.clickLabel('Filter anzeigen');
-        this.waitUntilVisible('.facetsBody');
+        this.waitUntilVisible('.facets_body');
     }).then(function () {
-        test.assert(true, 'Facets are visible');
+        test.assert(true, 'Facets became visible');
     });
 
     casper.run(function () {
