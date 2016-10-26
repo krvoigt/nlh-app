@@ -32,7 +32,7 @@ var ViewerThumbnails = {
         }, 0);
 
         $('img', this.container).lazyload({
-            container: this.container,
+            container: this.container.parent(),
             effect: 'fadeIn'
         });
     },
