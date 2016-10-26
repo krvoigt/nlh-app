@@ -24,14 +24,14 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="startIpAddress", type="integer")
+     * @ORM\Column(name="startIpAddress", type="bigint")
      */
     private $startIpAddress;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="endIpAddress", type="integer")
+     * @ORM\Column(name="endIpAddress", type="bigint")
      */
     private $endIpAddress;
 
