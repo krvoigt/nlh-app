@@ -28,7 +28,6 @@ var Viewer = {
             zoomOut: $('.viewer_control.-zoom-out'),
         };
 
-
         this.spinner = $('.scan_spinner');
 
         var layerOptions = {
