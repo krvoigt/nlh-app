@@ -163,10 +163,6 @@
     &.-search {
         @include icon(search, false);
     }
-
-    &.-fullscreen {
-        @include icon(arrows-alt, false);
-    }
 }
 
 .viewer_dl {

@@ -20,7 +20,6 @@ var Viewer = {
         this.loadState.bind(this)();
 
         this.controls = {
-            fullscreen: $('.viewer_control.-fullscreen'),
             nextPage: $('.viewer_control.-next-page'),
             pageSelect: $('.viewer_control.-page-select'),
             previousPage: $('.viewer_control.-previous-page'),
@@ -91,8 +90,6 @@ var Viewer = {
             that.togglePanel.bind(that, $(this), panelName)();
         });
 
-        this.controls.fullscreen.click(this.toggleFullscreen.bind(this));
-
         this.controls.pageSelect.change(function () {
             // Remove LOG_xxxx part from ID to prevent wrong document section being loaded
             var newUrl = setGetParameters({page: $(this).val()}, false);
@@ -159,28 +156,6 @@ var Viewer = {
         var zoom = this.image.getZoom();
         this.controls.zoomIn.toggleClass('-disabled', zoom === this.image.getMaxZoom());
         this.controls.zoomOut.toggleClass('-disabled', zoom === this.image.getMinZoom());
-    },
-
-    toggleFullscreen: function () {
-        this.controls.fullscreen.toggleClass('-active');
-        if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            }
-        } else {
-            var element = ($('#main')[0]);
-            if (element.requestFullscreen) {
-                element.requestFullscreen();
-            } else if (element.mozRequestFullScreen) {
-                element.mozRequestFullScreen();
-            } else if (element.webkitRequestFullScreen) {
-                element.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-            }
-        }
     },
 
     togglePanel: function () {
