@@ -82,10 +82,6 @@
         z-index: 1;
     }
 
-    .viewer_control-group.-vertical label + & {
-        @include separator(0, 0, 1);
-    }
-
     &[type=text] {
         color: $text-color !important;
         text-align: left;
@@ -162,6 +158,16 @@
 
     &.-search {
         @include icon(search, false);
+    }
+
+    .viewer_control-group.-vertical label + & {
+        @include separator(0, 0, 1);
+    }
+
+    .viewer_controls.-overlay & {
+        @include respond-to(micro) {
+            min-width: ($grid * 1.3);
+        }
     }
 }
 
