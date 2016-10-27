@@ -12,7 +12,7 @@
     }
 
     &.-expand {
-        @include icon(chevron-down, false);
+        @include icon(caret-down);
         position: absolute;
         bottom: 0;
         right: 0;
@@ -31,6 +31,6 @@
     }
 
     &.-collapse {
-        @include icon(chevron-up, false);
+        @include icon(caret-up);
     }
 }
