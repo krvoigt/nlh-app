@@ -18,7 +18,7 @@
             </li>
         </ul>
         <div class="search">
-            <form class="search_form -visible" method="get" role="search" action="{{ path('_homepage') }}">
+            <form class="search_form -visible" method="get" role="search" action="{{ path('_search') }}">
                 <input size="40" placeholder="{{ 'Search'|trans }}" class="search_input" id="q" type="text" name="q" value="{{ app.request.query.get('q') }}">
                 <label for="q" class="sr-only">{{ 'Search'|trans }}</label>
                 <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>

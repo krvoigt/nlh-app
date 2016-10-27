@@ -30,7 +30,7 @@
                         <dd>
                             {% for author in parentDocument.creator %}
                                 <a
-                                href="{{ path('_homepage', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
+                                href="{{ path('_search', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
                             {% endfor %}
                         </dd>
                     {% endif %}

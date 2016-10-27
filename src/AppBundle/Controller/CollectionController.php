@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class CollectionController extends Controller
 {
     /**
-     * @Route("/collections", name="_collections", methods={"GET"})
+     * @Route("/", name="_homepage", methods={"GET"})
      */
     public function indexAction(): Response
     {
