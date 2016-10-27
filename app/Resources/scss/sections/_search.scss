@@ -45,6 +45,7 @@
     background: none;
     bottom: round($grid / 4);
     border: 0;
+    border-radius: $br;
     height: $grid;
     line-height: 1;
     padding: 0;
@@ -213,6 +214,7 @@
     @include transition(background);
     background: none;
     border: 0;
+    border-radius: $br;
     height: 1.5 * $grid;
     padding: 0;
     position: absolute;
