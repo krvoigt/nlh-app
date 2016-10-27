@@ -99,6 +99,28 @@ class IIIFController extends Controller
     }
 
     /**
+     * @param string $identifier
+     *
+     * @return string
+     */
+    protected function getImageFormat($identifier)
+    {
+        $client = $this->get('solarium.client');
+        $selectDocument = $client->createSelect()
+            ->setQuery(sprintf('work:%s', $identifier));
+
+        $document = $client->select($selectDocument)->getDocuments()[0];
+
+        if (isset($document['image_format'])) {
+            $format = $document['image_format'];
+        } else {
+            $format = $this->getParameter('default_backend_image_format');
+        }
+
+        return $format;
+    }
+
+    /**
      * @Route("/image/{identifier}/info.json", name="_iiifjson", methods={"GET"})
      */
     public function infoJsonAction($identifier)
@@ -143,7 +165,8 @@ class IIIFController extends Controller
     protected function getOriginalFileContents($originalIdentifier)
     {
         $id = explode(':', $originalIdentifier);
-        $filename = vsprintf('/image/%s/%s/%s.jpg', [$id[0], $id[1], $id[2]]);
+        $format = $this->getImageFormat($id[1]);
+        $filename = vsprintf('/image/%s/%s/%s.%s', [$id[0], $id[1], $id[2], $format]);
 
         $originalImageFile = $this->get('oneup_flysystem.nlh_filesystem')->read($filename);
 

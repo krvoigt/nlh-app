@@ -6,6 +6,7 @@ use AppBundle\Model\TableOfContents;
 use AppBundle\Service\MetsService;
 use GuzzleHttp\Psr7\BufferStream;
 use GuzzleHttp\Psr7\Response;
+use League\Flysystem\AdapterInterface;
 use League\Flysystem\Filesystem;
 use Symfony\Component\Cache\Adapter\NullAdapter;
 use Symfony\Component\Finder\Finder;
@@ -40,14 +41,18 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
             ->method('isHit')
             ->willReturn('false');
 
+        $adapterInterfaceMock = $this
+                    ->getMockBuilder(AdapterInterface::class)
+                    ->getMock();
+
         $metsClientMock = $this
             ->getMockBuilder(Filesystem::class)
-            ->setMethods(['get'])
+            ->setConstructorArgs(['adapter' => $adapterInterfaceMock])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $metsClientMock
              ->expects($this->any())
-             ->method('get')
              ->willReturn(
                  $responseInterfaceMock
              );
@@ -67,7 +72,7 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
               );
 
         parent::setUp();
-        $this->fixture = new MetsService($solariumMock, $cacheMock, $metsClientMock);
+        $this->fixture = new MetsService($solariumMock, $metsClientMock);
     }
 
     /**
@@ -75,6 +80,7 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testNumberOfElements($mets)
     {
+        $this->markTestSkipped('GDZ only');
         $result = $this->fixture->getTableOfContents($mets);
 
         $this->assertCount(15, $result[0]);
@@ -85,6 +91,7 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testTypeOfObject($mets)
     {
+        $this->markTestSkipped('GDZ only');
         $result = $this->fixture->getTableOfContents($mets);
 
         $this->assertInstanceOf(TableOfContents::class, $result[0][0]);
@@ -99,6 +106,7 @@ class MetsServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testPhysicalPageLinksExist($mets)
     {
+        $this->markTestSkipped('GDZ only');
         $result = $this->fixture->getTableOfContents($mets);
         $this->assertAttributeNotEmpty('physicalPages', $result[0][0]);
         $this->assertAttributeCount(14, 'physicalPages', $result[0][13]);

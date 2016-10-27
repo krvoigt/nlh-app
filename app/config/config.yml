@@ -11,6 +11,7 @@ parameters:
     thumbnail_size: "104,"
     collections:
       - { id: "eai1", image: "eai1.jpg" }
+    default_backend_image_format: 'jpg'
 
 framework:
     #esi:             ~

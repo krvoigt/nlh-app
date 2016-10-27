@@ -69,7 +69,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/{id}/tei.xml", name="_tei", methods={"GET"})
+     * @Route("/id/{id}/tei.xml", name="_tei", methods={"GET"})
      *
      * @param string $id
      *
@@ -90,7 +90,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/{id}/mets.xml", name="_mets", methods={"GET"})
+     * @Route("/id/{id}/mets.xml", name="_mets", methods={"GET"})
      *
      * @param string $id
      *
@@ -102,12 +102,7 @@ class DocumentController extends Controller
         $select = $client->createSelect()->setQuery(sprintf('id:%s', $id));
         $document = $client->select($select)->getDocuments()[0];
 
-        $identifier = $document->presentation_url[0];
-        $identifier = str_replace('https://nl.sub.uni-goettingen.de/image/', '', $identifier);
-        $identifier = str_replace('/full/full/0/default.jpg', '', $identifier);
-        $identifierParts = explode(':', $identifier);
-
-        $file = $this->get('oneup_flysystem.nlh_filesystem')->read(vsprintf('/mets/%s/%s.mets.xml', [$identifierParts[0], $identifierParts[1]]));
+        $file = $this->get('oneup_flysystem.nlh_filesystem')->read(vsprintf('/mets/%s/%s.mets.xml', [$document->product, $document->work]));
 
         $response = new Response(
             $file,
