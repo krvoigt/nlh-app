@@ -1,11 +1,3 @@
-html {
-    box-sizing: border-box;
-    color: $text-color;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-}
-
 *,
 *::before,
 *::after {
@@ -310,7 +302,7 @@ select {
 }
 
 select {
-    $downArrowSvg: "%3Csvg height='9' width='29' viewBox='0 0 22 9' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ccc' d='M0 2l7 7 7-7-2-2-5 5-5-5z'/%3E%3C/svg%3E";
+    $downArrowSvg: "%3Csvg height='10' width='22' viewBox='0 0 22 9' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23ccc' d='M0 3, l7 7, 7 -7, -2 -2, -5 5, -5 -5, z'/%3E%3C/svg%3E";
     background: $white url('data:image/svg+xml,#{$downArrowSvg}') right center no-repeat;
     cursor: pointer;
     min-height: 30px; // Work around weird Chrome bug (?) since v53 that displays selects with reduced height

@@ -1,5 +1,6 @@
 .header {
     background: $white; // Prevent off-canvas nav from popping through
+    flex: none; // Prevent content from being cut off on Android and IE
     overflow: visible;
     position: relative;
     z-index: 1;
@@ -31,7 +32,7 @@
         padding: ceil($grid / 4) ($grid / 2) floor($grid / 4);
     }
 
-    .site.-fixed & {
+    .root.-fixed & {
         display: none;
     }
 }
@@ -67,7 +68,7 @@
     max-width: 100%;
     width: 640px; // Width of logo
 
-    .site:not(.-fixed) & {
+    .root:not(.-fixed) & {
         // Fit logo left of search
         @include respond-to(large) {
             background-size: 392px auto;
@@ -90,7 +91,7 @@
         }
     }
 
-    .site.-fixed & {
+    .root.-fixed & {
         background-position: floor($grid / 4);
         background-size: auto $grid;
         height: ($grid * 1.5);
@@ -101,7 +102,7 @@
         height: 100%;
         min-height: (1.5 * $grid);
 
-        .site.-fixed & {
+        .root.-fixed & {
             left: round($grid / 4);
             height: ($grid * 1.5);
             top: round($grid / 2);
@@ -120,7 +121,7 @@
         display: block;
         padding: round($grid / 4) 1em;
 
-        .site.-fixed & {
+        .root.-fixed & {
             padding: 0 1em;
         }
     }
@@ -134,19 +135,17 @@
         }
     }
 
-    .site.-fixed & {
+    .root.-fixed & {
         right: floor($grid / 4);
         top: floor($grid / 4);
     }
 }
 
 .header_nav-item {
-    &.-fixed {
-        display: none;
+    display: none;
 
-        .site.-fixed & {
-            display: block;
-        }
+    .root.-fixed & {
+        display: block;
     }
 }
 
@@ -174,19 +173,15 @@
 .header_title {
     @include typo-scale(2);
     background: $brand-color;
+    display: inline-block;
     color: $white;
-    display: table-cell; // Center text vertically inside element
     font-family: $font-family-display;
-    height: ($grid * 3);
     left: 143px; // 1
-    margin: $grid 0 0;
-    padding: 0 ($grid / 2);
+    padding: ($grid / 2);
     position: relative;
-    top: (-$grid / 2);
-    vertical-align: middle;
     width: 490px; // 2
 
-    .site:not(.-fixed) & {
+    .root:not(.-fixed) & {
         &.-short {
             display: none;
         }
@@ -195,15 +190,13 @@
             @include typo-scale(1);
             height: ($grid * 2);
             left: 96px; // 1
-            padding: 0 9px;
-            top: 0;
+            padding: ($grid / 2) 9px;
             width: 310px;
         }
 
         @include respond-to(medium) {
             font-size: $font-size;
             left: 76px;
-            line-height: 18px; // Making two rows same height as logo
             width: 260px; // 3
         }
 
@@ -212,18 +205,17 @@
             height: auto;
             left: 0;
             margin-top: 39px; // Just below logo blip
-            padding: 5px; // Ensure logo text is overlapped
+            padding: 0;
             text-align: center;
             width: 100%;
         }
     }
 
-    .site.-fixed & {
+    .root.-fixed & {
         font-size: inherit;
-        height: ($grid * 1.5 - 2px);
         left: 77px;
-        padding: 0 floor($grid / 4);
-        top: 2px;
+        padding: floor($grid / 4);
+        top: 1px;
 
         &.-short {
             display: none;
@@ -254,7 +246,7 @@
         padding: ($grid / 2);
     }
 
-    .site.-fixed & {
+    .root.-fixed & {
         max-width: none;
         padding: 0;
 

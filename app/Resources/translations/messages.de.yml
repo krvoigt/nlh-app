@@ -37,6 +37,7 @@ Published: Erschienen
 Remove all filters: Alle Filter entfernen
 Remove filter %name% is &ldquo;%value%&rdquo;: 'Filter entfernen: %name% ist &bdquo;%value%&ldquo;'
 results: Treffer
+RSS Feed: RSS-Feed
 Show filters: Filter anzeigen
 Show full title: Voller Titel
 Show less: Weniger anzeigen
@@ -60,6 +61,8 @@ Download METS file: METS-Datei herunterladen
 Download this section as PDF: Diesen Abschnitt als PDF herunterladen
 Export: Export
 First page: Erste Seite
+Fulltext: Volltext
+Go to page: Gehe zu Seite
 Fullscreen: Vollbildansicht
 Fulltext: Volltext
 Go to page: Gehe zu Seite
@@ -82,6 +85,7 @@ Search: Suchen
 Set zoom: Zoomen
 sorted by: sortiert nach
 Table of contents: Inhaltsverzeichnis
+uncounted: – # that's an ndash, not a dash
 Transcript: Volltext
 uncounted: – # that's an ndash, not a dash
 Zoom in: Vergrößern
@@ -99,6 +103,10 @@ datemodified: Importdatum
 dc: Sammlung|Sammlungen
 disclaimer: The Göttingen State and University Library provides access to digitized documents strictly for noncommercial educational, research and private purposes and makes no warranty with regard to their use for other purposes. Some of our collections are protected by copyright. Publication and/or broadcast in any form (including electronic) requires prior written permission from the Goettingen State- and University Library. Each copy of any part of this document must contain there Terms and Conditions. With the usage of the ibrary's online system to access or download a digitized document you accept there Terms and Conditions. Reproductions of material on the web site may not be made for or donated to other repositories, nor may be further reproduced without written permission from the Goettingen State- and University Library For reproduction requests and permissions, please contact us. If citing materials, please give proper attribution of the source.
 docstrct: Strukturtyp|Strukturtypen
+facetcreator: Autor|Autoren
+facetplacepublish: Erscheinungsort|Erscheinungsorte
+facetpublisher: Verlag|Verlage
+placepublish: Erscheinungsort|Erscheinungsorte
 facet_place_publish: Erscheinungsort|Erscheinungsorte
 placepublish: Erscheinungsort|Erscheinungsorte
 dc: Sammlung|Sammlungen
@@ -113,6 +121,7 @@ currentno: Band
 Catalogue: Katalogeintrag
 datemodified: Importdatum
 score: Relevanz
+yearpublish: Erscheinungsjahr|Erscheinungsjahre
 disclaimer: The Göttingen State and University Library provides access to digitized documents strictly for noncommercial educational, research and private purposes and makes no warranty with regard to their use for other purposes. Some of our collections are protected by copyright. Publication and/or broadcast in any form (including electronic) requires prior written permission from the Goettingen State- and University Library. Each copy of any part of this document must contain there Terms and Conditions. With the usage of the ibrary's online system to access or download a digitized document you accept there Terms and Conditions. Reproductions of material on the web site may not be made for or donated to other repositories, nor may be further reproduced without written permission from the Goettingen State- and University Library For reproduction requests and permissions, please contact us. If citing materials, please give proper attribution of the source.
 subject_topic: Thema
 subject_title: Titel

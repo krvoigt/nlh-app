@@ -20,11 +20,19 @@
     dt {
         font-weight: normal;
         width: 9em;
+
+        @include respond-to(large) {
+            width: 100%;
+        }
     }
 
     dd {
         margin: 0;
         width: auto;
+
+        @include respond-to(large) {
+            margin-left: 1em;
+        }
     }
 }
 

@@ -19,10 +19,10 @@
     margin-right: $border-width * 2;
 
     &.-current {
-        background: $text-color-light;
-        color: $white;
+        background: $shade-light;
+        color: $text-color-light;
         font-weight: bold;
-        text-shadow: $shade-inset;
+        text-shadow: $shine-inset;
     }
 
     &.-last {

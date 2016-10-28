@@ -3,10 +3,9 @@
     background: $grey-light;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%; // Using % instead of vh to accomodate Mobile Safari < 10
     margin: 0 auto;
     max-width: $site-width;
-    min-height: 100%;
 
     @include respond-to(large) {
         box-shadow: 0 0 $grid rgba($black, .5);
@@ -15,7 +14,8 @@
         overflow-x: hidden;
     }
 
-    &.-fixed {
+    .root.-fixed & {
+        height: 100%; // IE fix
         max-width: none;
     }
 

@@ -1,0 +1,11 @@
+.root {
+    box-sizing: border-box;
+    color: $text-color;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    &.-fixed {
+        overflow: hidden;
+    }
+}

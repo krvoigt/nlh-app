@@ -1,5 +1,7 @@
+// 1. Setting flex-shrink to 0 prevents footer overlapping with content on Android < 6, IE and Mobile Safari < 10
+
 .content {
-    flex: 1;
+    flex: 1 0 auto; // 1
     margin: $grid;
     position: relative;
     z-index: 0;
@@ -17,7 +19,7 @@
         margin-bottom: 0;
     }
 
-    .site.-fixed & {
+    .root.-fixed & {
         display: flex;
         flex-direction: column;
         margin: 0;

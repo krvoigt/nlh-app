@@ -1,4 +1,5 @@
-var Export = {
+// Inited by Viewer
+var ViewerExport = {
     init: function () {
         DCPDF.reset();
 
@@ -45,5 +46,3 @@ var Export = {
         return ($pageStart === 1 && $pageEnd === max) || $pageEnd - $pageStart > 100;
     }
 };
-
-Export.init();

@@ -13,6 +13,7 @@
     background-color: $shine-light;
     border: 0;
     color: $link-color;
+    padding-left: .25em;
 
     @include hover {
         background-color: $white;

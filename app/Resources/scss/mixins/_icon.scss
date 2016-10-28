@@ -7,7 +7,7 @@
             content: map-get($font-awesome-icons, $name);
 
             @if $with-text {
-                padding-left: .5em;
+                padding-left: .25em;
             }
         }
     } @else {
@@ -16,7 +16,7 @@
             content: map-get($font-awesome-icons, $name);
 
             @if $with-text {
-                padding-right: .5em;
+                padding-right: .25em;
             }
         }
     }
