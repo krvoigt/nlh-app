@@ -52,12 +52,7 @@ class IIIFController extends Controller
 
         $imagine = $this->get('liip_imagine');
         $imageService = $this->get('image_service');
-
-        try {
-            $image = $imagine->load($this->getOriginalFileContents($identifier));
-        } catch (\Exception $e) {
-            $image = $imagine->load($this->getOriginalFileContents($this->getRealIdentifier($identifier)));
-        }
+        $image = $imagine->load($this->getOriginalFileContents($identifier));
 
         $imageService->getRegion($imageEntity->getRegion(), $image);
         $imageService->getSize($imageEntity->getSize(), $image);
@@ -71,31 +66,6 @@ class IIIFController extends Controller
             );
 
         return new BinaryFileResponse($cachedFile);
-    }
-
-    /**
-     * @param string $identifier
-     *
-     * @return string
-     */
-    protected function getRealIdentifier($identifier)
-    {
-        $id = explode(':', $identifier);
-
-        if (isset($id[1])) {
-            $counter = (int) $id[1] - 1;
-        } else {
-            $counter = 1;
-        }
-        $client = $this->get('solarium.client');
-        $selectDocument = $client->createSelect()
-            ->setQuery(sprintf('id:%s', $id[0]));
-
-        $document = $client->select($selectDocument)->getDocuments()[0];
-
-        $identifier = $document->nlh_id[$counter];
-
-        return $identifier;
     }
 
     /**
@@ -126,11 +96,10 @@ class IIIFController extends Controller
     public function infoJsonAction($identifier)
     {
         $imageEntity = new Image();
-
-        $imageEntity->setIdentifier($this->getRealIdentifier($identifier));
+        $imageEntity->setIdentifier($identifier);
 
         $imagine = $this->get('liip_imagine');
-        $originalImage = $this->getOriginalFileContents($this->getRealIdentifier($identifier));
+        $originalImage = $this->getOriginalFileContents($identifier);
 
         try {
             $image = $imagine->load($originalImage);

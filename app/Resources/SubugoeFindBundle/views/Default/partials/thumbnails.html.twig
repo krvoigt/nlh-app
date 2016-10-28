@@ -1,7 +1,7 @@
 <section class="thumbnails">
-    {% if document.presentation_url is defined %}
+    {% if document['nlh_id'] is defined %}
         <ul class="thumbnails_list">
-            {% for page in document.presentation_url %}
+            {% for page in document['nlh_id'] %}
                 {% set link = document.id ~ '?page=' ~ loop.index %}
                 {% set isCurrent = (page == documentStructure.page) %}
                 {# TODO: Find a more elegant way to build image URL #}

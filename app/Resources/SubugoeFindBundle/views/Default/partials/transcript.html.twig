@@ -5,7 +5,7 @@
         <h2 class="viewer_heading">{{ 'Fulltext'|trans }}</h2>
         <div class="transcript_page">
             {% autoescape %}
-                {{ render(controller('AppBundle:Document:fullText', { 'id': document['presentation_url'][page - 1] })) }}
+                {{ render(controller('AppBundle:Document:fullText', { 'id': document['nlh_id'][page - 1] })) }}
             {% endautoescape %}
         </div>
     </section>
