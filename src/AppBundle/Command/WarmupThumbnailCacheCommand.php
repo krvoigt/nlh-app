@@ -20,7 +20,7 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
             ->setName('app:warmup_thumbnail_cache')
             ->setDescription('generates images for iiif')
             ->addOption('direction', null, InputOption::VALUE_OPTIONAL, 'Sorting direction (asc or desc)', 'desc')
-            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 1000);
+            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 500);
     }
 
     /**
@@ -29,18 +29,15 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = $this->getContainer()->get('solarium.client');
-        $query = $client->createSelect()->addSort('dateindexed', $input->getOption('direction'))->setRows($input->getOption('rows'));
+        $query = $client->createSelect()->addSort('date_indexed', $input->getOption('direction'))->setRows($input->getOption('rows'));
         $resultset = $client->select($query);
 
         $controller = new IIIFController();
         $controller->setContainer($this->getContainer());
 
         foreach ($resultset as $document) {
-            if (isset($document->presentation_url)) {
-                foreach ($document->presentation_url as $url) {
-                    $image = str_replace('http://gdz.sub.uni-goettingen.de/tiff/', '', $url);
-                    $image = str_replace('.tif', '', $image);
-                    $image = str_replace('/', ':', $image);
+            if (isset($document->nlh_id)) {
+                foreach ($document->nlh_id as $image) {
                     $output->write($image);
                     $start = microtime(true);
                     try {
