@@ -30,7 +30,12 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = $this->getContainer()->get('solarium.client');
-        $query = $client->createSelect()->addSort('date_indexed', $input->getOption('direction'))->setRows($input->getOption('rows'));
+        $query = $client
+            ->createSelect()
+            ->addSort('date_indexed', $input->getOption('direction'))
+            ->setRows($input->getOption('rows'))
+            ->setStart($input->getOption('start'));
+
         $resultset = $client->select($query);
 
         $controller = new IIIFController();
