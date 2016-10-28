@@ -20,7 +20,8 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
             ->setName('app:warmup_thumbnail_cache')
             ->setDescription('generates images for iiif')
             ->addOption('direction', null, InputOption::VALUE_OPTIONAL, 'Sorting direction (asc or desc)', 'desc')
-            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 500);
+            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 500)
+            ->addOption('start', null, InputOption::VALUE_OPTIONAL, 'Start at row', 0);
     }
 
     /**

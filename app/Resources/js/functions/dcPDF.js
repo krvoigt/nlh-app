@@ -342,12 +342,12 @@ DCPDF.generatePDF = function (ppn, physIdstart, physIdend) {
 };
 
 /**
- * @summary Helper function to build a physId from a string like "23" to "00000023"
+ * @summary Helper function to build a physId from a string like "23" to "EADWERAEE423"
  * @param theNumberOfphysId Like 23
- * @returns {string} Like "00000023"
+ * @returns {string} Like "EADWERAEE423"
  */
 DCPDF.buildphysIds = function (theNumberOfphysId) {
-    return ("00000000" + theNumberOfphysId).substr(-8, 8);
+    return $('.viewer_control.-page-select option[value=' + theNumberOfphysId+ ']').attr('data-id');
 };
 
 /**
