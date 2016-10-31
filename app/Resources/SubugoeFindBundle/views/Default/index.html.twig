@@ -71,13 +71,13 @@
         {% endif %}
 
         {% for result in pagination %}
-            {% if result.fields.product in allowedProductList %}
+            {% if result.fields.product in user.products %}
                 <li class="result_item">
             {% else %}
                 <li class="result_item_blocked">
             {% endif %}
                 <article class="result_wrap">
-                    {% if result.fields.product in allowedProductList %}
+                    {% if result.fields.product in user.products %}
                         <div class="result_left">
                             {% if result.fields.nlh_id is defined %}
                                 <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">

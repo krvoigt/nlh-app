@@ -15,8 +15,12 @@ services:
     class: AppBundle\Service\ImageService
 
   security.access.whitelist_voter:
-        class: AppBundle\Security\Authorization\Voter\ClientIpVoter
-        arguments: ["@service_container"]
-        public:    false
-        tags:
-          - { name: security.voter }
+    class: AppBundle\Security\Authorization\Voter\ClientIpVoter
+    arguments: ["@doctrine", "@request_stack"]
+    public:    false
+    tags:
+      - { name: security.voter }
+
+  authorization_service:
+    class: AppBundle\Service\AuthorizationService
+    arguments: ["@doctrine", "@request_stack"]
