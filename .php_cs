@@ -9,6 +9,7 @@ $config
     ->exclude('build')
     ->exclude('cache')
     ->exclude('var')
+    ->exclude('node_modules')
     ->exclude('vendor');
 
 return $config;
