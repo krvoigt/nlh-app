@@ -47,6 +47,17 @@
     }
 }
 
+.result_item_blocked {
+    background: $grey-light;
+    border-radius: $br;
+    box-shadow: $card-shadow;
+    padding: ($grid / 2);
+
+    & + & {
+        margin-top: ($grid / 2);
+    }
+}
+
 .result_left {
     display: table-cell;
     padding: 0 ($grid / 2) 0 0;
@@ -131,4 +142,9 @@
 .result_wrap {
     display: inline-block; // block or table would mess up list numbers
     vertical-align: top;
+}
+
+.registered_as {
+    color: $white;
+    margin-top: round($grid / 4);
 }

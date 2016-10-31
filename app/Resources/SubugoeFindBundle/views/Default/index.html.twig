@@ -71,20 +71,25 @@
         {% endif %}
 
         {% for result in pagination %}
-            <li class="result_item">
+            {% if result.fields.product in allowedProductList %}
+                <li class="result_item">
+            {% else %}
+                <li class="result_item_blocked">
+            {% endif %}
                 <article class="result_wrap">
-                    <div class="result_left">
-                        {% if result.fields.nlh_id is defined %}
-                            <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                <img class="result_thumbnail"
-                                     src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
-                                     alt="">
-                            </a>
-                        {% endif %}
-                    </div>
+                    {% if result.fields.product in allowedProductList %}
+                        <div class="result_left">
+                            {% if result.fields.nlh_id is defined %}
+                                <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
+                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="result_left">Dummybild</div>
+                    {% endif %}
                     <div class="result_metadata">
                         <h2 class="result_title">
-
                             <a class="result_link" title="{{ result.fields.nonsort | first }}"
                                href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.nonsort | first }}</a>
                             <button class="result_title-toggle -expand">
@@ -112,7 +117,7 @@
                         </dl>
                         <p>
                             {{ result.fields.docstrct|trans }}
-                            {% if result.fields.docstrct == 'volume' and result.fields.currentn is defined %}
+                            {% if result.fields.docstrct == 'volume' and result.fields.currentno is defined %}
                                 &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
                             {% endif %}
                         </p>

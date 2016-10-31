@@ -12,6 +12,7 @@ use AppBundle\Model\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Solarium\QueryType\Select\Query\Query;
+use \Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DefaultController extends BaseController
 {
@@ -24,8 +25,6 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('');
-
         $sort = $request->get('sort');
         if (isset($sort) && empty($sort)) {
             throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
@@ -47,6 +46,8 @@ class DefaultController extends BaseController
         $facets = $this->get('solarium.client')->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
+        list($userName, $allowedProductList) = $this->getAllowedProducts($this->container);
+
         return $this->render('SubugoeFindBundle:Default:index.html.twig', [
                 'facets' => $facets,
                 'facetCounter' => $facetCounter,
@@ -54,6 +55,8 @@ class DefaultController extends BaseController
                 'search' => $search,
                 'pagination' => $pagination,
                 'activeCollection' => $request->get('activeCollection'),
+                'userName' => isset($userName) ? $userName : null,
+                'allowedProductList' => $allowedProductList,
         ]);
     }
 
@@ -95,6 +98,15 @@ class DefaultController extends BaseController
         $document = $document->getDocuments();
         if (count($document) === 0) {
             throw new NotFoundHttpException(sprintf('Document %s not found', $documentId));
+        }
+
+        $product = $document[0]->product;
+
+        list($userName, $allowedProductList) = $this->getAllowedProducts($this->container);
+
+        if (!in_array($product, $allowedProductList)) {
+            $registerationLink = 'http://www.nationallizenzen.de/ind_inform_registration';
+            return $this->redirect($registerationLink);
         }
 
         if ($document[0]->idparentdoc[0]) {
@@ -193,6 +205,7 @@ class DefaultController extends BaseController
                         'parentDocumentTitle' => isset($parentDocumentTitle) ? $parentDocumentTitle : null,
                         'pageMappings' => isset($pageMappings) ? $pageMappings : null,
                         'documentStructure' => $documentStructure,
+                        'userName' => isset($userName) ? $userName : null,
                 ]);
     }
 
@@ -371,5 +384,28 @@ class DefaultController extends BaseController
         if (is_array($sort) && $sort != []) {
             $select->addSort($sort[0], $sort[1]);
         }
+    }
+
+    /*
+     * Returns the user name as well as his allowed products
+     * @param Interface $container
+     *
+     * @Return string $userName The user name
+     * @Return array $allowedProductList The allowed products
+     */
+    public function getAllowedProducts(ContainerInterface $container)
+    {
+        $clientIp = $container->get('request_stack')->getMasterRequest()->getClientIp();
+        //$clientIp = '143.93.144.1';
+        $repository = $container->get('doctrine')->getRepository('AppBundle:User');
+        $userArr = $repository->compareIp(ip2long($clientIp));
+        $allowedProductList = [];
+        if (count($userArr) > 0) {
+            $userName = $userArr[0]->getInstitution();
+            foreach ($userArr as $user) {
+                $allowedProductList[] = $user->getProduct();
+            }
+        }
+        return [isset($userName) ? $userName : '', $allowedProductList];
     }
 }

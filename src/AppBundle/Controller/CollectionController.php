@@ -27,6 +27,9 @@ class CollectionController extends Controller
      */
     public function collectionAction(Request $request, $id)
     {
+        $defaultController = new DefaultController();
+        list($userName, $allowedProductList) = $defaultController->getAllowedProducts($this->container);
+
         $client = $this->get('solarium.client');
         $paginator = $this->get('knp_paginator');
         $activeFacets = $request->get('filter');
@@ -69,6 +72,8 @@ class CollectionController extends Controller
             'facetCounter' => $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets),
             'queryParams' => $request->get('filter') ?: [],
             'activeCollection' => $id,
+            'userName' => isset($userName) ? $userName : null,
+            'allowedProductList' => $allowedProductList,
         ]);
     }
 
