@@ -3,20 +3,33 @@
 namespace AppBundle\Security\Authorization\Voter;
 
 use AppBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ClientIpVoter implements VoterInterface
 {
     /**
-     * @var ContainerInterface
+     * @var RegistryInterface
      */
-    private $container;
+    protected $doctrine;
 
-    public function __construct(ContainerInterface $container)
+    /**
+     * @var RequestStack
+     */
+    protected $request;
+
+    /**
+     * ClientIpVoter constructor.
+     *
+     * @param RegistryInterface $doctrine
+     * @param RequestStack      $request
+     */
+    public function __construct(RegistryInterface $doctrine, RequestStack $request)
     {
-        $this->container = $container;
+        $this->doctrine = $doctrine;
+        $this->request = $request;
     }
 
     public function supportsAttribute($attribute)
@@ -33,10 +46,10 @@ class ClientIpVoter implements VoterInterface
 
     public function vote(TokenInterface $token, $object, array $attributes)
     {
-        $clientIp = $this->container->get('request_stack')->getMasterRequest()->getClientIp();
+        $clientIp = $this->request->getMasterRequest()->getClientIp();
         //$clientIp = '143.93.144.1';
 
-        $repository = $this->container->get('doctrine')->getRepository('AppBundle:User');
+        $repository = $this->doctrine->getRepository('AppBundle:User');
 
         $user = $repository->compareIp(ip2long($clientIp));
 
