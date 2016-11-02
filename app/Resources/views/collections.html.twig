@@ -11,7 +11,7 @@
                     {% else %}
                         <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image_blocked">
                     {% endif %}
-                    <span class="collections_name"> {{ collection.id|trans }}</span>
+                    <span class="collections_name"> {{ collection.id|trans|raw }}</span>
                 </a>
             </li>
         {% endfor %}

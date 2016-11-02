@@ -1,39 +1,47 @@
-{# TODO: Show current page via page variable #}
 <section class="scan">
     <div class="viewer_controls -overlay">
         <div class="viewer_control-group">
             {% if documentStructure.page != 1 and documentStructure.identifier is not null %}
                 <a
-                class="viewer_control -first-page"
-                title="{{ 'First page'|trans }}"
-                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.firstChapter}) }}{{ '?page=' ~ documentStructure.documentFirstPage }}
+                    class="viewer_control -first-page"
+                    title="{{ 'First page'|trans }}"
+                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.firstChapter}) }}{{ '?page=' ~ documentStructure.documentFirstPage }}
                 >
-                <span class="sr-only">{{ 'First page'|trans }}</span>
+                    <i class="icon">first_page</i>
+                    <span class="sr-only">{{ 'First page'|trans }}</span>
                 </a>
             {% else %}
-                <button class="viewer_control -first-page -disabled"></button>
+                <span class="viewer_control -first-page -disabled">
+                     <i class="icon">first_page</i>
+                </span>
             {% endif %}
             {% if documentStructure.isThereAPreviousChapter is not empty and documentStructure.identifier is not null %}
                 <a
-                class="viewer_control -previous-section"
-                title="{{ 'Previous section'|trans }}"
-                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId}) }}{{ not documentStructure.isThereAPreviousChapter is empty ? '?page=' ~ documentStructure.previousChapterFirstPage }}
+                    class="viewer_control -previous-section"
+                    title="{{ 'Previous section'|trans }}"
+                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId}) }}{{ not documentStructure.isThereAPreviousChapter is empty ? '?page=' ~ documentStructure.previousChapterFirstPage }}
                 >
-                <span class="sr-only">{{ 'Previous section'|trans }}</span>
+                    <i class="icon">skip_previous</i>
+                    <span class="sr-only">{{ 'Previous section'|trans }}</span>
                 </a>
             {% else %}
-                <button class="viewer_control -previous-section -disabled"></button>
+                <span class="viewer_control -previous-section -disabled">
+                    <i class="icon">skip_previous</i>
+                </span>
             {% endif %}
             {% if documentStructure.page != 1 and documentStructure.identifier is not null %}
                 <a
-                class="viewer_control -previous-page"
-                title="{{ 'Previous page'|trans }}"
-                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId}) }}{{ documentStructure.page != 1 ? '?page=' ~ (documentStructure.page - 1) }}
+                    class="viewer_control -previous-page"
+                    title="{{ 'Previous page'|trans }}"
+                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId}) }}{{ documentStructure.page != 1 ? '?page=' ~ (documentStructure.page - 1) }}
                 >
-                <span class="sr-only">{{ 'Previous page'|trans }}</span>
+                    <i class="icon">navigate_before</i>
+                    <span class="sr-only">{{ 'Previous page'|trans }}</span>
                 </a>
             {% else %}
-                <button class="viewer_control -previous-page -disabled"></button>
+                <span class="viewer_control -previous-page -disabled">
+                    <i class="icon">navigate_before</i>
+                </span>
             {% endif %}
             <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
             <select class="viewer_control -page-select{{ documentStructure.identifier is null ? ' -disabled'  }}" name="page" id="viewer-page-select">
@@ -47,45 +55,59 @@
             </select>
             {% if documentStructure.page != documentStructure.pageCount and documentStructure.identifier is not null %}
                 <a
-                class="viewer_control -next-page"
-                title="{{ 'Next page'|trans }}"
-                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId}) }}{{ '?page=' ~ (documentStructure.page + 1) }}
+                    class="viewer_control -next-page"
+                    title="{{ 'Next page'|trans }}"
+                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId}) }}{{ '?page=' ~ (documentStructure.page + 1) }}
                 >
-                <span class="sr-only">{{ 'Next page'|trans }}</span>
+                    <i class="icon">navigate_next</i>
+                    <span class="sr-only">{{ 'Next page'|trans }}</span>
                 </a>
             {% else %}
-                <button class="viewer_control -next-page -disabled"></button>
+                <span class="viewer_control -next-page -disabled">
+                    <i class="icon">navigate_next</i>
+                </span>
             {% endif %}
             {% if documentStructure.isThereANextChapter is not empty and documentStructure.identifier is not null %}
                 <a
-                class="viewer_control -next-section"
-                title="{{ 'Next section'|trans }}"
-                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId}) }}{{ not documentStructure.isThereANextChapter is empty ? '?page=' ~ documentStructure.nextChapterFirstPage }}
+                    class="viewer_control -next-section"
+                    title="{{ 'Next section'|trans }}"
+                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId}) }}{{ not documentStructure.isThereANextChapter is empty ? '?page=' ~ documentStructure.nextChapterFirstPage }}
                 >
-                <span class="sr-only">{{ 'Next section'|trans }}</span>
+                    <i class="icon">skip_next</i>
+                    <span class="sr-only">{{ 'Next section'|trans }}</span>
                 </a>
             {% else %}
-                <button class="viewer_control -next-section -disabled"></button>
+                <span class="viewer_control -next-section -disabled">
+                    <i class="icon">skip_next</i>
+                </span>
             {% endif %}
             {% if documentStructure.page != documentStructure.documentLastPage and documentStructure.identifier is not null %}
                 <a
-                class="viewer_control -last-page"
-                title="{{ 'Last page'|trans }}"
-                {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.lastChapter}) }}{{ '?page=' ~ documentStructure.documentLastPage }}
+                    class="viewer_control -last-page"
+                    title="{{ 'Last page'|trans }}"
+                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.lastChapter}) }}{{ '?page=' ~ documentStructure.documentLastPage }}
                 >
-                <span class="sr-only">{{ 'Last page'|trans }}</span>
+                    <i class="icon">last_page</i>
+                    <span class="sr-only">{{ 'Last page'|trans }}</span>
                 </a>
             {% else %}
-                <button class="viewer_control -last-page -disabled"></button>
+                <span class="viewer_control -last-page -disabled">
+                     <i class="icon">last_page</i>
+                </span>
             {% endif %}
 
         </div>
     </div>
     <div class="viewer_controls -overlay">
         <div class="viewer_control-group -vertical">
-            <button class="viewer_control -zoom-out" title="{{ 'Zoom out'|trans }}"><span class="sr-only">{{ 'Zoom out'|trans }}</span></button>
-            <label class="sr-only" for="viewer-zoom-range">{{ 'Set zoom'|trans }}</label>
-            <button class="viewer_control -zoom-in" title="{{ 'Zoom in'|trans }}"><span class="sr-only">{{ 'Zoom in'|trans }}</span></button>
+            <button class="viewer_control -zoom-out" title="{{ 'Zoom out'|trans }}">
+                <i class="icon">zoom_out</i>
+                <span class="sr-only">{{ 'Zoom out'|trans }}</span>
+            </button>
+            <button class="viewer_control -zoom-in" title="{{ 'Zoom in'|trans }}">
+                <i class="icon">zoom_in</i>
+                <span class="sr-only">{{ 'Zoom in'|trans }}</span
+            ></button>
         </div>
     </div>
 

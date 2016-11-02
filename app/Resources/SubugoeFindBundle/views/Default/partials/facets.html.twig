@@ -51,8 +51,14 @@
 
         <article class="facet">
             <h2>{{ key|transchoice(facet|length) }}</h2>
-            <button class="facet_list-toggle -expand">{{ 'Show all'|trans }}</button>
-            <button class="facet_list-toggle -collapse">{{ 'Show less'|trans }}</button>
+            <button class="facet_list-toggle -expand">
+                <i class="icon">expand_more</i>
+                {{ 'Show all'|trans }}
+            </button>
+            <button class="facet_list-toggle -collapse">
+                <i class="icon">expand_less</i>
+                {{ 'Show less'|trans }}
+            </button>
             <ol class="facet_list">
                 {# Year range (only used with yearpublish #}
                 {# TODO: Add count #}
@@ -69,14 +75,15 @@
                                     {% endif %}
                                 {% endfor %}
                                 <a
-                                        class="facet_link -remove"
-                                        href="{{ path(app.request.attributes.get('_route'), {
-                                            'filter': queryParamsSliced,
-                                            'id': app.request.get('id'),
-                                            'q': app.request.get('q'),
-                                        }) }}"
-                                        title="{{ 'Remove filter: publishing year range'|trans }}"
+                                    class="facet_link -remove"
+                                    href="{{ path(app.request.attributes.get('_route'), {
+                                        'filter': queryParamsSliced,
+                                        'id': app.request.get('id'),
+                                        'q': app.request.get('q'),
+                                    }) }}"
+                                    title="{{ 'Remove filter: publishing year range'|trans }}"
                                 >
+                                    <i class="icon">remove</i>
                                     {{ tokens.0 }}&ndash;{{ tokens.2 }}
                                 </a>
                             </li>

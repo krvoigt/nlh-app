@@ -22,6 +22,7 @@
         width: 9em;
 
         @include respond-to(large) {
+            font-weight: bold;
             width: 100%;
         }
     }
@@ -31,7 +32,9 @@
         width: auto;
 
         @include respond-to(large) {
-            margin-left: 1em;
+            &:not(:last-child) {
+                margin: 0 0 ($grid / 2);
+            }
         }
     }
 }
@@ -61,19 +64,19 @@
 .result_left {
     display: table-cell;
     padding: 0 ($grid / 2) 0 0;
-    width: ($grid * 4);
+    width: ($thumbnail-width + $grid / 2);
+
+    @include respond-to(tiny) {
+         width: ($thumbnail-width / 2 + $grid / 2);
+    }
 }
 
 .result_link {
-    &.-image {
-        box-shadow: none;
+    > img {
+        @include transition(opacity);
 
-        > img {
-            @include transition(opacity);
-
-            @include hover {
-                opacity: .7;
-            }
+        @include hover {
+            opacity: .7;
         }
     }
 }
@@ -119,12 +122,21 @@
 }
 
 .result_title {
-    @extend %title;
     display: block;
     font: inherit;
     font-weight: bold;
     margin: 0 0 round($grid / 4);
     position: relative;
+
+    &.-cut {
+        height: $grid;
+        overflow: hidden;
+    }
+
+    &.-full {
+        height: auto !important;
+        overflow: visible;
+    }
 
     > a {
         @include link;
@@ -132,7 +144,35 @@
 }
 
 .result_title-toggle {
-    @include title-toggle($white);
+    @include button(link);
+    background: $white;
+    display: none;
+    float: right;
+    font-weight: normal;
+    min-height: 0;
+    padding: 0 ($grid / 4);
+
+    @include hover {
+        background: $brand-color-lighter;
+    }
+
+    &.-expand {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        &::after {
+            background: linear-gradient(to right, rgba($white, 0), rgba($white, 1));
+            content: '';
+            display: block;
+            height: $grid;
+            margin-left: (-$grid * 3.25); // width + button padding
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            width: ($grid * 3);
+        }
+    }
 }
 
 .result_thumbnail {

@@ -10,7 +10,6 @@
     }
 
     a {
-        @include link(false);
         white-space: nowrap;
     }
 
@@ -34,10 +33,6 @@
 
 .footer_right {
     float: right;
-
-    @include respond-to(medium) {
-        margin-top: ($grid / 2);
-    }
 }
 
 .footer_left,

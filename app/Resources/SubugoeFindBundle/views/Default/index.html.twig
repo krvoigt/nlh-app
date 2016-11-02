@@ -64,8 +64,12 @@
                     <li>
                         <a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}">{{ 'DFG Viewer'|trans }}</a>
                     </li>
-                    <li><a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a></li>
-                    <li><a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a></li>
+                    <li>
+                        <a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a>
+                    </li>
+                    <li>
+                        <a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a>
+                    </li>
                 </ul>
             </li>
         {% endif %}
@@ -80,8 +84,12 @@
                     {% if result.fields.product in user.products %}
                         <div class="result_left">
                             {% if result.fields.nlh_id is defined %}
-                                <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}" alt="">
+                                <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">
+                                    <img
+                                        class="result_thumbnail"
+                                        src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
+                                        alt=""
+                                    >
                                 </a>
                             {% endif %}
                         </div>
@@ -93,15 +101,17 @@
                             <a class="result_link" title="{{ result.fields.nonsort | first }}"
                                href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.nonsort | first }}</a>
                             <button class="result_title-toggle -expand">
+                                <i class="icon">expand_more</i>
                                 {{ 'Show full title'|trans }}
                             </button>
                             <button class="result_title-toggle -collapse">
+                                <i class="icon">expand_less</i>
                                 {{ 'Collapse title'|trans }}
                             </button>
                         </h2>
                         <dl class="result_info">
                             {% if result.fields.creator is defined %}
-                                <dt>{{ 'creator'|transchoice(result.fields.creator|length) }}:</dt>
+                                <dt>{{ 'creator'|transchoice(result.fields.creator|length) }}</dt>
                                 <dd>
                                     {% for author in result.fields.creator %}
                                         {{ author }}{% if not loop.last %}; {% endif %}

@@ -1,0 +1,19 @@
+#feedback {
+    button {
+        @include button;
+    }
+
+    .control-label {
+        color: $text-color-light;
+        font-weight: bold;
+    }
+
+    .form-control {
+        max-width: 40em;
+        width: 100%;
+    }
+
+    .form-group {
+        margin: 0 0 ($grid / 2);
+    }
+}

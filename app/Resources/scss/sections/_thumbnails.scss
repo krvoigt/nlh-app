@@ -27,7 +27,7 @@
     max-height: ($grid * 4.5);
     min-height: ($grid * 2.5);
     overflow: hidden;
-    width: 92px;
+    width: $thumbnail-width;
 
     @include hover {
         img {

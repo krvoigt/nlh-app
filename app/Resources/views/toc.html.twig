@@ -1,5 +1,6 @@
-{% tree item in structure %}
+{# TODO: Highlight current section (requires knowledge of current page) #}
 
+{% tree item in structure %}
     {% set page_start = item.physicalPages|first %}
     {% set page_start = (page_start is defined and page_start is not null ? page_start|split('_').1|abs : '') %}
     {% set page_end = item.physicalPages|last %}
@@ -13,8 +14,9 @@
                     <a class="toc_link" href="{{ href }}">{{ item.label is null ? item.type|lower|trans : item.label }}</a>
                 </span>
                 <span class="toc_column -right">
-                    <span class="toc_page-number">{{ page_start }}</span>
+                    <a class="toc_page-number" href="{{ href }}">{{ page_start }}</a>
                     <button class="toc_pdf" title="{{ 'Download this section as PDF'|trans }}" data-start="{{ page_start }}" data-end="{{ page_end }}">
+                        <i class="icon">file_download</i>
                         <span class="sr-only">{{ 'Download this section as PDF'|trans }}</span>
                     </button>
                 </span>

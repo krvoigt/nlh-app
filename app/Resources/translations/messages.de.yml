@@ -91,6 +91,7 @@ Table of contents: Inhaltsverzeichnis
 uncounted: – # that's an ndash, not a dash
 Transcript: Volltext
 uncounted: – # that's an ndash, not a dash
+View: Ansicht
 Zoom in: Vergrößern
 Zoom out: Verkleinern
 
@@ -251,7 +252,7 @@ nordamericana: Americana
 rezensionszeitschriften: Rezensionen
 sibirica: Sibirica
 varia: Varia
-wissenschaftsgeschichte: Wissenschaftsgeschichte
+wissenschaftsgeschichte: Wissenschafts&shy;geschichte
 zoologica: Zoologica
 rusdml: RusDML
 vd17-nova: VD17 Nova

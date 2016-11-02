@@ -12,7 +12,7 @@
     @include transition(background);
     background-color: $shine-light;
     border: 0;
-    color: $link-color;
+    color: $text-color;
     padding-left: .25em;
 
     @include hover {

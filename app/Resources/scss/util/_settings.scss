@@ -1,22 +1,23 @@
 // Responsive grid and dimensions
 $grid: 26px;
 $site-width: 48 * $grid;
-$search-width: 24 * $grid;
 
 $breakpoints: (
     large: 1023px,
     medium: 719px,
     small: 639px,
     tiny: 479px,
-    micro: 379px,
+    micro: 359px,
 );
 
 $border-width: 1px;
 $br: 2px; // border-radius
 
+$thumbnail-width: 92px; // Should be 94px, but oh well...
+
 // Typography
 $OpenSansPath: '../fonts'; // scss-lint:disable NameFormat
-$fa-font-path: '../fonts';
+$material-design-icons-font-path: '../fonts/';
 
 $font-family-display: 'urw_classicoregular', 'Helvetica', 'Arial', sans-serif;
 $font-family-display-fallback: 'Helvetica', 'Arial', sans-serif;

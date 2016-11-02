@@ -34,7 +34,10 @@
             {{ 'Invalid page range'|trans }}
         </div>
 
-        <button class="export_generate-pdf" data-ppn="{{ document.product }}:{{ document.work }}">{{ 'Generate PDF'|trans }}</button>
+        <button class="export_generate-pdf" data-ppn="{{ document.product }}:{{ document.work }}">
+            <i class="icon">file_download</i>
+            {{ 'Generate PDF'|trans }}
+        </button>
     </div>
 
     <div id="pdf-progress">
@@ -47,9 +50,15 @@
 
         <p>{{ 'pdf_progress_hint'|trans }}</p>
 
-        <button class="export_cancel">{{ 'Cancel'|trans }}</button>
+        <button class="export_cancel">
+            <i class="icon">cancel</i>
+            {{ 'Cancel'|trans }}
+        </button>
 
-        <button class="export_reset">{{ 'Go back'|trans }}</button>
+        <button class="export_reset">
+            <i class="icon">arrow_back</i>
+            {{ 'Go back'|trans }}
+        </button>
     </div>
 
     <div class="pdf_metadata">
@@ -74,13 +83,22 @@
     </div>
 
     <ul class="metadata_links">
-        <li><a class="metadata_link -mets" href="{{ url('_mets', {id: document.id}) }}" download>{{ 'Download METS file'|trans }}</a></li>
+        <li>
+            <a href="{{ url('_mets', {id: document.id}) }}" download>
+                <i class="icon">code</i>
+                {{ 'Download METS file'|trans }}
+            </a>
+        </li>
     </ul>
 
     <ul class="metadata_links">
         {% if document.id_PPNanalog_s is defined %}
-            <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+            <li>
+                <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ document.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a>
+            </li>
         {% endif %}
-        <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
+        <li>
+            <a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: document.id}) }}">{{ 'DFG Viewer'|trans }}</a>
+        </li>
     </ul>
 </section>

@@ -39,7 +39,7 @@ var Facets = {
 
     createHistogram: function($parent, $graphDiv, config) {
         // TODO: Show all values even if facet selected
-        var graphWidth = $parent.width() + 20; // TODO
+        var graphWidth = $parent.width() + 20; // TODO: Why +20?
         var canvasHeight = 150;
         $graphDiv.css({'width': graphWidth + 'px', 'height': canvasHeight + 'px', 'position': 'relative'});
 
@@ -111,7 +111,6 @@ var Facets = {
         var $tooltipDiv = $('<div class="facet_tooltip"/>');
         $toolTip = $tooltipDiv.appendTo(document.body);
 
-        // TODO
         // If range is set, highlight in plot
         selection = {
             from: null,

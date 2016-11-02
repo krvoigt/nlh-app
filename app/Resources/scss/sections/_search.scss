@@ -1,46 +1,53 @@
+@mixin search-small {
+    @include transition(opacity, visibility, z-index);
+    margin: 0;
+    right: ($grid / 2);
+    opacity: 0;
+    top: ($grid / 2);
+    visibility: hidden;
+    z-index: -1;
+
+    &.-show-popup {
+        opacity: 1;
+        visibility: visible;
+        z-index: 9;
+    }
+}
+
 .search {
     @extend %clearfix;
-    @include transition(margin);
-    float: right;
-    margin: (-2.5 * $grid) (-$grid / 2) 0 0;
+    @include transition(top, right);
     max-width: 100%;
-    position: relative;
+    position: absolute;
+    right: ($grid / 2);
+    top: ($grid / 2);
     z-index: 99;
 
     @include respond-to(large) {
-        margin-top: (-2.5 * $grid);
+        top: 0;
+        right: 0;
 
         &.-show-popup {
-            margin: (-2 * $grid) 0;
+            top: ($grid / 2);
+            right: ($grid / 2);
         }
     }
 
     @include respond-to(small) {
-        float: none;
-        right: 0;
-        margin: 0 auto;
+        @include search-small;
+        width: auto;
+    }
 
-        &.-show-popup {
-            margin: 0 auto;
-        }
+    @include respond-to(tiny) {
+        left: ($grid / 2);
     }
 
     .root.-fixed & {
-        display: none;
-        margin: 0;
-        position: absolute;
-        right: ($grid / 2);
-        top: ($grid / 2);
-
-        @include respond-to(small) {
-            left: ($grid / 2);
-            width: auto;
-        }
+        @include search-small;
     }
 }
 
 .search_close {
-    @include icon('close', false);
     @include transition(background);
     background: none;
     bottom: round($grid / 4);
@@ -59,6 +66,7 @@
 }
 
 .search_content {
+    @include transition(opacity, visibility, z-index);
     background: $white;
     border-radius: $br;
     box-shadow: $drop-shadow;
@@ -110,15 +118,11 @@
     height: ($grid * 2);
     padding-right: round(1.75 * $grid);
     position: relative;
-    width: 12 * $grid;
+    width: 16em;
     z-index: 9;
 
-    @include respond-to(large) {
-        width: 17em; // Minimum required width to fit placeholder into input
-    }
-
-    @include respond-to(small) {
-        width: 100%;
+    @include respond-to(medium) {
+        width: 12em;
     }
 
     &:focus {
@@ -161,8 +165,14 @@
     }
 }
 
+.search_separator {
+    background: $shade;
+    border: 0;
+    height: $border-width;
+    margin: ($grid / 2) 0 ($grid / 2 - $border-width);
+}
+
 .search_submit {
-    @include icon('search', false);
     @include transition(background);
     background: none;
     border: 0;
@@ -179,9 +189,7 @@
         background: $link-hover-bg-color;
     }
 
-    &::before {
-        height: $grid;
-        font-size: $grid;
-        width: $grid;
+    .icon {
+        font-size: 2em;
     }
 }

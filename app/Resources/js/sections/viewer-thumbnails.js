@@ -13,7 +13,7 @@ var ViewerThumbnails = {
             return false;
         });
 
-        Viewer.controls.togglePanel.filter('.-thumbnails').click(this.lazyLoad.bind(this));
+        Viewer.controls.togglePanel.filter('[data-target=thumbnails]').click(this.lazyLoad.bind(this));
     },
 
     lazyLoad: function () {

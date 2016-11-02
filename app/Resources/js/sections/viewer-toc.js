@@ -8,7 +8,7 @@ var ViewerToc = {
         var that = this;
         $.get(window.location.origin + window.location.pathname + '/toc/', function (data) {
             $('.toc_content', this.container).html(data);
-            that.controls.tocLink = $('.toc_link', this.container),
+            that.controls.tocLink = $('.toc_link, .toc_page-number', this.container),
             that.controls.tocPdf = $('.toc_pdf', this.container),
             that.bindEvents();
         });
@@ -23,7 +23,7 @@ var ViewerToc = {
         });
 
         this.controls.tocPdf.click(function () {
-            Viewer.controls.togglePanel.filter('.-export:not(.-active)').click();
+            Viewer.controls.togglePanel.filter('[data-target=export]:not(.-active)').click();
             $('#physIDstart').val( $(this).data('start') );
             $('#physIDend').val( $(this).data('end') );
             return false;

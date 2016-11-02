@@ -5,32 +5,30 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <main class="main" id="main">
-        <section class="viewer">
-            {% include "@SubugoeFind/Default/partials/header.html.twig" %}
+    <section class="viewer">
+        {% include "@SubugoeFind/Default/partials/header.html.twig" %}
 
-            <div class="viewer_main">
-                <div class="viewer_panel -scan">
-                    {% include "@SubugoeFind/Default/partials/scan.html.twig" %}
-                </div>
-                {% if document['fulltext_url'] is defined %}
-                    <div class="viewer_panel -transcript">
-                        {% include "@SubugoeFind/Default/partials/transcript.html.twig" %}
-                    </div>
-                {% endif %}
-                <div class="viewer_panel -toc">
-                    {% include "@SubugoeFind/Default/partials/toc.html.twig" %}
-                </div>
-                <div class="viewer_panel -thumbnails">
-                    {% include "@SubugoeFind/Default/partials/thumbnails.html.twig" %}
-                </div>
-                <div class="viewer_panel -metadata">
-                    {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
-                </div>
-                <div class="viewer_panel -export">
-                    {% include "@SubugoeFind/Default/partials/export.html.twig" %}
-                </div>
+        <div class="viewer_main">
+            <div class="viewer_panel -scan">
+                {% include "@SubugoeFind/Default/partials/scan.html.twig" %}
             </div>
-        </section>
-    </main>
+            {% if document['fulltext_url'] is defined %}
+                <div class="viewer_panel -transcript">
+                    {% include "@SubugoeFind/Default/partials/transcript.html.twig" %}
+                </div>
+            {% endif %}
+            <div class="viewer_panel -toc">
+                {% include "@SubugoeFind/Default/partials/toc.html.twig" %}
+            </div>
+            <div class="viewer_panel -thumbnails">
+                {% include "@SubugoeFind/Default/partials/thumbnails.html.twig" %}
+            </div>
+            <div class="viewer_panel -metadata">
+                {% include "@SubugoeFind/Default/partials/metadata.html.twig" %}
+            </div>
+            <div class="viewer_panel -export">
+                {% include "@SubugoeFind/Default/partials/export.html.twig" %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

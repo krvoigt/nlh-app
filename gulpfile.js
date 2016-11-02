@@ -27,7 +27,7 @@ var paths = {
     styleDest: 'web/css',
 
     fontsSrc: [
-        'node_modules/font-awesome/fonts/**/*.{ttf,woff,woff2}',
+        'node_modules/material-design-icons-iconfont/dist/fonts/**/*.{ttf,woff,woff2}',
         'node_modules/open-sans-fontface/fonts/Bold/**/*.{ttf,woff,woff2}',
         'node_modules/open-sans-fontface/fonts/BoldItalic/**/*.{ttf,woff,woff2}',
         'node_modules/open-sans-fontface/fonts/Italic/**/*.{ttf,woff,woff2}',

@@ -6,6 +6,12 @@
     display: none;
 }
 
+.icon {
+    @extend .material-icons;
+    line-height: inherit;
+    vertical-align: top;
+}
+
 .invisible {
     @extend .sr-only;
 }
