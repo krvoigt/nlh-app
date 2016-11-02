@@ -95,7 +95,9 @@
                             {% endif %}
                         </div>
                     {% else %}
-                        <div class="result_left">Dummybild</div>
+                        <div class="result_left">
+                            <img src="{{ absolute_url(asset('images/locked.png')) }}" alt="" />
+                        </div>
                     {% endif %}
                     <div class="result_metadata">
                         <h2 class="result_title">

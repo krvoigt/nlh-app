@@ -23,6 +23,16 @@ class IIIFController extends Controller
      */
     public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
     {
+        $product = explode(':', $identifier)[0];
+        $user = $this->get('authorization_service')->getAllowedProducts();
+        $products = $user->getProducts();
+
+        if (!empty($product) && is_array($products)) {
+            if (!in_array($product, $products)) {
+                return $this->redirect($this->getParameter('link_to_registration'));
+            }
+        }
+        
         $imageEntity = new Image();
         $imageEntity
             ->setIdentifier($identifier)

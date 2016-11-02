@@ -45,10 +45,17 @@ class DefaultController extends BaseController
         }
 
         $user = $this->get('authorization_service')->getAllowedProducts();
+        $products = $user->getProducts();
+        sort($products);
 
         if ($access !== null) {
-            $select = $this->addFilterForAllowedProducts($user, $select);
+            $select = $this->addFilterForAllowedProducts($products, $select);
         }
+
+        $solrProducts = array_column($this->getSolrProducts(), 'product');
+        sort($solrProducts);
+
+        $fullAccess = ($products === $solrProducts) ? true : false;
 
         $pagination = $this->getPagination($request, $select);
         $facets = $this->get('solarium.client')->select($select)->getFacetSet()->getFacets();
@@ -63,6 +70,7 @@ class DefaultController extends BaseController
                 'activeCollection' => $request->get('activeCollection'),
                 'user' => $user,
                 'access' => $access,
+                'fullAccess' => $fullAccess,
         ]);
     }
 
@@ -391,15 +399,14 @@ class DefaultController extends BaseController
         }
     }
 
-    /**
+    /*
      * @param User  $user
      * @param Query $select
      *
      * @return Query
      */
-    protected function addFilterForAllowedProducts($user, $select):Query
+    protected function addFilterForAllowedProducts($products, $select):Query
     {
-        $products = $user->getProducts();
         if (isset($products) && $products !== []) {
             $productQuery = [];
             foreach ($products as $key => $product) {
@@ -412,5 +419,23 @@ class DefaultController extends BaseController
         }
 
         return $select;
+    }
+
+    /*
+     * Returns the already indexed products from solr server
+     */
+    protected function getSolrProducts()
+    {
+        $client = $this->get('solarium.client');
+        $query = $client->createSelect();
+        $query->setFields(['product']);
+        $query->addParam('group', true);
+        $query->addParam('group.field', 'product');
+        $query->addParam('group.main', true);
+        $resultset = $client->execute($query);
+        $data = $resultset->getResponse()->getBody();
+        $solrProducts = json_decode($data, true)['response']['docs'];
+
+        return $solrProducts;
     }
 }
