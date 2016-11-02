@@ -10,7 +10,7 @@
             <li class="collections_item">
                 <a href="{{ path('_collection', {id: collection.id}) }}" class="collections_link">
                     <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image">
-                    <span class="collections_name"> {{ collection.id|trans }}</span>
+                    <span class="collections_name">{{ collection.id|trans|raw }}</span>
                 </a>
             </li>
         {% endfor %}
