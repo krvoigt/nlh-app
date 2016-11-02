@@ -14,15 +14,19 @@
         <ul class="header_nav">
             <li class="header_nav-item">
                 <button class="header_search-toggle">
+                    <i class="icon">search</i>
                     <span class="sr-only">{{ 'Search'|trans }}</span>
                 </button>
             </li>
         </ul>
         <div class="search">
             <form class="search_form -visible" method="get" role="search" action="{{ path('_homepage') }}">
-                <input size="40" placeholder="{{ 'Search'|trans }}" class="search_input" id="q" type="text" name="q" value="{{ app.request.query.get('q') }}">
+                <input size="32" placeholder="{{ 'Search'|trans }}" class="search_input" id="q" type="text" name="q" value="{{ app.request.query.get('q') }}">
                 <label for="q" class="sr-only">{{ 'Search'|trans }}</label>
-                <button type="submit" class="search_submit"><span class="sr-only">{{ 'Search'|trans }}</span></button>
+                <button type="submit" class="search_submit">
+                    <i class="icon">search</i>
+                    <span class="sr-only">{{ 'Search'|trans }}</span>
+                </button>
                 <div class="search_popup">
                     <div class="search_content -visible">
                         {% if activeCollection is not null %}
@@ -38,7 +42,7 @@
                                     <label class="search_label" for="search-all-collections">{{ 'In all documents'|trans }}</label>
                                 </li>
                             </ul>
-                            <hr>
+                            <hr class="search_separator">
                         {% endif %}
                         <p>{{ 'Search in'|trans }}</p>
                         <ul class="search_list">
@@ -56,6 +60,7 @@
                             </li>
                         </ul>
                         <button class="search_close" title="Schließen">
+                            <i class="icon">close</i>
                             <span class="sr-only">{{ 'Close'|trans }}</span>
                         </button>
                     </div>

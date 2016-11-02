@@ -22,83 +22,35 @@
     }
 }
 
-.header_bar {
-    @extend %clearfix;
-    background: $white;
-    font-size: $font-size-small;
-    padding: ceil($grid / 4) $grid floor($grid / 4);
-
-    @include respond-to(large) {
-        padding: ceil($grid / 4) ($grid / 2) floor($grid / 4);
-    }
-
-    .root.-fixed & {
-        display: none;
-    }
-}
-
-// NOTE: Currently unused, but kept for extensibility
-.header_language {
-    float: right;
-
-    @include respond-to(large) {
-        font-size: $font-size;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-
-    a {
-        @include icon('globe');
-        @include link(false);
-
-        @include respond-to(large) {
-            @include link(false, true);
-            color: $white;
-            display: inline-block;
-            padding: ($grid / 2);
-        }
-    }
+@mixin header_logo-small {
+    background-position: 0;
+    background-size: auto $grid;
+    margin: 0;
 }
 
 .header_logo {
     background: url($img-path + '/sub-logo.svg') 0 center no-repeat;
     background-size: contain;
+    display: inline-block;
     height: ($grid * 2);
     max-width: 100%;
-    width: 640px; // Width of logo
 
-    .root:not(.-fixed) & {
-        // Fit logo left of search
-        @include respond-to(large) {
-            background-size: 392px auto;
-            width: 392px;
-        }
+    @include respond-to(large) {
+        height: ($grid * 1.5);
+        margin: ($grid / 4) 0;
+    }
 
-        @include respond-to(medium) {
-            background-size: 314px auto;
-            width: 314px;
-        }
-
-        // Center logo above search
-        @include respond-to(small) {
-            background: url($img-path + '/sub-logo-centered.svg') center 0 no-repeat;
-            background-size: auto (2.5 * $grid);
-            height: auto;
-            margin: 2px auto 0;
-            min-height: (2.5 * $grid);
-            width: 100%;
-        }
+    @include respond-to(small) {
+        @include header_logo-small;
     }
 
     .root.-fixed & {
-        background-position: floor($grid / 4);
-        background-size: auto $grid;
+        @include header_logo-small;
         height: ($grid * 1.5);
     }
 
     a {
-        display: block;
+        display: inline-block;
         height: 100%;
         min-height: (1.5 * $grid);
 
@@ -111,10 +63,7 @@
 }
 
 .header_nav {
-    position: absolute;
-    right: 364px; // TODO
-    top: floor($grid * 1.25);
-    z-index: 1;
+    float: right;
 
     a {
         color: $white;
@@ -134,15 +83,14 @@
             box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
         }
     }
-
-    .root.-fixed & {
-        right: floor($grid / 4);
-        top: floor($grid / 4);
-    }
 }
 
 .header_nav-item {
     display: none;
+
+    @include respond-to(small) {
+        display: block;
+    }
 
     .root.-fixed & {
         display: block;
@@ -154,79 +102,67 @@
     border: 0;
     color: $white;
     cursor: pointer;
-    padding: 0 1em;
-
-    @include icon(search, false);
 
     @include hover {
         background: none;
     }
+
+    @include respond-to(small) {
+        margin: ($grid / 4) 0;
+    }
+
+    .root.-fixed & {
+        margin: ($grid / 4) 0;
+    }
+}
+
+@mixin header_title-small {
+    font-size: inherit;
+    margin-left: 70px;
+    padding: floor($grid / 4);
+    top: 1px;
+    width: 250px;
 }
 
 // 1. Position department name at the same position as brand name.
-// 2. Approximate width of brand name in logo that has to be overlayed is 440px.
-//    Has to be slightly larger to accomodate some very long deparment names,
-//    but may not overlap with search.
-// 3. Smallest possible width that can contain the longest title ("Ost- und
-//    Zentralasien / Altaistik / Sibirische & Paläoasiatische Sprachen") in two
-//    lines while preventing the title from overlapping with the search.
 .header_title {
     @include typo-scale(2);
     background: $brand-color;
-    display: inline-block;
+    display: block;
     color: $white;
     font-family: $font-family-display;
-    left: 143px; // 1
+    margin-left: 143px; // 1
     padding: ($grid / 2);
     position: relative;
-    width: 490px; // 2
 
-    .root:not(.-fixed) & {
-        &.-short {
-            display: none;
-        }
+    @include respond-to(large) {
+        @include typo-scale(1);
+        margin-left: 104px; // 1
+        padding: ($grid / 4) 9px;
+    }
 
-        @include respond-to(large) {
-            @include typo-scale(1);
-            height: ($grid * 2);
-            left: 96px; // 1
-            padding: ($grid / 2) 9px;
-            width: 310px;
-        }
+    @include respond-to(small) {
+        @include header_title-small;
+    }
 
-        @include respond-to(medium) {
-            font-size: $font-size;
-            left: 76px;
-            width: 260px; // 3
-        }
+    @include respond-to(tiny) {
+        display: none;
+    }
 
-        @include respond-to(small) {
-            display: inline-block;
-            height: auto;
-            left: 0;
-            margin-top: 39px; // Just below logo blip
-            padding: 0;
-            text-align: center;
-            width: 100%;
+    &.-short {
+        display: none;
+
+        @include respond-to(tiny) {
+            display: block;
+            width: 60px;
         }
     }
 
     .root.-fixed & {
-        font-size: inherit;
-        left: 77px;
-        padding: floor($grid / 4);
-        top: 1px;
+        @include header_title-small;
 
         &.-short {
-            display: none;
-        }
-
-        @include respond-to(tiny) {
-            display: none;
-
-            &.-short {
-                display: table-cell;
-            }
+            width: 60px;
         }
     }
 
@@ -246,9 +182,13 @@
         padding: ($grid / 2);
     }
 
+    @include respond-to(small) {
+        padding: ($grid / 4) ($grid / 2);
+    }
+
     .root.-fixed & {
         max-width: none;
-        padding: 0;
+        padding: 0 ($grid / 4);
 
         &::before,
         &::after {

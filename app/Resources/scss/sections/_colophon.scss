@@ -86,7 +86,6 @@
     }
 
     a {
-        @include icon('chevron-up', false);
         @include transition(background, color);
         background: $brand-color-light;
         border-radius: $br 0 0 $br;
@@ -98,7 +97,6 @@
         text-align: center;
 
         @include hover {
-            @include icon('chevron-up', false);
             @include transition(background, color);
             background: $brand-color-lighter;
             color: $link-color;

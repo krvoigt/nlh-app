@@ -5,31 +5,39 @@
         </h1>
     </div>
     <div class="viewer_column">
+        <button class="viewer_control -change-view">
+            <i class="icon">visibility</i>
+            {{ 'View'|trans }}
+        </button>
         <div class="viewer_controls -right">
-            <div class="viewer_control-group -top">
+            <div class="viewer_control-group">
                 <button class="viewer_control -toggle-panel -scan" data-target="scan">
-                    <span class="viewer_label">{{ 'Scan'|trans }}</span>
+                    <i class="icon">photo</i>
+                    {{ 'Scan'|trans }}
                 </button>
                 {% if document.gdzocr_url is defined %}
-                    <button class="viewer_control -toggle-panel -transcript" data-target="transcript">
-                        <span class="viewer_label">{{ 'Fulltext'|trans }}</span>
+                    <button class="viewer_control -toggle-panel" data-target="transcript">
+                        <i class="icon">subject</i>
+                        {{ 'Fulltext'|trans }}
                     </button>
                 {% endif %}
-                <button class="viewer_control -toggle-panel -thumbnails" data-target="thumbnails">
-                    <span class="viewer_label">{{ 'Pages'|trans }}</span>
+                <button class="viewer_control -toggle-panel" data-target="thumbnails">
+                    <i class="icon">view_module</i>
+                    {{ 'Pages'|trans }}
                 </button>
                 {% if documentStructure.tableOfContents %}
-                    <button class="viewer_control -toggle-panel -toc" data-target="toc">
-                        <span class="viewer_label">{{ 'Contents'|trans }}</span>
+                    <button class="viewer_control -toggle-panel" data-target="toc">
+                        <i class="icon">toc</i>
+                        {{ 'Contents'|trans }}
                     </button>
                 {% endif %}
-                <button class="viewer_control -toggle-panel -metadata " data-target="metadata">
-                    <span class="viewer_label">{{ 'Metadata'|trans }}</span>
+                <button class="viewer_control -toggle-panel " data-target="metadata">
+                    <i class="icon">info_outline</i>
+                    {{ 'Metadata'|trans }}
                 </button>
-            </div>
-            <div class="viewer_control-group">
-                <button class="viewer_control -toggle-panel -export" data-target="export" title="{{ 'Export'|trans }}">
-                    <span class="viewer_label">{{ 'Export'|trans }}</span>
+                <button class="viewer_control -toggle-panel" data-target="export" title="{{ 'Export'|trans }}">
+                    <i class="icon">file_download</i>
+                    {{ 'Export'|trans }}
                 </button>
             </div>
         </div>

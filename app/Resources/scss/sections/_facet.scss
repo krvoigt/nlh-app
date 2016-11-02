@@ -12,7 +12,7 @@
 .facet_histogram {
     margin: ($grid / 2) 0 0 -20px; // TODO: Why 20? Value can change.
 
-    // TODO: Broken on small screens
+    // TODO: Histogram is broken on small screens
     @include respond-to(medium) {
         display: none;
     }
@@ -23,13 +23,8 @@
     margin: 0 -.25em round($grid / 4);
     padding: 0 .25em;
 
-    &.-expand {
-        @include icon(plus, true);
-    }
-
     &.-collapse {
         display: none;
-        @include icon(minus, true);
     }
 }
 
@@ -53,7 +48,6 @@
 
     &.-remove {
         @include button(light);
-        @include icon(close);
         display: block;
         margin-bottom: $border-width;
         min-height: 0;

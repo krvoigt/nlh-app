@@ -11,16 +11,15 @@
 }
 
 .viewer_column {
-    flex-shrink: 1;
-    min-width: 8em;
+    min-width: 0;
 
     & + & {
         flex-shrink: 0;
         padding-left: ($grid / 2);
+    }
 
-        @include respond-to(large) {
-            padding: 0;
-        }
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	    max-width: 50%;
     }
 }
 
@@ -43,7 +42,31 @@
         justify-content: flex-end;
 
         @include respond-to(large) {
-            justify-content: space-between;
+            box-shadow: $drop-shadow;
+            display: none;
+            margin: (round($grid / 4) * 2 + $border-width) 0 0;
+            position: absolute;
+	        right: round($grid / 4);
+            z-index: 9;
+            min-width: 10em;
+
+            &.-open {
+                display: block;
+            }
+
+            &::after {
+                // wedge
+                position: absolute;
+                content: '';
+                background: $white;
+                box-shadow: $drop-shadow;
+                width: 1em;
+                height: 1em;
+                top: -.5em;
+                right: 1.5em;
+                transform: rotate(45deg);
+                z-index: 0;
+            }
         }
     }
 }
@@ -56,6 +79,15 @@
     overflow: hidden;
     z-index: 1;
 
+    @include respond-to(large) {
+        .viewer_controls.-right & {
+            display: block;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+    }
+
     &.-vertical {
         flex-direction: column-reverse;
     }
@@ -65,6 +97,21 @@
     @include button(light);
     border-radius: 0;
     box-shadow: none;
+
+    @include respond-to(large) {
+        &.-toggle-panel {
+            @include separator(0, 0, 1);
+            background: $white;
+            display: block;
+            text-align: left;
+            width: 100%;
+
+            &.-active {
+                display: block;
+                text-align: left;
+            }
+        }
+    }
 
     &.-active {
         @include button;
@@ -87,8 +134,18 @@
         text-align: left;
     }
 
+    &.-change-view {
+        @include separator(0, 0, 0, 1);
+        display: none;
+        height: ($grid * 1.5);
+        margin: round(-$grid / 4);
+
+        @include respond-to(large) {
+            display: block;
+        }
+    }
+
     &.-scan {
-        @include icon(file-image-o, false);
         display: none;
 
         @include respond-to(large) {
@@ -96,77 +153,15 @@
         }
     }
 
-    &.-toc {
-        @include icon(list, false);
-    }
-
-    &.-transcript {
-        @include icon(file-text-o, false);
-    }
-
-    &.-thumbnails {
-        @include icon(th, false);
-    }
-
-    &.-metadata {
-        @include icon(info-circle, false);
-    }
-
-    &.-export {
-        @include icon(external-link-square, false);
-    }
-
-    &.-first-page {
-        @include icon(fast-backward, false);
-    }
-
-    &.-previous-section {
-        @include icon(step-backward, false);
-    }
-
-    &.-previous-page {
-        @include icon(caret-left, false);
-    }
-
-    &.-next-page {
-        @include icon(caret-right, false);
-    }
-
-    &.-next-section {
-        @include icon(step-forward, false);
-    }
-
-    &.-last-page {
-        @include icon(fast-forward, false);
-    }
-
-    &.-zoom-out {
-        @include icon(search-minus, false);
-    }
-
-    &.-zoom-out {
-        @include icon(search-minus, false);
-    }
-
-    &.-zoom-in {
-        @include icon(search-plus, false);
-    }
-
-    &.-zoom-reset {
-        @include icon(circle-o-notch, false);
-    }
-
-    &.-search {
-        @include icon(search, false);
-    }
-
-    .viewer_control-group.-vertical label + & {
+    .viewer_control-group.-vertical & + & {
         @include separator(0, 0, 1);
     }
 
     .viewer_controls.-overlay & {
         @include respond-to(micro) {
-            min-width: ($grid * 1.3);
+            // Make sure all scan buttons stay within viewport
+            min-width: 0;
+            padding: round($grid / 4) .25em;
         }
     }
 }
@@ -199,10 +194,6 @@
     justify-content: space-between;
     padding: floor($grid / 4);
     width: 100%;
-
-    @include respond-to(large) {
-        display: block;
-    }
 }
 
 .viewer_heading {
@@ -214,12 +205,6 @@
     position: absolute;
     white-space: nowrap;
     width: 100%;
-}
-
-.viewer_label {
-    @include respond-to(small) {
-        @include sr-only;
-    }
 }
 
 .viewer_main {
@@ -241,6 +226,7 @@
 
     @include respond-to(large) {
         border: 0;
+        min-width: 0;
         width: 100%;
         position: absolute;
         top: 0;
@@ -253,24 +239,19 @@
 
     &.-active {
         display: block;
+        z-index: 8;
     }
 
-    &.-alwaysActive {
+    &.-always-active {
         display: block !important;
     }
 
     &.-scan {
         flex: 3;
-        height: 100%;
-    }
-
-    &.-thumbnails {
-        background: $grey-light;
     }
 }
 
 .viewer_title {
-    @extend %title;
     font-size: 20px !important; // TODO: Calc
     margin: floor($grid / 4) 0;
     overflow: hidden;
@@ -278,6 +259,6 @@
     white-space: nowrap;
 
     @include respond-to(large) {
-        margin-top: 0;
+        margin: 0;
     }
 }

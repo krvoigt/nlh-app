@@ -25,22 +25,6 @@
         text-shadow: $shine-inset;
     }
 
-    &.-last {
-        @include icon(fast-forward, false);
-    }
-
-    &.-first {
-        @include icon(fast-backward, false);
-    }
-
-    &.-next {
-        @include icon(step-forward, false);
-    }
-
-    &.-previous {
-        @include icon(step-backward, false);
-    }
-
     &.-disabled {
         cursor: not-allowed;
         opacity: .5;

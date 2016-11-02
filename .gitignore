@@ -23,7 +23,6 @@
 /web/fonts/*
 !/web/fonts/urwclassico-*
 /web/js/*
-!/web/js/sub-legacy.js
 /src/Subugoe/*
 .idea/
 .gradle

@@ -5,6 +5,4 @@
 @include font-face('Open Sans', '../fonts/OpenSans-Bold', normal, bold);
 @include font-face('Open Sans', '../fonts/OpenSans-BoldItalic', italic, bold);
 
-@import '../../../../node_modules/font-awesome/scss/variables';
-@import '../../../../node_modules/font-awesome/scss/path';
-@import '../../../../node_modules/font-awesome/scss/mixins';
+@import '../../../../node_modules/material-design-icons-iconfont/dist/material-design-icons.scss';

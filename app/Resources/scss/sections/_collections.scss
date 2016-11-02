@@ -21,20 +21,26 @@
     width: 100%;
 }
 
-.collections_item {
-    $collection-item-size: round(($site-width - $grid - 10 * round($grid / 4)) / 5);
+$collection_item-size: round(($site-width - $grid - 10 * round($grid / 4)) / 5);
+$collection_item-size-small: 160px;
 
+.collections_item {
     @include transition(opacity);
     border-radius: $br;
     box-shadow: $card-shadow;
     display: block;
-    height: $collection-item-size;
+    height: $collection_item-size;
     margin: 0 round($grid / 4) ($grid / 2);
     overflow: hidden;
-    width: $collection-item-size;
+    width: $collection_item-size;
 
     @include hover {
         opacity: .7;
+    }
+
+    @include respond-to(small) {
+        height: $collection_item-size-small;
+        width: $collection_item-size-small;
     }
 }
 
@@ -66,6 +72,11 @@
     .fonts-failed & {
         font-family: $font-family-text-fallback;
     }
+
+    @include respond-to(small) {
+        font-size: $font-size;
+        line-height: 1;
+    }
 }
 
 .collection_rss-link {
@@ -78,7 +89,6 @@
     }
 
     a {
-        @include icon('rss');
         box-shadow: none;
     }
 }

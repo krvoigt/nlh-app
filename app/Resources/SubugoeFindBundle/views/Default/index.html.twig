@@ -77,11 +77,19 @@
                 </dl>
 
                 <ul class="result_links">
-                    <li><a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}">{{ 'DFG Viewer'|trans }}</a></li>
-                    <li><a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a></li>
-                    <li><a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a></li>
+                    <li>
+                        <a href="http://dfg-viewer.de/show/?set[mets]={{ url('_mets', {id: parentDocument.id}) }}">{{ 'DFG Viewer'|trans }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('_mets', {id: parentDocument.id}) }}">Mets</a>
+                    </li>
+                    <li>
+                        <a href="{{ parentDocument.purl }}">{{ 'PURL'|trans }}</a>
+                    </li>
                     {% if parentDocument.id_PPNanalog_s is defined %}
-                        <li><a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a></li>
+                        <li>
+                            <a href="http://opac.sub.uni-goettingen.de/DB=1/PPN?PPN={{ parentDocument.id_PPNanalog_s.0|replace({'PPN': ''}) }}">{{ 'Catalogue'|trans }}</a>
+                        </li>
                     {% endif %}
                 </ul>
             </li>
@@ -92,15 +100,14 @@
                 <article class="result_wrap">
                     <div class="result_left">
                         {% if result.fields.presentation_url is defined %}
-                            {% if result.fields.isanchor %}
-                                <a class="result_link -image" href="{{ path('_volumes', {'id': result.fields.id}) }}">
-                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0|replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}" alt="">
-                                </a>
-                            {% else %}
-                                <a class="result_link -image" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                    <img class="result_thumbnail" src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0|replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}" alt="">
-                                </a>
-                            {% endif %}
+                            {% set href = path(result.fields.isanchor ? '_volumes' : '_detail', {'id': result.fields.id}) %}
+                            <a class="result_link" href="{{ href }}">
+                                <img
+                                    class="result_thumbnail"
+                                    src="{{ path('_image', {'format': 'jpg', 'identifier': (result.fields.presentation_url.0|replace({'http://gdz.sub.uni-goettingen.de/tiff/': '','.tif': '', '/': ':'})), 'region': 'full', 'size': thumbnail_size, 'rotation': 0, 'quality': 'default'}) }}"
+                                    alt=""
+                                >
+                            </a>
                         {% endif %}
                     </div>
                     <div class="result_metadata">
@@ -111,15 +118,17 @@
                                 <a class="result_link" title="{{ result.fields.title|first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title|first }}</a>
                             {% endif %}
                             <button class="result_title-toggle -expand">
+                                <i class="icon">expand_more</i>
                                 {{ 'Show full title'|trans }}
                             </button>
                             <button class="result_title-toggle -collapse">
+                                <i class="icon">expand_less</i>
                                 {{ 'Collapse title'|trans }}
                             </button>
                         </h2>
                         <dl class="result_info">
                             {% if result.fields.creator is defined %}
-                                <dt>{{ 'creator'|transchoice(result.fields.creator|length) }}:</dt>
+                                <dt>{{ 'creator'|transchoice(result.fields.creator|length) }}</dt>
                                 <dd>
                                     {% for author in result.fields.creator %}
                                         {{ author }}{% if not loop.last %}; {% endif %}
@@ -127,7 +136,7 @@
                                 </dd>
                             {% endif %}
                             {% if result.fields.yearpublish is defined %}
-                                <dt>{{ 'yearpublish'|transchoice(1) }}:</dt>
+                                <dt>{{ 'yearpublish'|transchoice(1) }}</dt>
                                 <dd>
                                     {{ result.fields.yearpublish }}
                                     <span class="result_import-date">

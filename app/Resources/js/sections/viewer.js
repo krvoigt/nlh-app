@@ -1,6 +1,7 @@
 var Viewer = {
     container: $('.viewer'),
     controls: {
+        changeView: $('.viewer_control.-change-view', this.container),
         nextPage: $('.viewer_control.-next-page', this.container),
         pageSelect: $('.viewer_control.-page-select', this.container),
         previousPage: $('.viewer_control.-previous-page', this.container),
@@ -70,10 +71,10 @@ var Viewer = {
 
         if (! this.alwaysShowScan && (this.settings.panel === 'thumbnails' || this.settings.panel === 'toc')) {
             // When page is changed via thumbnails or TOC, go back to scan on small screens
-            this.controls.togglePanel.filter('.-scan').click();
+            this.controls.togglePanel.filter('[data-target=scan]').click();
         } else if (this.settings.panel) {
             // Open last shown panel
-            this.controls.togglePanel.filter('.-' + this.settings.panel).click();
+            this.controls.togglePanel.filter('[data-target=' + this.settings.panel + ']').click();
         }
     },
 
@@ -81,9 +82,8 @@ var Viewer = {
         var that = this;
 
         // Add current hash on click to viewer controls
-        $('.viewer_controls', this.container).click(function (e) {
-            var $target = $(e.target, this.container);
-            $target.attr('href', $target.attr('href') + window.location.hash);
+        $('.viewer_control', this.container).click(function () {
+            $(this).attr('href', $(this).attr('href') + window.location.hash);
         });
 
         this.controls.togglePanel.click(function () {
@@ -122,12 +122,19 @@ var Viewer = {
             that.spinner.hide();
         });
 
-        $('.scan', this.container).click(function () {
-            that.controls.pageSelect.select2('close');
+        this.controls.changeView.click(function () {
+            $('.viewer_controls.-right').toggleClass('-open');
+            return false;
         });
 
         $('.scan .select2', this.container).click(function () {
+            $('.viewer_controls.-open').removeClass('-open');
             return false;
+        });
+
+        $('body').click(function () {
+            $('.viewer_controls.-open').removeClass('-open');
+            that.controls.pageSelect.select2('close');
         });
 
         $(document).keydown(function (e) {
@@ -144,8 +151,8 @@ var Viewer = {
     },
 
     checkShowScan: function () {
-        this.alwaysShowScan = this.controls.togglePanel.filter('.-scan').is(':hidden');
-        $('.viewer_panel.-scan', this.container).toggleClass('-alwaysActive', this.alwaysShowScan);
+        this.alwaysShowScan = this.controls.changeView.is(':hidden');
+        $('.viewer_panel.-scan', this.container).toggleClass('-always-active', this.alwaysShowScan);
         if (! this.alwaysShowScan && $('.viewer_panel.-active').length < 1) {
             $('.viewer_control.-scan').click();
         }

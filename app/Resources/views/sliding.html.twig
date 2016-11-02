@@ -6,22 +6,28 @@
             {% if first is defined %}
                 <li class="pagination_item">
                     {% if current != first %}
-                        <a class="pagination_link -first" href="{{ path(route, query|merge({(pageParameterName): first})) }}">
+                        <a class="pagination_link" href="{{ path(route, query|merge({(pageParameterName): first})) }}">
+                            <i class="icon">first_page</i>
                             <span class="sr-only">{{ 'Go to first page'|trans }}</span>
                         </a>
                     {% else %}
-                        <span class="pagination_link -first -disabled"></span>
+                        <span class="pagination_link -disabled">
+                            <i class="icon">first_page</i>
+                        </span>
                     {% endif %}
                 </li>
             {% endif %}
 
             <li class="pagination_item">
                 {% if previous is defined %}
-                    <a class="pagination_link -previous" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+                    <a class="pagination_link" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
+                        <i class="icon">navigate_before</i>
                         <span class="sr-only">{{ 'Go to previous page'|trans }}</span>
                     </a>
                 {% else %}
-                    <span class="pagination_link -previous -disabled"></span>
+                    <span class="pagination_link -disabled">
+                        <i class="icon">navigate_before</i>
+                    </span>
                 {% endif %}
             </li>
 
@@ -45,22 +51,28 @@
 
             <li class="pagination_item">
                 {% if next is defined %}
-                    <a class="pagination_link -next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+                    <a class="pagination_link" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
+                        <i class="icon">navigate_next</i>
                         <span class="sr-only">{{ 'Go to next page'|trans }}</span>
                     </a>
                 {% else %}
-                    <span class="pagination_link -next -disabled"></span>
+                    <span class="pagination_link -disabled">
+                        <i class="icon">navigate_next</i>
+                    </span>
                 {% endif %}
             </li>
 
             {% if last is defined %}
                 <li class="pagination_item">
                     {% if current != last %}
-                        <a class="pagination_link -last" href="{{ path(route, query|merge({(pageParameterName): last})) }}">
+                        <a class="pagination_link" href="{{ path(route, query|merge({(pageParameterName): last})) }}">
+                            <i class="icon">last_page</i>
                             <span class="sr-only">{{ 'Go to last page'|trans }}</span>
                         </a>
                     {% else %}
-                        <span class="pagination_link -last -disabled"></span>
+                        <span class="pagination_link -disabled">
+                            <i class="icon">last_page</i>
+                        </span>
                     {% endif %}
                 </li>
             {% endif %}
