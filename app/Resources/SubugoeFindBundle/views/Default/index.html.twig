@@ -12,6 +12,7 @@
 {% endblock %}
 
 {% block contentabove %}
+    <div class="registered-as"><span class="">{% if user.institution is defined and user.institution is not empty %}{{ 'Registered as'|trans }} {{ user.institution }}{% endif %}</span></div>
 {% endblock %}
 
 {% block content %}
