@@ -11,7 +11,7 @@ button,
 input,
 select,
 textarea {
-    border-radius: 0;
+    border-radius: $br;
     font: #{$font-size} / #{$grid} $font-family-text;
 
     .fonts-failed & {
@@ -216,66 +216,8 @@ sub {
 table {
     border: $border-width solid $border-color;
     border-width: $border-width 0;
-    margin: floor(-.25 * $grid) 0 ceil(.75 * $grid);
+    margin: floor(-$grid / 4) 0 ceil($grid * .75);
     width: 100%;
-
-    // Reponsive tables
-    @include respond-to(medium) {
-        &:not(.no-responsive, .dataTable) {
-            &,
-            thead,
-            tbody,
-            th,
-            td,
-            tr {
-                display: block;
-                overflow: hidden;
-            }
-
-            thead tr { // scss-lint:disable SelectorDepth
-                position: absolute;
-                top: -999em;
-                left: -999em;
-            }
-
-            td::before {
-                color: $text-color-light;
-                content: attr(data-label) ': ';
-                display: inline-block;
-                font-weight: bold;
-                width: 9em;
-            }
-        }
-    }
-
-    @include respond-to(small) {
-        // TODO: Rework and rename, as this is responsive, too
-        // Currently only used for opening hours
-        &.no-responsive {
-            border: 0;
-
-            tr {
-                display: block;
-                border: 0;
-
-                + tr > th {
-                    margin-top: $grid;
-                }
-            }
-
-            td,
-            th {
-                min-width: 5em;
-                padding: 0;
-            }
-
-            th {
-                color: $text-color-light;
-                display: block;
-                font-weight: bold;
-            }
-        }
-    }
 }
 
 th,
