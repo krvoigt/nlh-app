@@ -6,7 +6,7 @@
 
 {% block findnavigation %}
     <div class="find_aside">
-        <span class="find_count">{{ pagination.getTotalItemCount }} {{ 'results'|trans }}</span>
+        <span class="find_count">{{ pagination.getTotalItemCount|number_format(0, ',', '.') }} {{ 'results'|trans }}</span>
     </div>
     {{ knp_pagination_render(pagination) }}
 {% endblock %}
