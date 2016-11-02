@@ -20,7 +20,8 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
             ->setName('app:warmup_thumbnail_cache')
             ->setDescription('generates images for iiif')
             ->addOption('direction', null, InputOption::VALUE_OPTIONAL, 'Sorting direction (asc or desc)', 'desc')
-            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 1000);
+            ->addOption('rows', null, InputOption::VALUE_OPTIONAL, 'Number of rows', 1000)
+            ->addOption('start', null, InputOption::VALUE_OPTIONAL, 'Start at row', 0);
     }
 
     /**
@@ -29,7 +30,12 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $client = $this->getContainer()->get('solarium.client');
-        $query = $client->createSelect()->addSort('dateindexed', $input->getOption('direction'))->setRows($input->getOption('rows'));
+        $query = $client
+            ->createSelect()
+            ->addSort('dateindexed', $input->getOption('direction'))
+            ->setRows($input->getOption('rows'))
+            ->setStart($input->getOption('start'));
+
         $resultset = $client->select($query);
 
         $controller = new IIIFController();
