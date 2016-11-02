@@ -2,14 +2,15 @@
 
 {% block body %}
     <ul class="collections">
-
         {% for collection in collections %}
-
             {% set image =  '/images/collections/' ~collection.image %}
-
             <li class="collections_item">
                 <a href="{{ path('_collection', {id: collection.id}) }}" class="collections_link">
-                    <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image">
+                    {% if user.institution %}
+                        <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image">
+                    {% else %}
+                        <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image_blocked">
+                    {% endif %}
                     <span class="collections_name"> {{ collection.id|trans }}</span>
                 </a>
             </li>

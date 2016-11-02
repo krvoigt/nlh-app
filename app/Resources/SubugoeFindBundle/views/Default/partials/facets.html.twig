@@ -3,6 +3,32 @@
     <button class="facets_toggle -hide hidden">{{ 'Hide filters'|trans }}</button>
 </div>
 <div class="facets_body">
+    {% if user.institution and app.request.attributes.get('_route') != '_collection' and access is null %}
+        <a
+            class="facets_only_accessible"
+            href="{{ path(app.request.attributes.get('_route'), {
+                'q': app.request.get('q'),
+                'scope': app.request.get('scope'),
+                'collection': app.request.get('collection'),
+                'activeCollection': app.request.get('activeCollection'),
+                'access': 1
+            }) }}"
+        >
+            {{ 'Show only accessible'|trans }}
+        </a>
+    {% elseif user.institution and app.request.attributes.get('_route') != '_collection' %}
+        <a
+            class="facets_only_accessible"
+            href="{{ path(app.request.attributes.get('_route'), {
+                'q': app.request.get('q'),
+                'scope': app.request.get('scope'),
+                'collection': app.request.get('collection'),
+                'activeCollection': app.request.get('activeCollection')
+            }) }}"
+        >
+            {{ 'Show all accessible'|trans }}
+        </a>
+    {% endif %}
     {% if queryParams %}
         <a
             class="facets_remove"

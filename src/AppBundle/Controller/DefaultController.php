@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Model\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Subugoe\FindBundle\Controller\DefaultController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,7 @@ class DefaultController extends BaseController
      */
     public function indexAction(Request $request)
     {
+        $access = $request->get('access');
         $sort = $request->get('sort');
         if (isset($sort) && empty($sort)) {
             throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
@@ -41,11 +43,16 @@ class DefaultController extends BaseController
             $collectionFilter = $dcFilter->setKey('dc')->setQuery('facet_product:'.$collection);
             $select->addFilterQuery($collectionFilter);
         }
+
+        $user = $this->get('authorization_service')->getAllowedProducts();
+
+        if ($access !== null) {
+            $select = $this->addFilterForAllowedProducts($user, $select);
+        }
+
         $pagination = $this->getPagination($request, $select);
         $facets = $this->get('solarium.client')->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
-
-        $user = $this->get('authorization_service')->getAllowedProducts();
 
         return $this->render('SubugoeFindBundle:Default:index.html.twig', [
                 'facets' => $facets,
@@ -55,6 +62,7 @@ class DefaultController extends BaseController
                 'pagination' => $pagination,
                 'activeCollection' => $request->get('activeCollection'),
                 'user' => $user,
+                'access' => $access,
         ]);
     }
 
@@ -103,9 +111,7 @@ class DefaultController extends BaseController
         $user = $this->get('authorization_service')->getAllowedProducts();
 
         if (!in_array($product, $user->getProducts())) {
-            $registerationLink = 'http://www.nationallizenzen.de/ind_inform_registration';
-
-            return $this->redirect($registerationLink);
+            return $this->redirect($this->getParameter('link_to_registration'));
         }
 
         if ($document[0]->idparentdoc[0]) {
@@ -383,5 +389,28 @@ class DefaultController extends BaseController
         if (is_array($sort) && $sort != []) {
             $select->addSort($sort[0], $sort[1]);
         }
+    }
+
+    /**
+     * @param User  $user
+     * @param Query $select
+     *
+     * @return Query
+     */
+    protected function addFilterForAllowedProducts($user, $select):Query
+    {
+        $products = $user->getProducts();
+        if (isset($products) && $products !== []) {
+            $productQuery = [];
+            foreach ($products as $key => $product) {
+                $productQuery[] = sprintf('product:%s', $product);
+            }
+            $productQuery = implode(' OR ', $productQuery);
+            $accessFilter = new FilterQuery();
+            $productFilter = $accessFilter->setKey('product')->setQuery($productQuery);
+            $select->addFilterQuery($productFilter);
+        }
+
+        return $select;
     }
 }

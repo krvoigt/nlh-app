@@ -21,6 +21,15 @@
     width: 100%;
 }
 
+.collections_image_blocked {
+    @include transition(opacity);
+    border-radius: $br;
+    display: block;
+    height: auto;
+    width: 100%;
+    opacity: 0.5;
+}
+
 .collections_item {
     $collection-item-size: round(($site-width - $grid - 10 * round($grid / 4)) / 5);
 

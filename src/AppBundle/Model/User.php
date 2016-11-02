@@ -10,7 +10,7 @@ class User
     /**
      * @var string
      */
-    private $ipAddress;
+    private $ipAddress = '';
 
     /**
      * @var string

@@ -47,6 +47,11 @@
     margin-bottom: $grid;
 }
 
+.facets_only_accessible {
+    @include button(light);
+    margin-bottom: $grid;
+}
+
 .facets_toggle {
     background: $grey-light;
     border-radius: $br;

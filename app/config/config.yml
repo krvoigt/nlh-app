@@ -14,6 +14,7 @@ parameters:
       - { id: "eai2", image: "eai2.jpg" }
       - { id: "eol", image: "eol.jpg" }
     default_backend_image_format: 'jpg'
+    link_to_registration: "http://www.nationallizenzen.de/ind_inform_registration"
 
 framework:
     #esi:             ~
