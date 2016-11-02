@@ -1,12 +1,22 @@
 @import '../../../../node_modules/select2/src/scss/core';
 
 .select2 {
-    padding: 0;
+    padding: 0 !important;
     min-width: 6.5em !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: inherit;
+}
+
+.select2-selection--single .select2-selection__arrow b {
+    .select2-container--default & {
+        border-top-color: $text-color;
+    }
+
+    .select2-container--default.select2-container--open & {
+        border-bottom-color: $text-color;
+    }
 }
 
 .select2-search {
