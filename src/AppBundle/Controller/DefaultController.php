@@ -423,6 +423,7 @@ class DefaultController extends BaseController
 
     /*
      * Returns the already indexed products from solr server
+     * @return array
      */
     protected function getSolrProducts()
     {

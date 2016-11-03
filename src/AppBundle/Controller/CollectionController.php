@@ -77,6 +77,7 @@ class CollectionController extends Controller
             'queryParams' => $request->get('filter') ?: [],
             'activeCollection' => $id,
             'user' => $user,
+            'fullAccess' => true,
         ]);
     }
 

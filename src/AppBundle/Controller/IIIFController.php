@@ -32,7 +32,7 @@ class IIIFController extends Controller
                 return $this->redirect($this->getParameter('link_to_registration'));
             }
         }
-        
+
         $imageEntity = new Image();
         $imageEntity
             ->setIdentifier($identifier)
