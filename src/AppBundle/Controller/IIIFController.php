@@ -23,13 +23,16 @@ class IIIFController extends Controller
      */
     public function indexAction($identifier, $region, $size, $rotation, $quality, $format)
     {
-        $product = explode(':', $identifier)[0];
-        $user = $this->get('authorization_service')->getAllowedProducts();
-        $products = $user->getProducts();
+        // we shall run on cli
+        if (php_sapi_name() !== 'cli') {
+            $product = explode(':', $identifier)[0];
+            $user = $this->get('authorization_service')->getAllowedProducts();
+            $products = $user->getProducts();
 
-        if (!empty($product) && is_array($products)) {
-            if (!in_array($product, $products)) {
-                return $this->redirect($this->getParameter('link_to_registration'));
+            if (!empty($product) && is_array($products)) {
+                if (!in_array($product, $products)) {
+                    return $this->redirect($this->getParameter('link_to_registration'));
+                }
             }
         }
 
