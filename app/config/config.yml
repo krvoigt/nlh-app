@@ -13,6 +13,8 @@ parameters:
       - { id: "eai1", image: "eai1.jpg" }
       - { id: "eai2", image: "eai2.jpg" }
       - { id: "eol", image: "eol.jpg" }
+      - { id: "moc", image: "moc.jpg" }
+      - { id: "ecj", image: "ecj.jpg" }
     default_backend_image_format: 'jpg'
     link_to_registration: "http://www.nationallizenzen.de/ind_inform_registration"
 
