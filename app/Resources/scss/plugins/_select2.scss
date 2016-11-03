@@ -41,9 +41,14 @@
     background: none;
     border: 0;
     height: auto;
-    padding: ($grid / 4) 0;
+    padding: round($grid / 4) 0;
 }
 
 .select2-selection__arrow {
-    top: ($grid / 4) !important;
+    top: round($grid / 4) !important;
+}
+
+// Prevent title of generated element from showing when hovered
+.select2-selection__rendered {
+    pointer-events: none;
 }
