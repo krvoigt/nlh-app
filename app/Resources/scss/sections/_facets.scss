@@ -2,7 +2,7 @@
     margin-left: $grid;
     width: 200px;
 
-    @include respond-to(medium) {
+    @include respond-to(large) {
         float: none;
         margin: 0;
         width: auto;
@@ -10,7 +10,7 @@
 }
 
 .facets_body {
-    @include respond-to(medium) {
+    @include respond-to(large) {
         border-bottom: $border-width solid $border-color;
         display: none;
         margin: 0 0 $grid;
@@ -26,7 +26,7 @@
     padding: 0 0 ($grid / 2);
     text-align: center;
 
-    @include respond-to(medium) {
+    @include respond-to(large) {
         display: block;
     }
 
