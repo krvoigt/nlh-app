@@ -34,7 +34,7 @@
 
         @include respond-to(large) {
             &:not(:last-child) {
-                margin: 0 0 ($grid / 2);
+                margin: 0 0 round($grid / 4);
             }
         }
     }
