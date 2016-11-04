@@ -33,6 +33,7 @@ class WarmupThumbnailCacheCommand extends ContainerAwareCommand
         $query = $client
             ->createSelect()
             ->addSort('date_indexed', $input->getOption('direction'))
+            ->setFields(['nlh_id'])
             ->setRows($input->getOption('rows'))
             ->setStart($input->getOption('start'));
 
