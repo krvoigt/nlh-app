@@ -8,13 +8,12 @@ use Subugoe\FindBundle\Controller\DefaultController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Solarium\QueryType\Select\Query\FilterQuery;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use AppBundle\Model\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Solarium\QueryType\Select\Query\Query;
 
-class DefaultController extends BaseController
+class DefaultController extends BaseController implements IpAuthenticatedController
 {
     /**
      * @Route("/search", name="_search")
@@ -52,8 +51,7 @@ class DefaultController extends BaseController
             $select = $this->addFilterForAllowedProducts($products, $select);
         }
 
-        $solrProducts = array_column($this->getSolrProducts(), 'product');
-        sort($solrProducts);
+        $solrProducts = $this->get('document_service')->getAvailableProducts();
 
         $fullAccess = ($products === $solrProducts) ? true : false;
 
@@ -105,32 +103,17 @@ class DefaultController extends BaseController
             }
         }
 
-        $client = $this->get('solarium.client');
-        $select = $client->createSelect();
-        $select->setQuery('id:'.$documentId);
-        $document = $client->select($select);
-        $document = $document->getDocuments();
-        if (count($document) === 0) {
-            throw new NotFoundHttpException(sprintf('Document %s not found', $documentId));
+        $document = $this->get('document_service')->getDocumentById($documentId);
+
+        if ($document->idparentdoc[0]) {
+            $parentDocumentTitle = $this->get('document_service')->getDocumentById($document->idparentdoc[0])['title'][0];
         }
 
-        $product = $document[0]->product;
-
-        $user = $this->get('authorization_service')->getAllowedProducts();
-
-        if (!in_array($product, $user->getProducts())) {
-            return $this->redirect($this->getParameter('link_to_registration'));
+        if (isset($document->nlh_id[0])) {
+            $identifier = $document->nlh_id[$page - 1];
         }
 
-        if ($document[0]->idparentdoc[0]) {
-            $parentDocumentTitle = $this->getDocument($document[0]->idparentdoc[0])['title'][0];
-        }
-
-        if (isset($document[0]->nlh_id[0])) {
-            $identifier = $document[0]->nlh_id[$page - 1];
-        }
-
-        if (!$document[0]->isanchor) {
+        if (!$document->isanchor) {
             $metsService = $this->get('mets_service');
             $pageMappings = $metsService->getScannedPagesMapping($documentId);
             $pageCount = count($pageMappings);
@@ -214,7 +197,7 @@ class DefaultController extends BaseController
         $documentStructure->setPreviousPageChapterId(isset($previousPageChapterId) ? $previousPageChapterId : null);
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
-                        'document' => $document[0]->getFields(),
+                        'document' => $document->getFields(),
                         'parentDocumentTitle' => isset($parentDocumentTitle) ? $parentDocumentTitle : null,
                         'pageMappings' => isset($pageMappings) ? $pageMappings : null,
                         'documentStructure' => $documentStructure,
@@ -263,7 +246,7 @@ class DefaultController extends BaseController
         $facets = $client->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
-        $parentDocument = $this->getDocument($id);
+        $parentDocument = $this->get('document_service')->getDocumentById($id);
 
         $selectChildrenDocuments = $client->createSelect()->setRows((int) 500);
 
@@ -284,27 +267,6 @@ class DefaultController extends BaseController
                     'pagination' => $pagination,
                     'parentDocument' => $parentDocument,
                 ]);
-    }
-
-    /*
-     * This returns the meta data of a document
-     *
-     * @param string $id The document id
-     *
-     * @return array $document The document meta data
-     */
-    protected function getDocument($id)
-    {
-        $client = $this->get('solarium.client');
-
-        $selectDocument = $client->createSelect()
-                ->setQuery(sprintf('id:%s', $id));
-        $document = $client
-                ->select($selectDocument)
-                ->getDocuments()[0]
-                ->getFields();
-
-        return $document;
     }
 
     /*
@@ -419,24 +381,5 @@ class DefaultController extends BaseController
         }
 
         return $select;
-    }
-
-    /*
-     * Returns the already indexed products from solr server
-     * @return array
-     */
-    protected function getSolrProducts()
-    {
-        $client = $this->get('solarium.client');
-        $query = $client->createSelect();
-        $query->setFields(['product']);
-        $query->addParam('group', true);
-        $query->addParam('group.field', 'product');
-        $query->addParam('group.main', true);
-        $resultset = $client->execute($query);
-        $data = $resultset->getResponse()->getBody();
-        $solrProducts = json_decode($data, true)['response']['docs'];
-
-        return $solrProducts;
     }
 }
