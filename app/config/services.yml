@@ -24,3 +24,7 @@ services:
   authorization_service:
     class: AppBundle\Service\AuthorizationService
     arguments: ["@doctrine", "@request_stack"]
+
+  document_service:
+    class: AppBundle\Service\DocumentService
+    arguments: ["@solarium.client"]
