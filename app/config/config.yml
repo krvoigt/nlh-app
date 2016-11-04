@@ -91,7 +91,7 @@ nelmio_solarium:
 
 subugoe_find:
     default_query: "doctype:work"
-    default_sort: "date_modified desc"
+    default_sort: ""
     feed_sort: "date_modified DESC"
     feed_rows: 15
     feed_category: facet_product
