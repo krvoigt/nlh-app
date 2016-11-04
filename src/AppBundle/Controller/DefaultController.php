@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Model\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Subugoe\FindBundle\Controller\DefaultController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,14 +75,13 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
      * @Route("/id/{id}", name="_detail")
      *
      * @param string $id The document id
+     * @param Request $request The request
      *
      * @return Response
      */
-    public function detailAction($id)
+    public function detailAction($id, Request $request)
     {
         $documentStructure = new DocumentStructure();
-
-        $request = $this->get('request_stack')->getCurrentRequest();
 
         if ($request->get('page')) {
             $page = $request->get('page');

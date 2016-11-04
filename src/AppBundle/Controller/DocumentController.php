@@ -64,7 +64,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/id/{id}/tei.xml", name="_tei", methods={"GET"})
+     * @Route("/id/{id}.tei.xml", name="_tei", methods={"GET"})
      *
      * @param string $id
      *
@@ -85,7 +85,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/id/{id}/mets.xml", name="_mets", methods={"GET"})
+     * @Route("/id/{id}.mets.xml", name="_mets", methods={"GET"})
      *
      * @param string $id
      *
@@ -93,10 +93,7 @@ class DocumentController extends Controller
      */
     public function metsAction($id)
     {
-        $client = $this->get('solarium.client');
-        $select = $client->createSelect()->setQuery(sprintf('id:%s', $id));
-        $document = $client->select($select)->getDocuments()[0];
-
+        $document = $this->get('document_service')->getDocumentById($id);
         $file = $this->get('oneup_flysystem.nlh_filesystem')->read(vsprintf('/mets/%s/%s.mets.xml', [$document->product, $document->work]));
 
         $response = new Response(
