@@ -16,12 +16,7 @@ class DocumentController extends Controller
     {
         $client = $this->get('solarium.client');
 
-        $selectParentDocument = $client->createSelect()
-                ->setQuery(sprintf('id:%s', $id));
-        $parentDocument = $client
-                ->select($selectParentDocument)
-                ->getDocuments()[0]
-                ->getFields();
+        $parentDocument = $this->get('document_service')->getDocumentById($id);
 
         $selectChildrenDocuments = $client->createSelect()->setRows(500)
                 ->addSort('currentno', 'ASC')
