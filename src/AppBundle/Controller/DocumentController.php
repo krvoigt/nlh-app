@@ -109,19 +109,4 @@ class DocumentController extends Controller
 
         return $response;
     }
-
-    /**
-     * @Route("/just-scanned/", name="just-scanned", methods={"GET"})
-     */
-    public function justScannedAction()
-    {
-        $client = $this->get('solarium.client');
-        $select = $client->createSelect();
-        $select->setRows(1);
-        $select->addSort('date_indexed', 'desc');
-
-        return $this->render('partials/app/just-scanned.html.twig', [
-            'document' => $client->select($select)->getDocuments()[0],
-        ]);
-    }
 }
