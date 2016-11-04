@@ -17,6 +17,7 @@ parameters:
       - { id: "ecj", image: "ecj.jpg" }
     default_backend_image_format: 'jpg'
     link_to_registration: "http://www.nationallizenzen.de/ind_inform_registration"
+    lock_image: "images/locked.png"
 
 framework:
     #esi:             ~

@@ -82,23 +82,17 @@
                 <li class="result_item_blocked">
             {% endif %}
                 <article class="result_wrap">
-                    {% if result.fields.product in user.products %}
-                        <div class="result_left">
-                            {% if result.fields.nlh_id is defined %}
-                                <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                    <img
-                                        class="result_thumbnail"
-                                        src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
-                                        alt=""
-                                    >
-                                </a>
-                            {% endif %}
-                        </div>
-                    {% else %}
-                        <div class="result_left">
-                            <img src="{{ absolute_url(asset('images/locked.png')) }}" alt="" />
-                        </div>
-                    {% endif %}
+                    <div class="result_left">
+                        {% if result.fields.nlh_id is defined %}
+                            <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">
+                                <img
+                                    class="result_thumbnail"
+                                    src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
+                                    alt=""
+                                >
+                            </a>
+                        {% endif %}
+                    </div>
                     <div class="result_metadata">
                         <h2 class="result_title">
                             <a class="result_link" title="{{ result.fields.nonsort | first }}"
