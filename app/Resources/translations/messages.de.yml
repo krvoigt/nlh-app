@@ -144,7 +144,8 @@ currentnosort-asc: Band aufsteigend
 
 # Docstrct
 genre: Genre
-subject: Thema
+facet_subject_topic: Thema
+lang: Sprache
 abstract: Abstrakt
 acknowledgment: Danksagung
 addendum: Addendum
@@ -245,6 +246,12 @@ volume: Teil eines mehrbändigen Werkes
 werk_beigefuegt: Beigefügtes Werk
 werk: Werk
 contained_work: Enthaltenes Werk
+
+eng: Englisch
+ger: Deutsch
+fre: Französisch
+lat: Latein
+grc: Griechisch
 
 # DC
 autobiographica: Autobiographica
