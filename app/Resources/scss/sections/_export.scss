@@ -13,7 +13,7 @@
     color: $red;
     display: none;
     margin-bottom: $grid;
-    padding: round($grid / 4);
+    padding: ($grid / 4);
 }
 
 .export_complete-doc {

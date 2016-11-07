@@ -54,7 +54,7 @@
         text-indent: (-$grid);
 
         @include respond-to(small) {
-            margin-bottom: round($grid / 4);
+            margin-bottom: ($grid / 4);
         }
 
         &::before {
@@ -78,7 +78,7 @@
     bottom: (2 * $grid);
     opacity: 0;
     position: fixed;
-    right: floor(-1.5 * $grid);
+    right: (-1.5 * $grid);
 
     &.-visible {
         opacity: 1;
@@ -91,9 +91,9 @@
         border-radius: $br 0 0 $br;
         box-shadow: none;
         display: block;
-        height: ceil(1.5 * $grid);
-        line-height: ceil(1.5 * $grid);
-        width: ceil(1.5 * $grid);
+        height: (1.5 * $grid);
+        line-height: (1.5 * $grid);
+        width: (1.5 * $grid);
         text-align: center;
 
         @include hover {

@@ -93,7 +93,7 @@
                                 href="{{ path(app.request.attributes.get('_route'), {
                                     'filter': queryParams|merge({
                                         (facetCounter):  {
-                                            (key) : (value)
+                                            (key): (value)
                                         }
                                     }),
                                     'q': (app.request.get('q')),
@@ -111,8 +111,8 @@
                 {# TODO: Show counts for years outside of filter range #}
                 {# Workaround: Remove erroneous year #}
                 <div
-                        class="facet_histogram"
-                        data-years='[{% for year, count in facet %}{% if year < 2200 %}{{ loop.first ? '' : ',' }}[{{ year }},{{ count }}]{% endif %}{% endfor %}]'
+                    class="facet_histogram"
+                    data-years='[{% for year, count in facet %}{% if year < 2200 %}{{ loop.first ? '' : ',' }}[{{ year }},{{ count }}]{% endif %}{% endfor %}]'
                 >
                 </div>
             {% endif %}

@@ -7,12 +7,12 @@
 .thumbnails_list {
     display: flex;
     flex-wrap: wrap;
-    margin: round($grid / 8);
+    margin: ($grid / 8);
 }
 
 .thumbnails_item {
     box-shadow: $drop-shadow;
-    margin: round($grid / 8);
+    margin: ($grid / 8);
     position: relative;
 
     &::before {

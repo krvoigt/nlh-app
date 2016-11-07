@@ -20,7 +20,7 @@
 
 .facet_list-toggle {
     @include button(link);
-    margin: 0 -.25em round($grid / 4);
+    margin: 0 -.25em ($grid / 4);
     padding: 0 .25em;
 
     &.-collapse {

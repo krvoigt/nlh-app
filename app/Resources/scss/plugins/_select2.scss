@@ -41,11 +41,11 @@
     background: none;
     border: 0;
     height: auto;
-    padding: round($grid / 4) 0;
+    padding: ($grid / 4) 0;
 }
 
 .select2-selection__arrow {
-    top: round($grid / 4) !important;
+    top: ($grid / 4) !important;
 }
 
 // Prevent title of generated element from showing when hovered
