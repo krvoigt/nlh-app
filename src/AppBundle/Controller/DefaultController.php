@@ -75,13 +75,13 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
      * @Route("/id/{id}", name="_detail")
      *
      * @param string $id The document id
-     * @param Request $request The request
      *
      * @return Response
      */
-    public function detailAction($id, Request $request)
+    public function detailAction($id)
     {
         $documentStructure = new DocumentStructure();
+        $request = $this->get('request_stack')->getCurrentRequest();
 
         if ($request->get('page')) {
             $page = $request->get('page');
