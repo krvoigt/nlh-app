@@ -96,7 +96,7 @@ subugoe_find:
     feed_sort: "date_modified DESC"
     feed_rows: 15
     feed_category: facet_product
-    feed_fields: ["title", "date_indexed", "id"]
+    feed_fields: ["nonsort", "date_indexed", "id"]
     facets:
       - { title: facet_product, field: facet_product }
       - { title: facet_creator, field: facet_creator }
