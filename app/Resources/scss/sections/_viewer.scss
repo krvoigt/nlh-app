@@ -156,14 +156,6 @@
     .viewer_control-group.-vertical & + & {
         @include separator(0, 0, 1);
     }
-
-    .viewer_controls.-overlay & {
-        @include respond-to(micro) {
-            // Make sure all scan buttons stay within viewport
-            min-width: 0;
-            padding: ($grid / 4) .25em;
-        }
-    }
 }
 
 .viewer_dl {
