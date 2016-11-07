@@ -135,7 +135,7 @@
     }
 
     &.-change-view {
-        @include separator(0, 0, 0, 1);
+        @include separator(0, 0, 1, 1);
         display: none;
         height: ($grid * 1.5);
         margin: (-$grid / 4);
