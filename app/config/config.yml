@@ -105,6 +105,7 @@ subugoe_find:
       - { title: year_publish, field: year_publish }
       - { title: docstrct, field: docstrct }
       - { title: genre, field: genre }
+      - { title: subject, field: facet_subject_topic }
 
 knp_paginator:
     page_range: 7                      # default page range used in pagination control

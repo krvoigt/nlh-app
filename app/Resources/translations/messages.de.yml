@@ -144,6 +144,7 @@ currentnosort-asc: Band aufsteigend
 
 # Docstrct
 genre: Genre
+subject: Thema
 abstract: Abstrakt
 acknowledgment: Danksagung
 addendum: Addendum
