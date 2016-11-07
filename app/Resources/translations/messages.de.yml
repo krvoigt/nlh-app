@@ -143,6 +143,7 @@ currentnosort-desc: Band absteigend
 currentnosort-asc: Band aufsteigend
 
 # Docstrct
+genre: Genre
 abstract: Abstrakt
 acknowledgment: Danksagung
 addendum: Addendum
