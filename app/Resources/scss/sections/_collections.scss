@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 (-$grid / 2);
+    margin: (-$grid / 4);
 }
 
 .collections_above {
@@ -21,7 +21,8 @@
     width: 100%;
 }
 
-$collection_item-size: round(($site-width - $grid - 10 * round($grid / 4)) / 5);
+$collection_item-row-count: 5;
+$collection_item-size: floor(($site-width - 1.5 * $grid) / $collection_item-row-count) - ($grid / 2);
 $collection_item-size-small: 160px;
 
 .collections_item {
@@ -30,7 +31,7 @@ $collection_item-size-small: 160px;
     box-shadow: $card-shadow;
     display: block;
     height: $collection_item-size;
-    margin: 0 round($grid / 4) ($grid / 2);
+    margin: ($grid / 4);
     overflow: hidden;
     width: $collection_item-size;
 
@@ -63,7 +64,7 @@ $collection_item-size-small: 160px;
     bottom: 0;
     display: block;
     font-family: $font-family-display;
-    padding: round($grid / 4) .25em;
+    padding: ($grid / 4) .25em;
     position: absolute;
     text-align: center;
     text-shadow: $shade-inset,  0 0 .5em $black, 0 0 1em $black, 0 0 2em $black;

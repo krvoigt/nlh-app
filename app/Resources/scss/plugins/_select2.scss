@@ -3,6 +3,10 @@
 .select2 {
     padding: 0 !important;
     min-width: 6.5em !important;
+
+    @include respond-to(micro) {
+        min-width: 5.75em !important;
+    }
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -46,4 +50,9 @@
 
 .select2-selection__arrow {
     top: ($grid / 4) !important;
+}
+
+// Prevent title of generated element from showing when hovered
+.select2-selection__rendered {
+    pointer-events: none;
 }

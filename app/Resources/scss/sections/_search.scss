@@ -50,14 +50,14 @@
 .search_close {
     @include transition(background);
     background: none;
-    bottom: round($grid / 4);
+    bottom: ($grid / 4);
     border: 0;
     border-radius: $br;
     height: $grid;
     line-height: 1;
     padding: 0;
     position: absolute;
-    right: round($grid / 4);
+    right: ($grid / 4);
     width: $grid;
 
     @include hover {
@@ -116,7 +116,7 @@
     box-shadow: .1em .1em .5em rgba($black, .2) inset;
     float: right;
     height: ($grid * 2);
-    padding-right: round(1.75 * $grid);
+    padding-right: (1.75 * $grid);
     position: relative;
     width: 16em;
     z-index: 9;
@@ -180,8 +180,8 @@
     height: 1.5 * $grid;
     padding: 0;
     position: absolute;
-    right: round(.75 * $grid);
-    top: round(.75 * $grid);
+    right: (.75 * $grid);
+    top: (.75 * $grid);
     width: 1.5 * $grid;
     z-index: 9;
 

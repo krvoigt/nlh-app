@@ -44,14 +44,19 @@
                 </span>
             {% endif %}
             <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
-            <select class="viewer_control -page-select{{ documentStructure.identifier is null ? ' -disabled'  }}" name="page" id="viewer-page-select">
-            {% if documentStructure.identifier is not null %}
-                {% for physPage, logPage in pageMappings %}
-                    <option data-id="{{ document['nlh_id'][physPage -1] | split(':') | last}}" value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
-                        {{ physPage }} : {{ logPage }}
-                    </option>
-                {% endfor %}
-            {% endif %}
+            <select
+                class="viewer_control -page-select{{ documentStructure.identifier is null ? ' -disabled'  }}"
+                name="page"
+                id="viewer-page-select"
+                title="{{ 'Physical page:'|trans }} {{ documentStructure.page }}&#10;{{ 'Logical page:'|trans }} {{ pageMappings[documentStructure.page] }}"
+            >
+                {% if documentStructure.identifier is not null %}
+                    {% for physPage, logPage in pageMappings %}
+                        <option data-id="{{ document['nlh_id'][physPage -1] | split(':') | last}}" value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
+                            {{ physPage }} : {{ logPage }}
+                        </option>
+                    {% endfor %}
+                {% endif %}
             </select>
             {% if documentStructure.page != documentStructure.pageCount and documentStructure.identifier is not null %}
                 <a

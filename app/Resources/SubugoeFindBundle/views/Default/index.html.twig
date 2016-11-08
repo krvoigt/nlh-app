@@ -30,8 +30,7 @@
                         <dt>{{ 'creator'|transchoice(parentDocument.creator|length) }}:</dt>
                         <dd>
                             {% for author in parentDocument.creator %}
-                                <a
-                                href="{{ path('_search', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
+                                <a href="{{ path('_search', {'filter': {0: {'facetcreator': author}}}) }}">{{ author }}</a>{% if loop.last %}{% else %}; {% endif %}
                             {% endfor %}
                         </dd>
                     {% endif %}

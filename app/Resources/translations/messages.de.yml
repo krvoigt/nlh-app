@@ -33,7 +33,7 @@ Go to next page: Zur nächsten Seite
 Add filter %name% is &ldquo;%value%&rdquo;: 'Filter hinzufügen: %name% ist &bdquo;%value%&ldquo;'
 Collapse title: Titel verkleinern
 Hide filters: Filter ausblenden
-"(imported: %date%)": "(importiert: %date%)"
+Import date: Importdatum
 Published: Erschienen
 Remove all filters: Alle Filter entfernen
 Remove filter %name% is &ldquo;%value%&rdquo;: 'Filter entfernen: %name% ist &bdquo;%value%&ldquo;'
@@ -72,12 +72,14 @@ Go to page: Gehe zu Seite
 Invalid page: Ungültige Seite
 Last page: Letzte Seite
 Loading: Lade …
+Logical page:: Logische Seite:
 Metadata: Metadaten
 Next page: Nächste Seite
 Next section: Nächster Abschnitt
 page: Seite
 Pages: Seiten
 pages: Seiten
+Physical page:: Physische Seite:
 Previous page: Vorige Seite
 Previous section: Voriger Abschnitt
 PURL: Zitierlink (PURL)

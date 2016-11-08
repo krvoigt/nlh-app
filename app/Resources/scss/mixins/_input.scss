@@ -1,13 +1,13 @@
 @mixin input {
-	@include transition(border);
-	background: $white;
-	border: $border-width solid $shade;
+    @include transition(border);
+    background: $white;
+    border: $border-width solid $shade;
     border-radius: $br;
-	font: inherit;
-	padding: round($grid / 8) .5em;
+    font: inherit;
+    padding: ($grid / 8) .5em;
 
-	&:focus {
-		border-color: $brand-color;
-		outline: 0;
-	}
+    &:focus {
+        border-color: $brand-color;
+        outline: 0;
+    }
 }

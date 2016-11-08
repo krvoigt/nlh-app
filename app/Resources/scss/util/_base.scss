@@ -216,13 +216,13 @@ sub {
 table {
     border: $border-width solid $border-color;
     border-width: $border-width 0;
-    margin: floor(-$grid / 4) 0 ceil($grid * .75);
+    margin: (-$grid / 4) 0 ($grid * .75);
     width: 100%;
 }
 
 th,
 td {
-    padding: floor($grid / 4) ($grid / 4) ceil($grid / 4);
+    padding: ($grid / 4);
     text-align: left;
     vertical-align: top;
 }

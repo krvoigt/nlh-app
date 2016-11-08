@@ -19,18 +19,18 @@
     }
 
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-	    max-width: 50%;
+        max-width: 50%;
     }
 }
 
 .viewer_controls {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 round(-$grid / 4) round(-$grid / 4) 0;
+    margin: 0 (-$grid / 4) (-$grid / 4) 0;
     z-index: 1;
 
     &.-overlay {
-        margin: round($grid / 4);
+        margin: ($grid / 4);
         position: absolute;
 
         & + & {
@@ -44,9 +44,9 @@
         @include respond-to(large) {
             box-shadow: $drop-shadow;
             display: none;
-            margin: (round($grid / 4) * 2 + $border-width) 0 0;
+            margin: ($grid / 2 + $border-width) 0 0;
             position: absolute;
-	        right: round($grid / 4);
+            right: ($grid / 4);
             z-index: 9;
             min-width: 10em;
 
@@ -75,7 +75,7 @@
     border-radius: $br;
     box-shadow: $card-shadow;
     display: flex;
-    margin: 0 round($grid / 4) round($grid / 4) 0;
+    margin: 0 ($grid / 4) ($grid / 4) 0;
     overflow: hidden;
     z-index: 1;
 
@@ -135,10 +135,10 @@
     }
 
     &.-change-view {
-        @include separator(0, 0, 0, 1);
+        @include separator(0, 0, 1, 1);
         display: none;
         height: ($grid * 1.5);
-        margin: round(-$grid / 4);
+        margin: (-$grid / 4);
 
         @include respond-to(large) {
             display: block;
@@ -155,14 +155,6 @@
 
     .viewer_control-group.-vertical & + & {
         @include separator(0, 0, 1);
-    }
-
-    .viewer_controls.-overlay & {
-        @include respond-to(micro) {
-            // Make sure all scan buttons stay within viewport
-            min-width: 0;
-            padding: round($grid / 4) .25em;
-        }
     }
 }
 
@@ -192,7 +184,7 @@
     background: $header-bg;
     display: flex;
     justify-content: space-between;
-    padding: floor($grid / 4);
+    padding: ($grid / 4);
     width: 100%;
 }
 
@@ -253,7 +245,7 @@
 
 .viewer_title {
     font-size: 20px !important; // TODO: Calc
-    margin: floor($grid / 4) 0;
+    margin: ($grid / 4) 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
