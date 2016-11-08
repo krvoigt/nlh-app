@@ -13,8 +13,7 @@
     line-height: 1;
 }
 
-.result_info,
-.result_tags {
+.result_info {
     border-bottom: $border-width solid $border-color;
     margin: 0 0 ($grid / 4);
     padding: 0 0 ($grid / 4 - $border-width);
