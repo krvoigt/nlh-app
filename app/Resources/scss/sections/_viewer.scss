@@ -19,7 +19,7 @@
     }
 
     @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-	    max-width: 50%;
+        max-width: 50%;
     }
 }
 
@@ -46,7 +46,7 @@
             display: none;
             margin: ($grid / 2 + $border-width) 0 0;
             position: absolute;
-	        right: ($grid / 4);
+            right: ($grid / 4);
             z-index: 9;
             min-width: 10em;
 

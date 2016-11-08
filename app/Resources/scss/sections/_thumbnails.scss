@@ -41,13 +41,13 @@
         width: 100%;
     }
 
-	.thumbnails_item.-current & {
+    .thumbnails_item.-current & {
         background: $white;
 
-		img {
-			opacity: .4;
-		}
-	}
+        img {
+            opacity: .4;
+        }
+    }
 }
 
 .thumbnails_page-number {
@@ -62,9 +62,9 @@
     text-align: center;
     text-shadow: $shade-inset;
 
-	.thumbnails_item.-current & {
+    .thumbnails_item.-current & {
         background: $shine-light;
         color: $text-color;
         text-shadow: $shine-inset;
-	}
+    }
 }
