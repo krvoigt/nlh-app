@@ -3,7 +3,6 @@
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Solarium\QueryType\Select\Result\DocumentInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,20 +26,6 @@ class DocumentController extends Controller
             'parentDocument' => $parentDocument,
             'childrenDocuments' => $childrenDocuments,
         ]);
-    }
-
-    /**
-     * @param DocumentInterface $document
-     *
-     * @return bool
-     */
-    protected function onlyOneParent($document)
-    {
-        if (count($document->getFields()['idparentdoc']) === 1) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
