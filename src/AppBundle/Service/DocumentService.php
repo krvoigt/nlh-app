@@ -27,6 +27,9 @@ class DocumentService
      */
     public function getDocumentById($id)
     {
+        if (strchr($id, '|')) {
+            $id = explode('|', $id)[0];
+        }
         $select = $this->client->createSelect();
         $select->setQuery('id:'.$id);
         $document = $this->client->select($select);
