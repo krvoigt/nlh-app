@@ -65,7 +65,6 @@ class DefaultController extends BaseController
      */
     public function detailAction($id)
     {
-
         $documentId = $id;
 
         if (strchr($id, '|')) {
