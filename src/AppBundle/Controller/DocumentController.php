@@ -64,7 +64,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/id/{id}.tei.xml", name="_tei", methods={"GET"})
+     * @Route("/tei/{id}.tei.xml", name="_tei", methods={"GET"})
      *
      * @param string $id
      *
@@ -85,7 +85,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/id/{id}.mets.xml", name="_mets", methods={"GET"})
+     * @Route("/mets/{id}.mets.xml", name="_mets", methods={"GET"})
      *
      * @param string $id
      *
