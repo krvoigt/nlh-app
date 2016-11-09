@@ -6,7 +6,7 @@
             {% set image =  '/images/collections/' ~collection.image %}
             <li class="collections_item">
                 <a href="{{ path('_collection', {id: collection.id}) }}" class="collections_link">
-                    {% if user.institution %}
+                    {% if collection.id in products %}
                         <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image">
                     {% else %}
                         <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image_blocked">
