@@ -17,13 +17,13 @@ class CollectionController extends Controller
      */
     public function indexAction(): Response
     {
-        $user = $this->get('authorization_service')->getAllowedProducts();
+        $products = $this->get('authorization_service')->getAllowedProducts()->getProducts();
 
         $collections = $this->getParameter('collections');
 
         return $this->render('collections.html.twig', [
                 'collections' => $collections,
-                'user' => $user,
+                'products' => $products,
         ]);
     }
 
