@@ -147,7 +147,7 @@ currentnosort-asc: Band aufsteigend
 # Docstrct
 genre: Genre
 facet_subject_topic: Thema
-lang: Sprache
+lang: Sprache|Sprachen
 abstract: Abstrakt
 acknowledgment: Danksagung
 addendum: Addendum

@@ -37,6 +37,15 @@
             </dd>
         {% endif %}
 
+        {% if document.lang is defined %}
+            <dt>{{ 'lang'|transchoice(document.lang|length) }}</dt>
+            <dd>
+                {% for lang in document.lang %}
+                    <a href="{{ path('_search', {'filter': {0: {'lang': lang}}}) }}">{{ lang|trans }}</a>{% if loop.last %}{% else %}, {% endif %}
+                {% endfor %}
+            </dd>
+        {% endif %}
+
         <dt>{{ 'docstrct'|transchoice(1) }}</dt>
         <dd>{{ document.docstrct|trans }}</dd>
 
