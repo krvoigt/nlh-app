@@ -297,518 +297,538 @@ Generate PDF: PDF erzeugen
 pdf_preparing: PDF wird vorbereitet
 Invalid page range: Ungültiger Seitenbereich
 
-aar: Afar
-abk: Abkhaz
-ace: Achinese
-ach: Acoli
-ada: Adangme
-ady: Adygei
-afa: Afroasiatic (Other)
-afh: Afrihili (Artificial language)
+aar: Danakil-Sprache
+abk: Abchasisch
+ace: Aceh-Sprache
+ach: Acholi-Sprache
+ada: Adangme-Sprache
+ady: Adygisch
+afa: Hamitosemitische Sprachen (Andere)
+afh: Afrihili
 afr: Afrikaans
-ain: Ainu
--ajm: Aljamía
-aka: Akan
-akk: Akkadian
-alb: Albanian
-ale: Aleut
-alg: Algonquian (Other)
-alt: Altai
-amh: Amharic
-ang: English, Old (ca. 450-1100)
-anp: Angika
-apa: Apache languages
-ara: Arabic
-arc: Aramaic
-arg: Aragonese
-arm: Armenian
-arn: Mapuche
-arp: Arapaho
-art: Artificial (Other)
-arw: Arawak
-asm: Assamese
-ast: Bable
-ath: Athapascan (Other)
-aus: Australian languages
-ava: Avaric
-ave: Avestan
+ain: Ainu-Sprache
+aka: Akan-Sprache
+akk: Akkadisch
+alb: Albanisch
+sqi: Albanisch
+ale: Aleutisch
+alg: Algonkin-Sprachen (Andere)
+alt: Altaisch
+amh: Amharisch
+ang: Altenglisch
+anp: Anga-Sprache
+apa: Apachen-Sprachen
+ara: Arabisch
+arc: Aramäisch
+arg: Aragonesisch
+arm: Armenisch
+hye: Armenisch
+arn: Arauka-Sprachen
+arp: Arapaho-Sprache
+art: Kunstsprachen (Andere)
+arw: Arawak-Sprachen
+asm: Assamesisch
+ast: Asturisch
+ath: Athapaskische Sprachen (Andere)
+aus: Australische Sprachen
+ava: Awarisch
+ave: Avestisch
 awa: Awadhi
-aym: Aymara
-aze: Azerbaijani
-bad: Banda languages
-bai: Bamileke languages
-bak: Bashkir
-bal: Baluchi
-bam: Bambara
-ban: Balinese
-baq: Basque
-bas: Basa
-bat: Baltic (Other)
-bej: Beja
-bel: Belarusian
-bem: Bemba
+aym: Aymará-Sprache
+aze: Aserbeidschanisch
+bad: Banda-Sprachen (Ubangi-Sprachen)
+bai: Bamileke-Sprachen
+bak: Baschkirisch
+bal: Belutschisch
+bam: Bambara-Sprache
+ban: Balinesisch
+baq: Baskisch
+eus: Baskisch
+bas: Basaa-Sprache
+bat: Baltische Sprachen (Andere)
+bej: Bedauye
+bel: Weißrussisch
+bem: Bemba-Sprache
 ben: Bengali
-ber: Berber (Other)
+ber: Berbersprachen (Andere)
 bho: Bhojpuri
-bih: Bihari (Other)
-bik: Bikol
-bin: Edo
-bis: Bislama
-bla: Siksika
-bnt: Bantu (Other)
-bos: Bosnian
-bra: Braj
-bre: Breton
-btk: Batak
-bua: Buriat
-bug: Bugis
-bul: Bulgarian
-bur: Burmese
-byn: Bilin
-cad: Caddo
-cai: Central American Indian (Other)
--cam: Khmer
-car: Carib
-cat: Catalan
-cau: Caucasian (Other)
+bih: Bihari (Andere)
+bik: Bikol-Sprache
+bin: Edo-Sprache
+bis: Beach-la-mar
+bla: Blackfoot-Sprache
+bnt: Bantusprachen (Andere)
+tib: Tibetisch
+bod: Tibetisch
+bos: Bosnisch
+bra: Braj-Bhakha
+bre: Bretonisch
+btk: Batak-Sprache
+bua: Burjatisch
+bug: Bugi-Sprache
+bul: Bulgarisch
+bur: Birmanisch
+mya: Birmanisch
+byn: Bilin-Sprache
+cad: Caddo-Sprachen
+cai: Indianersprachen, Zentralamerika (Andere)
+car: Karibische Sprachen
+cat: Katalanisch
+cau: Kaukasische Sprachen (Andere)
 ceb: Cebuano
-cel: Celtic (Other)
-cha: Chamorro
-chb: Chibcha
-che: Chechen
-chg: Chagatai
-chi: Chinese
-chk: Chuukese
-chm: Mari
-chn: Chinook jargon
-cho: Choctaw
-chp: Chipewyan
-chr: Cherokee
-chu: Church Slavic
-chv: Chuvash
-chy: Cheyenne
-cmc: Chamic languages
-cop: Coptic
-cor: Cornish
-cos: Corsican
-cpe: Creoles and Pidgins, English-based (Other)
-cpf: Creoles and Pidgins, French-based (Other)
-cpp: Creoles and Pidgins, Portuguese-based (Other)
-cre: Cree
-crh: Crimean Tatar
-crp: Creoles and Pidgins (Other)
-csb: Kashubian
-cus: Cushitic (Other)
-cze: Czech
-dak: Dakota
-dan: Danish
-dar: Dargwa
-day: Dayak
-del: Delaware
-den: Slavey
-dgr: Dogrib
-din: Dinka
-div: Divehi
+cel: Keltische Sprachen (Andere)
+cze: Tschechisch
+ces: Tschechisch
+cha: Chamorro-Sprache
+chb: Chibcha-Sprachen
+che: Tschetschenisch
+chg: Tschagataisch
+chi: Chinesisch
+zho: Chinesisch
+chk: Trukesisch
+chm: Tscheremissisch
+chn: Chinook-Jargon
+cho: Choctaw-Sprache
+chp: Chipewyan-Sprache
+chr: Cherokee-Sprache
+chu: Kirchenslawisch
+chv: Tschuwaschisch
+chy: Cheyenne-Sprache
+cmc: Cham-Sprachen
+cop: Koptisch
+cor: Kornisch
+cos: Korsisch
+cpe: Kreolisch-Englisch (Andere)
+cpf: Kreolisch-Französisch (Andere)
+cpp: Kreolisch-Portugiesisch (Andere)
+cre: Cree-Sprache
+crh: Krimtatarisch
+crp: Kreolische Sprachen; Pidginsprachen (Andere)
+csb: Kaschubisch
+cus: Kuschitische Sprachen (Andere)
+wel: Kymrisch
+cym: Kymrisch
+cze: Tschechisch
+ces: Tschechisch
+dak: Dakota-Sprache
+dan: Dänisch
+dar: Darginisch
+day: Dajakisch
+del: Delaware-Sprache
+den: Slave-Sprache
+ger: Deutsch
+deu: Deutsch
+dgr: Dogrib-Sprache
+din: Dinka-Sprache
+div: Maledivisch
 doi: Dogri
-dra: Dravidian (Other)
-dsb: Lower Sorbian
-dua: Duala
-dum: Dutch, Middle (ca. 1050-1350)
-dut: Dutch
-dyu: Dyula
+dra: Drawidische Sprachen (Andere)
+dsb: Niedersorbisch
+dua: Duala-Sprachen
+dum: Mittelniederländisch
+dut: Niederländisch
+nld: Niederländisch
+dyu: Dyula-Sprache
 dzo: Dzongkha
 efi: Efik
-egy: Egyptian
+egy: Ägyptisch
 eka: Ekajuk
-elx: Elamite
-eng: English
-enm: English, Middle (1100-1500)
+gre: Neugriechisch
+ell: Neugriechisch
+elx: Elamisch
+eng: Englisch
+enm: Mittelenglisch
 epo: Esperanto
--esk: Eskimo languages
--esp: Esperanto
-est: Estonian
--eth: Ethiopic
-ewe: Ewe
+est: Estnisch
+baq: Baskisch
+eus: Baskisch
+ewe: Ewe-Sprache
 ewo: Ewondo
-fan: Fang
-fao: Faroese
--far: Faroese
-fat: Fanti
-fij: Fijian
-fil: Filipino
-fin: Finnish
-fiu: Finno-Ugrian (Other)
-fon: Fon
-fre: French
--fri: Frisian
-frm: French, Middle (ca. 1300-1600)
-fro: French, Old (ca. 842-1300)
-frr: North Frisian
-frs: East Frisian
-fry: Frisian
-ful: Fula
-fur: Friulian
-gaa: Gã
--gae: Scottish Gaelix
--gag: Galician
--gal: Oromo
-gay: Gayo
-gba: Gbaya
-gem: Germanic (Other)
-geo: Georgian
-ger: German
-gez: Ethiopic
-gil: Gilbertese
-gla: Scottish Gaelic
-gle: Irish
-glg: Galician
+fan: Pangwe-Sprache
+fao: Färöisch
+per: Persisch
+fas: Persisch
+fat: Fante-Sprache
+fij: Fidschi-Sprache
+fil: Pilipino
+fin: Finnisch
+fiu: Finnougrische Sprachen (Andere)
+fon: Fon-Sprache
+fre: Französisch
+fra: Französisch
+fre: Französisch
+fra: Französisch
+frm: Mittelfranzösisch
+fro: Altfranzösisch
+frr: Nordfriesisch
+frs: Ostfriesisch
+fry: Friesisch
+ful: Ful
+fur: Friulisch
+gaa: Ga-Sprache
+gay: Gayo-Sprache
+gba: Gbaya-Sprache
+gem: Germanische Sprachen (Andere)
+geo: Georgisch
+kat: Georgisch
+ger: Deutsch
+deu: Deutsch
+gez: Altäthiopisch
+gil: Gilbertesisch
+gla: Gälisch-Schottisch
+gle: Irisch
+glg: Galicisch
 glv: Manx
-gmh: German, Middle High (ca. 1050-1500)
-goh: German, Old High (ca. 750-1050)
-gon: Gondi
-gor: Gorontalo
-got: Gothic
-grb: Grebo
-grc: Greek, Ancient (to 1453)
-gre: Greek, Modern (1453-)
-grn: Guarani
-gsw: Swiss German
--gua: Guarani
-guj: Gujarati
-gwi: Gwich'in
-hai: Haida
-hat: Haitian French Creole
-hau: Hausa
-haw: Hawaiian
-heb: Hebrew
-her: Herero
-hil: Hiligaynon
-him: Western Pahari languages
+gmh: Mittelhochdeutsch
+goh: Althochdeutsch
+gon: Gondi-Sprache
+gor: Gorontalesisch
+got: Gotisch
+grb: Grebo-Sprache
+grc: Griechisch
+ell: Neugriechisch
+grn: Guaraní-Sprache
+gsw: Schweizerdeutsch
+guj: Gujarati-Sprache
+gwi: Kutchin-Sprache
+hai: Haida-Sprache
+hat: Haïtien (Haiti-Kreolisch)
+hau: Haussa-Sprache
+haw: Hawaiisch
+heb: Hebräisch
+her: Herero-Sprache
+hil: Hiligaynon-Sprache
+him: Himachali
 hin: Hindi
-hit: Hittite
-hmn: Hmong
-hmo: Hiri Motu
-hrv: Croatian
-hsb: Upper Sorbian
-hun: Hungarian
-hup: Hupa
-iba: Iban
-ibo: Igbo
-ice: Icelandic
+hit: Hethitisch
+hmn: Miao-Sprachen
+hmo: Hiri-Motu
+hrv: Kroatisch
+hsb: Obersorbisch
+hun: Ungarisch
+hup: Hupa-Sprache
+hye: Armenisch
+iba: Iban-Sprache
+ibo: Ibo-Sprache
+ice: Isländisch
+isl: Isländisch
 ido: Ido
-iii: Sichuan Yi
-ijo: Ijo
+iii: Lalo-Sprache
+ijo: Ijo-Sprache
 iku: Inuktitut
 ile: Interlingue
-ilo: Iloko
-ina: Interlingua (International Auxiliary Language Association)
-inc: Indic (Other)
-ind: Indonesian
-ine: Indo-European (Other)
-inh: Ingush
--int: Interlingua (International Auxiliary Language Association)
-ipk: Inupiaq
-ira: Iranian (Other)
--iri: Irish
-iro: Iroquoian (Other)
-ita: Italian
-jav: Javanese
-jbo: Lojban (Artificial language)
-jpn: Japanese
-jpr: Judeo-Persian
-jrb: Judeo-Arabic
-kaa: Kara-Kalpak
-kab: Kabyle
-kac: Kachin
-kal: Kalâtdlisut
-kam: Kamba
+ilo: Ilokano-Sprache
+ina: Interlingua
+inc: Indoarische Sprachen (Andere)
+ind: Bahasa Indonesia
+ine: Indogermanische Sprachen (Andere)
+inh: Inguschisch
+ipk: Inupik
+ira: Iranische Sprachen (Andere)
+iro: Irokesische Sprachen
+isl: Isländisch
+ita: Italienisch
+jav: Javanisch
+jbo: Lojban
+jpn: Japanisch
+jpr: Jüdisch-Persisch
+jrb: Jüdisch-Arabisch
+kaa: Karakalpakisch
+kab: Kabylisch
+kac: Kachin-Sprache
+kal: Grönländisch
+kam: Kamba-Sprache
 kan: Kannada
-kar: Karen languages
-kas: Kashmiri
-kau: Kanuri
+kar: Karenisch
+kas: Kaschmiri
+geo: Georgisch
+kat: Georgisch
+kau: Kanuri-Sprache
 kaw: Kawi
-kaz: Kazakh
-kbd: Kabardian
-kha: Khasi
-khi: Khoisan (Other)
-khm: Khmer
-kho: Khotanese
-kik: Kikuyu
-kin: Kinyarwanda
-kir: Kyrgyz
-kmb: Kimbundu
+kaz: Kasachisch
+kbd: Kabardinisch
+kha: Khasi-Sprache
+khi: Khoisan-Sprachen (Andere)
+khm: Kambodschanisch
+kho: Sakisch
+kik: Kikuyu-Sprache
+kin: Rwanda-Sprache
+kir: Kirgisisch
+kmb: Kimbundu-Sprache
 kok: Konkani
-kom: Komi
-kon: Kongo
-kor: Korean
-kos: Kosraean
-kpe: Kpelle
-krc: Karachay-Balkar
-krl: Karelian
-kro: Kru (Other)
-kru: Kurukh
-kua: Kuanyama
-kum: Kumyk
-kur: Kurdish
--kus: Kusaie
-kut: Kootenai
-lad: Ladino
-lah: Lahndā
-lam: Lamba (Zambia and Congo)
--lan: Occitan (post 1500)
-lao: Lao
--lap: Sami
-lat: Latin
-lav: Latvian
-lez: Lezgian
-lim: Limburgish
+kom: Komi-Sprache
+kon: Kongo-Sprache
+kor: Koreanisch
+kos: Kosraeanisch
+kpe: Kpelle-Sprache
+krc: Karatschaiisch-Balkarisch
+krl: Karelisch
+kro: Kru-Sprachen (Andere)
+kru: Oraon-Sprache
+kua: Kwanyama-Sprache
+kum: Kumükisch
+kur: Kurdisch
+kut: Kutenai-Sprache
+lad: Judenspanisch
+lah: Lahnda
+lam: Lamba-Sprache (Bantusprache)
+lao: Laotisch
+lat: Latein
+lav: Lettisch
+lez: Lesgisch
+lim: Limburgisch
 lin: Lingala
-lit: Lithuanian
-lol: Mongo-Nkundu
-loz: Lozi
-ltz: Luxembourgish
-lua: Luba-Lulua
-lub: Luba-Katanga
-lug: Ganda
-lui: Luiseño
-lun: Lunda
-luo: Luo (Kenya and Tanzania)
-lus: Lushai
-mac: Macedonian
-mad: Madurese
-mag: Magahi
-mah: Marshallese
+lit: Litauisch
+lol: Mongo-Sprache
+loz: Rotse-Sprache
+ltz: Luxemburgisch
+lua: Lulua-Sprache
+lub: Luba-Katanga-Sprache
+lug: Ganda-Sprache
+lui: Luiseño-Sprache
+lun: Lunda-Sprache
+luo: Luo-Sprache
+lus: Lushai-Sprache
+mac: Makedonisch
+mkd: Makedonisch
+mad: Maduresisch
+mag: Khotta
+mah: Marschallesisch
 mai: Maithili
-mak: Makasar
+mak: Makassarisch
 mal: Malayalam
-man: Mandingo
-mao: Maori
-map: Austronesian (Other)
+man: Malinke-Sprache
+mao: Maori-Sprache
+mri: Maori-Sprache
+map: Austronesische Sprachen (Andere)
 mar: Marathi
-mas: Maasai
--max: Manx
-may: Malay
-mdf: Moksha
-mdr: Mandar
-men: Mende
-mga: Irish, Middle (ca. 1100-1550)
-mic: Micmac
-min: Minangkabau
-mis: Miscellaneous languages
-mkh: Mon-Khmer (Other)
--mla: Malagasy
-mlg: Malagasy
-mlt: Maltese
-mnc: Manchu
-mni: Manipuri
-mno: Manobo languages
-moh: Mohawk
--mol: Moldavian
-mon: Mongolian
-mos: Mooré
-mul: Multiple languages
-mun: Munda (Other)
-mus: Creek
-mwl: Mirandese
+mas: Massai-Sprache
+may: Malaiisch
+msa: Malaiisch
+mdf: Mokscha-Sprache
+mdr: Mandaresisch
+men: Mende-Sprache
+mga: Mittelirisch
+mic: Micmac-Sprache
+min: Minangkabau-Sprache
+mis: Einzelne andere Sprachen
+mac: Makedonisch
+mkd: Makedonisch
+mkh: Mon-Khmer-Sprachen (Andere)
+mlg: Malagassi-Sprache
+mlt: Maltesisch
+mnc: Mandschurisch
+mni: Meithei-Sprache
+mno: Manobo-Sprachen
+moh: Mohawk-Sprache
+mon: Mongolisch
+mos: Mossi-Sprache
+mao: Maori-Sprache
+mri: Maori-Sprache
+may: Malaiisch
+msa: Malaiisch
+mul: Mehrere Sprachen
+mun: Mundasprachen (Andere)
+mus: Muskogisch
+mwl: Mirandesisch
 mwr: Marwari
-myn: Mayan languages
-myv: Erzya
+bur: Birmanisch
+mya: Birmanisch
+myn: Maya-Sprachen
+myv: Erza-Mordwinisch
 nah: Nahuatl
-nai: North American Indian (Other)
-nap: Neapolitan Italian
-nau: Nauru
-nav: Navajo
-nbl: Ndebele (South Africa)
-nde: Ndebele (Zimbabwe)
+nai: Indianersprachen, Nordamerika (Andere)
+nap: Neapel / Mundart
+nau: Nauruanisch
+nav: Navajo-Sprache
+nbl: Ndebele-Sprache (Transvaal)
+nde: Ndebele-Sprache (Simbabwe)
 ndo: Ndonga
-nds: Low German
+nds: Niederdeutsch
 nep: Nepali
 new: Newari
-nia: Nias
-nic: Niger-Kordofanian (Other)
-niu: Niuean
-nno: Norwegian (Nynorsk)
-nob: Norwegian (Bokmål)
-nog: Nogai
-non: Old Norse
-nor: Norwegian
+nia: Nias-Sprache
+nic: Nigerkordofanische Sprachen (Andere)
+niu: Niue-Sprache
+nld: Niederländisch
+nno: Nynorsk
+nob: Bokmål
+nog: Nogaisch
+non: Altnorwegisch
+nor: Norwegisch
 nqo: N'Ko
-nso: Northern Sotho
-nub: Nubian languages
-nwc: Newari, Old
-nya: Nyanja
-nym: Nyamwezi
-nyn: Nyankole
-nyo: Nyoro
-nzi: Nzima
-oci: Occitan (post-1500)
-oji: Ojibwa
-ori: Oriya
-orm: Oromo
-osa: Osage
-oss: Ossetic
-ota: Turkish, Ottoman
-oto: Otomian languages
-paa: Papuan (Other)
-pag: Pangasinan
-pal: Pahlavi
-pam: Pampanga
-pan: Panjabi
+nso: Pedi-Sprache
+nub: Nubische Sprachen
+nwc: Alt-Newari
+nya: Nyanja-Sprache
+nym: Nyamwezi-Sprache
+nyn: Nkole-Sprache
+nyo: Nyoro-Sprache
+nzi: Nzima-Sprache
+oci: Okzitanisch
+oji: Ojibwa-Sprache
+ori: Oriya-Sprache
+orm: Galla-Sprache
+osa: Osage-Sprache
+oss: Ossetisch
+ota: Osmanisch
+oto: Otomangue-Sprachen
+paa: Papuasprachen (Andere)
+pag: Pangasinan-Sprache
+pal: Mittelpersisch
+pam: Pampanggan-Sprache
+pan: Pandschabi-Sprache
 pap: Papiamento
-pau: Palauan
-peo: Old Persian (ca. 600-400 B.C.)
-per: Persian
-phi: Philippine (Other)
-phn: Phoenician
+pau: Palau-Sprache
+peo: Altpersisch
+fas: Persisch
+phi: Philippinisch-Austronesisch (Andere)
+phn: Phönikisch
 pli: Pali
-pol: Polish
-pon: Pohnpeian
-por: Portuguese
-pra: Prakrit languages
-pro: Provençal (to 1500)
-pus: Pushto
-que: Quechua
+pol: Polnisch
+pon: Ponapeanisch
+por: Portugiesisch
+pra: Prakrit
+pro: Altokzitanisch
+pus: Paschtu
+qaa: Reserviert für lokale Verwendung
+que: Quechua-Sprache
 raj: Rajasthani
-rap: Rapanui
-rar: Rarotongan
-roa: Romance (Other)
-roh: Raeto-Romance
-rom: Romani
-rum: Romanian
-run: Rundi
-rup: Aromanian
-rus: Russian
-sad: Sandawe
-sag: Sango (Ubangi Creole)
-sah: Yakut
-sai: South American Indian (Other)
-sal: Salishan languages
-sam: Samaritan Aramaic
+rap: Osterinsel-Sprache
+rar: Rarotonganisch
+roa: Romanische Sprachen (Andere)
+roh: Rätoromanisch
+rom: Romani (Sprache)
+rum: Rumänisch
+ron: Rumänisch
+ron: Rumänisch
+run: Rundi-Sprache
+rup: Aromunisch
+rus: Russisch
+sad: Sandawe-Sprache
+sag: Sango-Sprache
+sah: Jakutisch
+sai: Indianersprachen, Südamerika (Andere)
+sal: Salish-Sprache
+sam: Samaritanisch
 san: Sanskrit
--sao: Samoan
 sas: Sasak
 sat: Santali
--scc: Serbian
-scn: Sicilian Italian
-sco: Scots
--scr: Croatian
-sel: Selkup
-sem: Semitic (Other)
-sga: Irish, Old (to 1100)
-sgn: Sign languages
-shn: Shan
--sho: Shona
-sid: Sidamo
-sin: Sinhalese
-sio: Siouan (Other)
-sit: Sino-Tibetan (Other)
-sla: Slavic (Other)
-slo: Slovak
-slv: Slovenian
-sma: Southern Sami
-sme: Northern Sami
-smi: Sami
-smj: Lule Sami
-smn: Inari Sami
-smo: Samoan
-sms: Skolt Sami
-sna: Shona
-snd: Sindhi
--snh: Sinhalese
-snk: Soninke
-sog: Sogdian
+scn: Sizilianisch
+sco: Schottisch
+sel: Selkupisch
+sem: Semitische Sprachen (Andere)
+sga: Altirisch
+sgn: Zeichensprachen
+shn: Schan-Sprache
+sid: Sidamo-Sprache
+sin: Singhalesisch
+sio: Sioux-Sprachen (Andere)
+sit: Sinotibetische Sprachen (Andere)
+sla: Slawische Sprachen (Andere)
+slo: Slowakisch
+slk: Slowakisch
+slv: Slowenisch
+sma: Südsaamisch
+sme: Nordsaamisch
+smi: Saamisch
+smj: Lulesaamisch
+smn: Inarisaamisch
+smo: Samoanisch
+sms: Skoltsaamisch
+sna: Schona-Sprache
+snd: Sindhi-Sprache
+snk: Soninke-Sprache
+sog: Sogdisch
 som: Somali
-son: Songhai
-sot: Sotho
-spa: Spanish
-srd: Sardinian
-srn: Sranan
-srp: Serbian
-srr: Serer
-ssa: Nilo-Saharan (Other)
--sso: Sotho
-ssw: Swazi
-suk: Sukuma
-sun: Sundanese
+son: Songhai-Sprache
+sot: Süd-Sotho-Sprache
+spa: Spanisch
+sqi: Albanisch
+srd: Sardisch
+srn: Sranantongo
+srp: Serbisch
+srr: Serer-Sprache
+ssa: Nilosaharanische Sprachen (Andere)
+ssw: Swasi-Sprache
+suk: Sukuma-Sprache
+sun: Sundanesisch
 sus: Susu
-sux: Sumerian
+sux: Sumerisch
 swa: Swahili
-swe: Swedish
--swz: Swazi
-syc: Syriac
-syr: Syriac, Modern
--tag: Tagalog
-tah: Tahitian
-tai: Tai (Other)
--taj: Tajik
+swe: Schwedisch
+syc: Syrisch
+syr: Neuostaramäisch
+tah: Tahitisch
+tai: Thaisprachen (Andere)
 tam: Tamil
--tar: Tatar
-tat: Tatar
-tel: Telugu
-tem: Temne
-ter: Terena
-tet: Tetum
-tgk: Tajik
+tat: Tatarisch
+tel: Telugu-Sprache
+tem: Temne-Sprache
+ter: Tereno-Sprache
+tet: Tetum-Sprache
+tgk: Tadschikisch
 tgl: Tagalog
-tha: Thai
-tib: Tibetan
-tig: Tigré
-tir: Tigrinya
-tiv: Tiv
-tkl: Tokelauan
-tlh: Klingon (Artificial language)
-tli: Tlingit
-tmh: Tamashek
-tog: Tonga (Nyasa)
-ton: Tongan
-tpi: Tok Pisin
--tru: Truk
-tsi: Tsimshian
-tsn: Tswana
-tso: Tsonga
--tsw: Tswana
-tuk: Turkmen
-tum: Tumbuka
-tup: Tupi languages
-tur: Turkish
-tut: Altaic (Other)
-tvl: Tuvaluan
-twi: Twi
-tyv: Tuvinian
-udm: Udmurt
-uga: Ugaritic
-uig: Uighur
-ukr: Ukrainian
-umb: Umbundu
-und: Undetermined
+tha: Thailändisch
+bod: Tibetisch
+tig: Tigre-Sprache
+tir: Tigrinja-Sprache
+tiv: Tiv-Sprache
+tkl: Tokelauanisch
+tlh: Klingonisch
+tli: Tlingit-Sprache
+tmh: Tamašeq
+tog: Tonga (Bantusprache, Sambia)
+ton: Tongaisch
+tpi: Neumelanesisch
+tsi: Tsimshian-Sprache
+tsn: Tswana-Sprache
+tso: Tsonga-Sprache
+tuk: Turkmenisch
+tum: Tumbuka-Sprache
+tup: Tupi-Sprache
+tur: Türkisch
+tut: Altaische Sprachen (Andere)
+tvl: Elliceanisch
+twi: Twi-Sprache
+tyv: Tuwinisch
+udm: Udmurtisch
+uga: Ugaritisch
+uig: Uigurisch
+ukr: Ukrainisch
+umb: Mbundu-Sprache
+und: Nicht zu entscheiden
+unk: Nicht zu entscheiden
 urd: Urdu
-uzb: Uzbek
-vai: Vai
-ven: Venda
-vie: Vietnamese
+uzb: Usbekisch
+vai: Vai-Sprache
+ven: Venda-Sprache
+vie: Vietnamesisch
 vol: Volapük
-vot: Votic
-wak: Wakashan languages
-wal: Wolayta
+vot: Wotisch
+wak: Wakash-Sprachen
+wal: Walamo-Sprache
 war: Waray
-was: Washoe
-wel: Welsh
-wen: Sorbian (Other)
-wln: Walloon
-wol: Wolof
-xal: Oirat
-xho: Xhosa
-yao: Yao (Africa)
-yap: Yapese
-yid: Yiddish
-yor: Yoruba
-ypk: Yupik languages
-zap: Zapotec
-zbl: Blissymbolics
+was: Washo-Sprache
+cym: Kymrisch
+wen: Sorbisch (Andere)
+wln: Wallonisch
+wol: Wolof-Sprache
+xal: Kalmückisch
+xho: Xhosa-Sprache
+yao: Yao-Sprache (Bantusprache)
+yap: Yapesisch
+yid: Jiddisch
+yor: Yoruba-Sprache
+ypk: Ypik-Sprachen
+zap: Zapotekisch
+zbl: Bliss-Symbol
 zen: Zenaga
+zgh: amazighe standard marocain
 zha: Zhuang
-znd: Zande languages
-zul: Zulu
-zun: Zuni
-zxx: No linguistic content
-zza: Zaza
+zho: Chinesisch
+znd: Zande-Sprachen
+zul: Zulu-Sprache
+zun: Zuñi-Sprache
+zxx: Kein linguistischer Inhalt
+zza: Zazaki
