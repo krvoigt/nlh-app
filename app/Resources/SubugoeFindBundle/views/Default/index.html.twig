@@ -75,20 +75,26 @@
         {% endif %}
 
         {% for result in pagination %}
-            {% if result.fields.product in user.products %}
-                <li class="result_item">
-            {% else %}
-                <li class="result_item_blocked">
-            {% endif %}
+            <li class="result_item">
                 <article class="result_wrap">
+                    {% if result.fields.product not in user.products %}
+                        <div class="result_lock" title="{{ 'This document requires proper authentication'|trans }}">
+                            <i class="icon">lock</i>
+                        </div>
+                    {% endif %}
                     <div class="result_left">
+
                         {% if result.fields.nlh_id is defined %}
                             <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">
-                                <img
-                                    class="result_thumbnail"
-                                    src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
-                                    alt=""
-                                >
+                                {% if result.fields.product in user.products %}
+                                    <img
+                                        class="result_thumbnail"
+                                        src="{{ path('_image', {'format': 'jpg', 'identifier': result.fields.nlh_id | first, 'region': 'full', 'size': '100,165', 'rotation': 0, 'quality': 'default'}) }}"
+                                        alt=""
+                                    >
+                                {% else %}
+                                    <span class="result_thumbnail -locked"></span>
+                                {% endif %}
                             </a>
                         {% endif %}
                     </div>

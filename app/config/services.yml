@@ -27,7 +27,7 @@ services:
 
   app.ipauth.action_listener:
     class: AppBundle\EventListener\IpAuthenticationListener
-    arguments: ["@authorization_service", "@document_service", "%link_to_registration%", "%lock_image%"]
+    arguments: ["@authorization_service", "@document_service", "%link_to_registration%", ""]
     tags:
         - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 

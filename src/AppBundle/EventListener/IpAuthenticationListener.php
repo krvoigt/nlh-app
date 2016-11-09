@@ -27,21 +27,14 @@ class IpAuthenticationListener
      */
     protected $documentService;
 
-    /**
-     * @var string
-     */
-    protected $lockImage;
-
     public function __construct(
         AuthorizationService $authorizationService,
         DocumentService $documentService,
-        $registrationLink,
-        $lockImage
+        $registrationLink
     ) {
         $this->authorizationService = $authorizationService;
         $this->registrationLink = $registrationLink;
         $this->documentService = $documentService;
-        $this->lockImage = $lockImage;
     }
 
     public function onKernelController(FilterControllerEvent $event)
@@ -75,16 +68,6 @@ class IpAuthenticationListener
             if (!in_array($product, $products)) {
                 $event->setController(function () use ($registrationLink) {
                     return new RedirectResponse($registrationLink);
-                });
-            }
-        }
-
-        if ($controller[0] instanceof IIIFController and $controller[1] === 'indexAction') {
-            $product = explode(':', $event->getRequest()->get('identifier'))[0];
-
-            if (!in_array($product, $products)) {
-                $event->setController(function () {
-                    return new BinaryFileResponse($this->lockImage);
                 });
             }
         }
