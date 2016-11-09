@@ -145,8 +145,8 @@ currentnosort-desc: Band absteigend
 currentnosort-asc: Band aufsteigend
 
 # Docstrct
-genre: Genre
-facet_subject_topic: Thema
+genre: Genre|Genres
+facet_subject_topic: Thema|Themen
 lang: Sprache|Sprachen
 abstract: Abstrakt
 acknowledgment: Danksagung
