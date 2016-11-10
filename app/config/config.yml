@@ -9,6 +9,7 @@ parameters:
     locale: de
     thumbnail_size: '92,'
     image_cache: "%kernel.root_dir%/../var/images"
+    oai_temp_directory: "%kernel.root_dir%/../var/oai/"
     collections:
       - { id: "vd18.digital", image: "vd18.digital.jpg" }
       - { id: "vd17-nova", image: "vd17-nova.jpg" }

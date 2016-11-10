@@ -13,3 +13,7 @@ services:
 
   image_service:
     class: AppBundle\Service\ImageService
+
+  oai_service:
+    class: AppBundle\Service\OaiService
+    arguments: ["@request_stack", "@solarium.client", "%kernel.root_dir%", "%oai_temp_directory%"]
