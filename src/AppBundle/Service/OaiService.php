@@ -1101,7 +1101,7 @@ class OaiService
             $resumptionToken->setAttribute('expirationDate',
                 (gmdate('Y-m-d\TH:i:s\Z', (time() + self::EXPIRATION_DATE))));
             $resumptionToken->setAttribute('completeListSize', (string) $arrResult['hits']);
-            $resumptionToken->setAttribute('cursor', $arrArgs['start']);
+            $resumptionToken->setAttribute('cursor', (string) $arrArgs['start']);
             $this->ListRecords->appendChild($resumptionToken);
         }
     }
