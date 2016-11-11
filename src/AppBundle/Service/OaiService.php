@@ -15,6 +15,11 @@ class OaiService
     private $conf;
 
     /**
+     * @var bool
+     */
+    private $hideCollections = false;
+
+    /**
      * @var \DOMDocument
      */
     public $oai;
@@ -161,6 +166,7 @@ class OaiService
         'oai_dc:ListRecords' => 500,
         'oai_dc:ListIdentifiers' => 500,
         'mets:ListRecords' => 1,
+        'mets:GetRecord' => 1,
         'mets:ListIdentifiers' => 500,
 ];
     private $queryParameters = [
@@ -373,21 +379,24 @@ class OaiService
                 switch ($arrArgs['metadataPrefix']) {
                     case 'oai_dc':
                         $this->oai_dc = $this->oai->createElement('oai_dc:dc');
-                        foreach ($this->conf['oai_dc:dc'] as $attribute => $value) {
+                        foreach ($this->metadataFormatOptions['oai_dc']['dc'] as $attribute => $value) {
                             $this->oai_dc->setAttribute($attribute, $value);
                         }
                         $this->metadata->appendChild($this->oai_dc);
+
                         foreach ($arrResult['metadata'][$key] as $k => $v) {
-                            foreach ($v as $_v) {
-                                if ($_v) {
-                                    if ($k == 'dc:description') {
-                                        $data = $this->oai->createCDATASection($_v);
-                                    } else {
-                                        $data = new \DOMText($_v);
+                            if ($v) {
+                                foreach ($v as $_v) {
+                                    if ($_v) {
+                                        if ($k == 'dc:description') {
+                                            $data = $this->oai->createCDATASection($_v);
+                                        } else {
+                                            $data = new \DOMText((string) $_v);
+                                        }
+                                        $this->node = $this->oai->createElement($k);
+                                        $this->node->appendChild($data);
+                                        $this->oai_dc->appendChild($this->node);
                                     }
-                                    $this->node = $this->oai->createElement($k);
-                                    $this->node->appendChild($data);
-                                    $this->oai_dc->appendChild($this->node);
                                 }
                             }
                         }
@@ -726,7 +735,7 @@ class OaiService
     private function getMetadataFormats($identifier)
     {
         $arrFormats = [];
-        $arrArgs['verb'] = 'getRecord';
+        $arrArgs['verb'] = 'GetRecord';
         $arrArgs['identifier'] = $identifier;
         foreach ($this->metadataFormats as $key => $val) {
             $arrArgs['metadataPrefix'] = $key;
@@ -764,7 +773,7 @@ class OaiService
         $arrResult['records'] = [];
         if (isset($arr['identifier'])) {
             $identifier = str_replace(
-                $this->conf['oai-identifier']['scheme'].$this->conf['oai-identifier']['delimiter'].$this->conf['oai-identifier']['repositoryIdentifier'].$this->conf['oai-identifier']['delimiter'],
+                $this->oaiIdentifier['scheme'].$this->oaiIdentifier['delimiter'].$this->oaiIdentifier['repositoryIdentifier'].$this->oaiIdentifier['delimiter'],
                 '',
                 trim($arr['identifier'])
             );
@@ -799,9 +808,9 @@ class OaiService
                 }
             }
         }
-        if (isset($this->conf['HIDECOLLECTIONS'])) {
+        if ($this->hideCollections) {
             $addWhere .= '';
-            foreach ($this->conf['HIDECOLLECTIONS'] as $dc) {
+            foreach ($this->hiddenCollections as $dc) {
                 $addWhere .= ' NOT(dc:'.$dc.')';
             }
             $addWhere .= '';
@@ -817,11 +826,7 @@ class OaiService
         if (!$arrResult['hits']) {
             if ($arr['verb'] == 'GetRecord') {
                 throw new OaiException(sprintf('Id %s does not exist. Bad argument: identifier: %s', $identifier, $identifier), 1478853965);
-            } else {
-                $noerror = false;
             }
-
-            return $noerror;
         }
         for ($i = 0; $i < min($arrResult['hits'], $arr['maxresults']); ++$i) {
             if (!($arrData = $res)) {
@@ -1125,20 +1130,19 @@ class OaiService
             $Identify->appendChild($desc);
             $oai_id = $this->oai->createElement('oai-identifier');
             if (isset($this->conf['oai-identifier']['xmlns'])) {
-                $oai_id->setAttribute('xmlns', trim($this->conf['oai-identifier']['xmlns']));
+                $oai_id->setAttribute('xmlns', $this->oaiIdentifier['xmlns']);
                 unset($this->conf['oai-identifier']['xmlns']);
             }
-            if (isset($this->conf['oai-identifier']['xmlns:xsi'])) {
-                $oai_id->setAttribute('xmlns:xsi', trim($this->conf['oai-identifier']['xmlns:xsi']));
-                unset($this->conf['oai-identifier']['xmlns:xsi']);
+            if (isset($this->oaiIdentifier['xmlns:xsi'])) {
+                $oai_id->setAttribute('xmlns:xsi', $this->oaiIdentifier['xmlns:xsi']);
+                unset($this->oaiIdentifier['xmlns:xsi']);
             }
-            if (isset($this->conf['oai-identifier']['xsi:schemaLocation'])) {
-                $oai_id->setAttribute('xsi:schemaLocation',
-                    trim($this->conf['oai-identifier']['xsi:schemaLocation']));
-                unset($this->conf['oai-identifier']['xsi:schemaLocation']);
+            if (isset($this->oaiIdentifier['xsi:schemaLocation'])) {
+                $oai_id->setAttribute('xsi:schemaLocation', $this->oaiIdentifier['xsi:schemaLocation']);
+                unset($this->oaiIdentifier['xsi:schemaLocation']);
             }
             $desc->appendChild($oai_id);
-            foreach ($this->conf['oai-identifier'] as $key => $val) {
+            foreach ($this->oaiIdentifier as $key => $val) {
                 $$key = $this->oai->createElement($key, trim($val));
                 $oai_id->appendChild($$key);
             }
