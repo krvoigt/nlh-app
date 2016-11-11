@@ -13,6 +13,9 @@
 !/var/logs
 /var/logs/*
 !var/logs/.gitkeep
+!/var/oai
+/var/oai/*
+!var/oai/.gitkeep
 !/var/sessions
 /var/sessions/*
 !/var/sessions/.gitkeep
