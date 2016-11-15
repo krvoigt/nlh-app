@@ -31,6 +31,11 @@ parameters:
       - { id: "antiquitates.und.archaeologia.archaeo18", image: "antiquitates.und.archaeologia.archaeo18.jpg" }
       - { id: "itineraria", image: "itineraria.jpg" }
 
+    webdav:
+      userName: "%webdav_userName%"
+      password: "%webdav_password%"
+      baseUri: "%webdav_baseUri%"
+
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -143,3 +148,12 @@ services:
         class: Fuz\Jordan\Twig\Extension\TreeExtension
         tags:
             - { name: twig.extension }
+
+oneup_flysystem:
+    adapters:
+        myadapter:
+            webdav:
+              client: sabredav_client
+    filesystems:
+        cloud:
+            adapter: myadapter

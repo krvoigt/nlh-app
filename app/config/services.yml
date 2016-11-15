@@ -16,4 +16,8 @@ services:
 
   oai_service:
     class: AppBundle\Service\OaiService
-    arguments: ["@request_stack", "@solarium.client", "%kernel.root_dir%", "%oai_temp_directory%"]
+    arguments: ["@request_stack", "@solarium.client", "%oai_temp_directory%", "@oneup_flysystem.cloud_filesystem"]
+
+  sabredav_client:
+    class: Sabre\DAV\Client
+    arguments: ["%webdav%"]

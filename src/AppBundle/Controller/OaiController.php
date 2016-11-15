@@ -4,8 +4,6 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Response;
 
 class OaiController extends Controller
@@ -26,20 +24,14 @@ class OaiController extends Controller
         return $response;
     }
 
-    protected function deleteExpiredResumptionTokens()
+    private function deleteExpiredResumptionTokens()
     {
         $time = time() - 259200;
-        $fs = new Filesystem();
-        $directory = $this->getParameter('oai_temp_directory');
-        $fs->mkdir($directory);
-
-        $finder = new Finder();
-        $finder->files()->in($directory);
-        foreach ($finder as $file) {
-            if ($fs->exists($file) && substr($file->getFilename(), 0, 4) == 'oai_') {
-                if ($file->getMTime() < $time) {
-                    $fs->remove($file);
-                }
+        $filesystem = $this->get('oneup_flysystem.cloud_filesystem');
+        $contents = $filesystem->listContents('oai-gdz/');
+        foreach ($contents as $object) {
+            if ($object['mtime'] < $time) {
+                $filesystem->delete($object);
             }
         }
     }

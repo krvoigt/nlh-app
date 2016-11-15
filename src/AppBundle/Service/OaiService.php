@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace AppBundle\Service;
 
 use AppBundle\Exception\OaiException;
+use League\Flysystem\FileNotFoundException;
+use League\Flysystem\FilesystemInterface;
 use Solarium\Client;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -75,7 +77,7 @@ class OaiService
     private $requestStack;
 
     /**
-     * @var string
+     * @var FilesystemInterface
      */
     private $oaiTempDirectory;
 
@@ -154,6 +156,7 @@ class OaiService
         'dc_vd18.digital' => 'VD18 digital',
         'dc_wissenschaftsgeschichte' => 'History of the Humanities and the Sciences',
         'dc_zoologica' => 'Zoologica',
+        'dc_fid.mathematica' => 'FID Mathematik',
     ];
 
     private $metadataFormats = [
@@ -283,12 +286,12 @@ class OaiService
     /**
      * OaiService constructor.
      *
-     * @param RequestStack $requestStack
-     * @param Client       $client
-     * @param string       $kernelRootDir
-     * @param string       $oaiTempDirectory
+     * @param RequestStack        $requestStack
+     * @param Client              $client
+     * @param string              $kernelRootDir
+     * @param FilesystemInterface $oaiTempDirectory
      */
-    public function __construct(RequestStack $requestStack, Client $client, $kernelRootDir, $oaiTempDirectory)
+    public function __construct(RequestStack $requestStack, Client $client, $kernelRootDir, FilesystemInterface $oaiTempDirectory)
     {
         $this->kernelRootDir = $kernelRootDir;
         $this->requestStack = $requestStack;
@@ -713,16 +716,17 @@ class OaiService
      */
     private function restoreArgs(&$arr)
     {
-        $strToken = @file_get_contents($this->oaiTempDirectory.$arr['resumptionToken']);
-        if ($strToken != '') {
+        $strToken = $this->oaiTempDirectory->read('/oai-gdz/'.$arr['resumptionToken']);
+
+        try {
             parse_str($strToken, $arrToken);
             $arr = array_merge($arr, $arrToken);
             unset($arr['resumptionToken']);
-
-            return true;
-        } else {
+        } catch (FileNotFoundException $e) {
             throw new OaiException(sprintf('Bad Resumption Token %s.', $arr['resumptionToken']), 1478853790);
         }
+
+        return true;
     }
 
     /**
@@ -844,10 +848,10 @@ class OaiService
                 if ($setSpec) {
                     if ($this->sets['dc_'.$setSpec]) {
                         $arrResult['header'][$i]['setSpec'][] = 'dc_'.$setSpec;
-                        if (array_key_exists('acl', $arrData) && in_array('free', $arrData['acl'])) {
+                        if (array_key_exists('acl', $arrData[0][0]) && in_array('free', $arrData[0][0]['acl'])) {
                             $arrResult['header'][$i]['setSpec'][] = 'dc_'.$setSpec.'_acl_free';
                         } else {
-                            if (array_key_exists('acl', $arrData) && in_array('Gesamtabo', $arrData['acl'])) {
+                            if (array_key_exists('acl', $arrData[0][0]) && in_array('Gesamtabo', $arrData[0][0]['acl'])) {
                                 $arrResult['header'][$i]['setSpec'][] = 'dc_'.$setSpec.'_acl_gesamtabo';
                             }
                         }
@@ -937,9 +941,8 @@ class OaiService
                     }
                 }
                 $strToken .= 'hits='.$arrResult['hits'];
-                $fp = fopen($this->oaiTempDirectory.$arrResult['token'], 'w');
-                fwrite($fp, $strToken);
-                fclose($fp);
+                $this->oaiTempDirectory->createDir('oai-gdz');
+                $this->oaiTempDirectory->put('/oai-gdz/'.$arrResult['token'], $strToken);
             } else {
                 unset($arrResult['token']);
             }
