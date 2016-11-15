@@ -5,6 +5,7 @@
     {% set page_start = (page_start is defined and page_start is not null ? page_start|split('_').1|abs : '') %}
     {% set page_end = item.physicalPages|last %}
     {% set page_end = (page_end is defined and page_end is not null ? page_end|split('_').1|abs : '') %}
+    {% set chapter_start = pageMappings[page_start] %}
 
     {% if treeloop.first %}<ul class="toc_list">{% endif %}
         <li class="toc_item">
@@ -14,7 +15,7 @@
                     <a class="toc_link" href="{{ href }}">{{ item.label is null ? item.type|lower|trans : item.label }}</a>
                 </span>
                 <span class="toc_column -right">
-                    <a class="toc_page-number" href="{{ href }}">{{ page_start }}</a>
+                    <a class="toc_page-number" href="{{ href }}">{% if chapter_start is not empty %}{{ chapter_start }}{% else %}-{% endif %}</a>
                     <button class="toc_pdf" title="{{ 'Download this section as PDF'|trans }}" data-start="{{ page_start }}" data-end="{{ page_end }}">
                         <i class="icon">file_download</i>
                         <span class="sr-only">{{ 'Download this section as PDF'|trans }}</span>
