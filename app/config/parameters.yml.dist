@@ -22,3 +22,6 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ChangeThisGdzSecret
     solr_host:         solr:password@host
+    webdav_userName: "a"
+    webdav_password: "b"
+    webdav_baseUri: "https://webdav.example.com"
