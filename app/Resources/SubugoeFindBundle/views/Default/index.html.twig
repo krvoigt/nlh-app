@@ -100,8 +100,8 @@
                     </div>
                     <div class="result_metadata">
                         <h2 class="result_title">
-                            <a class="result_link" title="{{ result.fields.nonsort | first }}"
-                               href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.nonsort | first }}</a>
+                            <a class="result_link" title="{{ result.fields.title | first }}"
+                               href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
                             <button class="result_title-toggle -expand">
                                 <i class="icon">expand_more</i>
                                 {{ 'Show full title'|trans }}
