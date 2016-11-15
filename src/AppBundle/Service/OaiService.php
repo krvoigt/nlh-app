@@ -827,8 +827,9 @@ class OaiService
 
         $res = $this->query($this->queryParameters[$mPrefix].$addWhere, 'dateindexed', $direction, $arr);
         $arrResult['hits'] = $this->num_rows($res);
+
         if (!$arrResult['hits']) {
-            if ($arr['verb'] == 'GetRecord') {
+            if ($arr['verb'] === 'GetRecord') {
                 throw new OaiException(sprintf('Id %s does not exist. Bad argument: identifier: %s', $identifier, $identifier), 1478853965);
             }
         }
