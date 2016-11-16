@@ -2,11 +2,9 @@
 
 namespace AppBundle\EventListener;
 
-use AppBundle\Controller\IIIFController;
 use AppBundle\Controller\IpAuthenticatedController;
 use AppBundle\Service\AuthorizationService;
 use AppBundle\Service\DocumentService;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
