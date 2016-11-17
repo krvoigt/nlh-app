@@ -51,6 +51,13 @@ class User
     private $product;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="identifier", type="string", length=10)
+     */
+    private $identifier;
+
+    /**
      * Get id.
      *
      * @return int
@@ -154,5 +161,29 @@ class User
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set identifier.
+     *
+     * @param string $identifier
+     *
+     * @return User
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+
+        return $this;
+    }
+
+    /**
+     * Get identifier.
+     *
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 }
