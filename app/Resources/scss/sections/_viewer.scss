@@ -44,7 +44,7 @@
         @include respond-to(large) {
             box-shadow: $drop-shadow;
             display: none;
-            margin: ($grid / 2 + $border-width) 0 0;
+            margin: ($grid / 2) 0 0;
             position: absolute;
             right: ($grid / 4);
             z-index: 9;
@@ -72,6 +72,7 @@
 }
 
 .viewer_control-group {
+    background: $white;
     border-radius: $br;
     box-shadow: $card-shadow;
     display: flex;
@@ -100,8 +101,7 @@
 
     @include respond-to(large) {
         &.-toggle-panel {
-            @include separator(0, 0, 1);
-            background: $white;
+            background: none;
             display: block;
             text-align: left;
             width: 100%;
@@ -109,6 +109,10 @@
             &.-active {
                 display: block;
                 text-align: left;
+            }
+
+            & + & {
+                @include separator(1, 0, 0);
             }
         }
     }
