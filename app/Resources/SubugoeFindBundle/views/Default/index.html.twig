@@ -35,10 +35,10 @@
 
     <ol class="result_list" start="{{ search.offset + 1 }}">
         {% if parentDocument is defined %}
-            <li class="result_item">
+            <li class="result_item -sticky">
                 <h2 class="viewer_heading">{{ parentDocument.title|first }}</h2>
 
-                <dl class="result_info -no-clear">
+                <dl class="result_info">
                     <dt>{{ 'docstrct'|transchoice(1) }}:</dt>
                     <dd>{{ parentDocument.docstrct|trans }}</dd>
 
@@ -148,7 +148,7 @@
                                 {{ result.fields.datemodified|date('Y-m-d') }}
                             </dd>
                         </dl>
-                        <p>
+                        <p class="result_footer">
                             {{ result.fields.docstrct|trans }}
                             {% if result.fields.docstrct == 'volume' and result.fields.currentn is defined %}
                                 &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
