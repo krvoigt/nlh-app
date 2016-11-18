@@ -56,7 +56,7 @@ var Viewer = {
                 var imageSize = this._imageSizes[initialZoom];
                 var layerLatLng = that.image.options.crs.pointToLatLng(L.point(imageSize.x, imageSize.y), initialZoom);
                 var neBounds = that.image.getBounds()._northEast;
-                var latLng = [-neBounds.lat + 26, layerLatLng.lng / 2];
+                var latLng = [-neBounds.lat + 19, layerLatLng.lng / 2]; // 19 equals rougly 24px
                 that.image.panTo(latLng, {animate: false});
             });
         }
