@@ -45,7 +45,6 @@ var ViewerExport = {
             window.location.href = cacheUrlPrefix + identifier + '/' + identifier + '___' + element + '.pdf';
         } else {
             DCPDF.generatePDF(ppn, physIDstart, physIDend);
-
         }
     },
 

@@ -214,5 +214,3 @@ var Viewer = {
         history.replaceState(undefined, undefined, '#' + JSON.stringify(this.settings));
     },
 };
-
-Viewer.init();

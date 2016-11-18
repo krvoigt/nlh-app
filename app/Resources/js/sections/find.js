@@ -12,5 +12,3 @@ var Find = {
         });
     },
 }
-
-Find.init();
