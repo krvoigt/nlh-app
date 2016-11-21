@@ -4,15 +4,17 @@
     <ul class="collections">
         {% for collection in collections %}
             {% set image =  '/images/collections/' ~collection.image %}
+            {% set locked = collection.id not in products %}
             <li class="collections_item">
-                <a href="{{ path('_collection', {id: collection.id}) }}" class="collections_link">
-                    {% if collection.id in products %}
-                        <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image">
-                    {% else %}
-                        <img src="{{ image|imagine_filter('collections') }}" alt="" class="collections_image_blocked">
-                    {% endif %}
+                <a class="collections_link" href="{{ path('_collection', {id: collection.id}) }}">
+                    <img class="collections_image {{ locked ? '-locked' }}" src="{{ image|imagine_filter('collections') }}" alt="">
                     <span class="collections_name"> {{ collection.id|trans|raw }}</span>
                 </a>
+                {% if locked %}
+                    <div class="collections_lock" title="{{ 'This document requires proper authentication'|trans }}">
+                        <i class="icon">lock</i>
+                    </div>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

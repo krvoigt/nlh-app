@@ -19,22 +19,16 @@
     display: block;
     height: auto;
     width: 100%;
-}
 
-.collections_image_blocked {
-    @include transition(opacity);
-    border-radius: $br;
-    display: block;
-    height: auto;
-    width: 100%;
-    -webkit-filter: blur(3px);
-    filter: blur(3px);
+    &.-locked {
+        filter: blur(3px);
+        opacity: .5;
+    }
 }
 
 $collection_item-row-count: 5;
 $collection_item-size: floor(($site-width - 1.5 * $grid) / $collection_item-row-count) - ($grid / 2);
 $collection_item-size-small: 160px;
-
 .collections_item {
     @include transition(opacity);
     border-radius: $br;
@@ -43,6 +37,7 @@ $collection_item-size-small: 160px;
     height: $collection_item-size;
     margin: ($grid / 4);
     overflow: hidden;
+    position: relative;
     width: $collection_item-size;
 
     @include hover {
@@ -55,10 +50,6 @@ $collection_item-size-small: 160px;
     }
 }
 
-.collections_item:before {
-    content: none !important;
-}
-
 .collections_link {
     background: none !important;
     box-shadow: none !important;
@@ -66,6 +57,10 @@ $collection_item-size-small: 160px;
     display: block;
     padding: 0 !important;
     position: relative;
+}
+
+.collections_lock {
+    @include lock-badge;
 }
 
 .collections_name {

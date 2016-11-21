@@ -95,25 +95,7 @@
 }
 
 .result_lock {
-    color: $white;
-    left: ($grid / 4);
-    top: ($grid / 4);
-    position: absolute;
-    z-index: 1;
-
-    &::before {
-        border-color: $grey transparent transparent transparent;
-        border-style: solid;
-        border-width: ($grid * 2.5) ($grid * 2.5) 0 0;
-        content: '';
-        display: block;
-        height: 0;
-        left: (-$grid / 4);
-        position: absolute;
-        top: (-$grid / 4);
-        width: 0;
-        z-index: -1;
-    }
+    @include lock-badge;
 }
 
 .result_metadata {
