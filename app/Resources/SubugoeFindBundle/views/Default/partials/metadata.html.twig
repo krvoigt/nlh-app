@@ -64,9 +64,6 @@
             </dd>
         {% endif %}
 
-        <dt>{{ 'docstrct'|transchoice(1) }}</dt>
-        <dd>{{ document.docstrct|trans }}</dd>
-
         {% if document.docstrct == "volume" and document.currentno is defined %}
             <dt>{{ 'currentno'|trans }}</dt>
             <dd>{{ document.currentno }}</dd>
