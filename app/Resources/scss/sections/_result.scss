@@ -144,7 +144,7 @@
     float: right;
     font-weight: normal;
     min-height: 0;
-    padding: 0 ($grid / 4);
+    padding: 0 ($grid / 4) 0 0;
 
     @include hover {
         background: $brand-color-lighter;
@@ -155,12 +155,13 @@
         bottom: 0;
         right: 0;
 
+        // Gradient overlay left of button
         &::after {
             background: linear-gradient(to right, rgba($white, 0), rgba($white, 1));
             content: '';
             display: block;
             height: $grid;
-            margin-left: (-$grid * 3.25); // width + button padding
+            margin-left: (-$grid * 3); // element width + button padding-left
             pointer-events: none;
             position: absolute;
             top: 0;
