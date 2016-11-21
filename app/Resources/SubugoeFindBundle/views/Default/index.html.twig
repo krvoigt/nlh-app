@@ -128,9 +128,8 @@
                             {% endif %}
                         </dl>
                         <p>
-                            {{ result.fields.docstrct|trans }}
                             {% if result.fields.docstrct == 'volume' and result.fields.currentno is defined %}
-                                &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
+                                {{ result.fields.docstrct|trans }} &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
                             {% endif %}
                         </p>
                     </div>
