@@ -98,7 +98,7 @@ uncounted: – # that's an ndash, not a dash
 View: Ansicht
 Zoom in: Vergrößern
 Zoom out: Verkleinern
-
+Advanced Search: Erweiterte Suche
 #products
 eai1: Early American Imprints I
 eai2: Early American Imprints II
@@ -145,6 +145,19 @@ date_modified-desc: Importdatum absteigend
 date_modified-asc: Importdatum aufsteigend
 currentnosort-desc: Band absteigend
 currentnosort-asc: Band aufsteigend
+
+fields:
+  identifier: Identifier
+  title: Titel
+  creator: Autor|Autoren
+  genre: Genre|Genres
+  place_publish: Erscheinungsort|Erscheinungsorte
+  year_publish: Erscheinungsjahr|Erscheinungsjahre
+  publisher: Verlag|Verlage
+  lang: Sprache|Sprachen
+  product: Produkt|Produkte
+  facet_subject_topic: Thema|Themen
+  fulltext: Volltext|Volltexte
 
 # Docstrct
 genre: Genre|Genres
