@@ -7,17 +7,18 @@ Contact: Kontakt
 Fulltext: Volltext
 Göttingen State and University Library: Niedersächsische Staats- und Universitätsbibliothek Göttingen
 Help for search: Hilfe zur Suche
-In: in
 Imprint: Impressum
+In: in
 Just scanned: Just scanned
+Search results: Trefferliste
 The requested page was not found: Die gewünschte Seite wurde nicht gefunden
 Your feedback has been sent.: Ihre Nachricht wurde übermittelt.
 
 # Search popup
-Metadata and fulltext: Metadaten und Volltext
-Only in this document: Nur in diesem Dokument
 In all documents: In allen Dokumenten
 In the collection &ldquo;%collection%&rdquo;: In der Sammlung &bdquo;%collection%&ldquo;
+Metadata and fulltext: Metadaten und Volltext
+Only in this document: Nur in diesem Dokument
 Quick search: Schnellsuche
 Search in: Durchsuche
 
@@ -25,8 +26,8 @@ Search in: Durchsuche
 Current page:: Aktuelle Seite:
 Go to first page: Zur ersten Seite
 Go to last page: Zur letzten Seite
-Go to previous page: Zur vorigen Seite
 Go to next page: Zur nächsten Seite
+Go to previous page: Zur vorigen Seite
 
 # Results
 Add filter %name% is &ldquo;%value%&rdquo;: 'Filter hinzufügen: %name% ist &bdquo;%value%&ldquo;'
@@ -38,10 +39,10 @@ Remove all filters: Alle Filter entfernen
 Remove filter %name% is &ldquo;%value%&rdquo;: 'Filter entfernen: %name% ist &bdquo;%value%&ldquo;'
 results: Treffer
 RSS Feed: RSS-Feed
+Show all: Mehr anzeigen
 Show filters: Filter anzeigen
 Show full title: Voller Titel
 Show less: Weniger anzeigen
-Show all: Mehr anzeigen
 
 # Command
 Cleared IIIF image cache: IIIF cache geleert
@@ -71,8 +72,8 @@ Metadata: Metadaten
 Next page: Nächste Seite
 Next section: Nächster Abschnitt
 page: Seite
-Pages: Seiten
 pages: Seiten
+Pages: Seiten
 Physical page:: Physische Seite:
 Previous page: Vorige Seite
 Previous section: Voriger Abschnitt
@@ -105,13 +106,13 @@ publisher: Verlag|Verlage
 score: Relevanz
 yearpublish: Erscheinungsjahr|Erscheinungsjahre
 
-# sorts
-yearpublish_desc: Erscheinungsjahr absteigend
-yearpublish_asc: Erscheinungsjahr aufsteigend
-datemodified_desc: Importdatum absteigend
-datemodified_asc: Importdatum aufsteigend
-currentnosort_desc: Band absteigend
+# Sort options
 currentnosort_asc: Band aufsteigend
+currentnosort_desc: Band absteigend
+datemodified_asc: Importdatum aufsteigend
+datemodified_desc: Importdatum absteigend
+yearpublish_asc: Erscheinungsjahr aufsteigend
+yearpublish_desc: Erscheinungsjahr absteigend
 
 # Docstrct
 abstract: Abstrakt
@@ -131,6 +132,7 @@ bundle: Nachlass
 chapter: Kapitel
 collectivework: Sammelwerk
 comment: Kommentar
+contained_work: Enthaltenes Werk
 contents: Inhaltsverzeichnis
 corrigenda: Errata
 courtdecision: Rechtsentscheidung
@@ -145,12 +147,12 @@ headword: Stichwort
 illustration: Illustration
 illustrationdescription: Bildbeschreibung
 imprint: Impressum
+index: Index
 indexabbreviations: Abkürzungsverzeichnis
 indexauthor: Index of authors
 indexauthors: Autorenverzeichnis
 indexchronological: Chronologisches verzeichnis
 indexfigures: Abbildungsverzeichnis
-index: Index
 indexlocation: Ortsregister
 indexlocations: Ortsregister
 indexnames: Namensregister
@@ -177,19 +179,19 @@ message: Nachricht
 miscella: Miszelle
 miscelle: Miszelle
 monograph: Monograph
-multivolumework: Mehrbändiges Werk
 multivolume_work: Mehrbändiges Werk
+multivolumework: Mehrbändiges Werk
 music: Musik
 musical_notation: Noten
 notes: Noten
 obituary: Nachruf
-otherdocstrct: Sonstiges
 other: Sonstiges
+otherdocstrct: Sonstiges
 partofwork: Teilwerk
+periodical: Zeitschrift
 periodicalissue: Zeitschriftenheft
 periodicalpart: Zeitschriftenteil
 periodicalvolume: Zeitschriftenband
-periodical: Zeitschrift
 poem: Gedicht
 preface: Vorwort
 prepage: Deckblatt
@@ -199,12 +201,12 @@ section: Abschnitt
 sheetmusic: Musik
 singlemap: Einzelne Karte
 supplement: Beilage
+table: Tabelle, Liste
 tabledescription: Tabelle der Beschreibungen
 tablelist: Tabelle, Liste
 tableofabbreviations: Abkürzungsverzeichnis
 tableofcontents: Inhaltsverzeichnis
 tableofliteraturerefs: Literaturverzeichnis
-table: Tabelle, Liste
 textsection: Textabschnitt
 theses: DIssertation
 title_page: Titelseite
@@ -213,40 +215,39 @@ unit: Teil
 volume: Teil eines mehrbändigen Werkes
 werk_beigefuegt: Beigefügtes Werk
 werk: Werk
-contained_work: Enthaltenes Werk
 
 # DC
+antiquitates.und.archaeologia: Antiquitates & Archaeologia
+antiquitates.und.archaeologia.archaeo18: Antiquitates & Archaeologia - ARCHAEO18
 autobiographica: Autobiographica
+blumenbachiana: Blumenbachiana
+bucherhaltung: Bucherhaltung
 digiwunschbuch: DigiWunschbuch
+fid.mathematica: FID Mathematik
+göttinger.universitätsgeschichte.portraits: Göttinger Universitätsgeschichte – Portraits
+göttingeruniversitätsgeschichte-gedrucktewerke: Göttinger Universitätsgeschichte - Gedruckte Werke
 itineraria: Itineraria
+juridica: Rechtsgeschichte
+manuscriptae: Manuscripta
 maps: Karten
 mathematica: Mathematica
 nordamericana: Americana
 rezensionszeitschriften: Rezensionen
+rusdml: RusDML
 sibirica: Sibirica
+theologie: Theologie
 varia: Varia
+vd17-mainstream: VD17 Mainstream
+vd17-nova: VD17 Nova
+vd18.digital: VD18 digital
+vd18.göttingen: VD18 Göttingen
 wissenschaftsgeschichte: Wissenschafts&shy;geschichte
 zoologica: Zoologica
-rusdml: RusDML
-vd17-nova: VD17 Nova
-vd17-mainstream: VD17 Mainstream
-vd18.göttingen: VD18 Göttingen
-vd18.digital: VD18 digital
-juridica: Rechtsgeschichte
-göttingeruniversitätsgeschichte-gedrucktewerke: Göttinger Universitätsgeschichte - Gedruckte Werke
-bucherhaltung: Bucherhaltung
-göttinger.universitätsgeschichte.portraits: Göttinger Universitätsgeschichte – Portraits
-antiquitates.und.archaeologia: Antiquitates & Archaeologia
-antiquitates.und.archaeologia.archaeo18: Antiquitates & Archaeologia - ARCHAEO18
-blumenbachiana: Blumenbachiana
-manuscriptae: Manuscripta
-theologie: Theologie
-fid.mathematica: FID Mathematik
 
 # Export
-Download as PDF: Download als PDF
 Cancel: Abbrechen
 Choose quality: Bildqualität
+Download as PDF: Download als PDF
 Export: Export
 Go back: Zurück
 pdf_first_step_option1: Mittlere Qualität (1000 Pixel Breite pro Bild)
@@ -254,11 +255,12 @@ pdf_first_step_option2: Originale Scanauflösung
 pdf_first_step_option3: "Breite selbst wählen:"
 Selected too many pages - get full document: Bei über 100 ausgewählten Seiten wird zu Gunsten der Geschwindigkeit das vollständige, vorgenerierte Dokument heruntergeladen.
 
+# PDF
+Generate PDF: PDF erzeugen
+Invalid page range: Ungültiger Seitenbereich
 Page range: Seitenbereich
-pdf_until: bis
 pdf_from: von
 pdf_pages: Seiten
-pdf_progress_hint: Der Download startet automatisch, sobald das PDF erstellt wurde.
-Generate PDF: PDF erzeugen
 pdf_preparing: PDF wird vorbereitet
-Invalid page range: Ungültiger Seitenbereich
+pdf_progress_hint: Der Download startet automatisch, sobald das PDF erstellt wurde.
+pdf_until: bis

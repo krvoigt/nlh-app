@@ -150,6 +150,10 @@
     }
 }
 
+.search_list {
+    margin: 0;
+}
+
 .search_popup {
     @include transition(opacity);
     opacity: 0;

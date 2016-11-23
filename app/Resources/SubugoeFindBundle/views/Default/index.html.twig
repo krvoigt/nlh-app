@@ -32,7 +32,6 @@
 {% endblock %}
 
 {% block content %}
-
     <ol class="result_list" start="{{ search.offset + 1 }}">
         {% if parentDocument is defined %}
             <li class="result_item -sticky">
@@ -96,11 +95,11 @@
         {% endif %}
 
         {% for result in pagination %}
+            {% set href = path(result.fields.isanchor ? '_volumes' : '_detail', {'id': result.fields.id, 'origin': app.request.requestUri}) %}
             <li class="result_item">
                 <article class="result_wrap">
                     <div class="result_left">
                         {% if result.fields.presentation_url is defined %}
-                            {% set href = path(result.fields.isanchor ? '_volumes' : '_detail', {'id': result.fields.id}) %}
                             <a class="result_link" href="{{ href }}">
                                 <img
                                     class="result_thumbnail"
@@ -112,11 +111,7 @@
                     </div>
                     <div class="result_metadata">
                         <h2 class="result_title">
-                            {% if result.fields.isanchor %}
-                                <a class="result_link" title="{{ result.fields.title|first }}" href="{{ path('_volumes', {'id': result.fields.id}) }}">{{ result.fields.title|first }}</a>
-                            {% else %}
-                                <a class="result_link" title="{{ result.fields.title|first }}" href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title|first }}</a>
-                            {% endif %}
+                            <a class="result_link" title="{{ result.fields.title|first }}" href="{{ href }}">{{ result.fields.title|first }}</a>
                             <button class="result_title-toggle -expand">
                                 <i class="icon">expand_more</i>
                                 {{ 'Show full title'|trans }}
