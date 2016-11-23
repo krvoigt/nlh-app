@@ -23,7 +23,15 @@ class SearchController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return new Response('submitted');
+
+            $queryString = [];
+
+            foreach ($form->getData() as $field => $datum) {
+                if ($datum !== null) {
+                    $queryString[] = $field .':'.$datum;
+                }
+            }
+          return new Response(implode(' ', $queryString));
         }
 
         return $this->render('search/advanced.html.twig', [
