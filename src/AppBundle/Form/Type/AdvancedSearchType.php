@@ -27,6 +27,8 @@ class AdvancedSearchType extends AbstractType
         /** @var Translator $translator */
         $translator = $options['translator'];
 
+        $builder->setMethod('GET');
+
         foreach ($searchFields as $searchField) {
             $builder->add(
                 $searchField,

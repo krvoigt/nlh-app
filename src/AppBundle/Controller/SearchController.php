@@ -13,33 +13,21 @@ class SearchController extends Controller
     /**
      * @Route("/search/advanced/", name="_search_advanced", methods={"GET"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $form = $this->getForm();
+        $form = $this->createForm(AdvancedSearchType::class, null, [
+                  'search_fields' => $this->getParameter('advanced_search'),
+                  'translator' => $this->get('translator'),
+              ]);
 
-        return $this->render('search/advanced.html.twig', ['form' => $form->createView()]);
-    }
-
-    /**
-     * @Route("/search/advanced/", name="_search_advanced_post", methods={"POST"})
-     */
-    public function newAction(Request $request)
-    {
-        $form = $this->getForm();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             return new Response('submitted');
         }
 
-        return $this->render('search/advanced.html.twig', ['form' => $form->createView()]);
-    }
-
-    private function getForm()
-    {
-        return $this->createForm(AdvancedSearchType::class, null, [
-                  'search_fields' => $this->getParameter('advanced_search'),
-                  'translator' => $this->get('translator'),
-              ]);
+        return $this->render('search/advanced.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
