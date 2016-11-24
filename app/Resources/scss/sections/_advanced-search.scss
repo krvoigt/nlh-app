@@ -1,0 +1,29 @@
+#advanced_search {
+	display: table;
+	width: 40%;
+
+	&>ul {
+		display: table-caption;
+	}
+
+	div {
+		display: table-row;
+	}
+
+	label {
+		vertical-align: middle;
+	}
+
+	input {
+		@include input;
+	}
+
+	label,
+	input {
+		display: table-cell;
+	}
+
+	button {
+		@include button;
+	}
+}
