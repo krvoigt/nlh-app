@@ -10,7 +10,6 @@ use Solarium\QueryType\Select\Query\FilterQuery;
 use AppBundle\Model\DocumentStructure;
 use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
-use Solarium\QueryType\Select\Query\Query;
 
 class DefaultController extends BaseController implements IpAuthenticatedController
 {
@@ -49,7 +48,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
         sort($products);
 
         if ($access !== null) {
-            $select = $this->addFilterForAllowedProducts($products, $select);
+            $select = $this->get('authorization_service')->addFilterForAllowedProducts($products, $select);
         }
 
         $solrProducts = $this->get('document_service')->getAvailableProducts();
@@ -317,27 +316,5 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
         }
 
         return false;
-    }
-
-    /*
-     * @param User  $user
-     * @param Query $select
-     *
-     * @return Query
-     */
-    protected function addFilterForAllowedProducts($products, Query $select):Query
-    {
-        if (isset($products) && $products !== []) {
-            $productQuery = [];
-            foreach ($products as $key => $product) {
-                $productQuery[] = sprintf('product:%s', $product);
-            }
-            $productQuery = implode(' OR ', $productQuery);
-            $accessFilter = new FilterQuery();
-            $productFilter = $accessFilter->setKey('product')->setQuery($productQuery);
-            $select->addFilterQuery($productFilter);
-        }
-
-        return $select;
     }
 }

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SearchController extends Controller
+class SearchController extends Controller implements IpAuthenticatedController
 {
     /**
      * @Route("/search/advanced/", name="_search_advanced", methods={"GET"})
@@ -48,7 +48,7 @@ class SearchController extends Controller
             sort($products);
 
             if ($access !== null) {
-                $select = $this->addFilterForAllowedProducts($products, $select);
+                $select = $this->get('authorization_service')->addFilterForAllowedProducts($products, $select);
             }
 
             $solrProducts = $this->get('document_service')->getAvailableProducts();

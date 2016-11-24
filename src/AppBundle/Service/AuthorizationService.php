@@ -3,6 +3,8 @@
 namespace AppBundle\Service;
 
 use AppBundle\Model\User;
+use Solarium\QueryType\Select\Query\FilterQuery;
+use Solarium\QueryType\Select\Query\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -55,5 +57,27 @@ class AuthorizationService
         }
 
         return $user;
+    }
+
+    /*
+     * @param User  $user
+     * @param Query $select
+     *
+     * @return Query
+     */
+    public function addFilterForAllowedProducts($products, Query $select):Query
+    {
+        if (isset($products) && $products !== []) {
+            $productQuery = [];
+            foreach ($products as $key => $product) {
+                $productQuery[] = sprintf('product:%s', $product);
+            }
+            $productQuery = implode(' OR ', $productQuery);
+            $accessFilter = new FilterQuery();
+            $productFilter = $accessFilter->setKey('product')->setQuery($productQuery);
+            $select->addFilterQuery($productFilter);
+        }
+
+        return $select;
     }
 }
