@@ -29,12 +29,14 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
             throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
         }
         $order = $request->get('direction');
+        $searchService = $this->get('subugoe_find.search_service');
+        $queryService = $this->get('subugoe_find.query_service');
 
-        $search = $this->getSearchEntity($request);
-        $select = $this->getQuerySelect($request);
-        $this->addQuerySort($select, $sort, $order);
+        $search = $searchService->getSearchEntity();
+        $select = $searchService->getQuerySelect();
+        $queryService->addQuerySort($select, $sort, $order);
         $activeFacets = $request->get('filter');
-        $this->addQueryFilters($select, $activeFacets);
+        $queryService->addQueryFilters($select, $activeFacets);
         $collection = $request->get('collection');
         if (!empty($collection) && $collection !== 'all') {
             $dcFilter = new FilterQuery();
@@ -54,7 +56,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
 
         $fullAccess = ($products === $solrProducts) ? true : false;
 
-        $pagination = $this->getPagination($request, $select);
+        $pagination = $searchService->getPagination($select);
         $facets = $this->get('solarium.client')->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
@@ -74,14 +76,14 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
     /**
      * @Route("/id/{id}", name="_detail")
      *
-     * @param string $id The document id
+     * @param string  $id      The document id
+     * @param Request $request The request
      *
      * @return Response
      */
-    public function detailAction($id)
+    public function detailAction($id, Request $request)
     {
         $documentStructure = new DocumentStructure();
-        $request = $this->get('request_stack')->getCurrentRequest();
 
         if ($request->get('page')) {
             $page = $request->get('page');
@@ -235,12 +237,14 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
         }
 
         $client = $this->get('solarium.client');
+        $searchService = $this->get('subugoe_find.search_service');
+        $queryService = $this->get('subugoe_find.query_service');
 
-        $search = $this->getSearchEntity($request);
-        $select = $this->getQuerySelect($request);
-        $this->addQuerySort($select);
+        $search = $searchService->getSearchEntity();
+        $select = $searchService->getQuerySelect();
+        $queryService->addQuerySort($select);
         $activeFacets = $request->get('filter');
-        $this->addQueryFilters($select, $activeFacets);
+        $queryService->addQueryFilters($select, $activeFacets);
         $facets = $client->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
@@ -255,7 +259,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
         }
 
         $selectChildrenDocuments->setQuery(sprintf('idparentdoc:%s AND docstrct:volume', $id));
-        $pagination = $this->getPagination($request, $selectChildrenDocuments);
+        $pagination = $searchService->getPagination($selectChildrenDocuments);
 
         return $this->render('SubugoeFindBundle:Default:index.html.twig', [
                     'facets' => $facets,
@@ -272,7 +276,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
      *
      * @param array $structure The document structure
      *
-     * @return array $chapterArr The flattend chapter structure
+     * @return array $chapterArr The flattened chapter structure
      */
     protected function flattenStructure($structure)
     {
@@ -316,56 +320,12 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
     }
 
     /*
-     * @param Request $request A request instance
-     *
-     * @return Search $search A Search entity instance
-     */
-    protected function getSearchEntity(Request $request)
-    {
-        $search = new Search();
-
-        $scope = $request->get('scope');
-
-        if (!empty($scope)) {
-            $search->setQuery($scope.':'.$request->get('q'));
-        } else {
-            $search->setQuery($request->get('q'));
-        }
-
-        $search
-            ->setRows((int) $this->getParameter('results_per_page'))
-            ->setCurrentPage((int) $request->get('page') ?: 1);
-
-        return $search;
-    }
-
-    /*
-     * @param Query $select A Query instance
-     * @param string $sort The sort string
-     * @param string $order The sort order
-     */
-    protected function addQuerySort(Query $select, $sort = '', $order = '')
-    {
-        $queryService = $this->get('subugoe_find.query_service');
-
-        if (!empty($sort) && !empty($order)) {
-            $sort = $queryService->getSorting($sort.' '.$order);
-        } else {
-            $sort = $queryService->getSorting();
-        }
-
-        if (is_array($sort) && $sort != []) {
-            $select->addSort($sort[0], $sort[1]);
-        }
-    }
-
-    /*
      * @param User  $user
      * @param Query $select
      *
      * @return Query
      */
-    protected function addFilterForAllowedProducts($products, $select):Query
+    protected function addFilterForAllowedProducts($products, Query $select):Query
     {
         if (isset($products) && $products !== []) {
             $productQuery = [];
