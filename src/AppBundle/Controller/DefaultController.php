@@ -27,24 +27,27 @@ class DefaultController extends BaseController
     {
         $sort = $request->get('sort');
         if (isset($sort) && empty($sort)) {
-            throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
+            throw new InvalidParameterException(sprintf('Sort argument has to be provided.'));
         }
         $order = $request->get('direction');
 
-        $search = $this->getSearchEntity($request);
-        $select = $this->getQuerySelect($request);
-        $this->addQuerySort($select, $sort, $order);
+        $searchService = $this->get('subugoe_find.search_service');
+        $queryService = $this->get('subugoe_find.query_service');
+
+        $search = $searchService->getSearchEntity();
+        $select = $searchService->getQuerySelect();
+        $queryService->addQuerySort($select, $sort, $order);
         $activeFacets = $request->get('filter');
-        $this->addQueryFilters($select, $activeFacets);
+        $queryService->addQueryFilters($select, $activeFacets);
         $collection = $request->get('collection');
         if (!empty($collection) && $collection !== 'all') {
             $dcFilter = new FilterQuery();
             $collectionFilter = $dcFilter->setKey('dc')->setQuery('dc:'.$collection);
             $select->addFilterQuery($collectionFilter);
         }
-        $pagination = $this->getPagination($request, $select);
+        $pagination = $searchService->getPagination($select);
         $facets = $this->get('solarium.client')->select($select)->getFacetSet()->getFacets();
-        $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
+        $facetCounter = $queryService->getFacetCounter($activeFacets);
 
         return $this->render('SubugoeFindBundle:Default:index.html.twig', [
                 'facets' => $facets,
@@ -60,10 +63,11 @@ class DefaultController extends BaseController
      * @Route("/id/{id}", name="_detail")
      *
      * @param string $id The document id
+     * @param Request $request The request
      *
      * @return Response
      */
-    public function detailAction($id)
+    public function detailAction($id, Request $request)
     {
         $documentId = $id;
 
@@ -91,8 +95,6 @@ class DefaultController extends BaseController
 
             return new RedirectResponse($url, 301);
         }
-
-        $request = $this->get('request_stack')->getCurrentRequest();
 
         if ($request->get('page')) {
             $page = $request->get('page');
@@ -233,13 +235,16 @@ class DefaultController extends BaseController
             throw new InvalidParameterException(sprintf('Sort argument must be provided.'));
         }
 
+        $searchService = $this->get('subugoe_find.search_service');
+        $queryService = $this->get('subugoe_find.query_service');
+
         $client = $this->get('solarium.client');
 
-        $search = $this->getSearchEntity($request);
-        $select = $this->getQuerySelect($request);
-        $this->addQuerySort($select);
+        $search = $searchService->getSearchEntity();
+        $select = $searchService->getQuerySelect();
+        $queryService->addQuerySort($select);
         $activeFacets = $request->get('filter');
-        $this->addQueryFilters($select, $activeFacets);
+        $queryService->addQueryFilters($select, $activeFacets);
         $facets = $client->select($select)->getFacetSet()->getFacets();
         $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
@@ -254,7 +259,7 @@ class DefaultController extends BaseController
         }
 
         $selectChildrenDocuments->setQuery(sprintf('idparentdoc:%s AND docstrct:volume', $id));
-        $pagination = $this->getPagination($request, $selectChildrenDocuments);
+        $pagination = $searchService->getPagination($selectChildrenDocuments);
 
         return $this->render('SubugoeFindBundle:Default:index.html.twig', [
                     'facets' => $facets,
@@ -335,45 +340,4 @@ class DefaultController extends BaseController
         return false;
     }
 
-    /*
-     * @param Request $request A request instance
-     *
-     * @return Search $search A Search entity instance
-     */
-    protected function getSearchEntity(Request $request)
-    {
-        $search = new Search();
-
-        $scope = $request->get('scope');
-
-        if (!empty($scope)) {
-            $search->setQuery($scope.':'.$request->get('q'));
-        } else {
-            $search->setQuery($request->get('q'));
-        }
-
-        $search
-            ->setRows((int) $this->getParameter('results_per_page'))
-            ->setCurrentPage((int) $request->get('page') ?: 1);
-
-        return $search;
-    }
-
-    /*
-     * @param Query $select A Query instance
-     */
-    protected function addQuerySort(Query $select, $sort = '', $order = '')
-    {
-        $queryService = $this->get('subugoe_find.query_service');
-
-        if (!empty($sort) && !empty($order)) {
-            $sort = $queryService->getSorting($sort.' '.$order);
-        } else {
-            $sort = $queryService->getSorting();
-        }
-
-        if (is_array($sort) && $sort != []) {
-            $select->addSort($sort[0], $sort[1]);
-        }
-    }
 }
