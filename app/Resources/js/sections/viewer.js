@@ -33,7 +33,10 @@ var Viewer = {
         this.settings.panel = this.alwaysShowScan ? 'metadata' : 'scan';
         this.loadState.bind(this)();
 
-        this.layer = L.tileLayer.iiif(imageContainer.data('iiif'), {fitBounds: false});
+        this.layer = L.tileLayer.iiif(imageContainer.data('iiif'), {
+            fitBounds: false,
+        });
+
         this.image = L.map('scan_image', {
             attributionControl: false,
             center: [this.settings.lat || 0, this.settings.lng || 0],
@@ -56,7 +59,7 @@ var Viewer = {
                 var imageSize = this._imageSizes[initialZoom];
                 var layerLatLng = that.image.options.crs.pointToLatLng(L.point(imageSize.x, imageSize.y), initialZoom);
                 var neBounds = that.image.getBounds()._northEast;
-                var latLng = [-neBounds.lat + 26, layerLatLng.lng / 2];
+                var latLng = [-neBounds.lat + 19, layerLatLng.lng / 2]; // 19 equals rougly 24px
                 that.image.panTo(latLng, {animate: false});
             });
         }
@@ -92,7 +95,7 @@ var Viewer = {
         });
 
         this.controls.pageSelect.change(function () {
-            // Remove LOG_xxxx part from ID to prevent wrong document section being loaded
+            // Remove LOG_xxxx part from ID to prevent loading of wrong document section
             var newUrl = setGetParameters({page: $(this).val()}, false);
             newUrl = decodeURI(newUrl).replace(/\|LOG_[0-9_]+/, '');
             window.location = newUrl;
@@ -214,5 +217,3 @@ var Viewer = {
         history.replaceState(undefined, undefined, '#' + JSON.stringify(this.settings));
     },
 };
-
-Viewer.init();

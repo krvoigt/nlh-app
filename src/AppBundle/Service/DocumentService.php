@@ -89,12 +89,12 @@ class DocumentService
 
     /*
      * This flattens the document structure for navigation
-     *
-     * @param array $structure The document structure
+     * @TODO Check typehint - array? Object?
+     * @param mixed $structure The document structure
      *
      * @return array $chapterArr The flattened chapter structure
      */
-    public function flattenStructure(array $structure)
+    public function flattenStructure($structure)
     {
         $chapterArr = [];
         foreach ($structure as $chapter) {

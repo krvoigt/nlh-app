@@ -35,7 +35,6 @@ var ViewerExport = {
 
         DCPDF.generatePDF(ppn, physIDstart, physIDend);
 
-
     },
 
     isCompleteDocument: function () {

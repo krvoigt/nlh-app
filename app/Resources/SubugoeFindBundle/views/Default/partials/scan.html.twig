@@ -1,12 +1,11 @@
+{% set origin = app.request.get('origin') %}
+
 <section class="scan">
     <div class="viewer_controls -overlay">
         <div class="viewer_control-group">
             {% if documentStructure.page != 1 and documentStructure.identifier is not null %}
-                <a
-                    class="viewer_control -first-page"
-                    title="{{ 'First page'|trans }}"
-                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.firstChapter}) }}{{ '?page=' ~ documentStructure.documentFirstPage }}
-                >
+                {% set href = path('_detail', {'id': document.id ~ '|' ~ documentStructure.firstChapter, 'origin': origin, 'page': documentStructure.documentFirstPage}) %}
+                <a class="viewer_control -first-page" title="{{ 'First page'|trans }}" href="{{ href }}">
                     <i class="icon">first_page</i>
                     <span class="sr-only">{{ 'First page'|trans }}</span>
                 </a>
@@ -16,11 +15,8 @@
                 </span>
             {% endif %}
             {% if documentStructure.isThereAPreviousChapter is not empty and documentStructure.identifier is not null %}
-                <a
-                    class="viewer_control -previous-section"
-                    title="{{ 'Previous section'|trans }}"
-                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId}) }}{{ not documentStructure.isThereAPreviousChapter is empty ? '?page=' ~ documentStructure.previousChapterFirstPage }}
-                >
+                {% set href = path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousChapterId, 'origin': origin, 'page': documentStructure.previousChapterFirstPage})%}
+                <a class="viewer_control -previous-section" title="{{ 'Previous section'|trans }}" href="{{ href }}">
                     <i class="icon">skip_previous</i>
                     <span class="sr-only">{{ 'Previous section'|trans }}</span>
                 </a>
@@ -30,11 +26,8 @@
                 </span>
             {% endif %}
             {% if documentStructure.page != 1 and documentStructure.identifier is not null %}
-                <a
-                    class="viewer_control -previous-page"
-                    title="{{ 'Previous page'|trans }}"
-                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId}) }}{{ documentStructure.page != 1 ? '?page=' ~ (documentStructure.page - 1) }}
-                >
+                {% set href = path('_detail', {'id': document.id ~ '|' ~ documentStructure.previousPageChapterId, 'origin': origin, 'page': documentStructure.page - 1}) %}
+                <a class="viewer_control -previous-page" title="{{ 'Previous page'|trans }}" href="{{ href }}">
                     <i class="icon">navigate_before</i>
                     <span class="sr-only">{{ 'Previous page'|trans }}</span>
                 </a>
@@ -43,27 +36,23 @@
                     <i class="icon">navigate_before</i>
                 </span>
             {% endif %}
-            <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
-            <select
-                class="viewer_control -page-select{{ documentStructure.identifier is null ? ' -disabled'  }}"
-                name="page"
-                id="viewer-page-select"
-                title="{{ 'Physical page:'|trans }} {{ documentStructure.page }}&#10;{{ 'Logical page:'|trans }} {{ pageMappings[documentStructure.page] }}"
-            >
-                {% if documentStructure.identifier is not null %}
-                    {% for physPage, logPage in pageMappings %}
-                        <option data-id="{{ document['nlh_id'][physPage -1] | split(':') | last}}" value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
-                            {{ physPage }} : {{ logPage }}
-                        </option>
-                    {% endfor %}
-                {% endif %}
-            </select>
+            {% if documentStructure.identifier is not null %}
+                {% set title = 'Physical page:'|trans ~ ' ' ~ documentStructure.page ~ '&#10;' ~ 'Logical page:'|trans ~ ' ' ~ pageMappings[documentStructure.page] %}
+                <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
+                <select class="viewer_control -page-select" id="viewer-page-select" title="{{ title }}">
+                    {% if documentStructure.identifier is not null %}
+                        {# EVIL: data-id is used for determining the page ids for the pdf generator #}
+                        {% for physPage, logPage in pageMappings %}
+                            <option data-id="{{ document['nlh_id'][physPage -1] | split(':') | last}}" value={{ physPage }} {{ physPage == documentStructure.page ? 'selected' }}>
+                                {{ physPage }} : {{ logPage }}
+                            </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            {% endif %}
             {% if documentStructure.page != documentStructure.pageCount and documentStructure.identifier is not null %}
-                <a
-                    class="viewer_control -next-page"
-                    title="{{ 'Next page'|trans }}"
-                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId}) }}{{ '?page=' ~ (documentStructure.page + 1) }}
-                >
+                {% set href = path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextPageChapterId, 'origin': origin, 'page': documentStructure.page + 1}) %}
+                <a class="viewer_control -next-page" title="{{ 'Next page'|trans }}" href="{{ href }}">
                     <i class="icon">navigate_next</i>
                     <span class="sr-only">{{ 'Next page'|trans }}</span>
                 </a>
@@ -73,11 +62,8 @@
                 </span>
             {% endif %}
             {% if documentStructure.isThereANextChapter is not empty and documentStructure.identifier is not null %}
-                <a
-                    class="viewer_control -next-section"
-                    title="{{ 'Next section'|trans }}"
-                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId}) }}{{ not documentStructure.isThereANextChapter is empty ? '?page=' ~ documentStructure.nextChapterFirstPage }}
-                >
+                {% set href= path('_detail', {'id': document.id ~ '|' ~ documentStructure.nextChapterId, 'origin': origin, 'page':  documentStructure.nextChapterFirstPage}) %}
+                <a class="viewer_control -next-section" title="{{ 'Next section'|trans }}" href="{{ href }}">
                     <i class="icon">skip_next</i>
                     <span class="sr-only">{{ 'Next section'|trans }}</span>
                 </a>
@@ -87,11 +73,8 @@
                 </span>
             {% endif %}
             {% if documentStructure.page != documentStructure.documentLastPage and documentStructure.identifier is not null %}
-                <a
-                    class="viewer_control -last-page"
-                    title="{{ 'Last page'|trans }}"
-                    {{ 'href=' ~ path('_detail', {'id': document.id ~ '|' ~ documentStructure.lastChapter}) }}{{ '?page=' ~ documentStructure.documentLastPage }}
-                >
+                {% set href = path('_detail', {'id': document.id ~ '|' ~ documentStructure.lastChapter, 'origin': origin, 'page': documentStructure.documentLastPage}) %}
+                <a class="viewer_control -last-page" title="{{ 'Last page'|trans }}" href="{{ href }}">
                     <i class="icon">last_page</i>
                     <span class="sr-only">{{ 'Last page'|trans }}</span>
                 </a>
@@ -117,11 +100,7 @@
     </div>
 
     {% if documentStructure.isValidPage and documentStructure.identifier is not null %}
-        <div
-            class="scan_image"
-            id="scan_image"
-            data-iiif="{{ path('_iiifjson', {'identifier': documentStructure.identifier}) }}"
-        ></div>
+        <div class="scan_image" id="scan_image" data-iiif="{{ path('_iiifjson', {'identifier': documentStructure.identifier}) }}"></div>
         <div class="scan_spinner">
             <span class="sr-only">{{ 'Loading'|trans }}</span>
         </div>

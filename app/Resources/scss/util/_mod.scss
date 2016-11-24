@@ -8,8 +8,9 @@
 
 .icon {
     @extend .material-icons;
-    line-height: inherit;
+    overflow: hidden;
     vertical-align: top;
+    width: 1em;
 }
 
 .invisible {

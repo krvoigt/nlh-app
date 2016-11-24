@@ -45,5 +45,3 @@ var Results = {
         });
     },
 };
-
-Results.init();

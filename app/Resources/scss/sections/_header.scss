@@ -14,8 +14,6 @@
     }
 
     ul {
-        margin: 0;
-
         > li:before {
             content: none;
         }
@@ -63,15 +61,19 @@
 }
 
 .header_nav {
+    font-weight: bold;
     float: right;
+    margin: 0 (-$grid / 4) 0 0;
 
-    a {
+    a,
+    button {
+        border-radius: 0;
         color: $white;
         display: block;
-        padding: ($grid / 4) 1em;
+        padding: ($grid / 4);
 
-        .root.-fixed & {
-            padding: 0 1em;
+        @include hover {
+            background: $link-hover-bg-color;
         }
     }
 
@@ -81,37 +83,6 @@
         + li {
             @include separator(0, 0, 0, 1);
         }
-    }
-}
-
-.header_nav-item {
-    display: none;
-
-    @include respond-to(small) {
-        display: block;
-    }
-
-    .root.-fixed & {
-        display: block;
-    }
-}
-
-.header_search-toggle {
-    background: 0;
-    border: 0;
-    color: $white;
-    cursor: pointer;
-
-    @include hover {
-        background: none;
-    }
-
-    @include respond-to(small) {
-        margin: ($grid / 4) 0;
-    }
-
-    .root.-fixed & {
-        margin: ($grid / 4) 0;
     }
 }
 

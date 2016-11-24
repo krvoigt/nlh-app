@@ -200,5 +200,3 @@ var Facets = {
         $graphDiv.mouseout(hideTooltip);
     },
 }
-
-Facets.init();

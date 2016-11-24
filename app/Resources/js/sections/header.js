@@ -54,5 +54,3 @@ var Header = {
         });
     },
 }
-
-Header.init();

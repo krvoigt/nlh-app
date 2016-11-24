@@ -16,13 +16,12 @@
 {% endblock %}
 
 {% block content %}
-
     <ol class="result_list" start="{{ search.offset + 1 }}">
         {% if parentDocument is defined %}
-            <li class="result_item">
+            <li class="result_item -sticky">
                 <h2 class="viewer_heading">{{ parentDocument.title|first }}</h2>
 
-                <dl class="result_info -no-clear">
+                <dl class="result_info">
                     <dt>{{ 'docstrct'|transchoice(1) }}:</dt>
                     <dd>{{ parentDocument.docstrct|trans }}</dd>
 
@@ -75,6 +74,7 @@
         {% endif %}
 
         {% for result in pagination %}
+            {% set href = path('_detail', {'id': result.fields.id, 'origin': app.request.requestUri}) %}
             <li class="result_item">
                 <article class="result_wrap">
                     {% if result.fields.product not in user.products %}
@@ -85,7 +85,7 @@
                     <div class="result_left">
 
                         {% if result.fields.nlh_id is defined %}
-                            <a class="result_link" href="{{ path('_detail', {'id': result.fields.id}) }}">
+                            <a class="result_link" href="{{ href }}">
                                 {% if result.fields.product in user.products %}
                                     <img
                                         class="result_thumbnail"
@@ -100,8 +100,7 @@
                     </div>
                     <div class="result_metadata">
                         <h2 class="result_title">
-                            <a class="result_link" title="{{ result.fields.title | first }}"
-                               href="{{ path('_detail', {'id': result.fields.id}) }}">{{ result.fields.title | first }}</a>
+                            <a class="result_link" title="{{ result.fields.title|first }}" href="{{ href }}">{{ result.fields.title|first }}</a>
                             <button class="result_title-toggle -expand">
                                 <i class="icon">expand_more</i>
                                 {{ 'Show full title'|trans }}
@@ -127,7 +126,7 @@
                                 </dd>
                             {% endif %}
                         </dl>
-                        <p>
+                        <p class="result_footer">
                             {% if result.fields.docstrct == 'volume' and result.fields.currentno is defined %}
                                 {{ result.fields.docstrct|trans }} &ndash; {{ 'currentno'|trans }} {{ result.fields.currentno }}
                             {% endif %}
