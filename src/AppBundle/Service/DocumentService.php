@@ -15,13 +15,18 @@ class DocumentService
      */
     protected $client;
 
+    /**
+     * DocumentService constructor.
+     *
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return Document
      */
@@ -56,5 +61,53 @@ class DocumentService
         $products = array_column($resultset, 'product');
 
         return sort($products);
+    }
+
+    /*
+     * This returns the chapter id for a given page
+     *
+     * @param array $chapterArr The chapter array
+     * @param integer $page The page number
+     *
+     * @return string $chapterId The chapter id
+     */
+    public function getChapterId(array $chapterArr, int $page)
+    {
+        foreach ($chapterArr as $chapter) {
+            $chapterFirstPage = ltrim(explode('_', $chapter['chapterFirstPage'])[1], 0);
+            $chapterLastPage = ltrim(explode('_', $chapter['chapterLastPage'])[1], 0);
+
+            if (in_array($page, range($chapterFirstPage, $chapterLastPage))) {
+                $chapterId = $chapter['chapterId'];
+
+                return $chapterId;
+            }
+        }
+
+        return false;
+    }
+
+    /*
+     * This flattens the document structure for navigation
+     *
+     * @param array $structure The document structure
+     *
+     * @return array $chapterArr The flattened chapter structure
+     */
+    public function flattenStructure(array $structure)
+    {
+        $chapterArr = [];
+        foreach ($structure as $chapter) {
+            if (count($chapter->getChildren()) > 0) {
+                $chapterArr = array_merge($chapterArr, $this->flattenStructure($chapter->getChildren()));
+            } else {
+                $chapterArr[] = ['chapterId' => $chapter->getId(),
+                        'chapterFirstPage' => $chapter->getPhysicalPages()[0],
+                        'chapterLastPage' => $chapter->getPhysicalPages()[count($chapter->getPhysicalPages()) - 1],
+                ];
+            }
+        }
+
+        return $chapterArr;
     }
 }
