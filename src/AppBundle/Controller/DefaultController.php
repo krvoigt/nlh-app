@@ -82,6 +82,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
      */
     public function detailAction($id, Request $request)
     {
+        $documentService = $this->get('document_service');
         $documentStructure = new DocumentStructure();
 
         if ($request->get('page')) {
@@ -102,10 +103,10 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
             }
         }
 
-        $document = $this->get('document_service')->getDocumentById($documentId);
+        $document = $documentService->getDocumentById($documentId);
 
         if ($document->idparentdoc[0]) {
-            $parentDocumentTitle = $this->get('document_service')->getDocumentById($document->idparentdoc[0])['title'][0];
+            $parentDocumentTitle = $documentService->getDocumentById($document->idparentdoc[0])['title'][0];
         }
 
         if (isset($document->nlh_id[0])) {
@@ -126,7 +127,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
         }
 
         if (isset($structure[0]) && count($structure[0]) > 0) {
-            $chapterArr = $this->flattenStructure(array_filter($structure[0]));
+            $chapterArr = $documentService->flattenStructure(array_filter($structure[0]));
             $firstChapter = $chapterArr[0]['chapterId'];
             $lastChapter = $chapterArr[count($chapterArr) - 1]['chapterId'];
 
@@ -134,7 +135,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
                 if ($page === 1) {
                     $activeChapterId = $firstChapter;
                 } else {
-                    $activeChapterId = $this->getChapterId($chapterArr, $page);
+                    $activeChapterId = $documentService->getChapterId($chapterArr, $page);
                 }
             }
 
@@ -161,7 +162,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
                 $previousPageChapterId = $previousChapterId;
             } else {
                 $previouspage = intval($page - 1);
-                $previousPageChapterId = $this->getChapterId($chapterArr, $previouspage);
+                $previousPageChapterId = $documentService->getChapterId($chapterArr, $previouspage);
             }
 
             if (isset($activeChapterLastPage) && $page >= $activeChapterLastPage && isset($nextChapterId)) {
@@ -171,36 +172,37 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
                 if (isset($documentLastPage) && !empty($documentLastPage) && $nextPage === $documentLastPage) {
                     $nextPage = $page;
                 }
-                $nextPageChapterId = $this->getChapterId($chapterArr, $nextPage);
+                $nextPageChapterId = $documentService->getChapterId($chapterArr, $nextPage);
             }
         }
 
         $isValidPage = true;
 
-        $documentStructure->setPage($page);
-        $documentStructure->setPageCount(isset($pageCount) ? $pageCount : null);
-        $documentStructure->setIsValidPage($isValidPage);
-        $documentStructure->setTableOfContents(isset($tableOfContents) ? $tableOfContents : null);
-        $documentStructure->setIdentifier(isset($identifier) ? $identifier : null);
-        $documentStructure->setFirstChapter(isset($firstChapter) ? $firstChapter : null);
-        $documentStructure->setLastChapter(isset($lastChapter) ? $lastChapter : null);
-        $documentStructure->setDocumentFirstPage(isset($documentFirstPage) ? $documentFirstPage : null);
-        $documentStructure->setDocumentLastPage(isset($documentLastPage) ? $documentLastPage : null);
-        $documentStructure->setIsThereAPreviousChapter(isset($isThereAPreviousChapter) ? $isThereAPreviousChapter : false);
-        $documentStructure->setIsThereANextChapter(isset($isThereANextChapter) ? $isThereANextChapter : false);
-        $documentStructure->setPreviousChapterId(isset($previousChapterId) ? $previousChapterId : null);
-        $documentStructure->setPreviousChapterFirstPage(isset($previousChapterFirstPage) ? $previousChapterFirstPage : null);
-        $documentStructure->setNextChapterId(isset($nextChapterId) ? $nextChapterId : null);
-        $documentStructure->setNextChapterFirstPage(isset($nextChapterFirstPage) ? $nextChapterFirstPage : null);
-        $documentStructure->setNextPageChapterId(isset($nextPageChapterId) ? $nextPageChapterId : null);
-        $documentStructure->setPreviousPageChapterId(isset($previousPageChapterId) ? $previousPageChapterId : null);
+        $documentStructure
+            ->setPage($page)
+            ->setPageCount($pageCount ?? null)
+            ->setIsValidPage($isValidPage)
+            ->setTableOfContents($tableOfContents ?? null)
+            ->setIdentifier($identifier ?? null)
+            ->setFirstChapter($firstChapter ?? null)
+            ->setLastChapter($lastChapter ?? null)
+            ->setDocumentFirstPage($documentFirstPage ?? null)
+            ->setDocumentLastPage($documentLastPage ?? null)
+            ->setIsThereAPreviousChapter($isThereAPreviousChapter ?? false)
+            ->setIsThereANextChapter($isThereANextChapter ?? false)
+            ->setPreviousChapterId($previousChapterId ?? null)
+            ->setPreviousChapterFirstPage($previousChapterFirstPage ?? null)
+            ->setNextChapterId($nextChapterId ?? null)
+            ->setNextChapterFirstPage($nextChapterFirstPage ?? null)
+            ->setNextPageChapterId($nextPageChapterId ?? null)
+            ->setPreviousPageChapterId($previousPageChapterId ?? null);
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
                         'document' => $document->getFields(),
-                        'parentDocumentTitle' => isset($parentDocumentTitle) ? $parentDocumentTitle : null,
-                        'pageMappings' => isset($pageMappings) ? $pageMappings : null,
+                        'parentDocumentTitle' => $parentDocumentTitle ?? null,
+                        'pageMappings' => $pageMappings ?? null,
                         'documentStructure' => $documentStructure,
-                        'userName' => isset($userName) ? $userName : null,
+                        'userName' => $userName ?? null,
                 ]);
     }
 
@@ -268,53 +270,5 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
                     'pagination' => $pagination,
                     'parentDocument' => $parentDocument,
                 ]);
-    }
-
-    /*
-     * This flattens the document structure for navigation
-     *
-     * @param array $structure The document structure
-     *
-     * @return array $chapterArr The flattened chapter structure
-     */
-    protected function flattenStructure($structure)
-    {
-        $chapterArr = [];
-        foreach ($structure as $chapter) {
-            if (count($chapter->getChildren()) > 0) {
-                $chapterArr = array_merge($chapterArr, $this->flattenStructure($chapter->getChildren()));
-            } else {
-                $chapterArr[] = ['chapterId' => $chapter->getId(),
-                        'chapterFirstPage' => $chapter->getPhysicalPages()[0],
-                        'chapterLastPage' => $chapter->getPhysicalPages()[count($chapter->getPhysicalPages()) - 1],
-                ];
-            }
-        }
-
-        return $chapterArr;
-    }
-
-    /*
-     * This returns the chapter id for a given page
-     *
-     * @param array $chapterArr The chapter array
-     * @param integer $page The page number
-     *
-     * @return string $chapterId The chapter id
-     */
-    protected function getChapterId($chapterArr, $page)
-    {
-        foreach ($chapterArr as $chapter) {
-            $chapterFirstPage = ltrim(explode('_', $chapter['chapterFirstPage'])[1], 0);
-            $chapterLastPage = ltrim(explode('_', $chapter['chapterLastPage'])[1], 0);
-
-            if (in_array($page, range($chapterFirstPage, $chapterLastPage))) {
-                $chapterId = $chapter['chapterId'];
-
-                return $chapterId;
-            }
-        }
-
-        return false;
     }
 }

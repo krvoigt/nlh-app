@@ -102,10 +102,14 @@ class DocumentStructure
 
     /**
      * @param int $page
+     *
+     * @return DocumentStructure
      */
     public function setPage($page)
     {
         $this->page = $page;
+
+        return $this;
     }
 
     /**
@@ -118,10 +122,14 @@ class DocumentStructure
 
     /**
      * @param int $pageCount
+     *
+     * @return DocumentStructure
      */
     public function setPageCount($pageCount)
     {
         $this->pageCount = $pageCount;
+
+        return $this;
     }
 
     /**
@@ -134,10 +142,14 @@ class DocumentStructure
 
     /**
      * @param bool $isValidPage
+     *
+     * @return DocumentStructure
      */
     public function setIsValidPage($isValidPage)
     {
         $this->isValidPage = $isValidPage;
+
+        return $this;
     }
 
     /**
@@ -150,10 +162,14 @@ class DocumentStructure
 
     /**
      * @param bool $tableOfContents
+     *
+     * @return DocumentStructure
      */
     public function setTableOfContents($tableOfContents)
     {
         $this->tableOfContents = $tableOfContents;
+
+        return $this;
     }
 
     /**
@@ -166,10 +182,14 @@ class DocumentStructure
 
     /**
      * @param string $identifier
+     *
+     * @return DocumentStructure
      */
     public function setIdentifier($identifier)
     {
         $this->identifier = $identifier;
+
+        return $this;
     }
 
     /**
@@ -182,10 +202,14 @@ class DocumentStructure
 
     /**
      * @param string $firstChapter
+     *
+     * @return DocumentStructure
      */
     public function setFirstChapter($firstChapter)
     {
         $this->firstChapter = $firstChapter;
+
+        return $this;
     }
 
     /**
@@ -198,10 +222,14 @@ class DocumentStructure
 
     /**
      * @param string $lastChapter
+     *
+     * @return DocumentStructure
      */
     public function setLastChapter($lastChapter)
     {
         $this->lastChapter = $lastChapter;
+
+        return $this;
     }
 
     /**
@@ -214,10 +242,14 @@ class DocumentStructure
 
     /**
      * @param int $documentFirstPage
+     *
+     * @return DocumentStructure
      */
     public function setDocumentFirstPage($documentFirstPage)
     {
         $this->documentFirstPage = $documentFirstPage;
+
+        return $this;
     }
 
     /**
@@ -230,10 +262,14 @@ class DocumentStructure
 
     /**
      * @param int $documentLastPage
+     *
+     * @return DocumentStructure
      */
     public function setDocumentLastPage($documentLastPage)
     {
         $this->documentLastPage = $documentLastPage;
+
+        return $this;
     }
 
     /**
@@ -246,10 +282,14 @@ class DocumentStructure
 
     /**
      * @param bool $isThereAPreviousChapter
+     *
+     * @return DocumentStructure
      */
     public function setIsThereAPreviousChapter($isThereAPreviousChapter)
     {
         $this->isThereAPreviousChapter = $isThereAPreviousChapter;
+
+        return $this;
     }
 
     /**
@@ -262,10 +302,14 @@ class DocumentStructure
 
     /**
      * @param bool $isThereANextChapter
+     *
+     * @return DocumentStructure
      */
     public function setIsThereANextChapter($isThereANextChapter)
     {
         $this->isThereANextChapter = $isThereANextChapter;
+
+        return $this;
     }
 
     /**
@@ -278,10 +322,14 @@ class DocumentStructure
 
     /**
      * @param int $previousChapterId
+     *
+     * @return DocumentStructure
      */
     public function setPreviousChapterId($previousChapterId)
     {
         $this->previousChapterId = $previousChapterId;
+
+        return $this;
     }
 
     /**
@@ -294,10 +342,14 @@ class DocumentStructure
 
     /**
      * @param int $previousChapterFirstPage
+     *
+     * @return DocumentStructure
      */
     public function setPreviousChapterFirstPage($previousChapterFirstPage)
     {
         $this->previousChapterFirstPage = $previousChapterFirstPage;
+
+        return $this;
     }
 
     /**
@@ -310,10 +362,14 @@ class DocumentStructure
 
     /**
      * @param int $nextChapterId
+     *
+     * @return DocumentStructure
      */
     public function setNextChapterId($nextChapterId)
     {
         $this->nextChapterId = $nextChapterId;
+
+        return $this;
     }
 
     /**
@@ -326,10 +382,14 @@ class DocumentStructure
 
     /**
      * @param int $nextChapterFirstPage
+     *
+     * @return DocumentStructure
      */
     public function setNextChapterFirstPage($nextChapterFirstPage)
     {
         $this->nextChapterFirstPage = $nextChapterFirstPage;
+
+        return $this;
     }
 
     /**
@@ -342,10 +402,14 @@ class DocumentStructure
 
     /**
      * @param int $nextPageChapterId
+     *
+     * @return DocumentStructure
      */
     public function setNextPageChapterId($nextPageChapterId)
     {
         $this->nextPageChapterId = $nextPageChapterId;
+
+        return $this;
     }
 
     /**
@@ -358,9 +422,13 @@ class DocumentStructure
 
     /**
      * @param int $previousPageChapterId
+     *
+     * @return DocumentStructure
      */
     public function setPreviousPageChapterId($previousPageChapterId)
     {
         $this->previousPageChapterId = $previousPageChapterId;
+
+        return $this;
     }
 }
