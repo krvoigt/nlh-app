@@ -147,7 +147,7 @@ currentnosort-desc: Band absteigend
 currentnosort-asc: Band aufsteigend
 
 fields:
-  identifier: Identifier
+  pid: Identifier
   title: Titel
   creator: Autor|Autoren
   genre: Genre|Genres

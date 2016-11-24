@@ -19,7 +19,7 @@ parameters:
     link_to_registration: "http://www.nationallizenzen.de/ind_inform_registration"
     advanced_search:
       - title
-      - identifier
+      - pid
       - creator
       - genre
       - place_publish
