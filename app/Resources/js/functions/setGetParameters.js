@@ -24,6 +24,6 @@ function setGetParameters(params, changeLocation) {
     if (changeLocation) {
         window.location.href = url + hash;
     } else {
-        return url + hash
+        return url + hash;
     }
 }

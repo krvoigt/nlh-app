@@ -9,7 +9,7 @@ var ViewerThumbnails = {
 
     bindEvents: function () {
         $('.thumbnails_link[href]', this.container).click(function () {
-            window.location = $(this).attr('href') + window.location.hash;
+            setGetParameters({page: $(this).data('page')}, true);
             return false;
         });
 

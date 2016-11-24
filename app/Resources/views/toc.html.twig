@@ -11,11 +11,14 @@
         <li class="toc_item">
             <span class="toc_row">
                 <span class="toc_column">
-                    {% set href = path('_detail', {'id': id ~ '|' ~ item.id}) ~ '?page=' ~ page_start %}
-                    <a class="toc_link" href="{{ href }}">{{ item.label is null ? item.type|lower|trans : item.label }}</a>
+                    <a class="toc_link" data-page="{{ page_start }}" href>
+                        {{ item.label is null ? item.type|lower|trans : item.label }}
+                    </a>
                 </span>
                 <span class="toc_column -right">
-                    <a class="toc_page-number" href="{{ href }}">{% if chapter_start is not empty %}{{ chapter_start }}{% else %}-{% endif %}</a>
+                    <a class="toc_page-number" data-page="{{ page_start }}" href>
+                        {% if chapter_start is not empty %}{{ chapter_start }}{% else %}&mdash;{% endif %}
+                    </a>
                     <button class="toc_pdf" title="{{ 'Download this section as PDF'|trans }}" data-start="{{ page_start }}" data-end="{{ page_end }}">
                         <i class="icon">file_download</i>
                         <span class="sr-only">{{ 'Download this section as PDF'|trans }}</span>
