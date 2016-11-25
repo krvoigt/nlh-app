@@ -1,8 +1,29 @@
 {% extends "content.html.twig" %}
 
-{% block body %}
-    <h1>{{ 'Advanced Search' | trans }}</h1>
+{% form_theme form _self %}
 
+{%- block button_row -%}
+    {{- form_widget(form) -}}
+{%- endblock button_row -%}
+
+{%- block form_row -%}
+    <div class="advanced-search_row">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{%- block form_widget_compound -%}
+    {%- if form.parent is empty -%}
+        {{ form_errors(form) }}
+    {%- endif -%}
+    {{- block('form_rows') -}}
+    {{- form_rest(form) -}}
+{%- endblock form_widget_compound -%}
+
+{% block body %}
+    <h1>{{ 'Advanced Search'|trans }}</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}

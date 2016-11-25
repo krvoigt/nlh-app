@@ -1,29 +1,38 @@
-#advanced_search {
-	display: table;
-	width: 40%;
+.advanced-search {
+    button {
+        @include button;
+        margin-top: $grid;
+        min-width: 6em;
+    }
+}
 
-	&>ul {
-		display: table-caption;
-	}
+.advanced-search_row {
+    display: table-row;
+    margin-bottom: ($grid / 2);
 
-	div {
-		display: table-row;
-	}
+    @include respond-to(tiny) {
+        display: block;
+    }
 
-	label {
-		vertical-align: middle;
-	}
+    > label {
+        display: table-cell;
+        padding: 0 1em ($grid / 4) 0;
+        vertical-align: middle;
 
-	input {
-		@include input;
-	}
+        @include respond-to(tiny) {
+            display: block;
+            padding: 0;
+        }
+    }
 
-	label,
-	input {
-		display: table-cell;
-	}
+    > input {
+        @include input;
+        display: table-cell;
+        margin-bottom: ($grid / 4);
 
-	button {
-		@include button;
-	}
+        @include respond-to(tiny) {
+            display: block;
+            width: 100%;
+        }
+    }
 }

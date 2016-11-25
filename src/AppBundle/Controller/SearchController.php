@@ -15,9 +15,10 @@ class SearchController extends Controller implements IpAuthenticatedController
     public function indexAction(Request $request)
     {
         $form = $this->createForm(AdvancedSearchType::class, null, [
-                  'search_fields' => $this->getParameter('advanced_search'),
-                  'translator' => $this->get('translator'),
-              ]);
+            'attr' => ['class' => 'advanced-search'],
+            'search_fields' => $this->getParameter('advanced_search'),
+            'translator' => $this->get('translator'),
+        ]);
 
         $form->handleRequest($request);
 
@@ -60,15 +61,15 @@ class SearchController extends Controller implements IpAuthenticatedController
             $facetCounter = $this->get('subugoe_find.query_service')->getFacetCounter($activeFacets);
 
             return $this->render('SubugoeFindBundle:Default:index.html.twig', [
-                    'facets' => $facets,
-                    'facetCounter' => $facetCounter,
-                    'queryParams' => $request->get('filter') ?: [],
-                    'search' => $search,
-                    'pagination' => $pagination,
-                    'activeCollection' => $request->get('activeCollection'),
-                    'user' => $user,
-                    'access' => $access,
-                    'fullAccess' => $fullAccess,
+                'facets' => $facets,
+                'facetCounter' => $facetCounter,
+                'queryParams' => $request->get('filter') ?: [],
+                'search' => $search,
+                'pagination' => $pagination,
+                'activeCollection' => $request->get('activeCollection'),
+                'user' => $user,
+                'access' => $access,
+                'fullAccess' => $fullAccess,
             ]);
         }
 
