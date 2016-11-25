@@ -4,7 +4,7 @@
     border: $border-width solid $shade;
     border-radius: $br;
     font: inherit;
-    padding: ($grid / 8) .5em;
+    padding: ($grid / 4 - $border-width) .5em;
 
     &:focus {
         border-color: $brand-color;
