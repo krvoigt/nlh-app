@@ -9,6 +9,10 @@
     }
 }
 
+.facets_above {
+    margin-bottom: $grid;
+}
+
 .facets_body {
     @include respond-to(large) {
         border-bottom: $border-width solid $border-color;
@@ -45,11 +49,7 @@
 .facets_remove {
     @include button(light);
     margin-bottom: $grid;
-}
-
-.facets_only_accessible {
-    @include button(light);
-    margin-bottom: $grid;
+    width: 100%;
 }
 
 .facets_toggle {

@@ -1,45 +1,31 @@
+{% set route = app.request.attributes.get('_route') %}
+{% set id = app.request.get('id') %}
+
 <div class="facets_header">
     <button class="facets_toggle -show">{{ 'Show filters'|trans }}</button>
     <button class="facets_toggle -hide hidden">{{ 'Hide filters'|trans }}</button>
 </div>
 <div class="facets_body">
     {% if fullAccess is empty %}
-        {% if user.institution and app.request.attributes.get('_route') != '_collection' and access is null %}
-            <a
-                class="facets_only_accessible"
-                href="{{ path(app.request.attributes.get('_route'), {
-                    'q': app.request.get('q'),
-                    'scope': app.request.get('scope'),
-                    'collection': app.request.get('collection'),
-                    'activeCollection': app.request.get('activeCollection'),
-                    'access': 1
-                }) }}"
-            >
-                {{ 'Show only accessible'|trans }}
-            </a>
-        {% elseif user.institution and app.request.attributes.get('_route') != '_collection' %}
-            <a
-                class="facets_only_accessible"
-                href="{{ path(app.request.attributes.get('_route'), {
-                    'q': app.request.get('q'),
-                    'scope': app.request.get('scope'),
-                    'collection': app.request.get('collection'),
-                    'activeCollection': app.request.get('activeCollection')
-                }) }}"
-            >
-                {{ 'Show all accessible'|trans }}
-            </a>
-        {% endif %}
+        {# TODO: Only show access toggle if not all documents are accessible #}
+        <div class="facets_above">
+            {% if user.institution and route != '_collection' and access is null %}
+                {% set href = path(route, app.request.query.all|merge({access: 1})) %}
+                <a class="facets_access-toggle" href="{{ href }}">
+                    {{ 'Show only accessible'|trans }}
+                </a>
+            {% elseif user.institution and route != '_collection' %}
+                {% set href = path(route, app.request.query.all|merge({access: null})) %}
+                <a class="facets_access-toggle" href="{{ href }}">
+                    {{ 'Show all accessible'|trans }}
+                </a>
+            {% endif %}
+        </div>
     {% endif %}
 
     {% if queryParams %}
-        <a
-            class="facets_remove"
-            href="{{ path(app.request.attributes.get('_route'), {
-                'id': app.request.get('id'),
-                'q': app.request.get('q')
-            }) }}"
-        >
+        {% set href = path(route, app.request.query.all|merge({filter: null, id: id})) %}
+        <a class="facets_remove" href="{{ href }}">
             {{ 'Remove all filters'|trans }}
         </a>
     {% endif %}
@@ -77,15 +63,8 @@
                                         {% set queryParamsSliced = queryParamsSliced|slice(0, index2)|merge(queryParamsSliced|slice(index2 + 1)) %}
                                     {% endif %}
                                 {% endfor %}
-                                <a
-                                    class="facet_link -remove"
-                                    href="{{ path(app.request.attributes.get('_route'), {
-                                        'filter': queryParamsSliced,
-                                        'id': app.request.get('id'),
-                                        'q': app.request.get('q'),
-                                    }) }}"
-                                    title="{{ 'Remove filter: publishing year range'|trans }}"
-                                >
+                                {% set href = path(route, app.request.query.all|merge({'filter': queryParamsSliced, 'id': id})) %}
+                                <a class="facet_link -remove" href="{{ href }}" title="{{ 'Remove filter: publishing year range'|trans }}">
                                     <i class="icon">remove</i>
                                     {{ tokens.0 }}&ndash;{{ tokens.2 }}
                                 </a>
@@ -104,32 +83,16 @@
                         {% endfor %}
 
                         {% if value in filterValues %}
-                            <a
-                                class="facet_link -remove"
-                                href="{{ path(app.request.attributes.get('_route'), {
-                                    'filter': queryParamsSliced,
-                                    'q': (app.request.get('q')),
-                                    'id': (app.request.get('id'))
-                                }) }}"
-                                title="{{ 'Remove filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw }}"
-                            >
+                            {% set href = path(route, app.request.query.all|merge({'filter': queryParamsSliced, 'id': id})) %}
+                            {% set title = 'Remove filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw %}
+                            <a class="facet_link -remove" href="{{ href }}" title="{{ title }}">
                                 <i class="icon">remove</i>
                                 {{ value|trans }}&nbsp;<span class="facet_count">{{ count|number_format(0, ',', '.') }}</span>
                             </a>
                         {% else %}
-                            <a
-                                class="facet_link"
-                                href="{{ path(app.request.attributes.get('_route'), {
-                                    'filter': queryParams|merge({
-                                        (facetCounter):  {
-                                            (key): (value)
-                                        }
-                                    }),
-                                    'q': (app.request.get('q')),
-                                    'id': (app.request.get('id'))
-                                }) }}"
-                                title="{{ 'Add filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw }}"
-                            >
+                            {% set href = path(route, app.request.query.all|merge({'filter': queryParams|merge({(facetCounter): {(key): (value)}}), 'id': id})) %}
+                            {% set title = 'Add filter %name% is &ldquo;%value%&rdquo;'|trans({'%name%': key|transchoice(1), '%value%': value|trans})|raw %}
+                            <a class="facet_link" href="{{ href }}" title="{{ title }}">
                                 {{ value|trans }}&nbsp;<span class="facet_count">{{ count|number_format(0, ',', '.') }}</span>
                             </a>
                         {% endif %}
@@ -138,10 +101,10 @@
             </ol>
             {% if key == 'year_publish' %}
                 {# TODO: Show counts for years outside of filter range #}
-                {# Workaround: Remove erroneous year #}
+                {# WORKAROUND: Removing erroneous year. Introducing Y2100 bug, yay! #}
                 <div
                     class="facet_histogram"
-                    data-years='[{% for year, count in facet %}{% if year < 2200 %}{{ loop.first ? '' : ',' }}[{{ year }},{{ count }}]{% endif %}{% endfor %}]'
+                    data-years='[{% for year, count in facet %}{% if year < 2100 %}{{ loop.first ? '' : ',' }}[{{ year }},{{ count }}]{% endif %}{% endfor %}]'
                 >
                 </div>
             {% endif %}
