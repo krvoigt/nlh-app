@@ -25,3 +25,10 @@
         margin: 0;
     }
 }
+
+.content_registered {
+    color: $text-color-light;
+    font-size: $font-size-small;
+    margin: (-$grid / 2) 0 ($grid / 2);
+    text-align: right;
+}
