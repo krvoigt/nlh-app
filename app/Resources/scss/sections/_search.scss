@@ -82,11 +82,15 @@
     }
 
     a {
-        @include link(false);
+        @include link;
     }
 
     p {
         margin: 0;
+    }
+
+    ul + p {
+        margin-top: ($grid / 2);
     }
 }
 
