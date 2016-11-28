@@ -114,6 +114,7 @@ subugoe_find:
       - { title: facet_place_publish, field: facet_place_publish }
       - { title: facet_publisher, field: facet_publisher }
       - { title: year_publish, field: year_publish }
+      - { title: genre, field: genre, sort: "genre asc" }
       - { title: facet_subject_topic, field: facet_subject_topic }
       - { title: lang, field: lang }
 
