@@ -110,7 +110,8 @@ subugoe_find:
     feed_fields: ["nonsort", "date_indexed", "id"]
     facets:
       - { title: facet_product, field: facet_product }
-      - { title: bycreator, field: bycreator }
+      - { title: facet_creator_personal, field: facet_creator_personal }
+      - { title: facet_creator_corporate, field: facet_creator_corporate }
       - { title: facet_place_publish, field: facet_place_publish }
       - { title: facet_publisher, field: facet_publisher }
       - { title: year_publish, field: year_publish }
