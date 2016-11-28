@@ -70,6 +70,7 @@ class SearchController extends Controller implements IpAuthenticatedController
                 'user' => $user,
                 'access' => $access,
                 'fullAccess' => $fullAccess,
+                'advancedSearchParts' => $form->getData(),
             ]);
         }
 

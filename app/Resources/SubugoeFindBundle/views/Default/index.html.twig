@@ -8,7 +8,18 @@
     <div class="find_aside">
         <span class="find_count">{{ pagination.getTotalItemCount|number_format(0, ',', '.') }} {{ 'results'|trans }}</span>
     </div>
-    {{ knp_pagination_render(pagination) }}
+{% if app.request.get('_route') == '_search_advanced' %}
+    <div class="advanced_search-results">
+        {{ 'Advanced Search'|trans }}:
+        {% for key,searchParameters in advancedSearchParts %}
+            {% if searchParameters is not null %}
+                {% set fieldName = 'fields.'~key %}
+                <span class="advanced_search-parameter">{{ fieldName | transchoice(1) }}: {{ searchParameters }}</span>{% if loop.last %}{% else %}, {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+{{ knp_pagination_render(pagination) }}
 {% endblock %}
 
 {% block contentabove %}
