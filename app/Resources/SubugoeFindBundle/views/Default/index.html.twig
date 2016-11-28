@@ -9,12 +9,12 @@
         <span class="find_count">{{ pagination.getTotalItemCount|number_format(0, ',', '.') }} {{ 'results'|trans }}</span>
     </div>
 {% if app.request.get('_route') == '_search_advanced' %}
-    <div class="advanced_search-results">
+    <div class="advanced-search_results">
         {{ 'Advanced search'|trans }}:
         {% for key,searchParameters in advancedSearchParts %}
             {% if searchParameters is not null %}
                 {% set fieldName = 'fields.'~key %}
-                <span class="advanced_search-parameter">{{ fieldName | transchoice(1) }}: {{ searchParameters }}</span>{% if loop.last %}{% else %}, {% endif %}
+                <span class="advanced-search_parameter">{{ fieldName | transchoice(1) }}: {{ searchParameters }}</span>
             {% endif %}
         {% endfor %}
     </div>
