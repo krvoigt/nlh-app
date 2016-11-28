@@ -107,8 +107,8 @@ class DefaultController extends BaseController
         }
 
         if (isset($document[0]->presentation_url[0])) {
-            $identifier = explode('/', explode('.', $document[0]->presentation_url[0])[3])[3];
-            $identifier = $documentId.':'.str_pad($page, strlen($identifier), 0, STR_PAD_LEFT);
+            $identifier = explode('/', explode('.', $document[0]->presentation_url[$page - 1])[3])[3];
+            $identifier = $documentId.':'.$identifier;
         }
 
         if (!$document[0]->isanchor) {
