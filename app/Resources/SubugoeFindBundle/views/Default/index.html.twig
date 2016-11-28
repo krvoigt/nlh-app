@@ -10,7 +10,7 @@
     </div>
 {% if app.request.get('_route') == '_search_advanced' %}
     <div class="advanced_search-results">
-        {{ 'Advanced Search'|trans }}:
+        {{ 'Advanced search'|trans }}:
         {% for key,searchParameters in advancedSearchParts %}
             {% if searchParameters is not null %}
                 {% set fieldName = 'fields.'~key %}
