@@ -30,6 +30,7 @@ parameters:
       - { id: "digiwunschbuch", image: "digiwunschbuch.jpg" }
       - { id: "antiquitates.und.archaeologia.archaeo18", image: "antiquitates.und.archaeologia.archaeo18.jpg" }
       - { id: "itineraria", image: "itineraria.jpg" }
+      - { id: "aschiana", image: "aschiana.jpg" }
 
     webdav:
       userName: "%webdav_userName%"
