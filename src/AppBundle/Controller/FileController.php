@@ -26,6 +26,7 @@ class FileController extends Controller implements IpAuthenticatedController
 
         if ($fileSystem->has($file)) {
             $response->setContent($fileSystem->read($file));
+
             return $response;
         } else {
             throw new NotFoundHttpException(sprintf('PDF file for %s not found', $id));

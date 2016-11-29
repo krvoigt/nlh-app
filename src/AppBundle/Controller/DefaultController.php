@@ -178,6 +178,8 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
 
         $isValidPage = true;
 
+        $pdfSize = $this->get('file_service')->fileSize($document->product.':'.$document->work);
+
         $documentStructure
             ->setPage($page)
             ->setPageCount($pageCount ?? null)
@@ -203,6 +205,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
                         'pageMappings' => $pageMappings ?? null,
                         'documentStructure' => $documentStructure,
                         'userName' => $userName ?? null,
+                        'pdfSize' => $pdfSize,
                 ]);
     }
 

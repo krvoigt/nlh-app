@@ -34,3 +34,7 @@ services:
   document_service:
     class: AppBundle\Service\DocumentService
     arguments: ["@solarium.client"]
+
+  file_service:
+    class: AppBundle\Service\FileService
+    arguments: ['@oneup_flysystem.nlh_filesystem']
