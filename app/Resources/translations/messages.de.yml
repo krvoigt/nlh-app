@@ -305,7 +305,7 @@ pdf_first_step_option3: "Breite selbst wählen:"
 Selected too many pages - get full document: Bei über 100 ausgewählten Seiten wird zu Gunsten der Geschwindigkeit das vollständige, vorgenerierte Dokument heruntergeladen.
 
 # PDF
-Generate PDF: PDF erzeugen
+Generate PDF: PDF Download
 Invalid page range: Ungültiger Seitenbereich
 Page range: Seitenbereich
 pdf_from: von
