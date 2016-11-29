@@ -126,7 +126,8 @@ publisher: Verlag|Verlage
 facet_product: Produkt|Produkte
 creator: Autor|Autoren
 facet_creator_personal: Autor|Autoren
-facet_creator_corporate: Corporate|Corporates
+facet_person_corporate: Corporate|Corporates
+facet_person_personal: Person|Personen
 year_publish: Erscheinungsjahr|Erscheinungsjahre
 bytitle: Titel
 currentno: Band
