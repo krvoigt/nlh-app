@@ -14,7 +14,7 @@
                     <i class="icon">file_download</i>
                     {{ 'Generate PDF'|trans }}
                 </button>
-            </a> ({{ pdfSize }})
+            </a> ({{ (pdfSize / 1024 / 1024 )|round(2) }} MB)
         </div>
     {% endif %}
 
