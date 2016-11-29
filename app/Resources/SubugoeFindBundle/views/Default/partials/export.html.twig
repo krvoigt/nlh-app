@@ -1,89 +1,22 @@
 <section class="export">
     <h2 class="viewer_heading">{{ 'Export'|trans }}</h2>
 
-    <div id="pdf-options">
-        <h3>{{ 'Download as PDF'|trans }}</h3>
+    {% if pdfSize > 0 %}
+        <div id="pdf-options">
+            <h3>{{ 'Download as PDF'|trans }}</h3>
 
-        {# TODO: Quality selection is not working yet #}
-        {#<div class="export_step">
-            <h4>{{ 'Choose quality'|trans }}</h4>
-
-            <input type="radio" checked="checked" name="pdf-resolution" value="1000px" id="pdf-resolution-1">
-            <label for="pdf-resolution-1">{{ 'pdf_first_step_option1'|trans }}</label>
-
-            <input type="radio" name="pdf-resolution" value="original" id="pdf-resolution-2">
-            <label for="pdf-resolution-2">{{ 'pdf_first_step_option2'|trans }}</label>
-
-            <input type="radio" name="pdf-resolution" value="choose-free" id="pdf-resolution-3">
-            <label for="pdf-resolution-3">{{ 'pdf_first_step_option3'|trans }}</label>
-
-            <input type="number" class="export_input -indent" min="1" name="pdf-resolution-free" id="pdf-resolution-input">
-            <label for="pdf-resolution-input">Pixel</label>
-        </div>#}
-
-        <div class="export_step">
-            <h4>{{ 'Page range'|trans }}</h4>
-
-            <input type="number" class="export_input -narrow -page-start" min="1" max={{ documentStructure.pageCount }} id="physIDstart" value="1">
-            {{ 'pdf_until'|trans }}
-            <input type="number" class="export_input -narrow -page-end" min="1" max={{ documentStructure.pageCount }} id="physIDend" value={{ documentStructure.pageCount }}>
-            {{ 'pdf_from'|trans }} <span class="export_page-count">{{ documentStructure.pageCount }}</span>
+            <div class="export_error -page-range">
+                {{ 'Invalid page range'|trans }}
+            </div>
+            {% set download_path =  document.product ~ ':' ~ document.work %}
+            <a href="{{ path('_download_pdf', {id: download_path}) }}">
+                <button class="export_generate-pdf">
+                    <i class="icon">file_download</i>
+                    {{ 'Generate PDF'|trans }}
+                </button>
+            </a> ({{ pdfSize }})
         </div>
-
-        <div class="export_error -page-range">
-            {{ 'Invalid page range'|trans }}
-        </div>
-
-        {% set download_path =  document.product ~ ':' ~ document.work %}
-        <a href="{{ path('_download_pdf', {id: download_path}) }}">
-            <button class="export_generate-pdf">
-                <i class="icon">file_download</i>
-                {{ 'Generate PDF'|trans }}
-            </button>
-        </a> ({{ pdfSize }})
-    </div>
-
-    <div id="pdf-progress">
-        <div class="export_alert"></div>
-
-        <h3>{{ 'pdf_preparing'|trans }}</h3>
-        <div class="export_progress-wrap">
-            <div class="export_progress">0%</div>
-        </div>
-
-        <p>{{ 'pdf_progress_hint'|trans }}</p>
-
-        <button class="export_cancel">
-            <i class="icon">cancel</i>
-            {{ 'Cancel'|trans }}
-        </button>
-
-        <button class="export_reset">
-            <i class="icon">arrow_back</i>
-            {{ 'Go back'|trans }}
-        </button>
-    </div>
-
-    <div class="pdf_metadata">
-        <div id="pdf_title">{{ document.title | first }}</div>
-        <div id="pdf_author">
-            {% if document.creator is defined %}
-                {% for author in document.creator %}
-                    {{ author }}{% if not loop.last %}; {% endif %}
-                {% endfor %}
-            {% else %}
-                {{ '[unbekannt]'|trans }}
-            {% endif %}
-        </div>
-        <div id="pdf_year-publish">
-            {% if document['year_publish'] is defined %}
-                {{ document['year_publish'] }}
-            {% else %}
-                {{ '[unbekannt]'|trans }}
-            {% endif %}
-        </div>
-        <div id="pdf_license">{% trans %}disclaimer{% endtrans %}</div>
-    </div>
+    {% endif %}
 
     <ul class="metadata_links">
         <li>
