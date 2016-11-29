@@ -34,10 +34,13 @@
             {{ 'Invalid page range'|trans }}
         </div>
 
-        <button class="export_generate-pdf" data-ppn="{{ document.product }}:{{ document.work }}">
-            <i class="icon">file_download</i>
-            {{ 'Generate PDF'|trans }}
-        </button>
+        {% set download_path =  document.product ~ ':' ~ document.work %}
+        <a href="{{ path('_download_pdf', {id: download_path}) }}">
+            <button class="export_generate-pdf">
+                <i class="icon">file_download</i>
+                {{ 'Generate PDF'|trans }}
+            </button>
+        </a>
     </div>
 
     <div id="pdf-progress">

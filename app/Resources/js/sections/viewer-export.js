@@ -8,8 +8,6 @@ var ViewerExport = {
 
     bindEvents: function () {
         $('.export_input.-page-start, .export_input.-page-end').change(this.checkPageRange.bind(this));
-        $('.export_generate-pdf').click(this.downloadPdf.bind(this));
-
         $('.export_cancel, .export_reset').click(function () {
             DCPDF.reset();
         });
@@ -24,11 +22,9 @@ var ViewerExport = {
         var isError = start > end || start > max || end > max;
         $.merge($pageStart, $pageEnd).toggleClass('-error', isError);
         $('.export_error.-page-range').toggle(isError);
-        $('.export_generate-pdf').prop('disabled', isError);
     },
 
     downloadPdf: function () {
-        var ppn = $('.export_generate-pdf').data('ppn');
         // TODO: Sanitize. Add option to select arbitrary pages ("1, 3-6, 15").
         var physIDstart = parseInt($('#physIDstart').val());
         var physIDend = parseInt($('#physIDend').val());

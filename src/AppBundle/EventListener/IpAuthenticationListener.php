@@ -55,13 +55,22 @@ class IpAuthenticationListener
 
         $user = $this->authorizationService->getAllowedProducts();
         $products = $user->getProducts();
+        $registrationLink = $this->registrationLink;
 
         if ($controller[1] === 'detailAction') {
             $id = $event->getRequest()->get('id');
 
             $product = $this->documentService->getDocumentById($id)->product;
 
-            $registrationLink = $this->registrationLink;
+            if (!in_array($product, $products)) {
+                $event->setController(function () use ($registrationLink) {
+                    return new RedirectResponse($registrationLink);
+                });
+            }
+        }
+
+        if ($controller[1] === 'pdfAction') {
+            $product = explode(':', $event->getRequest()->get('id'))[0];
 
             if (!in_array($product, $products)) {
                 $event->setController(function () use ($registrationLink) {
