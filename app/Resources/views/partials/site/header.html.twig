@@ -15,7 +15,7 @@
             {# Display link back to search results if query is present #}
             {% if app.request.get('origin') %}
                 <li class="header_nav-item">
-                    <a href="{{ app.request.baseUrl ~ app.request.get('origin') }}">
+                    <a id="origin" href="{{ app.request.baseUrl ~ app.request.get('origin') }}">
                         <i class="icon">arrow_back</i>
                         {{ 'Search results'|trans }}
                     </a>
