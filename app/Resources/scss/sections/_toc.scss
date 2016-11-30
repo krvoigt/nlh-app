@@ -1,3 +1,10 @@
+%toc_row-item {
+    @include transition(background);
+    background: $white;
+    position: relative;
+    z-index: 1;
+}
+
 .toc {
     overflow-y: auto;
     padding: ($grid / 2);
@@ -11,20 +18,14 @@
     }
 }
 
-.toc_column {
+.toc_aside {
     display: table-cell;
-    vertical-align: top;
-    width: 100%;
+    vertical-align: bottom;
+}
 
-    &.-right {
-        background: $white;
-        position: relative;
-        text-align: right;
-        vertical-align: bottom;
-        white-space: nowrap;
-        width: 0;
-        z-index: 9;
-    }
+.toc_chapter {
+    @extend %toc_row-item;
+    padding-right: .25em;
 }
 
 .toc_item {
@@ -55,11 +56,30 @@
 }
 
 .toc_link {
-    background: $white;
     box-shadow: none;
-    padding-right: .25em;
+    border-radius: $br;
+    display: table-cell;
+    overflow: hidden;
+    padding: 0 .25em;
     position: relative;
-    z-index: 9;
+    width: 99%;
+
+    @include hover {
+        > * {
+            background: $brand-color-lighter;
+        }
+    }
+
+    // Dotted line below
+    &::after {
+        bottom: 6px;
+        content: '';
+        left: .25em;
+        min-width: 4em;
+        border-bottom: 1px dotted;
+        position: absolute;
+        right: .25em;;
+    }
 }
 
 .toc_list {
@@ -71,25 +91,17 @@
 }
 
 .toc_page-number {
-    box-shadow: none;
+    @extend %toc_row-item;
+    float: right;
     padding-left: .25em;
+    z-index: 1;
 }
 
 .toc_row {
     display: table;
+    margin-left: -.25em;
     position: relative;
     width: 100%;
-
-    // Dotted line below
-    &::after {
-        bottom: 6px;
-        content: '';
-        left: 0;
-        min-width: 4em;
-        border-bottom: 1px dotted;
-        position: absolute;
-        right: 0;
-    }
 }
 
 .toc_spinner {
