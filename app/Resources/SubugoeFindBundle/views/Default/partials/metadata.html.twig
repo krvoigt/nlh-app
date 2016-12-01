@@ -19,10 +19,10 @@
             <dd>{{ document['year_publish'] }}</dd>
         {% endif %}
 
-        {% if document.placepublish is defined %}
-            <dt>{{ 'placepublish'|transchoice(document.placepublish|length) }}</dt>
+        {% if document['place_publish'] is defined %}
+            <dt>{{ 'placepublish'|transchoice(document['place_publish']|length) }}</dt>
             <dd>
-                {% for place in document.placepublish %}
+                {% for place in document['place_publish'] %}
                     {{ place }}{% if loop.last %}{% else %}, {% endif %}
                 {% endfor %}
             </dd>
