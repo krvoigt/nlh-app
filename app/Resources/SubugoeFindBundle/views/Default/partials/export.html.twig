@@ -2,20 +2,14 @@
     <h2 class="viewer_heading">{{ 'Export'|trans }}</h2>
 
     {% if pdfSize > 0 %}
-        <div id="pdf-options">
-            <h3>{{ 'Download as PDF'|trans }}</h3>
-
-            <div class="export_error -page-range">
-                {{ 'Invalid page range'|trans }}
-            </div>
-            {% set download_path =  document.product ~ ':' ~ document.work %}
-            <a href="{{ path('_download_pdf', {id: download_path}) }}">
-                <button class="export_generate-pdf">
-                    <i class="icon">file_download</i>
-                    {{ 'Generate PDF'|trans }}
-                </button>
-            </a> ({{ (pdfSize / 1024 / 1024 )|round(2) }} MB)
-        </div>
+        {% set download_path =  document.product ~ ':' ~ document.work %}
+        {% set href = path('_download_pdf', {id: download_path}) %}
+        <p>
+            <a href="{{ href }}"><i class="icon">file_download</i> {{ 'Download as PDF'|trans }}</a>
+            ({{ (pdfSize / 1024 / 1024 )|round(2) }}&nbsp;MB)
+        </p>
+    {% else %}
+        <p>{{ 'PDF not yet available'|trans }}</p>
     {% endif %}
 
     <ul class="metadata_links">

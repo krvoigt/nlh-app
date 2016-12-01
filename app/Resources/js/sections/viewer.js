@@ -26,7 +26,6 @@ var Viewer = {
             return;
         }
 
-        ViewerExport.init();
         ViewerThumbnails.init();
 
         this.checkShowScan();

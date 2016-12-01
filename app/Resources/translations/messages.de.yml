@@ -297,20 +297,7 @@ Choose quality: Bildqualität
 Download as PDF: Download als PDF
 Export: Export
 Go back: Zurück
-pdf_first_step_option1: Mittlere Qualität (1000 Pixel Breite pro Bild)
-pdf_first_step_option2: Originale Scanauflösung
-pdf_first_step_option3: "Breite selbst wählen:"
-Selected too many pages - get full document: Bei über 100 ausgewählten Seiten wird zu Gunsten der Geschwindigkeit das vollständige, vorgenerierte Dokument heruntergeladen.
-
-# PDF
-Generate PDF: PDF Download
-Invalid page range: Ungültiger Seitenbereich
-Page range: Seitenbereich
-pdf_from: von
-pdf_pages: Seiten
-pdf_preparing: PDF wird vorbereitet
-pdf_progress_hint: Der Download startet automatisch, sobald das PDF erstellt wurde.
-pdf_until: bis
+PDF not yet available: PDF noch nicht verfügbar
 
 aar: Danakil-Sprache
 abk: Abchasisch
