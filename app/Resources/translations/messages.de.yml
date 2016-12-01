@@ -136,7 +136,6 @@ datemodified: Importdatum
 score: Relevanz
 yearpublish: Erscheinungsjahr|Erscheinungsjahre
 disclaimer: The Göttingen State and University Library provides access to digitized documents strictly for noncommercial educational, research and private purposes and makes no warranty with regard to their use for other purposes. Some of our collections are protected by copyright. Publication and/or broadcast in any form (including electronic) requires prior written permission from the Goettingen State- and University Library. Each copy of any part of this document must contain there Terms and Conditions. With the usage of the ibrary's online system to access or download a digitized document you accept there Terms and Conditions. Reproductions of material on the web site may not be made for or donated to other repositories, nor may be further reproduced without written permission from the Goettingen State- and University Library For reproduction requests and permissions, please contact us. If citing materials, please give proper attribution of the source.
-subject_topic: Thema
 subject_title: Titel
 
 # sorts
@@ -157,12 +156,10 @@ fields:
   publisher: Verlag|Verlage
   lang: Sprache|Sprachen
   product: Produkt|Produkte
-  facet_subject_topic: Thema|Themen
   fulltext: Volltext|Volltexte
 
 # Docstrct
 genre: Genre|Genres
-facet_subject_topic: Thema|Themen
 lang: Sprache|Sprachen
 abstract: Abstrakt
 acknowledgment: Danksagung

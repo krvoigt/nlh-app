@@ -55,15 +55,6 @@
             </dd>
         {% endif %}
 
-        {% if document.facet_subject_topic is defined %}
-            <dt>{{ 'facet_subject_topic'|transchoice(document.facet_subject_topic|length) }}</dt>
-            <dd>
-                {% for subject in document.facet_subject_topic %}
-                    <a href="{{ path('_search', {'filter': {0: {'facet_subject_topic': subject}}}) }}">{{ subject|trans }}</a>{% if loop.last %}{% else %}, {% endif %}
-                {% endfor %}
-            </dd>
-        {% endif %}
-
         {% if document.docstrct == "volume" and document.currentno is defined %}
             <dt>{{ 'currentno'|trans }}</dt>
             <dd>{{ document.currentno }}</dd>
