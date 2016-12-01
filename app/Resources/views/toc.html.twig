@@ -10,20 +10,20 @@
     {% if treeloop.first %}<ul class="toc_list">{% endif %}
         <li class="toc_item">
             <span class="toc_row">
-                <span class="toc_column">
-                    <a class="toc_link" data-page="{{ page_start }}" href>
+                <a class="toc_link" href="{{ path('_detail', {'id': id ~ '|' ~ item.id}) ~ '?page=' ~ page_start }}">
+                    <span class="toc_chapter">
                         {{ item.label is null ? item.type|lower|trans : item.label }}
-                    </a>
-                </span>
-                <span class="toc_column -right">
-                    <a class="toc_page-number" data-page="{{ page_start }}" href>
+                    </span>
+                    <span class="toc_page-number" data-page="{{ page_start }}">
                         {% if chapter_start is not empty %}{{ chapter_start }}{% else %}&mdash;{% endif %}
-                    </a>
+                    </span>
+                </a>
+                {#<span class="toc_aside">
                     <button class="toc_pdf" title="{{ 'Download this section as PDF'|trans }}" data-start="{{ page_start }}" data-end="{{ page_end }}">
                         <i class="icon">file_download</i>
                         <span class="sr-only">{{ 'Download this section as PDF'|trans }}</span>
                     </button>
-                </span>
+                </span>#}
             </span>
             {% subtree item.children %}
         </li>
