@@ -10,6 +10,7 @@ Help for search: Hilfe zur Suche
 Imprint: Impressum
 In: in
 Just scanned: Just scanned
+Search for %term%: Suche nach %term%
 Search results: Trefferliste
 The requested page was not found: Die gewünschte Seite wurde nicht gefunden
 Your feedback has been sent.: Ihre Nachricht wurde übermittelt.
@@ -34,6 +35,7 @@ Add filter %name% is &ldquo;%value%&rdquo;: 'Filter hinzufügen: %name% ist &bdq
 Collapse title: Titel verkleinern
 Hide filters: Filter ausblenden
 Import date: Importdatum
+No results: Keine Treffer
 Published: Erschienen
 Remove all filters: Alle Filter entfernen
 Remove filter %name% is &ldquo;%value%&rdquo;: 'Filter entfernen: %name% ist &bdquo;%value%&ldquo;'
@@ -43,6 +45,7 @@ Show all: Mehr anzeigen
 Show filters: Filter anzeigen
 Show full title: Voller Titel
 Show less: Weniger anzeigen
+Your search did not return any results.: Für Ihre Suche wurden keine Treffer gefunden.
 
 # Command
 Cleared IIIF image cache: IIIF cache geleert

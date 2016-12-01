@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="root" lang="de">
 {% include "partials/site/head.html.twig" %}
-<body class="site {{ app.request.get('q') == 'satan' ? '-⛧' }}">
+<body class="site">
     {% include 'partials/site/header.html.twig' %}
 
     <div class="content">
@@ -9,20 +9,24 @@
 
         {% block contentabove %}{% endblock %}
 
-        <div class="navigation -top">
-            {% block findnavigation %}{% endblock %}
-        </div>
+        {% if pagination.getTotalItemCount > 0 %}
+            <div class="navigation -top">
+                {% block findnavigation %}{% endblock %}
+            </div>
 
-        <div class="result">
-            <section class="facets">
-                {% block sidebar %}{% endblock %}
-            </section>
-            {% block content %}{% endblock %}
-        </div>
+            <div class="result">
+                <section class="facets">
+                    {% block sidebar %}{% endblock %}
+                </section>
+                {% block content %}{% endblock %}
+            </div>
 
-        <div class="navigation -bottom">
-            {% block footer %}{% endblock %}
-        </div>
+            <div class="navigation -bottom">
+                {% block footer %}{% endblock %}
+            </div>
+        {% else %}
+            {% block noresults %}{% endblock %}
+        {% endif %}
     </div>
 
     {% include 'partials/site/footer.html.twig' %}
