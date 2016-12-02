@@ -1,5 +1,6 @@
 .header {
-    background: $white; // Prevent off-canvas nav from popping through
+    @extend %full-width-background;
+    background: $brand-color;
     flex: none; // Prevent content from being cut off on Android and IE
     overflow: visible;
     position: relative;
@@ -119,7 +120,7 @@
 
         @include respond-to(tiny) {
             display: block;
-            width: 60px;
+            width: 45px;
         }
     }
 
@@ -127,7 +128,7 @@
         @include header_title-small;
 
         &.-short {
-            width: 60px;
+            width: 45px;
         }
     }
 
@@ -137,8 +138,6 @@
 }
 
 .header_top {
-    @extend %full-width-background;
-    background: $brand-color;
     padding: $grid;
     max-width: $site-width;
 
