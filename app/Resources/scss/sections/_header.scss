@@ -79,10 +79,6 @@
 
     li {
         float: left;
-
-        + li {
-            @include separator(0, 0, 0, 1);
-        }
     }
 }
 
