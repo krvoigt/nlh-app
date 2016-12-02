@@ -106,14 +106,16 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
      * @param string $institution
      * @param string $product
      */
-    protected function addUser($startIpAddress, $endIpAddress, $institution, $product)
+    protected function addUser($startIpAddress, $endIpAddress, $institution, $product, $email)
     {
         $user = new User();
         $user
             ->setStartIpAddress($startIpAddress)
             ->setEndIpAddress($endIpAddress)
             ->setInstitution($institution)
-            ->setProduct($product);
+            ->setProduct($product)
+            ->setProduct($email);
+
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
@@ -163,7 +165,7 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
                 if ($key > 0) {
                     $ipv4Arr = explode(',', $row['ipv4_allow']);
                     foreach ($ipv4Arr as $ipv4) {
-                        $ipv4Ips[] = [$product, $row['title'], $ipv4, $row['user_name']];
+                        $ipv4Ips[] = [$product, $row['title'], $ipv4, $row['user_name'], $row['email']];
                     }
                 }
             }
@@ -259,7 +261,7 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
             $thirdPartRanges = [];
             $fourthPartRanges = [];
 
-            $compeleteDataRows[] = [ip2long($startIp), ip2long($endIp), $ipv4Ip[1], $ipv4Ip[0], $ipv4Ip[3]];
+            $compeleteDataRows[] = [ip2long($startIp), ip2long($endIp), $ipv4Ip[1], $ipv4Ip[0], $ipv4Ip[3], $ipv4Ip[4]];
         }
 
         return $compeleteDataRows;
@@ -275,11 +277,11 @@ class FetchAuthenticationCommand extends ContainerAwareCommand
     {
         if (!$repository->checkIfTableExists($userTempTable)) {
             foreach ($compeleteDataRows as $dataRow) {
-                $this->addUser($dataRow[0], $dataRow[1], $dataRow[2], $dataRow[3], $dataRow[4]);
+                $this->addUser($dataRow[0], $dataRow[1], $dataRow[2], $dataRow[3], $dataRow[4], $dataRow[5]);
             }
         } else {
             foreach ($compeleteDataRows as $dataRow) {
-                $repository->storeTempDataRow($userTempTable, $dataRow[0], $dataRow[1], $dataRow[2], $dataRow[3], $dataRow[4]);
+                $repository->storeTempDataRow($userTempTable, $dataRow[0], $dataRow[1], $dataRow[2], $dataRow[3], $dataRow[4], $dataRow[5]);
             }
 
             if ($repository->checkIfTableExists($userTempTable) && $repository->checkIfTableExists($userTable)) {
