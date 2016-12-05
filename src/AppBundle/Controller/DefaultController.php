@@ -199,13 +199,27 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
             ->setNextPageChapterId($nextPageChapterId ?? null)
             ->setPreviousPageChapterId($previousPageChapterId ?? null);
 
+        $documentFields = $document->getFields();
+
+        $collectionInformation = array_filter(
+            $this->getParameter('collections'),
+            function ($data) use ($documentFields) {
+                if ($documentFields['product'] === $data['id']) {
+                    return true;
+                }
+
+                return false;
+            }
+        );
+
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
-                        'document' => $document->getFields(),
+                        'document' => $documentFields,
                         'parentDocumentTitle' => $parentDocumentTitle ?? null,
                         'pageMappings' => $pageMappings ?? null,
                         'documentStructure' => $documentStructure,
                         'userName' => $userName ?? null,
                         'pdfSize' => $pdfSize,
+                        'collectionInformation' => $collectionInformation,
                 ]);
     }
 

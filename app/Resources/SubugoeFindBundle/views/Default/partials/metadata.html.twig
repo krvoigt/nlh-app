@@ -55,6 +55,8 @@
             </dd>
         {% endif %}
 
+
+
         {% if document.docstrct == "volume" and document.currentno is defined %}
             <dt>{{ 'currentno'|trans }}</dt>
             <dd>{{ document.currentno }}</dd>
@@ -70,5 +72,6 @@
                 <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
+        <dd>&nbsp; &ndash; <a href="{{ collectionInformation[0].disclaimer_link }}">{{ 'License'|trans }}</a></dd>
     </dl>
 </section>

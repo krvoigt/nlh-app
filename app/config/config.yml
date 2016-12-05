@@ -10,11 +10,11 @@ parameters:
     image_cache: "%kernel.root_dir%/../var/images"
     thumbnail_size: "104,"
     collections:
-      - { id: "eai1", image: "eai1.jpg" }
-      - { id: "eai2", image: "eai2.jpg" }
-      - { id: "emo", image: "eol.jpg" }
-      - { id: "moc", image: "moc.jpg" }
-      - { id: "ecj", image: "ecj.jpg" }
+      - { id: "eai1", image: "eai1.jpg", disclaimer_link: "http://www.nationallizenzen.de/angebote/nlproduct.2006-03-14.3838869390" }
+      - { id: "eai2", image: "eai2.jpg", disclaimer_link: "http://www.nationallizenzen.de/angebote/nlproduct.2007-02-28.7704158004" }
+      - { id: "emo", image: "eol.jpg", disclaimer_link: "http://www.nationallizenzen.de/angebote/nlproduct.2007-05-30.5889520489" }
+      - { id: "moc", image: "moc.jpg", disclaimer_link: "http://www.nationallizenzen.de/angebote/nlproduct.2006-03-10.6248420663" }
+      - { id: "ecj", image: "ecj.jpg", disclaimer_link: "http://www.nationallizenzen.de/angebote/nlproduct.2007-05-30.8200625279" }
     default_backend_image_format: 'jpg'
     link_to_registration: "http://www.nationallizenzen.de/ind_inform_registration"
     advanced_search:

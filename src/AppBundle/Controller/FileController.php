@@ -40,6 +40,7 @@ class FileController extends Controller implements IpAuthenticatedController
     {
         $response = new Response();
         $response->headers->set('Content-Type', 'application/x-bibtex');
+
         return $this->render(':export:bibtex.bib.twig', ['id' => $id], $response);
     }
 }
