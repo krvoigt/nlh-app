@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class FileController extends Controller implements IpAuthenticatedController
 {
     /**
-     * @Route("/download/pdf/{id}", name="_download_pdf")
+     * @Route("/download/pdf/{id}.pdf", name="_download_pdf")
      */
     public function pdfAction($id)
     {
@@ -31,5 +31,15 @@ class FileController extends Controller implements IpAuthenticatedController
         } else {
             throw new NotFoundHttpException(sprintf('PDF file for %s not found', $id));
         }
+    }
+
+    /**
+     * @Route("/download/bibtex/{id}.bib", name="_download_bibtex")
+     */
+    public function bibtexAction($id)
+    {
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/x-bibtex');
+        return $this->render(':export:bibtex.bib.twig', ['id' => $id], $response);
     }
 }
