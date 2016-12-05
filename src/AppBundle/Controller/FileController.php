@@ -34,13 +34,40 @@ class FileController extends Controller implements IpAuthenticatedController
     }
 
     /**
-     * @Route("/download/bibtex/{id}.bib", name="_download_bibtex")
+     * @Route("/download/{id}.bib", name="_download_bibtex")
      */
     public function bibtexAction($id)
     {
+        $document = $this->get('document_service')->getDocumentById($id);
+
         $response = new Response();
         $response->headers->set('Content-Type', 'application/x-bibtex');
 
-        return $this->render(':export:bibtex.bib.twig', ['id' => $id], $response);
+        return $this->render(
+            ':export:bibtex.bib.twig',
+            [
+                'document' => $document,
+            ],
+            $response
+        );
+    }
+
+    /**
+     * @Route("/download/{id}.ris", name="_download_ris")
+     */
+    public function risAction($id)
+    {
+        $document = $this->get('document_service')->getDocumentById($id);
+
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/x-research-info-systems');
+
+        return $this->render(
+            ':export:ris.ris.twig',
+            [
+                'document' => $document,
+            ],
+            $response
+        );
     }
 }

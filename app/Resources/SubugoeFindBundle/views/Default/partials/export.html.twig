@@ -19,5 +19,17 @@
                 {{ 'Download metadata as METS file'|trans }}
             </a>
         </li>
+        <li>
+            <a href="{{ url('_download_bibtex', {id: document.id}) }}" download>
+                <i class="icon">file_download</i>
+                {{ 'BibTeX'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('_download_ris', {id: document.id}) }}" download>
+                <i class="icon">file_download</i>
+                {{ 'RIS'|trans }}
+            </a>
+        </li>
     </ul>
 </section>

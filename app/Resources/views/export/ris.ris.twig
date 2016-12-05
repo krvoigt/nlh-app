@@ -1,0 +1,12 @@
+TY  - BOOK
+{% if document.creator is defined %}{% for creator in document.creator %}
+AU  - {{ creator }}
+{% endfor %}{% endif %}
+CY  - {{ document.place_publish|first }}
+LA  - {{ document.lang|first }}
+PB  - {{ document.publisher|first }}
+PP  - {{ document.place_publish|first }}
+PY  - {{ document.year_publish }}
+TI  - {{ document.title|first }}
+
+ER  -
