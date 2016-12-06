@@ -16,7 +16,8 @@ var ViewerToc = {
 
     bindEvents: function () {
         this.controls.tocLink.click(function (e) {
-            window.location = $(this).attr('href') + '&origin=' + encodeURIComponent($('#origin').attr('href')) + window.location.hash;
+            var origin = $('#origin').attr('href');
+            window.location = $(this).attr('href') + (origin ? '&origin=' + encodeURIComponent(origin) : '') + window.location.hash;
             return false;
         });
     },

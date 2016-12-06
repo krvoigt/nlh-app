@@ -2,9 +2,9 @@ var Viewer = {
     container: $('.viewer'),
     controls: {
         changeView: $('.viewer_control.-change-view', this.container),
-        nextPage: $('.viewer_control.-next-page', this.container),
-        pageSelect: $('.viewer_control.-page-select', this.container),
-        previousPage: $('.viewer_control.-previous-page', this.container),
+        nextPage: $('.viewer_control.-pagination.-next', this.container),
+        pageSelect: $('.viewer_control.-pagination.-select', this.container),
+        previousPage: $('.viewer_control.-pagination.-previous', this.container),
         togglePanel: $('.viewer_control.-toggle-panel', this.container),
         zoomIn: $('.viewer_control.-zoom-in', this.container),
         zoomOut: $('.viewer_control.-zoom-out', this.container),
@@ -84,8 +84,10 @@ var Viewer = {
         var that = this;
 
         // Add current hash on click to viewer controls
-        $('.viewer_control', this.container).click(function () {
-            $(this).attr('href', $(this).attr('href') + window.location.hash);
+        $('.viewer_control.-pagination', this.container).click(function () {
+            var origin = $('#origin').attr('href');
+            window.location = $(this).attr('href') + (origin ? '&origin=' + encodeURIComponent(origin) : '') + window.location.hash;
+            return false;
         });
 
         this.controls.togglePanel.click(function () {
