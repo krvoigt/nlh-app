@@ -6,17 +6,20 @@
     padding: 0;
 }
 
-body,
-button,
-input,
-select,
-textarea {
-    border-radius: $br;
+body {
     font: #{$font-size} / #{$grid} $font-family-text;
 
     .fonts-failed & {
         font-family: $font-family-text-fallback;
     }
+}
+
+button,
+input,
+select,
+textarea {
+    border-radius: $br;
+    font: inherit;
 }
 
 h1,
