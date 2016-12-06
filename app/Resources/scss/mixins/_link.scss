@@ -1,5 +1,6 @@
 @mixin link($with-border: true, $on-dark-background: false) {
     @include transition(background, box-shadow);
+    cursor: pointer;
 
     @if $on-dark-background {
         color: $white;

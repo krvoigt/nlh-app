@@ -37,7 +37,7 @@
                 </span>
             {% endif %}
             {% if documentStructure.identifier is not null %}
-                {% set title = 'Physical page:'|trans ~ ' ' ~ documentStructure.page ~ '&#10;' ~ 'Logical page:'|trans ~ ' ' ~ pageMappings[documentStructure.page] %}
+                {% set title = 'Physical page:'|trans ~ ' ' ~ documentStructure.page ~ '\n' ~ 'Logical page:'|trans ~ ' ' ~ pageMappings[documentStructure.page] %}
                 <label class="sr-only" for="viewer-page-select">{{ 'Current page'|trans }}</label>
                 <select class="viewer_control -page-select" id="viewer-page-select" title="{{ title }}">
                     {% if documentStructure.identifier is not null %}

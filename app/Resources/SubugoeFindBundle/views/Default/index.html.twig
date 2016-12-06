@@ -1,8 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% if search.query is not empty %}
-    {% set title = search.query %}
+    {% set title = 'Search for %term%'|trans({'%term%': search.query}) %}
 {% endif %}
+
+{% block noresults %}
+    <h1>{{ 'No results'|trans }}</h1>
+    <p>{{ 'Your search did not return any results.'|trans }}</p>
+{% endblock %}
 
 {% block findnavigation %}
     <div class="find_aside">
@@ -94,7 +99,6 @@
                         </div>
                     {% endif %}
                     <div class="result_left">
-
                         {% if result.fields.nlh_id is defined %}
                             <a class="result_link" href="{{ href }}">
                                 {% if result.fields.product in user.products %}

@@ -4,7 +4,10 @@ function setGetParameters(params, changeLocation) {
 
     for (var key in params) {
         var value = params[key];
-        var keyIndex = url.indexOf('&' + key + '=') || url.indexOf('?' + key + '=');
+        var keyIndex = url.indexOf('&' + key + '=');
+        if (keyIndex === -1) {
+            keyIndex = url.indexOf('?' + key + '=');
+        }
         if (keyIndex >= 0) {
             var prefix = url.substring(0, keyIndex + 1);
             var suffix = url.substring(keyIndex + 1);
