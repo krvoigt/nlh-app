@@ -20,15 +20,21 @@
             </a>
         </li>
         <li>
-            <a href="{{ url('_download_bibtex', {id: document.id}) }}" download>
+            <a href="{{ url('_download_export', {id: document.id, _format: 'bib'}) }}" download>
                 <i class="icon">file_download</i>
-                {{ 'BibTeX'|trans }}
+                {{ 'export.BibTeX'|trans }}
             </a>
         </li>
         <li>
-            <a href="{{ url('_download_ris', {id: document.id}) }}" download>
+            <a href="{{ url('_download_export', {id: document.id, _format: 'ris'}) }}" download>
                 <i class="icon">file_download</i>
-                {{ 'RIS'|trans }}
+                {{ 'export.RIS'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('_download_export', {id: document.id, _format: 'enl'}) }}" download>
+                <i class="icon">file_download</i>
+                {{ 'export.Endnote'|trans }}
             </a>
         </li>
     </ul>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xml>
+    <records>
+        <record>
+            <database name="{{ document.pid }}.enl">{{ document.pid }}.enl</database>
+            <source-app name="EndNote" version="15.0">EndNote</source-app>
+            <rec-number>{{ document.pid }}</rec-number>
+            {% if document.creator is defined %}
+            <contributors>
+                <authors>
+                    {% for author in document.creator %}
+                    <author>
+                       {{ author|trim }}
+                    </author>
+                    {% endfor %}
+                </authors>
+            </contributors>
+            {% endif %}
+            <titles>
+                <title>{{ document.title|first|trim }}</title>
+            </titles>
+            <dates>
+                <year>{{ document.year_publish }}</year>
+            </dates>
+            <publisher>{{ document.publisher|first|trim }}</publisher>
+            <pub-location>{{ document.place_publish|first|trim }}</pub-location>
+            <language>{{ document.lang|first|trans }}</language>
+        </record>
+    </records>
+</xml>
