@@ -6,15 +6,15 @@
             <source-app name="EndNote" version="15.0">EndNote</source-app>
             <rec-number>{{ document.pid }}</rec-number>
             {% if document.creator is defined %}
-            <contributors>
-                <authors>
-                    {% for author in document.creator %}
-                    <author>
-                       {{ author|trim }}
-                    </author>
-                    {% endfor %}
-                </authors>
-            </contributors>
+                <contributors>
+                    <authors>
+                        {% for author in document.creator %}
+                            <author>
+                                {{ author|trim }}
+                            </author>
+                        {% endfor %}
+                    </authors>
+                </contributors>
             {% endif %}
             <titles>
                 <title>{{ document.title|first|trim }}</title>
