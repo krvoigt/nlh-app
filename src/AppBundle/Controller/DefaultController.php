@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Solarium\QueryType\Select\Query\FilterQuery;
 use AppBundle\Model\DocumentStructure;
-use Subugoe\FindBundle\Entity\Search;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 
 class DefaultController extends BaseController implements IpAuthenticatedController
@@ -201,7 +200,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
 
         $documentFields = $document->getFields();
 
-        $collectionInformation = array_filter(
+        $collectionInformation = array_values(array_filter(
             $this->getParameter('collections'),
             function ($data) use ($documentFields) {
                 if ($documentFields['product'] === $data['id']) {
@@ -210,7 +209,7 @@ class DefaultController extends BaseController implements IpAuthenticatedControl
 
                 return false;
             }
-        );
+        ))[0];
 
         return $this->render('SubugoeFindBundle:Default:detail.html.twig', [
                         'document' => $documentFields,

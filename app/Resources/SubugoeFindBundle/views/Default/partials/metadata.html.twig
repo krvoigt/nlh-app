@@ -72,6 +72,6 @@
                 <a href="{{ path('_collection', {id: dc}) }}">{{ dc | trans }}</a>{% if loop.last %}{% else %}, {% endif %}
             {% endfor %}
         </dd>
-        <dd>&nbsp; &ndash; <a href="{{ attribute(collectionInformation | first, 'disclaimer_link') }}">{{ 'License'|trans }}</a></dd>
+        <dd>&nbsp; &ndash; <a href="{{ collectionInformation.disclaimer_link }}">{{ 'License'|trans }}</a></dd>
     </dl>
 </section>
