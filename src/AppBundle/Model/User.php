@@ -23,6 +23,11 @@ class User
     private $products = [];
 
     /**
+     * @var string
+     */
+    private $identifier = '';
+
+    /**
      * @return string
      */
     public function getIpAddress(): string
@@ -88,5 +93,25 @@ class User
     public function addProduct($product)
     {
         $this->products[] = $product;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param string $identifier
+     *
+     * @return User
+     */
+    public function setIdentifier(string $identifier): User
+    {
+        $this->identifier = $identifier;
+
+        return $this;
     }
 }
