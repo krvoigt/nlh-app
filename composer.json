@@ -45,7 +45,8 @@
         "doctrine/orm": "^2.5",
         "league/csv": "^8.1",
         "eightpoints/guzzle-bundle": "^5.0",
-        "doctrine/doctrine-migrations-bundle": "^1.2"
+        "doctrine/doctrine-migrations-bundle": "^1.2",
+        "mewesk/twig-excel-bundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

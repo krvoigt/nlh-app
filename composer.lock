@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5b6d4424410e28920d852c787ff2d69e",
-    "content-hash": "abf819b5ddef5af686290d7e4454ecc0",
+    "hash": "3a58cb2350b50e49313369ef6e569fda",
+    "content-hash": "4e5689b75f2ad9a94fb95bafa434da45",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1767,6 +1767,65 @@
             "time": "2016-07-22 14:52:30"
         },
         {
+            "name": "mewesk/twig-excel-bundle",
+            "version": "2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MewesK/TwigExcelBundle.git",
+                "reference": "6ce74eb1267bdc167a3deddf30949df4604fdc68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MewesK/TwigExcelBundle/zipball/6ce74eb1267bdc167a3deddf30949df4604fdc68",
+                "reference": "6ce74eb1267bdc167a3deddf30949df4604fdc68",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpoffice/phpexcel": "~1.8.1",
+                "symfony/framework-bundle": "~2.7|~3.0"
+            },
+            "require-dev": {
+                "mpdf/mpdf": "~6.0",
+                "sensio/framework-extra-bundle": "~3.0",
+                "symfony/phpunit-bridge": "~3.0",
+                "symfony/symfony": "~2.7|~3.0"
+            },
+            "suggest": {
+                "mpdf/mpdf": "~6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MewesK\\TwigExcelBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mewes Kochheim",
+                    "email": "mewes@kochheim.de"
+                }
+            ],
+            "description": "This Symfony bundle provides a PhpExcel integration for Twig",
+            "homepage": "https://github.com/MewesK/TwigExcelBundle",
+            "keywords": [
+                "PHPExcel",
+                "excel",
+                "symfony",
+                "twig"
+            ],
+            "time": "2016-10-09 23:11:45"
+        },
+        {
             "name": "michelf/php-markdown",
             "version": "1.7.0",
             "source": {
@@ -2217,6 +2276,63 @@
                 "random"
             ],
             "time": "2016-11-07 23:38:38"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2015-05-01 07:00:55"
         },
         {
             "name": "psr/cache",
