@@ -58,12 +58,11 @@ class FileController extends Controller implements IpAuthenticatedController
         $response->headers->set('Content-Type', $formats[$format]);
 
         return $this->render(
-            ':export:bibliographic.'.$format . '.twig',
+            ':export:bibliographic.'.$format.'.twig',
             [
                 'document' => $document,
             ],
             $response
         );
     }
-
 }

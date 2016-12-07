@@ -51,6 +51,7 @@ class AuthorizationService
 
         if (count($userArr) > 0) {
             $user->setInstitution($userArr[0]->getInstitution());
+            $user->setIdentifier($userArr[0]->getIdentifier());
             foreach ($userArr as $userProduct) {
                 $user->addProduct($userProduct->getProduct());
             }

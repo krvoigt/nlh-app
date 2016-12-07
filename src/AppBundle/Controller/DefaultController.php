@@ -10,7 +10,7 @@ use Solarium\QueryType\Select\Query\FilterQuery;
 use AppBundle\Model\DocumentStructure;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
 
-class DefaultController extends BaseController implements IpAuthenticatedController
+class DefaultController extends BaseController implements IpAuthenticatedController, PiwikTrackingController
 {
     /**
      * @Route("/search", name="_search")

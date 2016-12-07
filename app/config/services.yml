@@ -38,3 +38,9 @@ services:
   file_service:
     class: AppBundle\Service\FileService
     arguments: ['@oneup_flysystem.nlh_filesystem']
+
+  app.tracking.action_listener:
+    class: AppBundle\EventListener\PiwikTrackingListener
+    arguments: ["@authorization_service", "@document_service", "@service_container"]
+    tags:
+        - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SearchController extends Controller implements IpAuthenticatedController
+class SearchController extends Controller implements IpAuthenticatedController, PiwikTrackingController
 {
     /**
      * @Route("/search/advanced/", name="_search_advanced", methods={"GET"})
