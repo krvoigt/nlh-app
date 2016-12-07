@@ -3,15 +3,17 @@
 {% form_theme form _self %}
 
 {%- block button_row -%}
-    {{- form_widget(form) -}}
+    <p class="advanced-search_controls">
+        {{- form_widget(form) -}}
+    </p>
 {%- endblock button_row -%}
 
 {%- block form_row -%}
-    <div class="advanced-search_row">
+    <p class="advanced-search_row -{{ form.vars['name'] }}">
         {{- form_label(form) -}}
         {{- form_errors(form) -}}
         {{- form_widget(form) -}}
-    </div>
+    </p>
 {%- endblock form_row -%}
 
 {%- block form_widget_compound -%}

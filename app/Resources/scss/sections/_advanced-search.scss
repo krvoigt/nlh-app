@@ -1,39 +1,48 @@
 .advanced-search {
-    button {
-        @include button;
-        margin-top: $grid;
-        min-width: 6em;
-    }
-}
+    display: flex;
+    margin: (-$grid / 4);
+    flex-wrap: wrap;
 
-.advanced-search_row {
-    display: table-row;
-    margin-bottom: ($grid / 2);
-
-    @include respond-to(tiny) {
+    @include respond-to(large) {
         display: block;
     }
 
-    > label {
-        display: table-cell;
-        padding: 0 1em ($grid / 4) 0;
-        vertical-align: middle;
+    button {
+        @include button;
+        float: right;
+        padding: ($grid / 2) .5em;
+        min-width: 8em;
+    }
+}
 
-        @include respond-to(tiny) {
-            display: block;
-            padding: 0;
-        }
+.advanced-search_controls {
+    padding: ($grid / 2) ($grid / 4);
+    width: 100%;
+}
+
+.advanced-search_row {
+    background: $white;
+    border-radius: $br;
+    box-shadow: $card-shadow;
+    flex-grow: 1;
+    margin: ($grid / 4);
+    min-width: 30%;
+    padding: ($grid / 4);
+
+    &.-fulltext {
+        min-width: 90%;
+    }
+
+    > label {
+        line-height: 1;
+        display: block;
+        margin-bottom: ($grid / 4);
     }
 
     > input {
         @include input;
-        display: table-cell;
-        margin-bottom: ($grid / 4);
-
-        @include respond-to(tiny) {
-            display: block;
-            width: 100%;
-        }
+        padding: ($grid / 2 - $border-width) .5em;
+        width: 100%;
     }
 }
 
