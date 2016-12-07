@@ -25,3 +25,5 @@ parameters:
     auth_keys:
       - { title: "abc", key: "def"}
     auth_data: { username: "abc", password: "def" }
+    idsite: 1
+    piwiktracker_url: http://127.0.0.1:8008/piwik.php

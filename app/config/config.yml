@@ -28,6 +28,7 @@ parameters:
       - lang
       - product
       - fulltext
+    piwik_idsite: "%idsite%"
 
 framework:
     #esi:             ~
@@ -161,3 +162,5 @@ guzzle:
     clients:
         auth:
             base_url: "https://www.nationallizenzen.de/"
+        piwiktracker:
+            base_url: "%piwiktracker_url%"
