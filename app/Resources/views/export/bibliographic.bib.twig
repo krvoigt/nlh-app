@@ -1,5 +1,5 @@
 @Book{ {{ document.pid  }},
- {% if document.creator is defined %}}author    = "{{ document.creator|join(' and ') }}",{% endif %}
+ {% if document.creator is defined %}author    = "{{ document.creator|join(' and ') }}",{% endif %}
  title     = "{{ document.title|first }}",
  publisher = "{{ document.publisher|join(' and ') }}",
  year      =  {{ document.year_publish }},
