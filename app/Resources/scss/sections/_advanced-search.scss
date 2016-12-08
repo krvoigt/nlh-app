@@ -1,48 +1,38 @@
 .advanced-search {
-    display: flex;
-    margin: (-$grid / 4);
-    flex-wrap: wrap;
-
-    @include respond-to(large) {
-        display: block;
-    }
-
     button {
         @include button;
-        float: right;
-        padding: ($grid / 2) .5em;
-        min-width: 8em;
+        min-width: 6em;
     }
 }
 
 .advanced-search_controls {
-    padding: ($grid / 2) ($grid / 4);
-    width: 100%;
+    margin: $grid 0 0;
 }
 
 .advanced-search_row {
-    background: $white;
-    border-radius: $br;
-    box-shadow: $card-shadow;
-    flex-grow: 1;
-    margin: ($grid / 4);
-    min-width: 30%;
-    padding: ($grid / 4);
+    margin-bottom: ($grid / 2);
 
     &.-fulltext {
-        min-width: 90%;
+        border-top: $border-width solid $shade;
+        padding-top: ($grid / 2);
     }
 
     > label {
-        line-height: 1;
-        display: block;
-        margin-bottom: ($grid / 4);
+        color: $text-color-light;
+        display: inline-block;
+        font-weight: bold;
+        width: 10em;
     }
 
     > input {
         @include input;
-        padding: ($grid / 2 - $border-width) .5em;
-        width: 100%;
+        max-width: 20em;
+        width: 61.8%;
+
+        @include respond-to(small) {
+            max-width: none;
+            width: 100%;
+        }
     }
 }
 
